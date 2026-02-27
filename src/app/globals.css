@@ -1,5 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+@plugin "tailwindcss-animate";
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -8,8 +10,20 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand Colors - Refined and Softer */
+  --color-primary: #1e3a8a; /* Deep Navy Blue */
+  --color-accent: #f59e0b;  /* Soft Amber/Gold */
+  --color-dark: #0f172a;    /* Midnight Slate */
+  --color-light: #f1f5f9;   /* Soft Cool Gray */
+  --color-surface: #ffffff;
+
+  /* Premium Effects */
+  --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  --shadow-premium-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
