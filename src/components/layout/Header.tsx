@@ -1,5 +1,5 @@
 import React from "react";
-import { Phone, MapPin, Search, Sparkles, Menu } from "lucide-react";
+import { Phone, MapPin, Search, Menu } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 

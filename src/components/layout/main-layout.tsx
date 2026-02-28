@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { FloatingContact } from "./floating-contact";
-import { Footer } from "./footer";
-import { Header } from "./header";
-import { Navbar } from "./navbar";
+import { FloatingContact } from "@/components/layout/floating-contact";
+import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
+import { Navbar } from "@/components/layout/navbar";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
