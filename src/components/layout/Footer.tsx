@@ -1,5 +1,5 @@
 import React from "react";
-import { Phone, MapPin, Sparkles } from "lucide-react";
+import { Phone, MapPin } from "lucide-react";
 import Image from "next/image";
 
 export const Footer: React.FC = () => {
