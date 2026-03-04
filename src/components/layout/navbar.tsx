@@ -232,23 +232,7 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 							className="fixed top-0 right-0 bottom-0 z-[70] flex w-[85%] max-w-sm flex-col bg-white shadow-2xl lg:hidden"
 						>
 							<div className="flex items-center justify-between border-b border-slate-100 p-4">
-								<div className="flex items-center gap-2">
-									<div className="bg-stem-blue flex h-8 w-8 items-center justify-center rounded-full text-white">
-										<span className="text-xs font-bold">SK</span>
-									</div>
-									<span className="font-bold text-slate-900">STEMKey</span>
-								</div>
-								<button
-									onClick={toggleMenu}
-									className="hover:text-stem-blue p-2 text-slate-600 transition-colors"
-								>
-									<X size={24} />
-								</button>
-							</div>
-
-							<div className="flex-grow space-y-6 overflow-y-auto px-4 py-6">
-								{/* Search in Sidebar */}
-								<div className="relative">
+								<div className="relative xl:hidden">
 									<input
 										type="text"
 										placeholder="Tìm kiếm nội dung..."
@@ -259,6 +243,18 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 										className="absolute top-1/2 right-3 -translate-y-1/2 text-slate-400"
 									/>
 								</div>
+								
+								<button
+									onClick={toggleMenu}
+									className="hover:text-stem-blue p-2 text-slate-600 transition-colors"
+								>
+									<X size={24} />
+								</button>
+							</div>
+
+							<div className="flex-grow space-y-6 overflow-y-auto px-4 py-6">
+								{/* Search in Sidebar */}
+								
 
 								<div className="space-y-4">
 									{navItems.map((item) => (
@@ -303,7 +299,7 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 															href={subItem.href}
 															key={subItem.label}
 															onClick={toggleMenu}
-															className="hover:text-stem-blue w-full py-1 text-left text-sm text-slate-600 transition-colors"
+															className="block hover:text-stem-blue w-full py-1 text-left text-sm text-slate-600 transition-colors"
 														>
 															{subItem.label}
 														</Link>

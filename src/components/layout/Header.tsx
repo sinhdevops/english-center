@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => {
 	return (
-		<header className="border-b border-slate-50 bg-white px-4 py-3 lg:border-none">
+		<header className="sticky top-0 z-40 xl:static border-b border-slate-50 bg-white px-4 py-3 lg:border-none">
 			<div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
 				{/* Logo */}
 				<div className="relative h-[54px] w-[136px]">
