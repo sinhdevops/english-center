@@ -89,7 +89,7 @@ export const CourserSidebar: React.FC = () => (
 		</div>
 
 		{/* Newsletter */}
-		<div className="rounded-3xl border border-slate-100 bg-slate-50 p-8">
+		{/* <div className="rounded-3xl border border-slate-100 bg-slate-50 p-8">
 			<div className="mb-4 flex items-center gap-3">
 				<div className="flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-100 text-yellow-600">
 					<Mail size={24} />
@@ -109,6 +109,6 @@ export const CourserSidebar: React.FC = () => (
 			<p className="mt-3 text-[10px] leading-relaxed text-slate-400">
 				Đăng ký email để nhận bản tin mới nhất của chúng tôi.
 			</p>
-		</div>
+		</div> */}
 	</aside>
 );

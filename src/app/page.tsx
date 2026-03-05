@@ -1,15 +1,37 @@
 "use client";
 
 import { motion } from "motion/react";
-import { CheckCircle2, ChevronLeft, ChevronRight, Sparkles, Zap } from "lucide-react";
+import { CheckCircle2, ChevronLeft, ChevronRight, Minus, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { home, imagePrograms } from "../../public/statics/images";
+import { home, HomeImages, imagePrograms } from "../../public/statics/images";
 import { useState } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+
+const registrationSchema = z.object({
+  parentName: z.string().min(1, 'Vui lòng nhập họ tên'),
+  email: z.string().min(1, 'Vui lòng nhập email').email('Email không hợp lệ'),
+  phone: z.string()
+    .min(10, 'Số điện thoại phải có ít nhất 10 số')
+    .max(11, 'Số điện thoại không quá 11 số')
+    .regex(/^[0-9]+$/, 'Số điện thoại chỉ được chứa số'),
+  childName: z.string().min(1, 'Vui lòng nhập họ tên của con'),
+  childClass: z.string().min(1, 'Vui lòng nhập lớp của con'),
+  course: z.string().min(1, 'Vui lòng nhập khóa học quan tâm'),
+  branch: z.string().min(1, 'Vui lòng chọn cơ sở'),
+});
+
+type RegistrationFormValues = z.infer<typeof registrationSchema>;
 
 const Hero = () => {
 	return (
-	 <section className="relative min-h-[600px] lg:min-h-[750px] flex items-center overflow-hidden">
+	 <section className="relative min-h-[600px] lg:min-h-[750px] flex overflow-hidden">
       {/* Tech/Circuit Background Pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none z-10">
         <svg width="100%" height="100%" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -24,8 +46,8 @@ const Hero = () => {
         style={{ background: 'linear-gradient(272.97deg, #00BA3D 22.93%, #005C1E 89.95%)' }} 
       />
 
-      <div className="max-w-7xl mx-auto px-4 w-full relative z-20 flex flex-col lg:flex-row items-center gap-12 lg:gap-8 py-12 lg:py-0">
-        <div className="w-full lg:w-3/5 text-center lg:text-left">
+      <div className="relative px-4 lg:px-[120px] w-full relative z-20 flex flex-col lg:flex-row items-center gap-12 py-12 ">
+        <div className="w-full text-center lg:text-left lg:w-3/4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -66,30 +88,21 @@ const Hero = () => {
               <Button size="lg" variant="primary" className="w-full sm:w-auto rounded-full px-10 py-6 text-base font-bold uppercase tracking-wider">
                 Đăng ký học thử miễn phí
               </Button>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full px-10 py-6 text-base font-bold uppercase tracking-wider border-2">
+              <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/20 rounded-full px-10 py-6 text-base uppercase tracking-wider border-2 hover:bg-white/30">
                 Tư vấn lộ trình học
               </Button>
             </div>
           </motion.div>
         </div>
 
-        <div className="w-full lg:w-2/5 relative flex justify-center lg:justify-end">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="relative w-full max-w-[500px] lg:max-w-none"
-          >
-            <div className="relative z-10">
-              <img 
-                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1000" 
+       <div className="absolute hidden lg:block w-[60vw] right-0 bottom-0 z-10">
+              <Image 
+                src={HomeImages.heroStudent}
                 alt="STEMKey Students" 
                 className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
                 referrerPolicy="no-referrer"
               />
             </div>
-          </motion.div>
-        </div>
       </div>
     </section>
 	);
@@ -322,18 +335,14 @@ const ExclusiveModel = () => {
               
               {/* Floating Info Badge */}
               <div className="absolute bottom-6 left-6">
-                <div className="bg-white p-4 lg:p-6 rounded-2xl shadow-2xl border border-slate-100 min-w-[200px]">
+                <div className="bg-white px-4 pt-[10px] pb-2 rounded-2xl shadow-2xl border border-slate-100 min-w-[200px]">
                   <h4 className="text-slate-500 font-bold text-sm lg:text-base mb-1">Mô hình lớp học</h4>
-                  <div className="text-2xl lg:text-4xl font-black text-slate-900 tracking-wider">4 - 3 - 1 - 6</div>
+                  <div className="text-2xl lg:text-4xl font-medium tracking-wider">4 - 3 - 1 - 6</div>
                 </div>
               </div>
 
               {/* Orange Icon Badge */}
-              <div className="absolute bottom-6 right-6">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 bg-[#FF9500] rounded-full flex items-center justify-center text-white shadow-xl">
-                  <Zap size={32} fill="currentColor" />
-                </div>
-              </div>
+            
             </motion.div>
           </div>
         </div>
@@ -373,8 +382,15 @@ const FlexibleLearning = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-16 items-start">
           {/* Left: Images */}
-          <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4">
-            <motion.div
+          <div className="w-full lg:w-1/2 ">  <div className="mb-10">
+              <h2 className="text-2xl font-medium mb-6">
+                Học linh hoạt giữa Online và Offline
+              </h2>
+              <p className="text-slate-500 text-lg font-medium">
+                Tham gia Lớp học Offline và Online tại STEMKey bạn sẽ được:
+              </p>
+            </div>
+          <div className="grid grid-cols-2 gap-4">  <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -400,19 +416,13 @@ const FlexibleLearning = () => {
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-            </motion.div>
+            </motion.div></div>
+          
           </div>
 
           {/* Right: Content & Accordion */}
           <div className="w-full lg:w-1/2">
-            <div className="mb-10">
-              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
-                Học linh hoạt giữa Online và Offline
-              </h2>
-              <p className="text-slate-500 text-lg font-medium">
-                Tham gia Lớp học Offline và Online tại STEMKey bạn sẽ được:
-              </p>
-            </div>
+          
 
             <div className="space-y-4">
               {benefits.map((benefit, i) => (
@@ -437,7 +447,7 @@ const FlexibleLearning = () => {
                       </span>
                     </div>
                     <div className={`transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`}>
-                      {openIndex === i ? <motion.span className="text-2xl">—</motion.span> : <motion.span className="text-2xl">+</motion.span>}
+                      {openIndex === i ? <motion.span className="text-2xl"> <Minus /></motion.span> : <motion.span className="text-2xl">+</motion.span>}
                     </div>
                   </button>
                   
@@ -481,55 +491,82 @@ const Teachers = () => {
       name: "Ms. Phạm Thu Hà",
       role: "Giáo viên Toán tư duy, hơn 10 năm kinh nghiệm",
       img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+      name: "Mr. Kevin Williams",
+      role: "Chuyên gia bản ngữ, cố vấn học thuật quốc tế",
+      img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+      name: "Ms. Đặng Thu Hà",
+      role: "Trưởng phòng Nghiên cứu & Phát triển chương trình",
+      img: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&q=80&w=400"
     }
   ];
 
   return (
-    <section className="py-24 bg-[#F1F5F9]">
+    <section className="py-24 bg-[#F1F5F9] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16 lg:mb-20">
-          <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6"
+          >
             300+ giáo viên truyền cảm hứng
-          </h2>
-          <p className="text-slate-500 text-lg font-medium">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-slate-500 text-lg font-medium"
+          >
             Tài năng, cá tính và tâm huyết trong từng bài giảng
-          </p>
+          </motion.p>
         </div>
 
-        <div className="relative group">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teachers.map((t, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="flex flex-col"
-              >
-                <div className="rounded-2xl overflow-hidden bg-white shadow-sm mb-6 aspect-[4/5]">
-                  <img 
-                    src={t.img} 
-                    alt={t.name} 
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{t.name}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                  {t.role}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Navigation Arrows (Visual only for now as requested by image) */}
-          <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors hidden lg:flex">
-            <ChevronLeft size={24} />
-          </button>
-          <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors hidden lg:flex">
-            <ChevronRight size={24} />
-          </button>
+        <div className="relative px-4 md:px-12">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4 md:-ml-6">
+              {teachers.map((t, i) => (
+                <CarouselItem key={i} className="pl-4 md:pl-6 sm:basis-1/2 lg:basis-1/4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex flex-col h-full"
+                  >
+                    <div className="rounded-2xl overflow-hidden bg-white shadow-sm mb-6 aspect-[4/5] group relative">
+                      <img 
+                        src={t.img} 
+                        alt={t.name} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                        <Button variant="primary" size="sm" className="w-full">Xem hồ sơ</Button>
+                      </div> */}
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">{t.name}</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed font-medium">
+                      {t.role}
+                    </p>
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex -left-6 lg:-left-12" />
+            <CarouselNext className="hidden md:flex -right-6 lg:-right-12" />
+          </Carousel>
         </div>
       </div>
     </section>
@@ -658,7 +695,7 @@ const News = () => {
                   referrerPolicy="no-referrer"
                 />
               </div>
-              <h3 className="text-sm xl:text-[18px] text-slate-900 group-hover:text-stem-blue transition-colors leading-tight">
+              <h3 className="text-sm lg:text-[18px] text-slate-900 group-hover:text-stem-blue transition-colors leading-tight">
                 {post.title}
               </h3>
             </motion.div>
@@ -671,16 +708,18 @@ const News = () => {
 
 const Partners = () => {
   const partners = [
-    { name: "Partner 1", logo: "https://picsum.photos/seed/p1/200/100" },
-    { name: "Partner 2", logo: "https://picsum.photos/seed/p2/200/100" },
-    { name: "Partner 3", logo: "https://picsum.photos/seed/p3/200/100" },
-    { name: "Partner 4", logo: "https://picsum.photos/seed/p4/200/100" },
-    { name: "Partner 5", logo: "https://picsum.photos/seed/p5/200/100" },
-    { name: "Partner 6", logo: "https://picsum.photos/seed/p6/200/100" },
+    { name: "Partner 1", logo: HomeImages.partner1 },
+    { name: "Partner 2", logo: HomeImages.partner1 },
+    { name: "Partner 3", logo: HomeImages.partner1 },
+    { name: "Partner 4", logo: HomeImages.partner1 },
+    { name: "Partner 5", logo: HomeImages.partner1 },
+    { name: "Partner 6", logo: HomeImages.partner1 },
+    { name: "Partner 7", logo: HomeImages.partner1 },
+    { name: "Partner 8", logo: HomeImages.partner1 },
   ];
 
   return (
-    <section className="py-20 bg-white border-t border-slate-50">
+    <section className="py-20 bg-white border-t border-slate-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -690,20 +729,44 @@ const Partners = () => {
         >
           Đối tác của STEMKey
         </motion.h2>
-        <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-          {partners.map((p, i) => (
-            <motion.img
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              src={p.logo}
-              alt={p.name}
-              className="h-10 lg:h-14 w-auto object-contain"
-              referrerPolicy="no-referrer"
-            />
-          ))}
+        
+        <div className=" transition-all duration-700">
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={20}
+            slidesPerView={2}
+            loop={true}
+            speed={3000}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+              1024: {
+                slidesPerView: 6,
+              },
+            }}
+            className="partners-swiper"
+          >
+            {partners.map((p, i) => (
+              <SwiperSlide key={i}>
+                <div className="flex justify-center items-center h-20">
+                  <Image
+                    src={p.logo}
+                    alt={p.name}
+                    className="h-10 lg:h-14 w-auto object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
@@ -711,6 +774,30 @@ const Partners = () => {
 };
 
 const RegistrationSection = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset
+  } = useForm<RegistrationFormValues>({
+    resolver: zodResolver(registrationSchema),
+    defaultValues: {
+      parentName: '',
+      email: '',
+      phone: '',
+      childName: '',
+      childClass: '',
+      course: '',
+      branch: ''
+    }
+  });
+
+  const onSubmit = async (data: RegistrationFormValues) => {
+    console.log('Registration data:', data);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    alert('Đăng ký giữ chỗ thành công! Chúng tôi sẽ liên hệ lại sớm.');
+    reset();
+  };
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4">
@@ -756,60 +843,94 @@ const RegistrationSection = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full lg:w-1/2 text-[18px] bg-white rounded-[2.5rem] p-8 lg:p-12 shadow-2xl"
+            className="w-full lg:w-1/2 bg-white rounded-[2.5rem] p-4 lg:p-12 shadow-2xl"
           >
-            <h3 className="text-xlfont-bold text-slate-900 mb-8 flex items-center gap-2">
+            <h3 className="text-base font-semibold mb-8 flex items-center gap-2">
               Tư vấn lộ trình học và ưu đãi → Đăng ký giữ chỗ ngay
             </h3>
             
-            <form className="space-y-4">
-              <input 
-                type="text" 
-                placeholder="Nhập họ tên của bạn" 
-                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-              />
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div className="space-y-1">
                 <input 
-                  type="email" 
-                  placeholder="Nhập email" 
-                  className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  {...register('parentName')}
+                  type="text" 
+                  placeholder="Nhập họ tên của bạn" 
+                  className={`w-full px-6 py-4 bg-slate-50 border ${errors.parentName ? 'border-red-500' : 'border-slate-100'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
                 />
-                <input 
-                  type="tel" 
-                  placeholder="Nhập số điện thoại" 
-                  className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                />
+                {errors.parentName && <p className="text-xs text-red-500 ml-2">{errors.parentName.message}</p>}
               </div>
               
-              <input 
-                type="text" 
-                placeholder="Nhập họ tên của con" 
-                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-              />
-              
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input 
-                  type="text" 
-                  placeholder="Nhập lớp con học" 
-                  className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                />
-                <input 
-                  type="text" 
-                  placeholder="Nhập khóa học" 
-                  className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                />
+                <div className="space-y-1">
+                  <input 
+                    {...register('email')}
+                    type="email" 
+                    placeholder="Nhập email" 
+                    className={`w-full px-6 py-4 bg-slate-50 border ${errors.email ? 'border-red-500' : 'border-slate-100'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+                  />
+                  {errors.email && <p className="text-xs text-red-500 ml-2">{errors.email.message}</p>}
+                </div>
+                <div className="space-y-1">
+                  <input 
+                    {...register('phone')}
+                    type="tel" 
+                    placeholder="Nhập số điện thoại" 
+                    className={`w-full px-6 py-4 bg-slate-50 border ${errors.phone ? 'border-red-500' : 'border-slate-100'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+                  />
+                  {errors.phone && <p className="text-xs text-red-500 ml-2">{errors.phone.message}</p>}
+                </div>
               </div>
               
-              <select className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-slate-500 appearance-none">
-                <option>Chọn cơ sở gần bạn</option>
-                <option>Cơ sở Nam An Khánh</option>
-                <option>Cơ sở Quận 7</option>
-              </select>
+              <div className="space-y-1">
+                <input 
+                  {...register('childName')}
+                  type="text" 
+                  placeholder="Nhập họ tên của con" 
+                  className={`w-full px-6 py-4 bg-slate-50 border ${errors.childName ? 'border-red-500' : 'border-slate-100'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+                />
+                {errors.childName && <p className="text-xs text-red-500 ml-2">{errors.childName.message}</p>}
+              </div>
               
-              <button className="w-full py-5 bg-[#1890FF] hover:bg-blue-600 text-white font-black text-lg rounded-2xl shadow-lg shadow-blue-200 transition-all active:scale-[0.98] mt-4 uppercase tracking-wider">
-                GIỮ CHỖ NGAY
-              </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <input 
+                    {...register('childClass')}
+                    type="text" 
+                    placeholder="Nhập lớp con học" 
+                    className={`w-full px-6 py-4 bg-slate-50 border ${errors.childClass ? 'border-red-500' : 'border-slate-100'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+                  />
+                  {errors.childClass && <p className="text-xs text-red-500 ml-2">{errors.childClass.message}</p>}
+                </div>
+                <div className="space-y-1">
+                  <input 
+                    {...register('course')}
+                    type="text" 
+                    placeholder="Nhập khóa học" 
+                    className={`w-full px-6 py-4 bg-slate-50 border ${errors.course ? 'border-red-500' : 'border-slate-100'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+                  />
+                  {errors.course && <p className="text-xs text-red-500 ml-2">{errors.course.message}</p>}
+                </div>
+              </div>
+              
+              <div className="space-y-1">
+                <select 
+                  {...register('branch')}
+                  className={`w-full px-6 py-4 bg-slate-50 border ${errors.branch ? 'border-red-500' : 'border-slate-100'} rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-slate-500 appearance-none`}
+                >
+                  <option value="">Chọn cơ sở gần bạn</option>
+                  <option value="Cơ sở Nam An Khánh">Cơ sở Nam An Khánh</option>
+                  <option value="Cơ sở Quận 7">Cơ sở Quận 7</option>
+                </select>
+                {errors.branch && <p className="text-xs text-red-500 ml-2">{errors.branch.message}</p>}
+              </div>
+              
+              <Button 
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-5 bg-[#1890FF] hover:bg-blue-600 text-white font-black text-lg rounded-2xl shadow-lg shadow-blue-200 transition-all active:scale-[0.98] mt-4 uppercase tracking-wider disabled:opacity-70"
+              >
+                {isSubmitting ? 'ĐANG XỬ LÝ...' : 'GIỮ CHỖ NGAY'}
+              </Button>
               
               <p className="text-center text-slate-400 text-sm mt-6 font-medium">
                 * Vui lòng để ý điện thoại, chúng tôi sẽ liên hệ bạn sớm (trong vòng 24h)

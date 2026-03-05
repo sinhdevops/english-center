@@ -43,3 +43,8 @@ body {
   color: var(--foreground);
   font-family: Nunito Sans;
 }
+
+
+.partners-swiper .swiper-wrapper {
+  transition-timing-function: linear !important;
+}

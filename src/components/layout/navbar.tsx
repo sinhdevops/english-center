@@ -23,44 +23,6 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 		{
 			label: "Về chúng tôi",
 			href: "/ve-chung-toi",
-			subItems: [
-				{
-					label: "Câu chuyện của STEMKey",
-					href: "/ve-chung-toi/cuoi-chuyen-cua-stemkey",
-				},
-				{
-					label: "Tầm nhìn, sứ mệnh",
-					href: "/ve-chung-toi/tam-nhien-su-menh",
-				},
-				{
-					label: "Triết lý, phương pháp đào tạo",
-					href: "/ve-chung-toi/triet-ly-phuong-phap-dao-tao",
-				},
-				{
-					label: "Mô hình lớp học",
-					href: "/ve-chung-toi/mo-hinh-lop-hoc",
-				},
-				{
-					label: "Đội ngũ giáo viên",
-					href: "/ve-chung-toi/doi-ngu-giao-vien",
-				},
-				{
-					label: "Học viên xuất sắc",
-					href: "/ve-chung-toi/hoc-vien-xuat-sac",
-				},
-				{
-					label: "Hệ thống cơ sở",
-					href: "/ve-chung-toi/he-thong-co-so",
-				},
-				{
-					label: "Báo chí viết gì về chúng tôi",
-					href: "/ve-chung-toi/bao-chi-viet-gi-nhe-chung-toi",
-				},
-				{
-					label: "LMS học tập",
-					href: "/ve-chung-toi/lms-hoc-tap",
-				},
-			],
 		},
 		{
 			label: "Góc ba mẹ",
@@ -125,28 +87,28 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 		{
 			label: "Tin tức",
 			href: "/tin-tuc",
-			subItems: [
-				{
-					label: "Tin tức mới nhất",
-					href: "/tin-tuc/tin-tuc-moi-nhat",
-				},
-				{
-					label: "Sự kiện",
-					href: "/tin-tuc/su-kien",
-				},
-				{
-					label: "Hoạt động ngoại khóa",
-					href: "/tin-tuc/hoat-dong-ngoai-khoa",
-				},
-				{
-					label: "Kỳ thi học bổng",
-					href: "/tin-tuc/ky-thi-hoc-bong",
-				},
-				{
-					label: "Tuyển dụng",
-					href: "/tin-tuc/tuyen-dung",
-				},
-			],
+			// subItems: [
+			// 	{
+			// 		label: "Tin tức mới nhất",
+			// 		href: "/tin-tuc/tin-tuc-moi-nhat",
+			// 	},
+			// 	{
+			// 		label: "Sự kiện",
+			// 		href: "/tin-tuc/su-kien",
+			// 	},
+			// 	{
+			// 		label: "Hoạt động ngoại khóa",
+			// 		href: "/tin-tuc/hoat-dong-ngoai-khoa",
+			// 	},
+			// 	{
+			// 		label: "Kỳ thi học bổng",
+			// 		href: "/tin-tuc/ky-thi-hoc-bong",
+			// 	},
+			// 	{
+			// 		label: "Tuyển dụng",
+			// 		href: "/tin-tuc/tuyen-dung",
+			// 	},
+			// ],
 		},
 		{ label: "Liên hệ", href: "/lien-he" },
 	];
@@ -179,7 +141,7 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 								{pathname === item.href && (
 									<motion.div
 										layoutId="activeTab"
-										className="text-stem-blue absolute right-0 bottom-0 left-0 h-0.5"
+										className="bg-stem-blue absolute right-0 bottom-0 left-0 h-0.5"
 									/>
 								)}
 							</Link>
@@ -231,8 +193,8 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 							transition={{ type: "spring", damping: 25, stiffness: 200 }}
 							className="fixed top-0 right-0 bottom-0 z-[70] flex w-[85%] max-w-sm flex-col bg-white shadow-2xl lg:hidden"
 						>
-							<div className="flex items-center justify-between border-b border-slate-100 p-4">
-								<div className="relative xl:hidden">
+							<div className="flex items-center justify-between border-b gap-2 border-slate-100 p-4">
+								<div className="relative lg:hidden flex-1">
 									<input
 										type="text"
 										placeholder="Tìm kiếm nội dung..."
@@ -257,9 +219,11 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 								
 
 								<div className="space-y-4">
-									{navItems.map((item) => (
+									{navItems.map((item) => {
+										let Comp = item?.subItems?.length ? "button" : Link
+										return (
 										<div key={item.label} className="space-y-2">
-											<button
+											<Comp href={item.href || "#"}
 												onClick={() => {
 													if (item.subItems) {
 														setExpandedItem(
@@ -286,7 +250,7 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 														className="bg-stem-blue absolute right-0 bottom-0 left-0 h-0.5"
 													/>
 												)}
-											</button>
+											</Comp>
 
 											{item.subItems && expandedItem === item.label && (
 												<motion.div
@@ -307,7 +271,8 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 												</motion.div>
 											)}
 										</div>
-									))}
+									)
+									})}
 								</div>
 							</div>
 

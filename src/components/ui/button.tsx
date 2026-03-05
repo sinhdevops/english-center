@@ -19,7 +19,7 @@ export const Button: React.FC<ButtonProps> = ({
   const variants = {
     primary: 'bg-gradient-to-b from-[#1890FF] to-[#096DD9] text-white shadow-[0_4px_14px_0_rgba(24,144,255,0.39)] hover:brightness-110 active:scale-95',
     secondary: 'bg-white text-slate-800 shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] hover:bg-slate-50 active:scale-95',
-    outline: 'bg-white/20 backdrop-blur-md text-white border border-white/30 hover:bg-white/30 active:scale-95',
+    outline: 'bg-[#f7f7f7] font-medium backdrop-blur-md border border-white/30 active:scale-95',
     ghost: 'text-slate-700 hover:bg-slate-50'
   };
   
@@ -31,7 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button 
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className} hover:cursor-pointer`}
       {...props}
     >
       {children}
