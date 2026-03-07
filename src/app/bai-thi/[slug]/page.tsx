@@ -85,35 +85,37 @@ export default function QuizPage({ test = { title: "Bài kiểm tra", grade: "T�
 			</div>
 
 			{/* Header */}
-			<div className="relative z-20 mx-auto mb-8 flex max-w-7xl flex-col items-center gap-4 md:mb-12">
-				<div className="rounded-full bg-white px-8 py-1.5 shadow-lg">
-					<span className="text-xl font-black tracking-widest text-slate-800 uppercase">StemKey</span>
+			<div className="relative z-20 mx-auto mb-6 flex max-w-7xl flex-col items-center gap-3 md:mb-12 md:gap-4">
+				<div className="rounded-full bg-white px-5 py-1 shadow-lg md:px-8 md:py-1.5">
+					<span className="text-sm font-black tracking-widest text-slate-800 uppercase md:text-xl">
+						StemKey
+					</span>
 				</div>
 
-				<h1 className="px-4 text-center text-2xl font-black text-white uppercase drop-shadow-lg md:text-4xl lg:text-5xl">
+				<h1 className="px-4 text-center text-xl font-black text-white uppercase drop-shadow-lg md:text-4xl lg:text-5xl">
 					{test.title} - {test.grade}
 				</h1>
 
-				<div className="flex w-full flex-wrap items-center justify-center gap-3 md:gap-6">
+				<div className="flex w-full flex-wrap items-center justify-center gap-2 md:gap-6">
 					{gameState === "taking" && (
 						<>
-							<div className="flex items-center gap-3 rounded-xl border-b-4 border-slate-200 bg-white p-3 shadow-xl md:p-4">
-								<div className="text-[10px] font-bold text-slate-400 uppercase md:text-xs">
-									Tiến độ:
+							<div className="flex items-center gap-2 rounded-xl border-b-2 border-slate-200 bg-white/95 p-2 shadow-xl backdrop-blur-sm md:gap-3 md:border-b-4 md:p-4">
+								<div className="text-[8px] font-extrabold text-slate-400 uppercase md:text-xs">
+									Tiến độ
 								</div>
-								<div className="text-lg font-black text-slate-800 md:text-2xl">
+								<div className="text-sm font-black text-slate-800 md:text-2xl">
 									{Object.keys(currentAnswers).length}/{QUIZ_QUESTIONS.length}
 								</div>
 							</div>
-							<div className="relative flex items-center gap-3 rounded-xl border-b-4 border-slate-200 bg-white p-3 shadow-xl md:p-4">
-								<div className="text-[10px] font-bold text-slate-400 uppercase md:text-xs">
-									Thời gian:
+							<div className="relative flex items-center gap-2 rounded-xl border-b-2 border-slate-200 bg-white/95 p-2 shadow-xl backdrop-blur-sm md:gap-3 md:border-b-4 md:p-4">
+								<div className="text-[8px] font-extrabold text-slate-400 uppercase md:text-xs">
+									Thời gian
 								</div>
-								<div className="font-mono text-lg font-black text-slate-800 md:text-2xl">
+								<div className="font-mono text-sm font-black text-slate-800 md:text-2xl">
 									{formatTime(timeLeft)}
 								</div>
-								<div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-yellow-400 shadow-lg md:-top-4 md:-right-4 md:h-12 md:w-12 md:border-4">
-									<Clock size={16} className="text-white md:hidden" />
+								<div className="absolute -top-1.5 -right-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-yellow-400 shadow-lg md:-top-4 md:-right-4 md:h-12 md:w-12 md:border-4">
+									<Clock size={12} className="text-white md:hidden" />
 									<Clock size={24} className="hidden text-white md:block" />
 								</div>
 							</div>
@@ -169,9 +171,9 @@ export default function QuizPage({ test = { title: "Bài kiểm tra", grade: "T�
 			{/* Back Button */}
 			<button
 				onClick={() => router.back()}
-				className="fixed bottom-8 left-4 z-50 flex cursor-pointer items-center gap-2 rounded-full bg-white/20 px-6 py-3 font-bold text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/40 md:left-8"
+				className="fixed bottom-6 left-4 z-50 flex cursor-pointer items-center gap-2 rounded-full bg-white/30 px-5 py-2.5 text-xs font-black text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/40 active:scale-95 md:bottom-8 md:left-8 md:px-6 md:py-3 md:text-base"
 			>
-				<ChevronRight size={20} className="rotate-180" /> Quay lại
+				<ChevronRight size={16} className="rotate-180 md:h-5 md:w-5" /> Quay lại
 			</button>
 		</div>
 	);
