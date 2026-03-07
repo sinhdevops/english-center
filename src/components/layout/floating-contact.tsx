@@ -11,6 +11,7 @@ export const FloatingContact: React.FC = () => {
 				href="https://m.me/stemkey"
 				target="_blank"
 				rel="noopener noreferrer"
+				aria-label="Chat với STEMKey qua Messenger"
 				initial={{ opacity: 0, scale: 0.5, y: 20 }}
 				animate={{ opacity: 1, scale: 1, y: 0 }}
 				whileHover={{ scale: 1.1 }}
@@ -30,6 +31,7 @@ export const FloatingContact: React.FC = () => {
 				href="https://zalo.me/0325610016"
 				target="_blank"
 				rel="noopener noreferrer"
+				aria-label="Chat với STEMKey qua Zalo"
 				initial={{ opacity: 0, scale: 0.5, y: 20 }}
 				animate={{ opacity: 1, scale: 1, y: 0 }}
 				transition={{ delay: 0.1 }}

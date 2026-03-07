@@ -2,40 +2,19 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Calendar, ChevronLeft, ChevronRight, TrendingUp } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, TrendingUp, ChevronRight as ChevronRightIcon } from "lucide-react";
 import { CourserSidebar } from "@/components/ui/courser-sidebar";
-
-const Breadcrumbs = () => (
-	<div className="border-b border-slate-100 bg-slate-50 py-4">
-		<div className="mx-auto flex max-w-7xl items-center gap-2 px-4 text-sm text-slate-500">
-			<span className="hover:text-stem-blue cursor-pointer">Trang chủ</span>
-			<ChevronRight size={14} />
-			<span className="font-medium text-slate-900">Góc học tập</span>
-		</div>
-	</div>
-);
+import Link from "next/link";
+import Image from "next/image";
+import { LEARNING_CORNER_SLIDES, LEARNING_MATERIALS } from "@/constants";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 const Carousel: React.FC<{ onArticleSelect?: (article: any) => void }> = ({ onArticleSelect }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
-	const slides = [
-		{
-			title: "Tổng hợp bộ từ vựng tiếng Anh chuyên ngành Robotics cho học sinh",
-			desc: "Giúp các con làm quen với những thuật ngữ kỹ thuật cơ bản bằng tiếng Anh, hỗ trợ đắc lực cho việc đọc tài liệu và thuyết trình dự án.",
-			date: "22/02/2024",
-			views: "1.2k lượt xem",
-			img: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=800",
-		},
-		{
-			title: "Video hướng dẫn lắp ráp mô hình cánh tay robot đơn giản",
-			desc: "Từng bước chi tiết để các con có thể tự thực hành tại nhà với bộ kit STEMKey, rèn luyện tính kiên trì và khéo léo.",
-			date: "18/02/2024",
-			views: "950 lượt xem",
-			img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800",
-		},
-	];
 
-	const next = () => setCurrentIndex((prev) => (prev + 1) % slides.length);
-	const prev = () => setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+	const next = () => setCurrentIndex((prev) => (prev + 1) % LEARNING_CORNER_SLIDES.length);
+	const prev = () =>
+		setCurrentIndex((prev) => (prev - 1 + LEARNING_CORNER_SLIDES.length) % LEARNING_CORNER_SLIDES.length);
 
 	return (
 		<div className="group relative mb-16">
@@ -49,18 +28,22 @@ const Carousel: React.FC<{ onArticleSelect?: (article: any) => void }> = ({ onAr
 						className="grid w-full grid-cols-1 gap-8 md:grid-cols-2"
 					>
 						{[0, 1].map((offset) => {
-							const slide = slides[(currentIndex + offset) % slides.length];
+							const slide =
+								LEARNING_CORNER_SLIDES[(currentIndex + offset) % LEARNING_CORNER_SLIDES.length];
 							return (
-								<div
+								<Link
+									href={`/goc-hoc-tap/${slide.title}`}
 									key={offset}
-									className="flex cursor-pointer flex-col"
+									className="group/item flex cursor-pointer flex-col"
 									onClick={() => onArticleSelect?.(slide)}
 								>
-									<div className="mb-4 aspect-[16/9] overflow-hidden rounded-2xl shadow-lg">
-										<img
+									<div className="relative mb-4 aspect-video overflow-hidden rounded-2xl shadow-lg">
+										<Image
 											src={slide.img}
 											alt={slide.title}
-											className="h-full w-full object-cover"
+											width={800}
+											height={450}
+											className="h-full w-full object-cover transition-transform duration-500 group-hover/item:scale-105"
 											referrerPolicy="no-referrer"
 										/>
 									</div>
@@ -75,7 +58,7 @@ const Carousel: React.FC<{ onArticleSelect?: (article: any) => void }> = ({ onAr
 										<span>•</span>
 										<span>{slide.views}</span>
 									</div>
-								</div>
+								</Link>
 							);
 						})}
 					</motion.div>
@@ -106,55 +89,43 @@ const MaterialItem = ({ title, date, desc, img, onClick }: any) => (
 		onClick={onClick}
 		className="group mb-8 flex cursor-pointer flex-col gap-6 border-b border-slate-100 pb-8 last:border-0 md:flex-row"
 	>
-		<div className="w-full shrink-0 overflow-hidden rounded-xl md:w-1/3">
-			<img
-				src={img}
-				alt={title}
-				className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-				referrerPolicy="no-referrer"
-			/>
-		</div>
-		<div className="flex-grow">
-			<div className="mb-2 flex items-center gap-2 text-xs text-slate-400">
-				<Calendar size={14} />
-				<span>{date}</span>
+		<Link href={`/goc-hoc-tap/${title}`} className="flex w-full flex-col gap-6 md:flex-row">
+			<div className="w-full shrink-0 grow-0 overflow-hidden rounded-xl md:w-1/3">
+				<Image
+					src={img}
+					alt={title}
+					width={400}
+					height={300}
+					className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+					referrerPolicy="no-referrer"
+				/>
 			</div>
-			<h3 className="group-hover:text-stem-blue mb-3 text-xl leading-tight font-bold text-slate-900 transition-colors">
-				{title}
-			</h3>
-			<p className="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600">{desc}</p>
-			<button className="text-stem-blue flex items-center gap-1 text-sm font-bold hover:underline">
-				Tải tài liệu <ChevronRight size={14} />
-			</button>
-		</div>
+			<div className="grow text-left">
+				<div className="mb-2 flex items-center gap-2 text-xs text-slate-400">
+					<Calendar size={14} />
+					<span>{date}</span>
+				</div>
+				<h3 className="group-hover:text-stem-blue mb-3 text-xl leading-tight font-bold text-slate-900 transition-colors">
+					{title}
+				</h3>
+				<p className="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600">{desc}</p>
+				<button className="text-stem-blue flex items-center gap-1 text-sm font-bold hover:underline">
+					Tải tài liệu <ChevronRightIcon size={14} />
+				</button>
+			</div>
+		</Link>
 	</motion.div>
 );
 
 export default function LearningCornerPage({ onArticleSelect }: { onArticleSelect?: (article: any) => void }) {
-	const materials = [
-		{
-			title: "Hướng dẫn lập trình Scratch cơ bản cho người mới bắt đầu",
-			date: "20 Tháng 2, 2024",
-			desc: "Scratch là ngôn ngữ lập trình kéo thả tuyệt vời để trẻ làm quen với tư duy thuật toán. Bài viết này sẽ hướng dẫn con tạo ra trò chơi đầu tiên của mình.",
-			img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=800",
-		},
-		{
-			title: "Bộ thẻ Flashcard: 50 Động từ tiếng Anh về chủ đề Khoa học",
-			date: "15 Tháng 2, 2024",
-			desc: "Tải ngay bộ Flashcard sinh động giúp con ghi nhớ từ vựng tiếng Anh một cách nhanh chóng và hiệu quả qua hình ảnh minh họa.",
-			img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800",
-		},
-		{
-			title: "Thử thách tuần này: Chế tạo xe đua phản lực từ bong bóng",
-			date: "10 Tháng 2, 2024",
-			desc: "Một dự án STEM thực tế giúp con hiểu về định luật III Newton và lực đẩy. Cùng chuẩn bị nguyên liệu và bắt đầu thôi!",
-			img: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
-		},
-	];
-
 	return (
 		<div className="min-h-screen bg-white">
-			<div className="mx-auto max-w-7xl px-4 py-12 lg:py-20">
+			<div className="border-b border-slate-100 bg-slate-50 py-4">
+				<div className="mx-auto max-w-7xl px-4">
+					<Breadcrumb items={[{ label: "Góc học tập", active: true }]} variant="dark" />
+				</div>
+			</div>
+			<div className="mx-auto max-w-7xl px-4 py-12 text-center lg:py-20">
 				<Carousel onArticleSelect={onArticleSelect} />
 				<div className="flex flex-col gap-16 lg:flex-row">
 					<div className="w-full lg:w-2/3">
@@ -162,7 +133,7 @@ export default function LearningCornerPage({ onArticleSelect }: { onArticleSelec
 							<TrendingUp className="text-stem-blue" /> Góc học tập
 						</h1>
 						<div className="space-y-4">
-							{materials.map((item, idx) => (
+							{LEARNING_MATERIALS.map((item, idx) => (
 								<MaterialItem key={idx} {...item} onClick={() => onArticleSelect?.(item)} />
 							))}
 						</div>

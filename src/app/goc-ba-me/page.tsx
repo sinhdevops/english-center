@@ -2,40 +2,19 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Calendar, ChevronLeft, ChevronRight, TrendingUp } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, TrendingUp, ChevronRight as ChevronRightIcon } from "lucide-react";
 import { CourserSidebar } from "@/components/ui/courser-sidebar";
-
-const Breadcrumbs = () => (
-	<div className="border-b border-slate-100 bg-slate-50 py-4">
-		<div className="mx-auto flex max-w-7xl items-center gap-2 px-4 text-sm text-slate-500">
-			<span className="hover:text-stem-blue cursor-pointer">Trang chủ</span>
-			<ChevronRight size={14} />
-			<span className="font-medium text-slate-900">Góc ba mẹ</span>
-		</div>
-	</div>
-);
+import Link from "next/link";
+import Image from "next/image";
+import { PARENTS_CORNER_SLIDES, PARENTS_ARTICLES } from "@/constants";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 const Carousel: React.FC<{ onArticleSelect?: (article: any) => void }> = ({ onArticleSelect }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
-	const slides = [
-		{
-			title: "Làm thế nào để khơi gợi niềm đam mê khoa học cho trẻ ngay tại nhà?",
-			desc: "Chia sẻ những bí quyết đơn giản giúp ba mẹ biến những hoạt động hàng ngày thành những bài học khoa học thú vị, giúp trẻ luôn tò mò và ham học hỏi.",
-			date: "25/02/2024",
-			views: "850 lượt xem",
-			img: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
-		},
-		{
-			title: "Kỷ nguyên số: Ba mẹ nên cho con tiếp cận công nghệ từ khi nào?",
-			desc: "Chuyên gia STEMKey phân tích về độ tuổi và cách thức cho trẻ tiếp cận với các thiết bị điện tử một cách lành mạnh và hiệu quả nhất.",
-			date: "20/02/2024",
-			views: "620 lượt xem",
-			img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800",
-		},
-	];
 
-	const next = () => setCurrentIndex((prev) => (prev + 1) % slides.length);
-	const prev = () => setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+	const next = () => setCurrentIndex((prev) => (prev + 1) % PARENTS_CORNER_SLIDES.length);
+	const prev = () =>
+		setCurrentIndex((prev) => (prev - 1 + PARENTS_CORNER_SLIDES.length) % PARENTS_CORNER_SLIDES.length);
 
 	return (
 		<div className="group relative mb-16">
@@ -49,18 +28,21 @@ const Carousel: React.FC<{ onArticleSelect?: (article: any) => void }> = ({ onAr
 						className="grid w-full grid-cols-1 gap-8 md:grid-cols-2"
 					>
 						{[0, 1].map((offset) => {
-							const slide = slides[(currentIndex + offset) % slides.length];
+							const slide = PARENTS_CORNER_SLIDES[(currentIndex + offset) % PARENTS_CORNER_SLIDES.length];
 							return (
-								<div
+								<Link
+									href={`/goc-ba-me/${slide.title}`}
 									key={offset}
-									className="flex cursor-pointer flex-col"
+									className="group/item flex cursor-pointer flex-col"
 									onClick={() => onArticleSelect?.(slide)}
 								>
-									<div className="mb-4 aspect-[16/9] overflow-hidden rounded-2xl shadow-lg">
-										<img
+									<div className="relative mb-4 aspect-video overflow-hidden rounded-2xl text-center shadow-lg">
+										<Image
 											src={slide.img}
 											alt={slide.title}
-											className="h-full w-full object-cover"
+											width={800}
+											height={450}
+											className="h-full w-full object-cover transition-transform duration-500 group-hover/item:scale-105"
 											referrerPolicy="no-referrer"
 										/>
 									</div>
@@ -75,7 +57,7 @@ const Carousel: React.FC<{ onArticleSelect?: (article: any) => void }> = ({ onAr
 										<span>•</span>
 										<span>{slide.views}</span>
 									</div>
-								</div>
+								</Link>
 							);
 						})}
 					</motion.div>
@@ -106,63 +88,51 @@ const ArticleItem = ({ title, date, desc, img, onClick }: any) => (
 		onClick={onClick}
 		className="group mb-8 flex cursor-pointer flex-col gap-6 border-b border-slate-100 pb-8 last:border-0 md:flex-row"
 	>
-		<div className="w-full shrink-0 overflow-hidden rounded-xl md:w-1/3">
-			<img
-				src={img}
-				alt={title}
-				className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-				referrerPolicy="no-referrer"
-			/>
-		</div>
-		<div className="flex-grow">
-			<div className="mb-2 flex items-center gap-2 text-xs text-slate-400">
-				<Calendar size={14} />
-				<span>{date}</span>
+		<Link href={`/goc-ba-me/${title}`} className="flex w-full flex-col gap-6 text-center md:flex-row md:text-left">
+			<div className="w-full shrink-0 grow-0 overflow-hidden rounded-xl md:w-1/3">
+				<Image
+					src={img}
+					alt={title}
+					width={400}
+					height={300}
+					className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+					referrerPolicy="no-referrer"
+				/>
 			</div>
-			<h3 className="group-hover:text-stem-blue mb-3 text-xl leading-tight font-bold text-slate-900 transition-colors">
-				{title}
-			</h3>
-			<p className="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600">{desc}</p>
-			<button className="text-stem-blue flex items-center gap-1 text-sm font-bold hover:underline">
-				Xem thêm <ChevronRight size={14} />
-			</button>
-		</div>
+			<div className="grow">
+				<div className="mb-2 flex items-center justify-center gap-2 text-xs text-slate-400 md:justify-start">
+					<Calendar size={14} />
+					<span>{date}</span>
+				</div>
+				<h3 className="group-hover:text-stem-blue mb-3 text-xl leading-tight font-bold text-slate-900 transition-colors">
+					{title}
+				</h3>
+				<p className="mb-4 line-clamp-3 text-sm leading-relaxed text-slate-600">{desc}</p>
+				<button className="text-stem-blue flex items-center justify-center gap-1 text-sm font-bold hover:underline md:justify-start">
+					Xem thêm <ChevronRightIcon size={14} />
+				</button>
+			</div>
+		</Link>
 	</motion.div>
 );
 
 export default function ParentsCornerPage({ onArticleSelect }: { onArticleSelect?: (article: any) => void }) {
-	const articles = [
-		{
-			title: "5 Trò chơi STEM đơn giản giúp trẻ phát triển tư duy logic",
-			date: "24 Tháng 2, 2024",
-			desc: "Không cần những bộ kit đắt tiền, ba mẹ có thể cùng con thực hiện những thí nghiệm vui nhộn ngay tại phòng khách với những vật dụng có sẵn.",
-			img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=800",
-		},
-		{
-			title: "Cách khích lệ trẻ khi gặp thất bại trong các dự án sáng tạo",
-			date: "20 Tháng 2, 2024",
-			desc: "Thất bại là một phần tất yếu của quá trình học tập STEM. Ba mẹ nên phản ứng thế nào để con không nản lòng và tiếp tục kiên trì với ý tưởng của mình?",
-			img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800",
-		},
-		{
-			title: "Tầm quan trọng của việc đọc sách khoa học cho trẻ mầm non",
-			date: "15 Tháng 2, 2024",
-			desc: "Xây dựng thói quen đọc sách không chỉ giúp con phát triển ngôn ngữ mà còn mở ra cánh cửa tri thức về thế giới tự nhiên đầy kỳ thú.",
-			img: "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=800",
-		},
-	];
-
 	return (
-		<div className="min-h-screen bg-white">
+		<div className="min-h-screen bg-white text-center">
+			<div className="border-b border-slate-100 bg-slate-50 py-4">
+				<div className="mx-auto max-w-7xl px-4">
+					<Breadcrumb items={[{ label: "Góc ba mẹ", active: true }]} variant="dark" />
+				</div>
+			</div>
 			<div className="mx-auto max-w-7xl px-4 py-12 lg:py-20">
 				<Carousel onArticleSelect={onArticleSelect} />
 				<div className="flex flex-col gap-16 lg:flex-row">
 					<div className="w-full lg:w-2/3">
-						<h1 className="mb-10 flex items-center gap-3 text-3xl font-black text-slate-900">
+						<h1 className="mb-10 flex items-center justify-center gap-3 text-3xl font-black text-slate-900 uppercase md:justify-start">
 							<TrendingUp className="text-stem-blue" /> Góc ba mẹ
 						</h1>
 						<div className="space-y-4">
-							{articles.map((item, idx) => (
+							{PARENTS_ARTICLES.map((item, idx) => (
 								<ArticleItem key={idx} {...item} onClick={() => onArticleSelect?.(item)} />
 							))}
 						</div>

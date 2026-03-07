@@ -1,19 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-	ChevronRight,
-	Download,
-	FileText,
-	BookOpen,
-	Search,
-	Filter,
-	ArrowRight,
-	Gift,
-	Star,
-	Clock,
-	CheckCircle2,
-} from "lucide-react";
+import { ChevronRight, Download, Search, Filter, ArrowRight, Gift, Star, Clock, CheckCircle2 } from "lucide-react";
 
 const categories = [
 	"Tất cả",
