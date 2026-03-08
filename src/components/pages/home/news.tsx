@@ -25,7 +25,7 @@ const News = () => {
 							transition={{ delay: i * 0.1 }}
 							className="group flex cursor-pointer flex-col"
 						>
-							<div className="mb-6 aspect-16/10 overflow-hidden rounded-xl shadow-lg">
+							<div className="mb-6 aspect-16/10 max-h-[220px] overflow-hidden rounded-xl shadow-lg">
 								<Image
 									src={post.img}
 									alt={post.title}

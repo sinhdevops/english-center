@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
+import { IMAGES } from "../../public/statics/images";
 
 export default function NotFound() {
 	return (
@@ -15,26 +16,18 @@ export default function NotFound() {
 			</div>
 
 			<div className="relative z-10 w-full max-w-xl text-center">
+				<Image src={IMAGES.notFound} alt="404" />
+
 				<motion.div
 					initial={{ opacity: 0, scale: 0.9 }}
 					animate={{ opacity: 1, scale: 1 }}
 					transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
 				>
 					{/* Prominent 404 with STEM colors */}
-					<div className="relative mb-6 inline-block">
-						<h1 className="from-stem-blue to-stem-green bg-linear-to-br via-blue-600 bg-clip-text text-[120px] leading-none font-black tracking-tighter text-transparent select-none sm:text-[180px]">
-							404
-						</h1>
-						<motion.div
-							animate={{ y: [0, -10, 0], rotate: [0, 5, 0] }}
-							transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-							className="text-stem-green absolute -top-4 -right-4 rounded-2xl border border-slate-100 bg-white p-3 shadow-xl"
-						>
-							<Search size={24} strokeWidth={2.5} />
-						</motion.div>
-					</div>
 
-					<h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl">Ối! Trang này không tồn tại</h2>
+					<h2 className="mb-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
+						Ối! Trang này không tồn tại
+					</h2>
 					<p className="mx-auto mb-10 max-w-md text-lg leading-relaxed text-slate-500">
 						Có vẻ như đường dẫn bạn đang tìm kiếm đã bị di chuyển hoặc không còn tồn tại trong hệ thống của
 						chúng tôi.
