@@ -10,7 +10,7 @@ const Programs = () => {
 		<section className="bg-white py-24">
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="mb-12 text-center lg:mb-20">
-					<h2 className="mb-4 text-2xl font-bold text-slate-900 sm:text-4xl lg:mb-6 lg:text-5xl">
+					<h2 className="mb-4 text-2xl font-bold text-slate-900 sm:text-4xl lg:mb-6 lg:text-4xl">
 						Các chương trình học tại STEMKey
 					</h2>
 					<p className="mx-auto max-w-3xl text-base font-medium text-slate-500 lg:text-lg">

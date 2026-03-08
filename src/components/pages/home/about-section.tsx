@@ -16,7 +16,7 @@ const AboutSection = () => {
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
-							className="mb-8 text-4xl font-bold text-slate-900 lg:text-5xl"
+							className="mb-8 text-3xl font-bold text-slate-900 lg:text-4xl"
 						>
 							Giới thiệu về STEMKey
 						</motion.h2>
@@ -41,7 +41,7 @@ const AboutSection = () => {
 						>
 							{ABOUT_FEATURES.map((item, i) => (
 								<li key={i} className="flex items-center gap-3 font-medium text-slate-700">
-									<div className="h-1.5 w-1.5 rounded-full bg-slate-900" />
+									<div className="h-1.5 w-1.5 rounded-xl bg-slate-900" />
 									{item}
 								</li>
 							))}
@@ -56,7 +56,7 @@ const AboutSection = () => {
 									whileInView={{ opacity: 1, scale: 1 }}
 									viewport={{ once: true }}
 									transition={{ delay: 0.3 + i * 0.05 }}
-									className="rounded-2xl border border-slate-100 bg-slate-50 p-6 transition-colors hover:border-slate-200"
+									className="rounded-xl border border-slate-100 bg-slate-50 p-6 transition-colors hover:border-slate-200"
 								>
 									<div className="mb-2 text-2xl font-bold text-slate-900 lg:text-3xl">
 										{stat.value}
@@ -74,7 +74,7 @@ const AboutSection = () => {
 							whileInView={{ opacity: 1, x: 0 }}
 							viewport={{ once: true }}
 							transition={{ duration: 0.8 }}
-							className="relative overflow-hidden rounded-[2.5rem] shadow-2xl"
+							className="relative overflow-hidden rounded-xl shadow-2xl"
 						>
 							<Image
 								src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1000"

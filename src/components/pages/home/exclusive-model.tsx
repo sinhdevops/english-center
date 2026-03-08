@@ -10,7 +10,7 @@ const ExclusiveModel = () => {
 		<section className="bg-[#F8FAFC] py-24">
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="mb-16 text-center lg:mb-24">
-					<h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-5xl">Mô hình lớp học độc quyền</h2>
+					<h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">Mô hình lớp học độc quyền</h2>
 					<p className="mx-auto max-w-4xl text-base leading-relaxed font-medium text-slate-500 lg:text-lg">
 						Lớp học đảo ngược thúc đẩy khả năng tự học, tính chủ động và tích cực trong học tập ở học trò,
 						các con không phụ thuộc, chờ thầy cô đưa kiến thức.
@@ -26,7 +26,7 @@ const ExclusiveModel = () => {
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: i * 0.1 }}
-								className="group flex items-center gap-6 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition-all hover:shadow-md lg:p-5"
+								className="group flex items-center gap-6 rounded-xl border border-slate-100 bg-white p-4 shadow-sm transition-all hover:shadow-md lg:p-5"
 							>
 								<div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg font-bold text-[#1890FF]">
 									{item.id}
@@ -41,7 +41,7 @@ const ExclusiveModel = () => {
 							initial={{ opacity: 0, scale: 0.95 }}
 							whileInView={{ opacity: 1, scale: 1 }}
 							viewport={{ once: true }}
-							className="relative overflow-hidden rounded-[2.5rem] shadow-2xl"
+							className="relative overflow-hidden rounded-xl shadow-2xl"
 						>
 							<Image
 								src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1000"

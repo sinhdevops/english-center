@@ -16,7 +16,9 @@ const FlexibleLearning = () => {
 					{/* Left: Images */}
 					<div className="w-full lg:w-1/2">
 						<div className="mb-10 text-center lg:text-left">
-							<h2 className="mb-6 text-2xl font-medium">Học linh hoạt giữa Online và Offline</h2>
+							<h2 className="mb-6 text-2xl font-medium lg:text-4xl">
+								Học linh hoạt giữa Online và Offline
+							</h2>
 							<p className="text-lg font-medium text-slate-500">
 								Tham gia Lớp học Offline và Online tại STEMKey bạn sẽ được:
 							</p>
@@ -26,7 +28,7 @@ const FlexibleLearning = () => {
 								initial={{ opacity: 0, scale: 0.95 }}
 								whileInView={{ opacity: 1, scale: 1 }}
 								viewport={{ once: true }}
-								className="relative h-[400px] overflow-hidden rounded-3xl shadow-lg lg:h-[500px]"
+								className="relative h-[400px] overflow-hidden rounded-xl shadow-lg lg:h-[500px]"
 							>
 								<Image
 									src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&q=80&w=600"

@@ -15,7 +15,7 @@ const Teachers = () => {
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
-						className="mb-6 text-3xl font-bold text-slate-900 lg:text-5xl"
+						className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl"
 					>
 						300+ giáo viên truyền cảm hứng
 					</motion.h2>
@@ -49,7 +49,7 @@ const Teachers = () => {
 										className="flex h-full flex-col"
 									>
 										<div
-											className="group relative mb-6 aspect-4/5 overflow-hidden rounded-2xl bg-white shadow-sm"
+											className="group relative mb-6 aspect-4/5 overflow-hidden rounded-xl bg-white shadow-sm"
 											aria-hidden="true"
 										>
 											<Image

@@ -13,7 +13,7 @@ const Testimonials = () => {
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mb-12 text-3xl font-bold text-slate-900 lg:mb-16 lg:text-5xl"
+					className="mb-12 text-3xl font-bold text-slate-900 lg:mb-16 lg:text-4xl"
 				>
 					Cảm nhận của học viên và phụ huynh
 				</motion.h2>
@@ -23,7 +23,7 @@ const Testimonials = () => {
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="group rounded-5xl relative mb-12 aspect-21/9 overflow-hidden shadow-2xl"
+					className="group relative mb-12 aspect-21/9 overflow-hidden rounded-xl shadow-2xl"
 				>
 					<Image
 						src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1200"
@@ -53,7 +53,7 @@ const Testimonials = () => {
 							transition={{ delay: i * 0.1 }}
 							className="group flex flex-col gap-6"
 						>
-							<div className="relative aspect-4/3 overflow-hidden rounded-4xl text-center shadow-xl">
+							<div className="relative aspect-4/3 overflow-hidden rounded-xl text-center shadow-xl">
 								<Image
 									src={award.img}
 									alt={`Giải thưởng: ${award.title}`}

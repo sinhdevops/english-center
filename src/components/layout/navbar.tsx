@@ -47,7 +47,7 @@ const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => 
 			<Link
 				href={item.href || "#"}
 				className={`relative flex items-center gap-1 pb-1 text-sm font-medium whitespace-nowrap transition-colors ${
-					pathname === item.href ? "text-stem-blue" : "hover:text-stem-blue text-slate-600"
+					pathname === item.href ? "text-stem-blue" : "hover:text-stem-blue"
 				}`}
 			>
 				{item.label}

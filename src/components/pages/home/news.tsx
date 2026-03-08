@@ -10,7 +10,7 @@ const News = () => {
 		<section className="bg-white py-24">
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="mb-12 lg:mb-16">
-					<h2 className="text-3xl font-bold text-slate-900 lg:text-5xl">
+					<h2 className="text-3xl font-bold text-slate-900 lg:text-4xl">
 						Loạt sự kiện HOT - đừng vội lướt qua!
 					</h2>
 				</div>
@@ -25,7 +25,7 @@ const News = () => {
 							transition={{ delay: i * 0.1 }}
 							className="group flex cursor-pointer flex-col"
 						>
-							<div className="mb-6 aspect-16/10 overflow-hidden rounded-2xl shadow-lg lg:rounded-3xl">
+							<div className="mb-6 aspect-16/10 overflow-hidden rounded-xl shadow-lg">
 								<Image
 									src={post.img}
 									alt={post.title}

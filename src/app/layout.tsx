@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
+import { Nunito_Sans, Italianno } from "next/font/google";
 import MainLayout from "@/components/layout/main-layout";
 import "@/app/globals.css";
 import AppProvider from "@/providers/app-provider";
 import { AuthProvider } from "@/components/auth/auth-provider";
 import { Toaster } from "sonner";
+import { utmAzuki } from "@/lib/fonts";
 
 const nunito = Nunito_Sans({
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "600", "700", "800"],
 	variable: "--font-nunito",
+	display: "swap",
+});
+const italianno = Italianno({
+	subsets: ["latin"],
+	weight: ["400"],
+	variable: "--font-italianno",
 	display: "swap",
 });
 
@@ -55,7 +62,9 @@ export default async function RootLayout({
 }>) {
 	return (
 		<html lang="vi" suppressHydrationWarning>
-			<body className={`${nunito.variable} bg-white font-sans text-slate-900 antialiased`}>
+			<body
+				className={`${nunito.variable} ${italianno.variable} ${utmAzuki.variable} bg-white font-sans text-slate-900 antialiased`}
+			>
 				<AppProvider>
 					<AuthProvider>
 						<MainLayout>{children}</MainLayout>

@@ -3,16 +3,13 @@
 import { motion } from "motion/react";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { HomeImages } from "../../../../public/statics/images";
 import { HERO_TARGETS } from "@/constants";
 import React from "react";
-
 const Hero = () => {
 	return (
 		<section className="relative flex min-h-[600px] overflow-hidden lg:min-h-[750px]">
 			{/* Tech/Circuit Background Pattern */}
-			<div className="pointer-events-none absolute inset-0 z-10 opacity-10">
+			<div className="pointer-events-none absolute inset-0 z-10 opacity-[0.05] lg:opacity-10">
 				<svg
 					width="100%"
 					height="100%"
@@ -30,14 +27,32 @@ const Hero = () => {
 				</svg>
 			</div>
 
-			{/* Background Gradient - Green */}
-			<div
-				className="absolute inset-0 z-0"
-				style={{ background: "linear-gradient(272.97deg, #00BA3D 22.93%, #005C1E 89.95%)" }}
-			/>
+			{/* Background Layers */}
+			<div className="bg-stem-green absolute inset-0 z-0 bg-[linear-gradient(272.97deg,#00BA3D_22.93%,#005C1E_89.95%)] lg:bg-[url('/statics/images/home/herobg.webp')] lg:bg-cover lg:bg-center lg:bg-no-repeat" />
+			<div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15)_0%,transparent_70%)] lg:hidden" />
 
-			<div className="relative z-20 flex w-full flex-col items-center gap-12 px-4 py-12 lg:flex-row lg:px-[120px]">
-				<div className="w-full text-center lg:w-3/4 lg:text-left">
+			{/* Decorative Blobs for Mobile Depth */}
+			<div className="lg:hidden">
+				<motion.div
+					animate={{
+						y: [0, -20, 0],
+						opacity: [0.2, 0.4, 0.2],
+					}}
+					transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+					className="absolute -top-10 -left-10 z-0 h-64 w-64 rounded-full bg-white/10 blur-3xl"
+				/>
+				<motion.div
+					animate={{
+						y: [0, 20, 0],
+						opacity: [0.1, 0.3, 0.1],
+					}}
+					transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+					className="absolute -right-20 bottom-20 z-0 h-80 w-80 rounded-full bg-white/10 blur-3xl"
+				/>
+			</div>
+
+			<div className="relative z-20 flex w-full flex-col items-center gap-12 px-6 py-16 lg:flex-row lg:px-[120px] lg:py-12">
+				<div className="text-center lg:w-[50vw] lg:text-left">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -46,16 +61,16 @@ const Hero = () => {
 						<motion.p
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
-							className="font-cursive mb-2 text-3xl text-white lg:mb-4 lg:text-5xl"
+							className="font-italianno mb-3 text-4xl text-white drop-shadow-sm lg:mb-4 lg:text-5xl"
 						>
 							Phát triển toàn diện
 						</motion.p>
 
-						<h2 className="font-azuki mb-8 text-3xl leading-tight tracking-wide text-white uppercase sm:text-4xl lg:mb-10 lg:text-6xl">
-							Tư duy – Ngôn ngữ – Công nghệ
+						<h2 className="font-utm-azuki mb-8 text-3xl leading-[1.1] tracking-wide text-white uppercase sm:text-4xl lg:mb-10 lg:text-6xl">
+							Tư duy – Ngôn ngữ <br className="sm:hidden" />– Công nghệ
 						</h2>
 
-						<div className="mb-10 inline-block space-y-4 text-left lg:mb-12">
+						<div className="mb-10 inline-flex flex-col space-y-4 text-left lg:mb-12">
 							{HERO_TARGETS.map((text, i) => (
 								<motion.div
 									key={i}
@@ -74,29 +89,19 @@ const Hero = () => {
 							<Button
 								size="lg"
 								variant="primary"
-								className="w-full rounded-full px-10 py-6 text-base font-bold tracking-wider uppercase sm:w-auto"
+								className="w-full rounded-full px-10 py-7 text-base font-bold tracking-wider uppercase shadow-xl transition-all active:scale-95 sm:w-auto"
 							>
 								Đăng ký học thử miễn phí
 							</Button>
 							<Button
 								size="lg"
 								variant="outline"
-								className="w-full rounded-full border-2 bg-white/20 px-10 py-6 text-base tracking-wider uppercase hover:bg-white/30 sm:w-auto"
+								className="w-full rounded-full border-2 border-white/30 bg-white/10 px-10 py-7 text-base tracking-wider text-white uppercase backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 sm:w-auto"
 							>
 								Tư vấn lộ trình học
 							</Button>
 						</div>
 					</motion.div>
-				</div>
-
-				<div className="absolute right-0 bottom-0 z-10 hidden w-[60vw] lg:block">
-					<Image
-						src={HomeImages.heroStudent}
-						alt="Học sinh STEMKey"
-						className="h-auto w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
-						referrerPolicy="no-referrer"
-						priority
-					/>
 				</div>
 			</div>
 		</section>
