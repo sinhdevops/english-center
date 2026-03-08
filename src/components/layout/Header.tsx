@@ -5,6 +5,7 @@ import { Phone, MapPin, Search, Menu, LogOut, User as UserIcon, ChevronDown } fr
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/useAuthStore";
 import { logout as logoutAction } from "@/app/auth/login/actions";
 import { toast } from "sonner";
@@ -14,6 +15,8 @@ import { supabase } from "@/lib/supabase-client";
 export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => {
 	const { user, profile, logout } = useAuthStore();
 	const [showDropdown, setShowDropdown] = useState(false);
+	const [searchQuery, setSearchQuery] = useState("");
+	const router = useRouter();
 
 	const handleLogout = async () => {
 		setShowDropdown(false);
@@ -24,6 +27,13 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 		} else {
 			logout();
 			toast.success("Đã đăng xuất");
+		}
+	};
+
+	const handleSearch = (e?: React.KeyboardEvent | React.MouseEvent) => {
+		if (e && "key" in e && e.key !== "Enter") return;
+		if (searchQuery.trim()) {
+			router.push(`/tim-kiem?q=${encodeURIComponent(searchQuery.trim())}`);
 		}
 	};
 
@@ -69,12 +79,16 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 						<input
 							type="text"
 							placeholder="Tìm kiếm"
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)}
+							onKeyDown={handleSearch}
 							aria-label="Tìm kiếm nội dung"
 							className="focus:ring-stem-blue/20 w-full rounded-full border border-slate-200 bg-slate-50 py-2 pr-10 pl-4 text-sm focus:ring-2 focus:outline-none"
 						/>
 						<Search
 							size={16}
-							className="absolute top-1/2 right-3 -translate-y-1/2 text-slate-400"
+							onClick={handleSearch}
+							className="hover:text-stem-blue absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-slate-400"
 							aria-hidden="true"
 						/>
 					</div>

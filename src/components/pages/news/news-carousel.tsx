@@ -5,17 +5,21 @@ import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { NEWS_SLIDES } from "@/constants";
 
 interface NewsCarouselProps {
-	onArticleSelect?: (article: any) => void;
+	items: any[];
 }
 
-const NewsCarousel: React.FC<NewsCarouselProps> = ({ onArticleSelect }) => {
+const NewsCarousel: React.FC<NewsCarouselProps> = ({ items = [] }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 
-	const next = () => setCurrentIndex((prev) => (prev + 1) % NEWS_SLIDES.length);
-	const prev = () => setCurrentIndex((prev) => (prev - 1 + NEWS_SLIDES.length) % NEWS_SLIDES.length);
+	if (!items || items.length === 0) return null;
+
+	const next = () => setCurrentIndex((prev) => (prev + 1) % items.length);
+	const prev = () => setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+
+	// Determine how many items to show (max 2)
+	const visibleItemsCount = Math.min(items.length, 2);
 
 	return (
 		<div className="group relative mb-16">
@@ -26,20 +30,22 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ onArticleSelect }) => {
 						initial={{ opacity: 0, x: 50 }}
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: -50 }}
-						className="grid w-full grid-cols-1 gap-8 md:grid-cols-2"
+						className={`grid w-full grid-cols-1 gap-8 ${visibleItemsCount > 1 ? "md:grid-cols-2" : ""}`}
 					>
-						{[0, 1].map((offset) => {
-							const slide = NEWS_SLIDES[(currentIndex + offset) % NEWS_SLIDES.length];
+						{[...Array(visibleItemsCount)].map((_, offset) => {
+							const slide = items[(currentIndex + offset) % items.length];
 							return (
 								<Link
-									href={`/tin-tuc/${slide.title}`}
-									key={offset}
+									href={`/tin-tuc/${slide.id}`}
+									key={slide.id}
 									className="flex cursor-pointer flex-col"
-									onClick={() => onArticleSelect?.(slide)}
 								>
 									<div className="mb-4 aspect-video overflow-hidden rounded-2xl shadow-lg">
 										<Image
-											src={slide.img}
+											src={
+												slide.image_url ||
+												"https://images.unsplash.com/photo-1531297484001-80022131f5a1"
+											}
 											alt={slide.title}
 											width={800}
 											height={450}
@@ -51,12 +57,12 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ onArticleSelect }) => {
 										{slide.title}
 									</h3>
 									<p className="mb-3 line-clamp-3 text-sm leading-relaxed text-slate-500">
-										{slide.desc}
+										{slide.excerpt || slide.description}
 									</p>
 									<div className="flex items-center gap-4 text-xs font-medium text-slate-400">
-										<span>{slide.date}</span>
+										<span>{new Date(slide.date).toLocaleDateString("vi-VN")}</span>
 										<span>•</span>
-										<span>{slide.views}</span>
+										<span>Tin tức</span>
 									</div>
 								</Link>
 							);
@@ -65,18 +71,22 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ onArticleSelect }) => {
 				</AnimatePresence>
 			</div>
 
-			<button
-				onClick={prev}
-				className="absolute top-1/3 -left-4 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#c41e3a] text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100"
-			>
-				<ChevronLeft size={24} />
-			</button>
-			<button
-				onClick={next}
-				className="absolute top-1/3 -right-4 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#c41e3a] text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100"
-			>
-				<ChevronRight size={24} />
-			</button>
+			{items.length > 2 && (
+				<>
+					<button
+						onClick={prev}
+						className="absolute top-1/3 -left-4 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#c41e3a] text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100"
+					>
+						<ChevronLeft size={24} />
+					</button>
+					<button
+						onClick={next}
+						className="absolute top-1/3 -right-4 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#c41e3a] text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100"
+					>
+						<ChevronRight size={24} />
+					</button>
+				</>
+			)}
 		</div>
 	);
 };

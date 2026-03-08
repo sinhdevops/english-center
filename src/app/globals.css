@@ -46,3 +46,28 @@ body {
 .partners-swiper .swiper-wrapper {
   transition-timing-function: linear !important;
 }
+
+.ql-editor {
+  min-height: 200px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ql-editor img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.ql-container.ql-snow {
+  border-radius: 0 0 12px 12px;
+  border-color: #e2e8f0 !important;
+  background-color: #f8fafc;
+}
+
+.ql-toolbar.ql-snow {
+  border-radius: 12px 12px 0 0;
+  border-color: #e2e8f0 !important;
+  background-color: #fff;
+}
