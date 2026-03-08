@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 
 @plugin "tailwindcss-animate";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -15,10 +16,14 @@
   --font-utm-azuki: var(--font-utm-azuki);
 
   /* Brand Colors - Refined and Softer */
-  --color-primary: #1e3a8a; /* Deep Navy Blue */
-  --color-accent: #f59e0b;  /* Soft Amber/Gold */
-  --color-dark: #0f172a;    /* Midnight Slate */
-  --color-light: #f1f5f9;   /* Soft Cool Gray */
+  --color-primary: #1e3a8a;
+  /* Deep Navy Blue */
+  --color-accent: #f59e0b;
+  /* Soft Amber/Gold */
+  --color-dark: #0f172a;
+  /* Midnight Slate */
+  --color-light: #f1f5f9;
+  /* Soft Cool Gray */
   --color-surface: #ffffff;
   --color-stem-blue: #1d8cf8;
   --color-stem-green: #76bc21;
@@ -28,13 +33,6 @@
   --shadow-premium-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --stem-blue: #1d8cf8;
-  }
-}
 
 body {
   background: var(--background);
