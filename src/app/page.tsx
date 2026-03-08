@@ -28,15 +28,17 @@ export default function HomePage() {
 	return (
 		<main className="overflow-x-hidden">
 			<Hero />
-			<AboutSection />
-			<Programs />
-			<ExclusiveModel />
-			<FlexibleLearning />
-			<Teachers />
-			<Testimonials />
-			<News />
-			<Partners />
-			<RegistrationSection />
+			<div className="flex flex-col gap-[120px] my-[120px]">
+				<AboutSection />
+				<Programs />
+				<ExclusiveModel />
+				<FlexibleLearning />
+				<Teachers />
+				<Testimonials />
+				<News />
+				<Partners />
+				<RegistrationSection />
+			</div>
 		</main>
 	);
 }

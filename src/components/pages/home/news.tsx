@@ -7,9 +7,9 @@ import Image from "next/image";
 
 const News = () => {
 	return (
-		<section className="bg-white py-24">
+		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
-				<div className="mb-12 lg:mb-16">
+				<div className="mb-10">
 					<h2 className="text-3xl font-bold text-slate-900 lg:text-4xl">
 						Loạt sự kiện HOT - đừng vội lướt qua!
 					</h2>

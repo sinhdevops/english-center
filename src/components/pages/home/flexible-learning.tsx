@@ -5,18 +5,19 @@ import { Sparkles, Minus } from "lucide-react";
 import { FLEXIBLE_BENEFITS } from "@/constants";
 import React, { useState } from "react";
 import Image from "next/image";
+import { HomeImages } from "../../../../public/statics/images";
 
 const FlexibleLearning = () => {
 	const [openIndex, setOpenIndex] = useState(0);
 
 	return (
-		<section className="bg-white py-24">
+		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="flex flex-col items-start gap-16 lg:flex-row">
 					{/* Left: Images */}
 					<div className="w-full lg:w-1/2">
 						<div className="mb-10 text-center lg:text-left">
-							<h2 className="mb-6 text-2xl font-medium lg:text-4xl">
+							<h2 className="mb-2 text-2xl font-medium lg:text-4xl">
 								Học linh hoạt giữa Online và Offline
 							</h2>
 							<p className="text-lg font-medium text-slate-500">
@@ -31,7 +32,7 @@ const FlexibleLearning = () => {
 								className="relative h-[400px] overflow-hidden rounded-xl shadow-lg lg:h-[500px]"
 							>
 								<Image
-									src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&q=80&w=600"
+									src={HomeImages.image5}
 									alt="Học sinh tham gia lớp học Online"
 									fill
 									sizes="(max-width: 768px) 50vw, 25vw"
@@ -47,7 +48,7 @@ const FlexibleLearning = () => {
 								className="relative mt-8 h-[400px] overflow-hidden rounded-3xl shadow-lg lg:h-[500px]"
 							>
 								<Image
-									src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600"
+									src={HomeImages.image6}
 									alt="Học sinh tham gia lớp học Offline"
 									fill
 									sizes="(max-width: 768px) 50vw, 25vw"
@@ -64,9 +65,8 @@ const FlexibleLearning = () => {
 							{FLEXIBLE_BENEFITS.map((benefit, i) => (
 								<div
 									key={i}
-									className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-										openIndex === i ? "border-blue-500 bg-blue-50/50" : "border-slate-100 bg-white"
-									}`}
+									className={`overflow-hidden rounded-2xl border transition-all duration-300 ${openIndex === i ? "border-blue-500 bg-blue-50/50" : "border-slate-100 bg-white"
+										}`}
 								>
 									<button
 										onClick={() => setOpenIndex(openIndex === i ? -1 : i)}

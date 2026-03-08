@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
 			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 border-b border-[#454545] px-4 py-4 md:grid-cols-4 lg:px-[120px] lg:pt-[60px] lg:pb-[30px]">
 				<div className="col-span-1 space-y-4 md:col-span-2">
 					<Image
-						src="/statics/images/logo.png"
+						src="/statics/images/logo.svg"
 						alt="Logo"
 						width={200}
 						height={200}

@@ -7,7 +7,7 @@ import { HERO_TARGETS } from "@/constants";
 import React from "react";
 const Hero = () => {
 	return (
-		<section className="relative flex min-h-[600px] overflow-hidden lg:min-h-[750px]">
+		<section className="relative flex min-h-[600px] overflow-hidden lg:min-h-[640px]">
 			{/* Tech/Circuit Background Pattern */}
 			<div className="pointer-events-none absolute inset-0 z-10 opacity-[0.05] lg:opacity-10">
 				<svg
@@ -58,29 +58,30 @@ const Hero = () => {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8 }}
 					>
-						<motion.p
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							className="font-italianno mb-3 text-4xl text-white drop-shadow-sm lg:mb-4 lg:text-5xl"
-						>
-							Phát triển toàn diện
-						</motion.p>
+						<div className="mb-[52px]">
+							<motion.p
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								className="font-italianno text-4xl text-white drop-shadow-sm lg:text-5xl"
+							>
+								Phát triển toàn diện
+							</motion.p>
 
-						<h2 className="font-utm-azuki mb-8 text-3xl leading-[1.1] tracking-wide text-white uppercase sm:text-4xl lg:mb-10 lg:text-6xl">
-							Tư duy – Ngôn ngữ <br className="sm:hidden" />– Công nghệ
-						</h2>
+							<h2 className="font-utm-azuki mb-8 text-3xl leading-[1.1] tracking-wide text-white uppercase sm:text-4xl lg:mb-10 lg:text-6xl">
+								Tư duy – Ngôn ngữ <br className="sm:hidden" />– Công nghệ
+							</h2>
+						</div>
 
-						<div className="mb-10 inline-flex flex-col space-y-4 text-left lg:mb-12">
+						<div className="mb-10 inline-flex flex-col text-left lg:mb-[52px]">
 							{HERO_TARGETS.map((text, i) => (
 								<motion.div
 									key={i}
 									initial={{ opacity: 0, x: -20 }}
 									animate={{ opacity: 1, x: 0 }}
 									transition={{ delay: 0.3 + i * 0.1 }}
-									className="flex items-center gap-3 text-base font-medium text-white/90 lg:text-lg"
+									className="flex items-center gap-3 text-base leading-[26px] text-white/90 lg:text-lg"
 								>
-									<CheckCircle2 size={20} className="shrink-0 text-white" />
-									<span>{text}</span>
+									✦ <span>{text}</span>
 								</motion.div>
 							))}
 						</div>
@@ -89,14 +90,14 @@ const Hero = () => {
 							<Button
 								size="lg"
 								variant="primary"
-								className="w-full rounded-full px-10 py-7 text-base font-bold tracking-wider uppercase shadow-xl transition-all active:scale-95 sm:w-auto"
+								className="w-full rounded-full  text-base font-bold tracking-wider uppercase shadow-xl transition-all active:scale-95 sm:w-auto"
 							>
 								Đăng ký học thử miễn phí
 							</Button>
 							<Button
 								size="lg"
 								variant="outline"
-								className="w-full rounded-full border-2 border-white/30 bg-white/10 px-10 py-7 text-base tracking-wider text-white uppercase backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 sm:w-auto"
+								className="w-full rounded-full border-2 border-white/30 bg-white/10  text-base tracking-wider text-white uppercase backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 sm:w-auto"
 							>
 								Tư vấn lộ trình học
 							</Button>

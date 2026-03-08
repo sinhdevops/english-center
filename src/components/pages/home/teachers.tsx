@@ -8,14 +8,14 @@ import Image from "next/image";
 
 const Teachers = () => {
 	return (
-		<section className="overflow-hidden bg-[#F1F5F9] py-24">
-			<div className="mx-auto max-w-7xl px-4">
-				<div className="mb-16 text-center lg:mb-20">
+		<section className="overflow-hidden bg-[#F1F5F9]">
+			<div className="mx-auto max-w-7xl px-4 my-[120px]">
+				<div className="mb-10 text-center">
 					<motion.h2
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
-						className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl"
+						className="text-3xl font-bold text-slate-900 lg:text-4xl"
 					>
 						300+ giáo viên truyền cảm hứng
 					</motion.h2>

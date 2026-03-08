@@ -34,7 +34,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 				<div className="relative h-[54px] w-[136px]">
 					<Link href="/" aria-label="Trang chủ STEMKey">
 						<Image
-							src="/statics/images/logo.png"
+							src="/statics/images/logo.svg"
 							alt="Logo STEMKey"
 							fill
 							className="object-contain"
@@ -46,20 +46,18 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 				{/* Contact Info (Desktop Only) */}
 				<div className="hidden items-center gap-8 text-sm text-slate-600 lg:flex">
 					<div className="flex items-center gap-3">
-						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50">
+						<div className="flex h-10 w-10 items-center justify-center rounded-full">
 							<Phone size={18} className="text-stem-blue" />
 						</div>
 						<div className="flex flex-col">
-							<span className="text-[10px] font-bold uppercase">Hotline</span>
 							<span className="font-bold">0325 610 016</span>
 						</div>
 					</div>
 					<div className="flex items-center gap-3">
-						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50">
+						<div className="flex h-10 w-10 items-center justify-center rounded-full">
 							<MapPin size={18} className="text-stem-blue" />
 						</div>
 						<div className="flex flex-col">
-							<span className="text-[10px] font-bold uppercase">Cơ sở</span>
 							<span className="font-bold">Nam An Khánh, Hà Nội</span>
 						</div>
 					</div>

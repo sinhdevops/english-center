@@ -52,7 +52,7 @@ const RegistrationSection = () => {
 	};
 
 	return (
-		<section className="bg-white py-24">
+		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="relative flex flex-col items-center gap-12 overflow-hidden rounded-xl bg-[#00BA3D] p-8 lg:flex-row lg:gap-20 lg:p-16">
 					{/* Left: Content & Image */}

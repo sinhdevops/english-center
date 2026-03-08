@@ -7,10 +7,10 @@ import Image from "next/image";
 
 const ExclusiveModel = () => {
 	return (
-		<section className="bg-[#F8FAFC] py-24">
+		<section className="bg-[#F8FAFC]">
 			<div className="mx-auto max-w-7xl px-4">
-				<div className="mb-16 text-center lg:mb-24">
-					<h2 className="mb-6 text-3xl font-bold text-slate-900 lg:text-4xl">Mô hình lớp học độc quyền</h2>
+				<div className="mb-10 text-center">
+					<h2 className="text-3xl font-bold lg:text-4xl">Mô hình lớp học độc quyền</h2>
 					<p className="mx-auto max-w-4xl text-base leading-relaxed font-medium text-slate-500 lg:text-lg">
 						Lớp học đảo ngược thúc đẩy khả năng tự học, tính chủ động và tích cực trong học tập ở học trò,
 						các con không phụ thuộc, chờ thầy cô đưa kiến thức.

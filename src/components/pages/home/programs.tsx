@@ -7,10 +7,10 @@ import { PROGRAMS_DATA } from "@/constants";
 
 const Programs = () => {
 	return (
-		<section className="bg-white py-24">
+		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
-				<div className="mb-12 text-center lg:mb-20">
-					<h2 className="mb-4 text-2xl font-bold text-slate-900 sm:text-4xl lg:mb-6 lg:text-4xl">
+				<div className="mb-10 text-center ">
+					<h2 className="text-2xl font-bold text-slate-900 sm:text-4xl lg:text-4xl">
 						Các chương trình học tại STEMKey
 					</h2>
 					<p className="mx-auto max-w-3xl text-base font-medium text-slate-500 lg:text-lg">
