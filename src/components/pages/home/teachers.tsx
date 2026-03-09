@@ -5,11 +5,12 @@ import React from "react";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { TEACHERS_DATA } from "@/constants";
 import Image from "next/image";
+import { IMAGES } from "../../../../public/statics/images";
 
 const Teachers = () => {
 	return (
 		<section className="overflow-hidden bg-[#F1F5F9]">
-			<div className="mx-auto max-w-7xl px-4 my-[120px]">
+			<div className="mx-auto my-[120px] max-w-7xl px-4">
 				<div className="mb-10 text-center">
 					<motion.h2
 						initial={{ opacity: 0, y: 20 }}
@@ -61,6 +62,9 @@ const Teachers = () => {
 												className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
 												referrerPolicy="no-referrer"
 											/>
+											<div className="absolute top-3 left-2">
+												<Image src={IMAGES.logo} alt="logo" width={80} />
+											</div>
 										</div>
 										<h3 className="mb-2 text-xl font-bold text-slate-900">{t.name}</h3>
 										<p className="text-sm leading-relaxed font-medium text-slate-500">{t.role}</p>
