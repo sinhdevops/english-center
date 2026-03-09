@@ -28,8 +28,7 @@ const Hero = () => {
 			</div>
 
 			{/* Background Layers */}
-			<div className="bg-stem-green absolute inset-0 z-0 bg-[linear-gradient(272.97deg,#00BA3D_22.93%,#005C1E_89.95%)] lg:bg-[url('/statics/images/home/herobg.webp')] lg:bg-cover lg:bg-center lg:bg-no-repeat" />
-			<div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15)_0%,transparent_70%)] lg:hidden" />
+			<div className="absolute inset-0 z-0 bg-[url('/statics/images/home/herobgmb.webp')] bg-cover bg-center bg-no-repeat lg:bg-[url('/statics/images/home/herobg.webp')]" />
 
 			{/* Decorative Blobs for Mobile Depth */}
 			<div className="lg:hidden">
@@ -90,14 +89,14 @@ const Hero = () => {
 							<Button
 								size="lg"
 								variant="primary"
-								className="w-full rounded-full  text-base font-bold tracking-wider uppercase shadow-xl transition-all active:scale-95 sm:w-auto"
+								className="w-full rounded-full text-base font-bold tracking-wider uppercase shadow-xl transition-all active:scale-95 sm:w-auto"
 							>
 								Đăng ký học thử miễn phí
 							</Button>
 							<Button
 								size="lg"
 								variant="outline"
-								className="w-full rounded-full border-2 border-white/30 bg-white/10  text-base tracking-wider text-white uppercase backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 sm:w-auto"
+								className="w-full rounded-full border-2 border-white/30 bg-white/10 text-base tracking-wider text-white uppercase backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 sm:w-auto"
 							>
 								Tư vấn lộ trình học
 							</Button>

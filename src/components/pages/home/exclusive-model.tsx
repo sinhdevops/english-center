@@ -7,7 +7,7 @@ import Image from "next/image";
 
 const ExclusiveModel = () => {
 	return (
-		<section className="bg-[#F8FAFC]">
+		<section className="bg-[#F8FAFC] py-[120px]">
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="mb-10 text-center">
 					<h2 className="text-3xl font-bold lg:text-4xl">Mô hình lớp học độc quyền</h2>
