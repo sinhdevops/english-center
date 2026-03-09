@@ -1,13 +1,12 @@
 "use client";
 
 import { motion } from "motion/react";
-import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HERO_TARGETS } from "@/constants";
 import React from "react";
 const Hero = () => {
 	return (
-		<section className="relative flex min-h-[600px] overflow-hidden lg:min-h-[640px]">
+		<section className="relative flex min-h-[844px] overflow-hidden lg:min-h-[640px]">
 			{/* Tech/Circuit Background Pattern */}
 			<div className="pointer-events-none absolute inset-0 z-10 opacity-[0.05] lg:opacity-10">
 				<svg
@@ -57,7 +56,7 @@ const Hero = () => {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8 }}
 					>
-						<div className="mb-[52px]">
+						<div className="mb-2 lg:mb-[52px]">
 							<motion.p
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
