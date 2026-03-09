@@ -20,7 +20,7 @@ const Programs = () => {
 					<h2 className="text-2xl font-bold text-slate-900 sm:text-4xl lg:text-4xl">
 						Các chương trình học tại STEMKey
 					</h2>
-					<p className="mx-auto max-w-3xl text-base font-medium text-slate-500 lg:text-lg">
+					<p className="mx-auto max-w-3xl text-slate-600 ">
 						Hệ thống giáo dục dành cho trẻ 4-10 tuổi, phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ
 					</p>
 				</div>

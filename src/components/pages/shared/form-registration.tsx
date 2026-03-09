@@ -71,7 +71,7 @@ const FormRegistration = () => {
 			initial={{ opacity: 0, x: 30 }}
 			whileInView={{ opacity: 1, x: 0 }}
 			viewport={{ once: true }}
-			className="w-full rounded-xl bg-white p-8 shadow-2xl lg:w-1/2 lg:p-12"
+			className="w-full rounded-xl bg-white p-4 shadow-2xl lg:w-1/2 lg:p-12"
 		>
 			<h3 className="mb-8 flex items-center gap-2 text-[18px] font-medium">
 				Tư vấn lộ trình học và ưu đãi → Đăng ký giữ chỗ ngay
@@ -177,7 +177,7 @@ const FormRegistration = () => {
 					{isSubmitting ? "ĐANG XỬ LÝ..." : "GIỮ CHỖ NGAY"}
 				</Button>
 
-				<p className="mt-6 text-center text-sm font-medium text-slate-400">
+				<p className="mt-6 text-center font-medium text-slate-600">
 					* Vui lòng để ý điện thoại, chúng tôi sẽ liên hệ bạn sớm (trong vòng 24h)
 				</p>
 			</form>

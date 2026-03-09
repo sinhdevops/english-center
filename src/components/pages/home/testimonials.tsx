@@ -4,6 +4,10 @@ import { motion } from "motion/react";
 import React from "react";
 import { TESTIMONIALS_DATA } from "@/constants";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const Testimonials = () => {
 	return (
@@ -23,7 +27,7 @@ const Testimonials = () => {
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="group relative mb-12 max-h-[300px] w-full aspect-21/9 overflow-hidden rounded-xl shadow-2xl"
+					className="group relative mb-12 aspect-21/9 max-h-[300px] w-full overflow-hidden rounded-xl shadow-2xl"
 				>
 					<Image
 						src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1200"
@@ -34,8 +38,8 @@ const Testimonials = () => {
 						className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 						referrerPolicy="no-referrer"
 					/>
-					<div className="absolute inset-0 flex items-end bg-linear-to-t from-black/90 via-black/20 to-transparent p-8 lg:p-12">
-						<p className="max-w-4xl text-base leading-relaxed font-medium text-white lg:text-xl">
+					<div className="absolute inset-0 flex items-end bg-linear-to-t from-black/90 via-black/20 to-transparent p-4">
+						<p className="text-lg leading-relaxed font-semibold text-white">
 							Bảng Vàng JU AWARDS 2025: Vinh Danh Dàn “Cao Thủ” Cambridge Nhà Ju Tân Bình – TP. Hồ Chí
 							Minh -
 						</p>
@@ -43,34 +47,58 @@ const Testimonials = () => {
 				</motion.div>
 
 				{/* Award Grid */}
-				<div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+				<Swiper
+					modules={[Autoplay, Pagination]}
+					spaceBetween={20}
+					slidesPerView={1}
+					autoplay={{
+						delay: 5000,
+						disableOnInteraction: false,
+					}}
+					pagination={{
+						clickable: true,
+						dynamicBullets: true,
+					}}
+					breakpoints={{
+						640: {
+							slidesPerView: 2,
+							spaceBetween: 30,
+						},
+						1024: {
+							slidesPerView: 3,
+							spaceBetween: 40,
+						},
+					}}
+					className="testimonials-swiper pb-12!"
+				>
 					{TESTIMONIALS_DATA.map((award, i) => (
-						<motion.div
-							key={i}
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: i * 0.1 }}
-							className="group flex flex-col gap-6"
-						>
-							<div className="relative aspect-4/3 max-h-[220px] overflow-hidden rounded-xl text-center shadow-xl">
-								<Image
-									src={award.img}
-									alt={`Giải thưởng: ${award.title}`}
-									width={800}
-									height={600}
-									sizes="(max-width: 768px) 100vw, 33vw"
-									className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-									referrerPolicy="no-referrer"
-								/>
-								<div className="absolute inset-0 bg-black/5 transition-colors group-hover:bg-transparent" />
-							</div>
-							<p className="text-base leading-relaxed font-semibold text-slate-700 lg:text-lg">
-								{award.title}
-							</p>
-						</motion.div>
+						<SwiperSlide key={i} className="h-auto">
+							<motion.div
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ delay: i * 0.1 }}
+								className="group flex h-full flex-col gap-6"
+							>
+								<div className="relative aspect-4/3 max-h-[220px] w-full overflow-hidden rounded-xl text-center shadow-xl">
+									<Image
+										src={award.img}
+										alt={`Giải thưởng: ${award.title}`}
+										width={800}
+										height={600}
+										sizes="(max-width: 768px) 100vw, 33vw"
+										className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+										referrerPolicy="no-referrer"
+									/>
+									<div className="absolute inset-0 bg-black/5 transition-colors group-hover:bg-transparent" />
+								</div>
+								<p className="text-base leading-relaxed font-semibold text-slate-600 lg:text-lg">
+									{award.title}
+								</p>
+							</motion.div>
+						</SwiperSlide>
 					))}
-				</div>
+				</Swiper>
 			</div>
 		</section>
 	);

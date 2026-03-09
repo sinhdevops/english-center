@@ -56,19 +56,19 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 				{/* Contact Info (Desktop Only) */}
 				<div className="hidden items-center gap-8 text-sm text-slate-600 lg:flex">
 					<div className="flex items-center gap-3">
-						<div className="flex h-10 w-10 items-center justify-center rounded-full">
+						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50">
 							<Phone size={18} className="text-stem-blue" />
 						</div>
 						<div className="flex flex-col">
-							<span className="font-bold">0325 610 016</span>
+							<span className="text-[13px]">0325 610 016</span>
 						</div>
 					</div>
 					<div className="flex items-center gap-3">
-						<div className="flex h-10 w-10 items-center justify-center rounded-full">
+						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50">
 							<MapPin size={18} className="text-stem-blue" />
 						</div>
 						<div className="flex flex-col">
-							<span className="font-bold">Nam An Khánh, Hà Nội</span>
+							<span className="text-[13px]">Nam An Khánh, Hà Nội</span>
 						</div>
 					</div>
 				</div>
@@ -134,7 +134,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 													</p>
 													<p className="truncate text-xs text-slate-500">{user.email}</p>
 												</div>
-												<div className="p-1">
+												{/* <div className="p-1">
 													<Link
 														href="/thong-tin-ca-nhan"
 														onClick={() => setShowDropdown(false)}
@@ -143,7 +143,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 														<UserIcon size={18} />
 														Thông tin cá nhân
 													</Link>
-												</div>
+												</div> */}
 												<div className="border-t border-slate-50 p-1">
 													<button
 														onClick={handleLogout}

@@ -165,13 +165,6 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 									<p className="text-xs text-slate-500">{user.email}</p>
 								</div>
 							</div>
-							<Link
-								href="/dashboard"
-								onClick={toggleMenu}
-								className="flex w-full items-center justify-center rounded-2xl border border-slate-200 bg-white py-4 text-sm font-black tracking-wider text-slate-800 uppercase transition-all active:scale-95"
-							>
-								Bảng điều khiển
-							</Link>
 							<button
 								onClick={handleLogout}
 								className="w-full rounded-2xl bg-red-50 py-4 text-sm font-black tracking-wider text-red-500 uppercase transition-all active:scale-95"

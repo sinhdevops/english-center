@@ -20,7 +20,7 @@ const FlexibleLearning = () => {
 							<h2 className="mb-2 text-2xl font-medium lg:text-4xl">
 								Học linh hoạt giữa Online và Offline
 							</h2>
-							<p className="text-lg font-medium text-slate-500">
+							<p className="text-slate-600">
 								Tham gia Lớp học Offline và Online tại STEMKey bạn sẽ được:
 							</p>
 						</div>
@@ -72,7 +72,7 @@ const FlexibleLearning = () => {
 										onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
 										aria-expanded={openIndex === i}
 										aria-controls={`benefit-content-${i}`}
-										className="flex w-full items-center justify-between p-5 text-left"
+										className="flex w-full items-center justify-between p-4 pb-3 text-left"
 									>
 										<div className="flex items-center gap-4">
 											<div
@@ -81,7 +81,7 @@ const FlexibleLearning = () => {
 												<Sparkles size={20} />
 											</div>
 											<span
-												className={`text-base font-bold lg:text-lg ${openIndex === i ? "text-slate-900" : "text-slate-600"}`}
+												className={`text-base font-semibold lg:text-lg text-slate-900`}
 											>
 												{benefit.title}
 											</span>
@@ -91,7 +91,6 @@ const FlexibleLearning = () => {
 										>
 											{openIndex === i ? (
 												<motion.span className="flex items-center justify-center text-2xl">
-													{" "}
 													<Minus />
 												</motion.span>
 											) : (
@@ -113,7 +112,7 @@ const FlexibleLearning = () => {
 										}}
 										className="overflow-hidden"
 									>
-										<div className="p-5 pt-0 pl-[68px] text-sm leading-relaxed font-medium text-slate-500 lg:text-base">
+										<div className="p-5 pt-0 pl-[68px] text-sm leading-relaxed text-slate-600">
 											{benefit.content}
 										</div>
 									</motion.div>

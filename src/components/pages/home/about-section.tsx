@@ -27,7 +27,7 @@ const AboutSection = () => {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: 0.1 }}
-							className="mb-3 text-lg leading-relaxed text-slate-600"
+							className="mb-3 leading-relaxed text-slate-600"
 						>
 							STEMKey Việt Nam. Với sứ mệnh giúp hàng triệu trẻ em Việt Nam yêu tiếng Anh, robotics, toán
 							tư duy giúp các em chinh phục từ nhỏ.
@@ -38,11 +38,10 @@ const AboutSection = () => {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: 0.2 }}
-							className="mb-6 space-y-2"
+							className="mb-6 space-y-2 pl-5"
 						>
 							{ABOUT_FEATURES.map((item, i) => (
-								<li key={i} className="flex items-center gap-3 font-medium text-slate-700">
-									<div className="h-1.5 w-1.5 rounded-xl bg-slate-900" />
+								<li key={i} className="list-disc text-slate-600">
 									{item}
 								</li>
 							))}
@@ -59,9 +58,7 @@ const AboutSection = () => {
 									transition={{ delay: 0.3 + i * 0.05 }}
 									className="rounded-xl border border-slate-100 bg-slate-50 p-6 transition-colors hover:border-slate-200"
 								>
-									<div className="mb-2 text-2xl font-medium text-slate-900">
-										{stat.value}
-									</div>
+									<div className="mb-2 text-2xl font-medium text-slate-900">{stat.value}</div>
 									<div className="text-sm leading-tight font-medium text-slate-500">{stat.label}</div>
 								</motion.div>
 							))}

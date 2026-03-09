@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import React from "react";
 import { EXCLUSIVE_MODEL_ITEMS } from "@/constants";
 import Image from "next/image";
+import { IMAGES } from "../../../../public/statics/images";
 
 const ExclusiveModel = () => {
 	return (
@@ -11,7 +12,7 @@ const ExclusiveModel = () => {
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="mb-10 text-center">
 					<h2 className="text-3xl font-bold lg:text-4xl">Mô hình lớp học độc quyền</h2>
-					<p className="mx-auto max-w-4xl text-base leading-relaxed font-medium text-slate-500 lg:text-lg">
+					<p className="mx-auto max-w-4xl leading-relaxed text-slate-600">
 						Lớp học đảo ngược thúc đẩy khả năng tự học, tính chủ động và tích cực trong học tập ở học trò,
 						các con không phụ thuộc, chờ thầy cô đưa kiến thức.
 					</p>
@@ -26,12 +27,12 @@ const ExclusiveModel = () => {
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: i * 0.1 }}
-								className="group flex items-center gap-6 rounded-xl border border-slate-100 bg-white p-4 shadow-sm transition-all hover:shadow-md lg:p-5"
+								className="group flex items-center gap-6 rounded-xl border border-slate-100 bg-white p-4 shadow-sm transition-all hover:shadow-md"
 							>
-								<div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg font-bold text-[#1890FF]">
+								<div className="text-stem-blue flex size-[46px] shrink-0 items-center justify-center rounded-xl bg-blue-50 text-lg font-semibold">
 									{item.id}
 								</div>
-								<span className="text-base font-semibold text-slate-700 lg:text-lg">{item.text}</span>
+								<span className="text-base font-normal">{item.text}</span>
 							</motion.div>
 						))}
 					</div>
@@ -44,7 +45,7 @@ const ExclusiveModel = () => {
 							className="relative overflow-hidden rounded-xl shadow-2xl"
 						>
 							<Image
-								src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1000"
+								src={IMAGES.classImg}
 								alt="Mô hình lớp học STEMKey thực tế"
 								width={1000}
 								height={750}

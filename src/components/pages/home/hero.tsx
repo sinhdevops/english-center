@@ -4,9 +4,10 @@ import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { HERO_TARGETS } from "@/constants";
 import React from "react";
+import Link from "next/link";
 const Hero = () => {
 	return (
-		<section className="relative flex min-h-[844px] overflow-hidden lg:min-h-[640px]">
+		<section className="relative flex min-h-[1024px] overflow-hidden lg:min-h-[640px]">
 			{/* Tech/Circuit Background Pattern */}
 			<div className="pointer-events-none absolute inset-0 z-10 opacity-[0.05] lg:opacity-10">
 				<svg
@@ -49,7 +50,7 @@ const Hero = () => {
 				/>
 			</div>
 
-			<div className="relative z-20 flex w-full flex-col items-center gap-12 px-6 py-16 lg:flex-row lg:px-[120px] lg:py-12">
+			<div className="relative z-20 flex w-full flex-col items-center gap-12 px-6 py-8 lg:flex-row lg:px-[120px] lg:py-12">
 				<div className="text-center lg:w-[50vw] lg:text-left">
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
@@ -85,20 +86,29 @@ const Hero = () => {
 						</div>
 
 						<div className="flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
-							<Button
-								size="lg"
-								variant="primary"
-								className="w-full rounded-full text-base font-bold tracking-wider uppercase shadow-xl transition-all active:scale-95 sm:w-auto"
+							<Link href="/khoa-hoc/dang-ky" className="min-w-[320px]">
+								<Button
+									size="lg"
+									variant="primary"
+									className="w-full rounded-full text-base font-bold tracking-wider uppercase shadow-xl transition-all active:scale-95 sm:w-auto"
+								>
+									Đăng ký học thử miễn phí
+								</Button>
+							</Link>
+							<a
+								className="min-w-[320px]"
+								href="https://zalo.me/0325610016"
+								target="_blank"
+								rel="noopener noreferrer"
 							>
-								Đăng ký học thử miễn phí
-							</Button>
-							<Button
-								size="lg"
-								variant="outline"
-								className="w-full rounded-full border-2 border-white/30 bg-white/10 text-base tracking-wider text-white uppercase backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 sm:w-auto"
-							>
-								Tư vấn lộ trình học
-							</Button>
+								<Button
+									size="lg"
+									variant="outline"
+									className="w-full rounded-full border-2 border-white/30 bg-white/10 text-base tracking-wider text-white uppercase backdrop-blur-md transition-all hover:bg-white/20 active:scale-95 sm:w-auto"
+								>
+									Tư vấn lộ trình học
+								</Button>
+							</a>
 						</div>
 					</motion.div>
 				</div>

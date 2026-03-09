@@ -10,14 +10,14 @@ const RegistrationSection = () => {
 	return (
 		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
-				<div className="relative flex flex-col items-center gap-12 overflow-hidden rounded-xl bg-[#00BA3D] p-8 lg:flex-row lg:gap-20 lg:p-16">
+				<div className="relative flex flex-col items-center gap-12 overflow-hidden rounded-xl bg-[#00BA3D] p-4 lg:flex-row lg:gap-20 lg:p-16">
 					{/* Left: Content & Image */}
 					<div className="z-10 w-full text-white lg:w-1/2">
 						<motion.h2
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
-							className="mb-6 text-4xl font-black tracking-tight lg:text-4xl"
+							className="mb-6 text-2xl font-black tracking-tight lg:text-4xl"
 						>
 							QUÀ TẶNG HẤP DẪN
 						</motion.h2>
@@ -26,7 +26,7 @@ const RegistrationSection = () => {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: 0.1 }}
-							className="mb-12 max-w-md text-lg font-medium opacity-90 lg:text-xl"
+							className="mb-12 max-w-md font-medium opacity-90 lg:text-xl"
 						>
 							Cơ hội nhận học bổng lên tới 40% và các phần quà hấp dẫn khác đang chờ bạn
 						</motion.p>
