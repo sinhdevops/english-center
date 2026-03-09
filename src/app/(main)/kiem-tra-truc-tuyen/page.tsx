@@ -131,7 +131,7 @@ export default function TestOnlinePage() {
 			</section>
 
 			{/* Registration Form Overlay */}
-			<div className="relative z-20 mx-auto -mt-24 max-w-7xl px-4 text-center md:text-left lg:-mt-32">
+			<div className="relative z-20 mx-auto -mt-24 max-w-7xl px-4 text-left lg:-mt-32">
 				<CardRegistration />
 			</div>
 

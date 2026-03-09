@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase-client";
 import Link from "next/link";
-import CardRegistration from "@/components/pages/shared/card-registration";
 
 interface Course {
 	id: number;
@@ -57,10 +56,10 @@ export default function CoursesPage() {
 			{/* Header Banner */}
 			<section className="relative h-[250px] overflow-hidden">
 				{/* Background Gradient - Matching the image's soft pastel feel */}
-				<div className="absolute inset-0 bg-[linear-gradient(280.15deg,#CFD8FF_15.09%,#A0FF98_93.34%)] via-[#dbeafe] to-[#ede9fe]" />
+				<div className="absolute inset-0 bg-[linear-gradient(280.15deg,#1999D3_15.09%,#19B24B_93.34%)]" />
 
 				<div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 lg:flex-row lg:justify-between">
-					<div className="text-center lg:max-w-2xl lg:text-left">
+					<div className="text-center text-white lg:max-w-2xl lg:text-left">
 						<motion.h1
 							initial={{ opacity: 0, x: -20 }}
 							animate={{ opacity: 1, x: 0 }}
@@ -101,7 +100,7 @@ export default function CoursesPage() {
 			</div> */}
 			{/* Courses Grid */}
 			<section className="mx-auto max-w-7xl py-[120px]">
-				<div className="grid grid-cols-1 gap-x-20 gap-y-24 lg:grid-cols-2">
+				<div className="grid grid-cols-1 gap-x-20 gap-y-8 px-4 lg:grid-cols-2">
 					{isLoading ? (
 						<div className="col-span-full flex justify-center py-20">
 							<div className="h-10 w-10 animate-spin rounded-full border-4 border-emerald-500 border-t-transparent" />
@@ -114,16 +113,16 @@ export default function CoursesPage() {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: (index % 2) * 0.1 }}
-								className="flex flex-col items-center gap-8 overflow-hidden rounded-xl md:h-[238px] md:flex-row md:items-start md:gap-[30px]"
+								className="flex items-center overflow-hidden rounded-l-xl bg-slate-50 md:h-[238px] lg:gap-[30px]"
 							>
 								{/* Course Image - Large rounded corners as in image */}
-								<div className="h-[238px] w-[300px] shrink-0 md:w-[175px]">
+								<div className="h-[238px] w-[175px] shrink-0">
 									<Image
 										src={course.image}
 										alt={course.title}
 										width={300}
 										height={238}
-										className="size-full rounded-2xl border border-slate-50 object-cover shadow-sm md:rounded-none"
+										className="size-full border border-slate-50 object-cover shadow-sm"
 										referrerPolicy="no-referrer"
 									/>
 								</div>
@@ -139,7 +138,7 @@ export default function CoursesPage() {
 											<li key={i}>{bullet}</li>
 										))}
 									</ul>
-									<p className="mb-6 text-sm leading-relaxed text-[#3D3D3D] lg:text-base">
+									<p className="mb-3 text-sm leading-relaxed text-[#3D3D3D] lg:text-base">
 										{course.footer}
 									</p>
 									<Link href={`khoa-hoc/dang-ky`}>

@@ -6,9 +6,8 @@ import { TEACHERS_DATA } from "@/constants";
 import Image from "next/image";
 import { IMAGES } from "../../../../public/statics/images";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
 
 const Teachers = () => {
 	return (
@@ -36,9 +35,9 @@ const Teachers = () => {
 
 				<div className="relative">
 					<Swiper
-						modules={[Autoplay, Pagination]}
-						spaceBetween={20}
-						slidesPerView={1}
+						modules={[Autoplay]}
+						spaceBetween={16}
+						slidesPerView={1.2}
 						autoplay={{
 							delay: 5000,
 							disableOnInteraction: false,
@@ -49,7 +48,7 @@ const Teachers = () => {
 						}}
 						breakpoints={{
 							640: {
-								slidesPerView: 2,
+								slidesPerView: 2.2,
 								spaceBetween: 20,
 							},
 							1024: {
@@ -57,7 +56,7 @@ const Teachers = () => {
 								spaceBetween: 30,
 							},
 						}}
-						className="teachers-swiper pb-12!"
+						className="teachers-swiper"
 					>
 						{TEACHERS_DATA.map((t, i) => (
 							<SwiperSlide key={i} className="h-auto">

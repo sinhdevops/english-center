@@ -109,29 +109,35 @@ export const TEACHERS_DATA = [
 export const TESTIMONIALS_DATA = [
   {
     img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800",
-    title: "Bảng Vàng JU AWARDS 2025: Vinh Danh Dàn “Cao Thủ” Cambridge Nhà Ju Tân Bình – TP. Hồ Chí Minh -"
+    title: "Bảng Vàng JU AWARDS 2025: Vinh Danh Dàn “Cao Thủ” Cambridge Nhà Ju Tân Bình",
+    desc: "Vinh danh những gương mặt xuất sắc đạt thành tích cao trong kỳ thi Cambridge quốc tế năm 2025, khẳng định chất lượng đào tạo vượt trội của hệ thống STEMKey."
   },
   {
     img: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=800",
-    title: "Bảng Vàng JU AWARDS 2025: Vinh Danh Dàn “Cao Thủ” Cambridge Nhà Ju Tân Bình – TP. Hồ Chí Minh -"
+    title: "Lễ Trao Giải STEMKey Robotics Championship: Khơi Nguồn Đam Mê Sáng Tạo",
+    desc: "Sự kiện vinh danh các kỹ sư nhí tài năng đã xuất sắc vượt qua các vòng thi gay cấn để giành lấy những giải thưởng cao quý nhất tại đấu trường Robotics."
   },
   {
     img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800",
-    title: "Bảng Vàng JU AWARDS 2025: Vinh Danh Dàn “Cao Thủ” Cambridge Nhà Ju Tân Bình – TP. Hồ Chí Minh -"
+    title: "Gương Mặt Học Viên Tiêu Biểu: Hành Trình Chinh Phục Học Bổng 40%",
+    desc: "Câu chuyện truyền cảm hứng về nỗ lực học tập và hành trình gặt hái thành công của bạn học viên xuất sắc nhất tháng, mở ra cơ hội phát triển tương lai rạng rỡ."
   }
 ];
 
 export const NEWS_DATA = [
   {
     title: "STEMKey chính thức khai trương cơ sở mới tại Nam An Khánh",
+    desc: "Với mong muốn mang giáo dục STEM đến gần hơn với trẻ em Việt Nam, STEMKey tự hào ra mắt cơ sở mới với không gian học tập sáng tạo, trang thiết bị hiện đại bậc nhất.",
     img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800"
   },
   {
     title: "Workshop: Chế tạo Robot từ vật liệu tái chế cùng STEMKey",
+    desc: "Sự kiện cuối tuần thu hút đông đảo phụ huynh và học sinh tham gia, nơi các con được tự tay thiết kế những mô hình robot độc đáo từ những vật dụng quen thuộc hàng ngày.",
     img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
   },
   {
     title: "STEMKey đồng hành cùng phụ huynh định hướng nghề nghiệp tương lai",
+    desc: "Buổi tọa đàm chuyên sâu về tầm quan trọng của kỹ năng công nghệ và tư duy sáng tạo trong kỷ nguyên số, giúp ba mẹ có cái nhìn rõ nét hơn về lộ trình phát triển của con.",
     img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800"
   }
 ];

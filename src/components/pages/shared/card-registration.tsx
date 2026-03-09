@@ -9,6 +9,7 @@ import * as z from "zod";
 import { registrationSchema } from "@/lib/validations/admin";
 import { ChevronDown, Loader2, Send } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 type RegistrationFormValues = z.infer<typeof registrationSchema>;
 
@@ -206,14 +207,10 @@ const CardRegistration = () => {
 					)}
 				</div>
 				<div className="flex items-end">
-					<button
-						type="submit"
-						disabled={isSubmitting}
-						className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#00a699] py-4 text-sm font-black tracking-widest text-white uppercase shadow-lg shadow-[#00a699]/20 transition-all hover:bg-[#008c81] active:scale-95 disabled:cursor-not-allowed disabled:opacity-70"
-					>
+					<Button type="submit" disabled={isSubmitting} className="flex w-full items-center gap-2">
 						{isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
 						{isSubmitting ? "Đang gửi..." : "Đăng ký tư vấn"}
-					</button>
+					</Button>
 				</div>
 			</form>
 		</motion.div>

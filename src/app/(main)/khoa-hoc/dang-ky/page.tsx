@@ -10,10 +10,9 @@ export default function RegistrationPage() {
 		<div className="">
 			<section className="relative h-[250px] overflow-hidden">
 				{/* Background Gradient - Matching the image's soft pastel feel */}
-				<div className="absolute inset-0 bg-[linear-gradient(280.15deg,#CFD8FF_15.09%,#A0FF98_93.34%)] via-[#dbeafe] to-[#ede9fe]" />
-
+				<div className="absolute inset-0 bg-[linear-gradient(280.15deg,#1999D3_15.09%,#19B24B_93.34%)]" />
 				<div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 lg:flex-row lg:justify-between">
-					<div className="text-center lg:max-w-2xl lg:text-left">
+					<div className="text-center text-white lg:max-w-2xl lg:text-left">
 						<motion.h1
 							initial={{ opacity: 0, x: -20 }}
 							animate={{ opacity: 1, x: 0 }}
@@ -51,7 +50,7 @@ export default function RegistrationPage() {
 			</section>
 
 			<section className="mx-auto max-w-7xl">
-				<div className="flex items-center py-[120px]">
+				<div className="flex flex-col items-center px-4 py-[120px] lg:flex-row">
 					<div className="w-1/2">
 						<Image src={IMAGES.registration} alt="registration" />
 					</div>
