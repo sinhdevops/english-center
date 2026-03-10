@@ -229,14 +229,14 @@ export function AuthForm({ mode }: AuthFormProps) {
 				</div>
 			</div>
 
-			<button
+			{/* <button
 				onClick={handleGoogleLogin}
 				disabled={isLoading}
 				className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl border border-slate-200 px-4 py-3 font-medium text-slate-700 transition-colors hover:bg-slate-50"
 			>
 				<Chrome size={20} className="text-red-500" />
 				Tiếp tục với Google
-			</button>
+			</button> */}
 
 			<p className="mt-10 text-center text-sm text-slate-500">
 				{mode === "login" ? "Chưa có tài khoản?" : "Đã có tài khoản?"}{" "}

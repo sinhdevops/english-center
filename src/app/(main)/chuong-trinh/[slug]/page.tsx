@@ -44,18 +44,18 @@ export default function ProgramDetailPage() {
 					{/* Main Content Area */}
 					<div className="w-full lg:w-2/3">
 						{/* Banner Banner */}
-						<div className="relative mb-8 aspect-16/7 overflow-hidden rounded-4xl shadow-2xl">
+						<div className="relative mb-8 aspect-20/11 overflow-hidden rounded-3xl shadow-2xl sm:aspect-16/7 sm:rounded-4xl">
 							<div className="absolute inset-0 bg-linear-to-r from-[#e96443] to-[#904e95]" />
-							<div className="relative z-10 flex h-full items-center justify-between px-10">
-								<div className="max-w-xs text-white">
-									<h1 className="text-3xl leading-tight font-black sm:text-4xl lg:text-5xl">
+							<div className="relative z-10 flex h-full items-center justify-between px-6 sm:px-10">
+								<div className="z-20 max-w-[65%] text-white sm:max-w-xs">
+									<h1 className="text-xl leading-tight font-black sm:text-3xl lg:text-5xl">
 										{program.bannerTitle}
 									</h1>
-									<div className="mt-4 inline-block rounded-md bg-[#004a87] px-4 py-1.5 text-base font-black tracking-widest uppercase lg:text-xl">
+									<div className="mt-2 inline-block rounded-md bg-[#004a87] px-3 py-1.5 text-[10px] font-black tracking-widest uppercase sm:mt-4 sm:px-4 sm:text-base lg:text-xl">
 										{program.bannerSubtitle}
 									</div>
 								</div>
-								<div className="relative h-full w-1/2">
+								<div className="relative h-[85%] w-[45%] self-end sm:h-full sm:w-1/2">
 									<Image
 										src={program.img}
 										alt={program.title}

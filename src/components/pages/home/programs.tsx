@@ -31,10 +31,10 @@ const Programs = () => {
 						<Link key={p.title} href={`/chuong-trinh/${p.slug}`}>
 							<motion.div
 								whileHover={{ y: -10 }}
-								className="group relative flex min-h-[220px] cursor-pointer flex-col justify-between overflow-hidden rounded-xl p-6 text-white shadow-2xl"
+								className="group relative flex min-h-[220px] cursor-pointer flex-col justify-between overflow-hidden rounded-xl p-4 text-white shadow-2xl lg:p-6"
 								style={GRADIENTS[i % GRADIENTS.length]}
 							>
-								<div className="relative z-10 w-full sm:w-1/2">
+								<div className="relative z-10 w-1/2">
 									<h3 className="mb-4 text-2xl font-bold lg:text-3xl">{p.title}</h3>
 									<p className="mb-10 line-clamp-2 text-sm leading-relaxed font-medium opacity-90 lg:text-base">
 										{p.desc}
