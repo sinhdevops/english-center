@@ -8,7 +8,7 @@ import { IMAGES } from "../../public/statics/images";
 
 export default function NotFound() {
 	return (
-		<div className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-slate-50 px-4 py-20 text-center">
+		<div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-50 px-4 py-20 text-center">
 			{/* Subtle Background Decorations */}
 			<div className="pointer-events-none absolute top-0 left-0 h-full w-full opacity-40">
 				<div className="bg-stem-blue/10 absolute top-[-10%] left-[-5%] h-64 w-64 rounded-full blur-3xl" />

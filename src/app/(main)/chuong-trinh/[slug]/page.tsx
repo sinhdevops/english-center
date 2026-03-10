@@ -107,16 +107,19 @@ export default function ProgramDetailPage() {
 										<Calendar size={18} className="text-[#c41e3a]" />
 										<span className="text-sm font-bold text-slate-600">Lịch khai giảng</span>
 									</div>
-									<span className="flex items-center gap-1 text-[10px] font-black tracking-tighter text-[#c41e3a] uppercase">
+									<Link
+										href="/lich-khai-giang"
+										className="flex items-center gap-1 text-[10px] font-black tracking-tighter text-[#c41e3a] uppercase"
+									>
 										Xem chi tiết
-									</span>
+									</Link>
 								</div>
 								<div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors hover:bg-slate-50">
 									<div className="flex items-center gap-3">
 										<Book size={18} className="text-[#c41e3a]" />
-										<span className="text-sm font-bold text-slate-600">
+										<Link href="/khoa-hoc/dang-ky" className="text-sm font-bold text-slate-600">
 											Giáo trình tự học {program.title}
-										</span>
+										</Link>
 									</div>
 									<span className="flex items-center gap-1 text-[10px] font-black tracking-tighter text-[#c41e3a] uppercase">
 										Xem chi tiết

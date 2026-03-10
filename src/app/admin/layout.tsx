@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "../globals.css";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -18,11 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-	return (
-		<html lang="vi" className={`${inter.variable} ${jetbrainsMono.variable}`}>
-			<body className="bg-[#f8f9fa] text-slate-900 antialiased" suppressHydrationWarning>
-				{children}
-			</body>
-		</html>
-	);
+	return <div className={`${inter.variable} ${jetbrainsMono.variable}`}>{children}</div>;
 }

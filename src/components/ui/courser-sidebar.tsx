@@ -4,6 +4,7 @@ import React from "react";
 import { Facebook, Youtube, Phone, MessageCircle, Play } from "lucide-react";
 import Image from "next/image";
 import { SIDEBAR_COURSES, SIDEBAR_SOCIALS } from "@/constants";
+import Link from "next/link";
 
 const IconMap: Record<string, any> = {
 	facebook: Facebook,
@@ -25,20 +26,22 @@ export const CourserSidebar: React.FC = () => (
 						key={i}
 						className="group relative aspect-4/3 cursor-pointer overflow-hidden rounded-2xl text-center shadow-md"
 					>
-						<Image
-							src={course.img}
-							alt={course.title}
-							width={400}
-							height={300}
-							className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-							referrerPolicy="no-referrer"
-						/>
-						<div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/40" />
-						<div className="absolute inset-0 flex items-center justify-center p-6">
-							<h5 className="text-center text-xl leading-tight font-black text-white drop-shadow-lg">
-								{course.title}
-							</h5>
-						</div>
+						<Link href="/khoa-hoc/dang-ky">
+							<Image
+								src={course.img}
+								alt={course.title}
+								width={400}
+								height={300}
+								className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+								referrerPolicy="no-referrer"
+							/>
+							<div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/40" />
+							<div className="absolute inset-0 flex items-center justify-center p-6">
+								<h5 className="text-center text-xl leading-tight font-black text-white drop-shadow-lg">
+									{course.title}
+								</h5>
+							</div>
+						</Link>
 					</div>
 				))}
 			</div>

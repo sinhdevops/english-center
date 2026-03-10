@@ -109,7 +109,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 				router.refresh();
 			}
 		} catch (error: any) {
-			toast.error(error.message || "Có lỗi xảy ra, vui lòng thử lại.");
+			toast.error("Có lỗi xảy ra, vui lòng thử lại.");
 		} finally {
 			setIsLoading(false);
 		}
@@ -125,7 +125,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 			});
 			if (error) throw error;
 		} catch (error: any) {
-			toast.error(error.message || "Có lỗi xảy ra khi đăng nhập bằng Google.");
+			toast.error("Có lỗi xảy ra khi đăng nhập bằng Google.");
 		}
 	};
 
