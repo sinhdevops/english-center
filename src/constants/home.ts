@@ -26,18 +26,21 @@ export const PROGRAMS_DATA = [
   {
     title: "Toán tư duy",
     desc: "Phát triển tư duy - Vững nền tảng",
+    slug: "toan-tu-duy",
     style: { background: 'linear-gradient(286.12deg, #FFCA74 9.13%, #C80057 86.64%)' },
     img: imagePrograms.program1
   },
   {
     title: "Robotics",
     desc: "Lắp ráp & lập trình - Tư duy Stem",
+    slug: "robotics",
     style: { background: 'linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)' },
     img: HomeImages.image2
   },
   {
     title: "Tiếng anh",
     desc: "Nghe nói tự nhiên - Tự tin giao tiếp",
+    slug: "tieng-anh",
     style: { background: 'linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)' },
     img: HomeImages.image3
   }

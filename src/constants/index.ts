@@ -8,4 +8,5 @@ export * from "./learning-corner";
 export * from "./parents-corner";
 export * from "./standard-courses";
 export * from "./quiz";
+export * from "./programs-detail";
 
