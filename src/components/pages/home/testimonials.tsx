@@ -78,7 +78,7 @@ const Testimonials = () => {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: i * 0.1 }}
-								className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl bg-white shadow-lg transition-all hover:shadow-xl"
+								className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-t-xl bg-white shadow-lg transition-all hover:shadow-xl"
 							>
 								<div className="relative aspect-4/3 overflow-hidden">
 									<Image
