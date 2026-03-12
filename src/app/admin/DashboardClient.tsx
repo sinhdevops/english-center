@@ -5,12 +5,13 @@ import { Calendar, ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ClassSchedule, Event } from "@/lib/types";
+import { Users, BookOpen, TrendingUp } from "lucide-react";
 
 interface DashboardClientProps {
 	stats: {
 		name: string;
 		value: string;
-		icon: any;
+		icon: string;
 		change: string;
 		trend: string;
 	}[];
@@ -19,11 +20,18 @@ interface DashboardClientProps {
 }
 
 export default function DashboardClient({ stats, latestSchedules, featuredEvents }: DashboardClientProps) {
+	const iconMap: Record<string, any> = {
+		users: Users,
+		book: BookOpen,
+		calendar: Calendar,
+		trending: TrendingUp,
+	};
+
 	return (
 		<>
 			<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
 				{stats.map((stat, index) => {
-					const Icon = stat.icon;
+					const Icon = iconMap[stat.icon] || Calendar;
 					return (
 						<motion.div
 							key={stat.name}

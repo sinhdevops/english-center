@@ -1,6 +1,5 @@
 import React from "react";
 import AdminLayout from "@/components/layout/admin/AdminLayout";
-import { Users, Calendar, BookOpen, TrendingUp } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import DashboardClient from "./DashboardClient";
 
@@ -24,22 +23,22 @@ export default async function DashboardPage() {
 		{
 			name: "Tổng học viên",
 			value: (studentCount || 0).toLocaleString(),
-			icon: Users,
+			icon: "users",
 			change: "+12%",
 			trend: "up",
 		},
-		{ name: "Lớp đang mở", value: (openClassesCount || 0).toString(), icon: BookOpen, change: "+5%", trend: "up" },
+		{ name: "Lớp đang mở", value: (openClassesCount || 0).toString(), icon: "book", change: "+5%", trend: "up" },
 		{
 			name: "Sự kiện sắp tới",
 			value: (upcomingEventsCount || 0).toString(),
-			icon: Calendar,
+			icon: "calendar",
 			change: "+2",
 			trend: "up",
 		},
 		{
 			name: "Đăng ký mới",
 			value: (newRegistrationsCount || 0).toString(),
-			icon: TrendingUp,
+			icon: "trending",
 			change: "+18%",
 			trend: "up",
 		},
