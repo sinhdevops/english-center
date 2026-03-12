@@ -5,6 +5,7 @@ import AboutSection from "@/components/pages/home/about-section";
 import Programs from "@/components/pages/home/programs";
 import ExclusiveModel from "@/components/pages/home/exclusive-model";
 import FlexibleLearning from "@/components/pages/home/flexible-learning";
+import { createClient } from "@/utils/supabase/server";
 
 const Teachers = dynamic(() => import("@/components/pages/home/teachers"), { ssr: true });
 const Testimonials = dynamic(() => import("@/components/pages/home/testimonials"), { ssr: true });
@@ -24,20 +25,27 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+	const supabase = await createClient();
+
+	const { data: newsItems } = await supabase.from("events").select("*").order("date", { ascending: false }).limit(6);
+
+	const { data: branches } = await supabase.from("branches").select("id, name");
+	const { data: courses } = await supabase.from("courses").select("id, name");
+
 	return (
 		<main className="overflow-x-hidden">
 			<Hero />
-			<div className="flex flex-col gap-[120px] my-[120px]">
+			<div className="my-[120px] flex flex-col gap-[120px]">
 				<AboutSection />
 				<Programs />
 				<ExclusiveModel />
 				<FlexibleLearning />
 				<Teachers />
+				<News initialNews={newsItems || []} />
 				<Testimonials />
-				<News />
+				<RegistrationSection branches={branches || []} courses={courses || []} />
 				<Partners />
-				<RegistrationSection />
 			</div>
 		</main>
 	);

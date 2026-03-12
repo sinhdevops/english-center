@@ -11,7 +11,13 @@ import "swiper/css";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const News = () => {
+interface NewsProps {
+	initialNews?: any[];
+}
+
+const News = ({ initialNews }: NewsProps) => {
+	const displayNews = initialNews && initialNews.length > 0 ? initialNews : NEWS_DATA;
+
 	return (
 		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
@@ -43,7 +49,7 @@ const News = () => {
 					}}
 					className="news-swiper"
 				>
-					{NEWS_DATA.map((post: any, i) => (
+					{displayNews.map((post: any, i) => (
 						<SwiperSlide key={i} className="h-auto">
 							<motion.div
 								initial={{ opacity: 0, y: 20 }}
@@ -54,7 +60,7 @@ const News = () => {
 							>
 								<div className="relative aspect-16/10 overflow-hidden">
 									<Image
-										src={post.img}
+										src={post.image_url || post.img}
 										alt={post.title}
 										width={800}
 										height={500}
@@ -67,7 +73,7 @@ const News = () => {
 										{post.title}
 									</h3>
 									<p className="mb-6 line-clamp-3 text-sm leading-relaxed text-slate-500">
-										{post.desc}
+										{post.excerpt || post.description || post.desc}
 									</p>
 									<div className="text-stem-blue mt-auto flex items-center gap-2 font-bold">
 										<span>Xem chi tiết</span>

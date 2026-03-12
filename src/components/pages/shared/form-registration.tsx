@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { registrationSchema } from "@/lib/validations/admin";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { supabase } from "@/lib/supabase-client";
 import * as z from "zod";
 import React from "react";
 import { toast } from "sonner";
@@ -13,20 +12,12 @@ import { ChevronDown } from "lucide-react";
 
 type RegistrationFormValues = z.infer<typeof registrationSchema>;
 
-const FormRegistration = () => {
-	const [branches, setBranches] = React.useState<any[]>([]);
-	const [courses, setCourses] = React.useState<any[]>([]);
+interface FormRegistrationProps {
+	branches?: any[];
+	courses?: any[];
+}
 
-	React.useEffect(() => {
-		const fetchData = async () => {
-			const { data: bData } = await supabase.from("branches").select("id, name");
-			const { data: cData } = await supabase.from("courses").select("id, name");
-			if (bData) setBranches(bData);
-			if (cData) setCourses(cData);
-		};
-		fetchData();
-	}, []);
-
+const FormRegistration = ({ branches = [], courses = [] }: FormRegistrationProps) => {
 	const {
 		register,
 		handleSubmit,

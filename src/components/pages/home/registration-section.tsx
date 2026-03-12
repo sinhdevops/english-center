@@ -6,7 +6,12 @@ import Image from "next/image";
 import { home } from "../../../../public/statics/images";
 import FormRegistration from "../shared/form-registration";
 
-const RegistrationSection = () => {
+interface RegistrationSectionProps {
+	branches?: any[];
+	courses?: any[];
+}
+
+const RegistrationSection = ({ branches, courses }: RegistrationSectionProps) => {
 	return (
 		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
@@ -47,7 +52,7 @@ const RegistrationSection = () => {
 						</motion.div>
 					</div>
 
-					<FormRegistration />
+					<FormRegistration branches={branches} courses={courses} />
 				</div>
 			</div>
 		</section>
