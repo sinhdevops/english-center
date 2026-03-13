@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { Target, Eye, Zap, Shield, Users, Rocket, Globe, Award, BookOpen } from "lucide-react";
 import Image from "next/image";
 import { ABOUT_HERO, MISSION_VISION, CORE_VALUES, LEADERSHIP_TEAM, ABOUT_STATS_GRID } from "@/constants";
+import Teachers from "@/components/pages/home/teachers";
 
 const SectionTitle: React.FC<{ children: React.ReactNode; subtitle?: string; dark?: boolean }> = ({
 	children,
@@ -100,7 +101,7 @@ export default function AboutPage() {
 						{MISSION_VISION.map((item, i) => (
 							<div key={i} className="flex gap-6">
 								<div
-									className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl ${
+									className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-xl ${
 										item.color === "blue"
 											? "text-stem-blue bg-blue-100"
 											: "bg-emerald-100 text-emerald-600"
@@ -121,7 +122,7 @@ export default function AboutPage() {
 						viewport={{ once: true }}
 						className="relative"
 					>
-						<div className="relative aspect-square overflow-hidden rounded-3xl shadow-2xl">
+						<div className="relative aspect-square overflow-hidden rounded-xl shadow-2xl">
 							<Image
 								src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
 								alt="Vision"
@@ -131,7 +132,7 @@ export default function AboutPage() {
 								referrerPolicy="no-referrer"
 							/>
 						</div>
-						<div className="absolute -bottom-8 -left-8 hidden rounded-3xl border border-slate-100 bg-white p-8 shadow-xl lg:block">
+						<div className="absolute -bottom-8 -left-8 hidden rounded-xl border border-slate-100 bg-white p-8 shadow-xl lg:block">
 							<div className="text-stem-blue mb-1 text-4xl font-semibold">10+</div>
 							<div className="text-sm font-bold tracking-wider text-slate-500 uppercase">
 								Cơ sở đào tạo
@@ -160,7 +161,7 @@ export default function AboutPage() {
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
 									transition={{ delay: idx * 0.1 }}
-									className="group rounded-3xl border border-white/10 bg-white/5 p-8 transition-colors hover:bg-white/10"
+									className="group rounded-xl border border-white/10 bg-white/5 p-8 transition-colors hover:bg-white/10"
 								>
 									<div className="bg-stem-blue mb-6 flex h-14 w-14 items-center justify-center rounded-xl transition-transform group-hover:scale-110">
 										<Icon size={28} />
@@ -175,7 +176,7 @@ export default function AboutPage() {
 			</section>
 
 			{/* Team Section */}
-			<section className="mx-auto max-w-7xl px-4 py-24 lg:py-32">
+			{/* <section className="mx-auto max-w-7xl px-4 py-24 lg:py-32">
 				<SectionTitle subtitle="Đội ngũ chuyên gia và giáo viên tâm huyết, giàu kinh nghiệm trong lĩnh vực giáo dục STEM.">
 					Đội ngũ lãnh đạo
 				</SectionTitle>
@@ -204,7 +205,9 @@ export default function AboutPage() {
 						</motion.div>
 					))}
 				</div>
-			</section>
+			</section> */}
+
+			<Teachers />
 
 			{/* Stats Section */}
 			<section className="bg-slate-50 py-24 text-center">
@@ -238,17 +241,17 @@ export default function AboutPage() {
 					<h2 className="mb-8 text-4xl leading-tight lg:text-6xl">
 						SẴN SÀNG CHO HÀNH TRÌNH <br /> KHÁM PHÁ CÙNG STEMKEY?
 					</h2>
-					<p className="mb-12 text-xl opacity-90">
+					<p className="text-xl opacity-90">
 						Hãy để chúng tôi đồng hành cùng con bạn trên con đường chinh phục tri thức và công nghệ.
 					</p>
-					<div className="flex flex-wrap justify-center gap-6">
+					{/* <div className="flex flex-wrap justify-center gap-6">
 						<button className="text-stem-blue rounded-full bg-white px-10 py-4 font-semibold tracking-wider uppercase shadow-xl transition-all hover:bg-slate-50 active:scale-95">
 							Đăng ký ngay
 						</button>
 						<button className="rounded-full border-2 border-white px-10 py-4 font-semibold tracking-wider text-white uppercase transition-all hover:bg-white/10 active:scale-95">
 							Liên hệ tư vấn
 						</button>
-					</div>
+					</div> */}
 				</div>
 			</section>
 		</div>

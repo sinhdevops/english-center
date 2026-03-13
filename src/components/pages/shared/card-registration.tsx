@@ -26,7 +26,6 @@ const CardRegistration = () => {
 		};
 		fetchData();
 	}, []);
-
 	const {
 		register,
 		handleSubmit,
@@ -207,7 +206,7 @@ const CardRegistration = () => {
 					)}
 				</div>
 				<div className="flex items-end">
-					<Button type="submit" disabled={isSubmitting} className="flex w-full items-center gap-2">
+					<Button size="md" type="submit" disabled={isSubmitting} className="flex w-full items-center gap-2">
 						{isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
 						{isSubmitting ? "Đang gửi..." : "Đăng ký tư vấn"}
 					</Button>

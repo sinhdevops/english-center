@@ -1,5 +1,3 @@
-import React from "react";
-import AdminLayout from "@/components/layout/admin/AdminLayout";
 import { createClient } from "@/utils/supabase/server";
 import StudentsClient from "./StudentsClient";
 
@@ -13,13 +11,13 @@ export default async function StudentsPage() {
 	const { data: schedules } = await supabase.from("schedules").select("*").order("start_date");
 
 	return (
-		<AdminLayout>
+		<>
 			<StudentsClient
 				initialStudents={students || []}
 				branches={branches || []}
 				courses={courses || []}
 				schedules={schedules || []}
 			/>
-		</AdminLayout>
+		</>
 	);
 }

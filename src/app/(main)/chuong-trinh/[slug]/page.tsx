@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ChevronRight, Calendar, Book, ArrowRight } from "lucide-react";
+import { Calendar, Book } from "lucide-react";
 import { PROGRAMS_DETAIL_DATA } from "@/constants";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
@@ -44,7 +44,7 @@ export default function ProgramDetailPage() {
 					{/* Main Content Area */}
 					<div className="w-full lg:w-2/3">
 						{/* Banner Banner */}
-						<div className="relative mb-8 aspect-20/11 overflow-hidden rounded-3xl shadow-2xl sm:aspect-16/7 sm:rounded-4xl">
+						<div className="relative mb-8 aspect-20/11 overflow-hidden rounded-xl shadow-2xl sm:aspect-16/7">
 							<div className="absolute inset-0 bg-linear-to-r from-[#e96443] to-[#904e95]" />
 							<div className="relative z-10 flex h-full items-center justify-between px-6 sm:px-10">
 								<div className="z-20 max-w-[65%] text-white sm:max-w-xs">
@@ -89,7 +89,7 @@ export default function ProgramDetailPage() {
 								<p className="mb-2 text-sm font-medium text-slate-500">Thay đổi để đón cơ hội mới</p>
 								<p className="mb-6 font-bold text-slate-800">Nhận lộ trình FREE cho con</p>
 								<Link href="/khoa-hoc/dang-ky" className="block w-full">
-									<button className="w-full rounded-xl bg-[#c41e3a] py-4 text-base font-black tracking-widest text-white transition-all hover:bg-[#a01830] active:scale-[0.98]">
+									<button className="bg-stem-blue w-full rounded-xl py-4 text-base font-black tracking-widest text-white transition-all hover:bg-[#a01830] active:scale-[0.98]">
 										{">>> Tôi sẵn sàng <<<"}
 									</button>
 								</Link>
@@ -104,24 +104,24 @@ export default function ProgramDetailPage() {
 							<div className="divide-y divide-slate-50">
 								<div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors hover:bg-slate-50">
 									<div className="flex items-center gap-3">
-										<Calendar size={18} className="text-[#c41e3a]" />
+										<Calendar size={18} className="text-stem-blue" />
 										<span className="text-sm font-bold text-slate-600">Lịch khai giảng</span>
 									</div>
 									<Link
 										href="/lich-khai-giang"
-										className="flex items-center gap-1 text-[10px] font-black tracking-tighter text-[#c41e3a] uppercase"
+										className="text-stem-blue flex items-center gap-1 text-[10px] font-black tracking-tighter uppercase"
 									>
 										Xem chi tiết
 									</Link>
 								</div>
 								<div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors hover:bg-slate-50">
 									<div className="flex items-center gap-3">
-										<Book size={18} className="text-[#c41e3a]" />
+										<Book size={18} className="text-stem-blue" />
 										<Link href="/khoa-hoc/dang-ky" className="text-sm font-bold text-slate-600">
 											Giáo trình tự học {program.title}
 										</Link>
 									</div>
-									<span className="flex items-center gap-1 text-[10px] font-black tracking-tighter text-[#c41e3a] uppercase">
+									<span className="text-stem-blue flex items-center gap-1 text-[10px] font-black tracking-tighter uppercase">
 										Xem chi tiết
 									</span>
 								</div>
@@ -130,28 +130,19 @@ export default function ProgramDetailPage() {
 
 						{/* Roadmap List */}
 						<div className="space-y-4">
-							<h3 className="inline-block border-b-2 border-[#c41e3a] px-2 pb-1 text-lg font-black text-slate-900">
+							<h3 className="border-stem-blue inline-block border-b-2 px-2 pb-1 text-lg font-black text-slate-900">
 								Lộ trình học miễn phí
 							</h3>
 							<div className="space-y-3">
 								{program.roadmap.map((item: string, idx: number) => (
 									<div
 										key={idx}
-										className="group hover:border-stem-blue flex cursor-pointer items-center gap-4 rounded-xl border border-slate-100 bg-white p-4 transition-all hover:shadow-lg"
+										className="group flex cursor-pointer items-center gap-4 rounded-xl border border-slate-100 bg-white p-4 transition-all"
 									>
-										<div className="group-hover:bg-stem-blue/10 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100">
-											<ArrowRight
-												size={14}
-												className="group-hover:text-stem-blue text-slate-400"
-											/>
+										<div className="text-stem-blue border-stem-blue flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 bg-white text-sm font-bold">
+											{idx + 1}
 										</div>
-										<span className="group-hover:text-stem-blue text-sm font-bold text-slate-700">
-											{item}
-										</span>
-										<ChevronRight
-											size={16}
-											className="group-hover:text-stem-blue ml-auto text-slate-200"
-										/>
+										<span className="text-sm font-bold text-slate-700">{item}</span>
 									</div>
 								))}
 							</div>

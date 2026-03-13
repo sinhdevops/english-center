@@ -1,6 +1,8 @@
 import React from "react";
-import { Phone, MapPin, ArrowRight } from "lucide-react";
+import { Phone, MapPin } from "lucide-react";
 import Image from "next/image";
+import { PROGRAMS_DATA } from "@/constants";
+import Link from "next/link";
 
 export const Footer: React.FC = () => {
 	return (
@@ -19,7 +21,7 @@ export const Footer: React.FC = () => {
 						kỹ năng chuẩn Cambridge và Điểm giỏi trên trường
 					</p>
 
-					<div className="relative h-10 max-w-sm">
+					{/* <div className="relative h-10 max-w-sm">
 						<label htmlFor="footer-email" className="sr-only">
 							Nhập email nhận tin tức
 						</label>
@@ -35,7 +37,7 @@ export const Footer: React.FC = () => {
 						>
 							<ArrowRight size={20} aria-hidden="true" />
 						</button>
-					</div>
+					</div> */}
 
 					<div className="flex gap-4">
 						<button
@@ -56,9 +58,11 @@ export const Footer: React.FC = () => {
 				<div>
 					<h3 className="mb-6 text-lg font-medium uppercase">Khóa học</h3>
 					<ul className="space-y-4 font-light text-white">
-						<li className="cursor-pointer transition-colors hover:text-white">Toán tư duy</li>
-						<li className="cursor-pointer transition-colors hover:text-white">Robotics & Coding</li>
-						<li className="cursor-pointer transition-colors hover:text-white">Tiếng Anh STEM</li>
+						{PROGRAMS_DATA.map((item) => (
+							<li key={item.title} className="cursor-pointer transition-colors hover:text-white">
+								<Link href={`/chuong-trinh/${item.slug}`}>{item.title}</Link>
+							</li>
+						))}
 					</ul>
 				</div>
 

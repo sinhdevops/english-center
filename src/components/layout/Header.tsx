@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Phone, MapPin, Search, Menu, LogOut, User as UserIcon, ChevronDown } from "lucide-react";
+import { Phone, MapPin, Search, Menu, LogOut, ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";

@@ -45,7 +45,7 @@ const FlexibleLearning = () => {
 								whileInView={{ opacity: 1, scale: 1 }}
 								viewport={{ once: true }}
 								transition={{ delay: 0.2 }}
-								className="relative mt-8 h-[400px] overflow-hidden rounded-3xl shadow-lg lg:h-[500px]"
+								className="relative mt-8 h-[400px] overflow-hidden rounded-xl shadow-lg lg:h-[500px]"
 							>
 								<Image
 									src={HomeImages.image6}
@@ -65,8 +65,9 @@ const FlexibleLearning = () => {
 							{FLEXIBLE_BENEFITS.map((benefit, i) => (
 								<div
 									key={i}
-									className={`overflow-hidden rounded-2xl border transition-all duration-300 ${openIndex === i ? "border-blue-500 bg-blue-50/50" : "border-slate-100 bg-white"
-										}`}
+									className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
+										openIndex === i ? "border-blue-500 bg-blue-50/50" : "border-slate-100 bg-white"
+									}`}
 								>
 									<button
 										onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
@@ -80,9 +81,7 @@ const FlexibleLearning = () => {
 											>
 												<Sparkles size={20} />
 											</div>
-											<span
-												className={`text-base font-semibold lg:text-lg text-slate-900`}
-											>
+											<span className={`text-base font-semibold text-slate-900 lg:text-lg`}>
 												{benefit.title}
 											</span>
 										</div>

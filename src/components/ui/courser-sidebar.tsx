@@ -24,7 +24,7 @@ export const CourserSidebar: React.FC = () => (
 				{SIDEBAR_COURSES.map((course, i) => (
 					<div
 						key={i}
-						className="group relative aspect-4/3 cursor-pointer overflow-hidden rounded-2xl text-center shadow-md"
+						className="group relative aspect-4/3 cursor-pointer overflow-hidden rounded-xl text-center shadow-md"
 					>
 						<Link href="/khoa-hoc/dang-ky">
 							<Image
@@ -51,7 +51,7 @@ export const CourserSidebar: React.FC = () => (
 			<h4 className="mb-6 inline-block border-b-2 border-[#c41e3a] pb-2 text-xl font-bold text-slate-900">
 				Mạng xã hội
 			</h4>
-			<div className="relative space-y-3 overflow-hidden rounded-3xl bg-linear-to-br from-[#f27121] to-[#e94057] p-6">
+			<div className="relative space-y-3 overflow-hidden rounded-xl bg-linear-to-br from-[#f27121] to-[#e94057] p-6">
 				{/* Decorative dots */}
 				<div className="absolute top-2 left-2 h-1 w-1 rounded-full bg-white/40" />
 				<div className="absolute right-4 bottom-4 h-2 w-2 rounded-full bg-white/40" />
@@ -61,7 +61,7 @@ export const CourserSidebar: React.FC = () => (
 					return (
 						<button
 							key={i}
-							className="flex w-full items-center gap-3 rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50"
+							className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50"
 						>
 							{Icon && <Icon className={social.color} size={20} fill="currentColor" />}
 							{social.name}
@@ -73,7 +73,7 @@ export const CourserSidebar: React.FC = () => (
 					<p className="mb-3 text-xs font-bold tracking-wider text-white uppercase opacity-90">
 						Liên lạc trực tiếp
 					</p>
-					<button className="flex w-full items-center gap-3 rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50">
+					<button className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50">
 						<div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white">
 							<Phone size={16} fill="currentColor" />
 						</div>

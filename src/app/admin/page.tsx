@@ -1,5 +1,3 @@
-import React from "react";
-import AdminLayout from "@/components/layout/admin/AdminLayout";
 import { createClient } from "@/utils/supabase/server";
 import DashboardClient from "./DashboardClient";
 
@@ -67,8 +65,8 @@ export default async function DashboardPage() {
 	}));
 
 	return (
-		<AdminLayout>
+		<>
 			<DashboardClient stats={stats} latestSchedules={processedSchedules} featuredEvents={events || []} />
-		</AdminLayout>
+		</>
 	);
 }

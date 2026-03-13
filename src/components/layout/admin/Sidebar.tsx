@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, CalendarDays, Trophy, Users, MapPin, BookOpen, LogOut, ClipboardList } from "lucide-react";
@@ -8,6 +7,10 @@ import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { IMAGES } from "../../../../public/statics/images";
+import { useAuthStore } from "@/store/useAuthStore";
+import { supabase } from "@/lib/supabase-client";
+import { logout as logoutAction } from "@/app/auth/login/actions";
+import { toast } from "sonner";
 
 const navItems = [
 	{ name: "Tổng quan", href: "/admin", icon: LayoutDashboard },
@@ -21,12 +24,23 @@ const navItems = [
 
 export function Sidebar() {
 	const pathname = usePathname();
+	const { logout } = useAuthStore();
+	const handleLogout = async () => {
+		await supabase.auth.signOut();
+		const res = await logoutAction();
+		if (res?.error) {
+			toast.error(res.error);
+		} else {
+			logout();
+			toast.success("Đã đăng xuất");
+		}
+	};
 
 	return (
 		<aside className="fixed top-0 left-0 z-40 h-screen w-64 border-r border-slate-200 bg-white transition-transform">
 			<div className="flex h-full flex-col px-3 py-4">
-				<div className="mb-8 flex flex-col items-center">
-					<div className="flex items-center justify-center rounded-xl bg-white p-2 shadow-lg shadow-blue-100/50">
+				<Link href={"/"} className="mb-8 flex flex-col items-center">
+					<div className="flex items-center justify-center rounded-xl p-2">
 						<Image
 							src={IMAGES.logo}
 							alt="Logo"
@@ -35,7 +49,7 @@ export function Sidebar() {
 							className="h-auto w-full max-w-[140px]"
 						/>
 					</div>
-				</div>
+				</Link>
 
 				<nav className="flex-1 space-y-1">
 					{navItems.map((item) => {
@@ -70,7 +84,10 @@ export function Sidebar() {
 				</nav>
 
 				<div className="mt-auto space-y-1 border-t border-slate-100 pt-4">
-					<button className="flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 transition-all hover:bg-red-50">
+					<button
+						onClick={handleLogout}
+						className="flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 transition-all hover:bg-red-50"
+					>
 						<LogOut className="mr-3 h-5 w-5" />
 						Đăng xuất
 					</button>

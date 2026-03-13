@@ -59,6 +59,7 @@ export default function TestOnlineDetail({ category }: TestDetailPageProps) {
 	const { user } = useAuthStore();
 	const [activeGrade, setActiveGrade] = useState("Lớp 3");
 	const [showLoginModal, setShowLoginModal] = useState(false);
+	const [pendingTestId, setPendingTestId] = useState<string | null>(null);
 
 	const grades = ["Lớp 3", "Lớp 4", "Lớp 5"];
 	const router = useRouter();
@@ -137,6 +138,7 @@ export default function TestOnlineDetail({ category }: TestDetailPageProps) {
 
 	const handleTestClick = (test: any) => {
 		if (!user) {
+			setPendingTestId(test.id);
 			setShowLoginModal(true);
 			return;
 		}
@@ -304,7 +306,10 @@ export default function TestOnlineDetail({ category }: TestDetailPageProps) {
 							className="flex w-full items-center justify-center gap-2 rounded-2xl py-4 font-bold"
 							onClick={() => {
 								setShowLoginModal(false);
-								router.push("/dang-nhap");
+								const redirectPath = pendingTestId
+									? `/bai-thi/${pendingTestId}`
+									: window.location.pathname;
+								router.push(`/dang-nhap?redirect=${encodeURIComponent(redirectPath)}`);
 							}}
 						>
 							<User size={18} /> Đăng nhập ngay

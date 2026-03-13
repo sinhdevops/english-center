@@ -1,5 +1,4 @@
 import React from "react";
-import AdminLayout from "@/components/layout/admin/AdminLayout";
 import { createClient } from "@/utils/supabase/server";
 import SchedulesClient from "./SchedulesClient";
 
@@ -20,8 +19,8 @@ export default async function SchedulesPage() {
 	}));
 
 	return (
-		<AdminLayout>
+		<>
 			<SchedulesClient initialSchedules={processedSchedules} branches={branches || []} courses={courses || []} />
-		</AdminLayout>
+		</>
 	);
 }

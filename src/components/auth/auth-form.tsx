@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Lock, ArrowRight, Chrome, Phone, UserCheck, Loader2 } from "lucide-react";
+import { Mail, Lock, ArrowRight, Phone, UserCheck, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,7 +9,7 @@ import * as z from "zod";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase-client";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuthStore } from "@/store/useAuthStore";
 
 const authSchema = z
@@ -61,6 +61,8 @@ const AuthInput = ({ register, name, type, placeholder, icon: Icon, error, label
 export function AuthForm({ mode }: AuthFormProps) {
 	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
+	const searchParams = useSearchParams();
+	const redirect = searchParams.get("redirect") || "/";
 	const { setUser, setProfile } = useAuthStore();
 
 	const {
@@ -105,7 +107,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 				setProfile(profileData);
 
 				toast.success("Đăng nhập thành công!");
-				router.push("/");
+				router.push(redirect);
 				router.refresh();
 			}
 		} catch (error: any) {
