@@ -53,7 +53,7 @@ export const EventList = ({ events, isLoading, onEdit, onDelete }: EventListProp
 								<span className="mt-2 text-xs font-medium">Chưa có ảnh bìa</span>
 							</div>
 						)}
-						<div className="absolute top-3 right-3 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+						<div className="absolute top-3 right-3 flex gap-2 transition-opacity lg:opacity-0 lg:group-hover:opacity-100">
 							<button
 								onClick={() => onEdit(event)}
 								className="hover:text-stem-blue rounded-full bg-white/90 p-2 text-slate-600 shadow-sm backdrop-blur-sm hover:bg-white"

@@ -150,7 +150,7 @@ export const ProgramList = ({
 														<div className="text-stem-blue flex h-8 w-8 items-center justify-center rounded-lg bg-blue-50">
 															<GraduationCap size={16} />
 														</div>
-														<div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+														<div className="flex gap-1 transition-opacity lg:opacity-0 lg:group-hover:opacity-100">
 															<button
 																onClick={() => onEditCourse(program.id, course)}
 																className="hover:text-stem-blue rounded-md p-1 text-slate-400 hover:bg-slate-100"

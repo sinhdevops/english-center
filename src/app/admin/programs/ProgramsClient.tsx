@@ -120,7 +120,7 @@ export default function ProgramsClient({ initialPrograms, initialCourses }: Prog
 			/>
 
 			<ProgramModal
-				key={isProgramModalOpen ? editingProgram?.id || "new" : "closed"}
+				key={isProgramModalOpen ? `program-${editingProgram?.id || "new"}` : "program-closed"}
 				isOpen={isProgramModalOpen}
 				onClose={() => setIsProgramModalOpen(false)}
 				editingProgram={editingProgram}
@@ -129,7 +129,7 @@ export default function ProgramsClient({ initialPrograms, initialCourses }: Prog
 			/>
 
 			<CourseModal
-				key={isCourseModalOpen ? editingCourse?.id || "new" : "closed"}
+				key={isCourseModalOpen ? `course-${editingCourse?.id || "new"}` : "course-closed"}
 				isOpen={isCourseModalOpen}
 				onClose={() => setIsCourseModalOpen(false)}
 				editingCourse={editingCourse}

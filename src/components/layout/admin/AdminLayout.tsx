@@ -1,12 +1,18 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Sidebar } from "./Sidebar";
+import { Header } from "./Header";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
 	return (
-		<div className="min-h-screen bg-[#f8f9fa]">
-			<Sidebar />
-			<div className="pl-64">
-				<main className="p-8">{children}</main>
+		<div className="min-h-screen bg-slate-50">
+			<Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+			<div className="flex flex-col lg:pl-64">
+				<Header onMenuClick={() => setIsSidebarOpen(true)} />
+				<main className="p-4 md:p-8">{children}</main>
 			</div>
 		</div>
 	);

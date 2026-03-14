@@ -91,7 +91,7 @@ export function AdminTable<T extends { id: string | number }>({
 									))}
 									{rowActions && (
 										<td className="px-6 py-4 text-right">
-											<div className="flex justify-end gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+											<div className="flex justify-end gap-2 transition-opacity lg:opacity-0 lg:group-hover:opacity-100">
 												{rowActions(item)}
 											</div>
 										</td>
