@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
 import { AdminModal } from "../AdminModal";
 import { AdminFormField } from "../AdminFormField";
 import { programSchema } from "@/lib/validations/admin";
@@ -20,39 +18,33 @@ interface ProgramModalProps {
 }
 
 export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubmitting }: ProgramModalProps) => {
-	const {
-		register,
-		handleSubmit,
-		reset,
-		setValue,
-		control,
-		formState: { errors },
-	} = useForm<ProgramFormData>({
-		resolver: zodResolver(programSchema) as any,
-		defaultValues: {
-			name: "",
-			description: "",
-			image_url: "",
-		},
-	});
-
-	const imageUrl = useWatch({ control, name: "image_url" });
-
-	useEffect(() => {
+	const [formData, setFormData] = useState<ProgramFormData>(() => {
 		if (editingProgram) {
-			reset({
+			return {
 				name: editingProgram.name,
 				description: editingProgram.description || "",
 				image_url: editingProgram.image_url || "",
-			});
-		} else {
-			reset({
-				name: "",
-				description: "",
-				image_url: "",
-			});
+			};
 		}
-	}, [editingProgram, reset, isOpen]);
+		return {
+			name: "",
+			description: "",
+			image_url: "",
+		};
+	});
+	const [errors, setErrors] = useState<Partial<Record<keyof ProgramFormData, string>>>({});
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+
+		if (errors[name as keyof ProgramFormData]) {
+			setErrors((prev) => ({ ...prev, [name]: undefined }));
+		}
+	};
 
 	const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -66,13 +58,37 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 						body: JSON.stringify({ image: reader.result as string, folder: "programs" }),
 					});
 					const data = await response.json();
-					if (data.url) setValue("image_url", data.url);
+					if (data.url) {
+						setFormData((prev) => ({ ...prev, image_url: data.url }));
+						if (errors.image_url) {
+							setErrors((prev) => ({ ...prev, image_url: undefined }));
+						}
+					}
 				} catch (error) {
 					console.error("Upload error:", error);
 				}
 			};
 			reader.readAsDataURL(file);
 		}
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		const result = programSchema.safeParse(formData);
+
+		if (!result.success) {
+			const newErrors: Partial<Record<keyof ProgramFormData, string>> = {};
+			result.error.issues.forEach((issue) => {
+				const path = issue.path[0] as string;
+				if (path) {
+					newErrors[path as keyof ProgramFormData] = issue.message;
+				}
+			});
+			setErrors(newErrors);
+			return;
+		}
+
+		await onSubmit(formData);
 	};
 
 	return (
@@ -82,32 +98,36 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 			title={editingProgram ? "Chỉnh sửa chương trình" : "Thêm chương trình mới"}
 			maxWidth="max-w-md"
 		>
-			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-				<AdminFormField label="Tên chương trình" error={errors.name?.message} required>
+			<form onSubmit={handleSubmit} className="space-y-4">
+				<AdminFormField label="Tên chương trình" error={errors.name} required>
 					<input
 						type="text"
+						name="name"
+						value={formData.name}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("name")}
 					/>
 				</AdminFormField>
 
-				<AdminFormField label="Mô tả ngắn" error={errors.description?.message}>
+				<AdminFormField label="Mô tả ngắn" error={errors.description}>
 					<textarea
+						name="description"
+						value={formData.description || ""}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
 						rows={3}
-						{...register("description")}
 					/>
 				</AdminFormField>
 
-				<AdminFormField label="Ảnh đại diện" error={errors.image_url?.message}>
+				<AdminFormField label="Ảnh đại diện" error={errors.image_url}>
 					<div className="mt-2 flex items-center gap-4">
 						<div className="hover:border-stem-blue relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
-							{imageUrl ? (
+							{formData.image_url ? (
 								<>
-									<Image src={imageUrl} alt="Preview" fill className="object-cover" />
+									<Image src={formData.image_url} alt="Preview" fill className="object-cover" />
 									<button
 										type="button"
-										onClick={() => setValue("image_url", "")}
+										onClick={() => setFormData((prev) => ({ ...prev, image_url: "" }))}
 										className="absolute top-1 right-1 rounded-full bg-rose-500 p-1 text-white shadow-lg hover:bg-rose-600"
 									>
 										<X size={12} />
@@ -130,9 +150,11 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 							<p className="text-xs text-slate-500">Tải lên ảnh hoặc dán URL ảnh bên dưới.</p>
 							<input
 								type="text"
+								name="image_url"
+								value={formData.image_url || ""}
+								onChange={handleChange}
 								placeholder="URL ảnh"
 								className="mt-2 block w-full rounded-lg border-slate-200 bg-slate-50 px-3 py-1.5 text-xs"
-								{...register("image_url")}
 							/>
 						</div>
 					</div>

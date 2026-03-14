@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
 import { AdminModal } from "../AdminModal";
 import { AdminFormField } from "../AdminFormField";
 import { courseSchema } from "@/lib/validations/admin";
@@ -28,38 +26,54 @@ export const CourseModal = ({
 	onSubmit,
 	isSubmitting,
 }: CourseModalProps) => {
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { errors },
-	} = useForm<CourseFormData>({
-		resolver: zodResolver(courseSchema),
-		defaultValues: {
-			program_id: selectedProgramId || "",
-			name: "",
-			duration: "",
-			level: "",
-		},
-	});
-
-	useEffect(() => {
+	const [formData, setFormData] = useState<CourseFormData>(() => {
 		if (editingCourse) {
-			reset({
+			return {
 				program_id: editingCourse.program_id,
 				name: editingCourse.name,
 				duration: editingCourse.duration || "",
 				level: editingCourse.level || "",
-			});
-		} else {
-			reset({
-				program_id: selectedProgramId || "",
-				name: "",
-				duration: "",
-				level: "",
-			});
+			};
 		}
-	}, [editingCourse, selectedProgramId, reset, isOpen]);
+		return {
+			program_id: selectedProgramId || "",
+			name: "",
+			duration: "",
+			level: "",
+		};
+	});
+	const [errors, setErrors] = useState<Partial<Record<keyof CourseFormData, string>>>({});
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+
+		if (errors[name as keyof CourseFormData]) {
+			setErrors((prev) => ({ ...prev, [name]: undefined }));
+		}
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		const result = courseSchema.safeParse(formData);
+
+		if (!result.success) {
+			const newErrors: Partial<Record<keyof CourseFormData, string>> = {};
+			result.error.issues.forEach((issue) => {
+				const path = issue.path[0] as string;
+				if (path) {
+					newErrors[path as keyof CourseFormData] = issue.message;
+				}
+			});
+			setErrors(newErrors);
+			return;
+		}
+
+		await onSubmit(formData);
+	};
 
 	return (
 		<AdminModal
@@ -68,11 +82,13 @@ export const CourseModal = ({
 			title={editingCourse ? "Chỉnh sửa khóa học" : "Thêm khóa học mới"}
 			maxWidth="max-w-md"
 		>
-			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-				<AdminFormField label="Chương trình" error={errors.program_id?.message} required>
+			<form onSubmit={handleSubmit} className="space-y-4">
+				<AdminFormField label="Chương trình" error={errors.program_id} required>
 					<select
+						name="program_id"
+						value={formData.program_id}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm disabled:opacity-60"
-						{...register("program_id")}
 						disabled={!!selectedProgramId}
 					>
 						{programs.map((p) => (
@@ -83,29 +99,35 @@ export const CourseModal = ({
 					</select>
 				</AdminFormField>
 
-				<AdminFormField label="Tên khóa học" error={errors.name?.message} required>
+				<AdminFormField label="Tên khóa học" error={errors.name} required>
 					<input
 						type="text"
+						name="name"
+						value={formData.name}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("name")}
 					/>
 				</AdminFormField>
 
 				<div className="grid grid-cols-2 gap-4">
-					<AdminFormField label="Thời lượng" error={errors.duration?.message}>
+					<AdminFormField label="Thời lượng" error={errors.duration}>
 						<input
 							type="text"
+							name="duration"
+							value={formData.duration || ""}
+							onChange={handleChange}
 							placeholder="Ví dụ: 24 buổi"
 							className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-							{...register("duration")}
 						/>
 					</AdminFormField>
-					<AdminFormField label="Trình độ" error={errors.level?.message}>
+					<AdminFormField label="Trình độ" error={errors.level}>
 						<input
 							type="text"
+							name="level"
+							value={formData.level || ""}
+							onChange={handleChange}
 							placeholder="Ví dụ: A1 - A2"
 							className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-							{...register("level")}
 						/>
 					</AdminFormField>
 				</div>

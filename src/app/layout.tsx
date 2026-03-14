@@ -5,6 +5,7 @@ import AppProvider from "@/providers/app-provider";
 import { AuthProvider } from "@/components/auth/auth-provider";
 import { Toaster } from "sonner";
 import { utmAzuki } from "@/lib/fonts";
+import NextTopLoader from "nextjs-toploader";
 
 const nunito = Nunito_Sans({
 	subsets: ["latin"],
@@ -64,6 +65,7 @@ export default async function RootLayout({
 			<body
 				className={`${nunito.variable} ${italianno.variable} ${utmAzuki.variable} bg-white font-sans text-slate-900 antialiased`}
 			>
+				<NextTopLoader showSpinner={false} color="#1d8cf8" />
 				<AppProvider>
 					<AuthProvider>{children}</AuthProvider>
 				</AppProvider>

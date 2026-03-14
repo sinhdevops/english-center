@@ -92,6 +92,7 @@ export default function SchedulesClient({ initialSchedules, branches, courses }:
 			/>
 
 			<ScheduleModal
+				key={isModalOpen ? editingSchedule?.id || "new" : "closed"}
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 				editingSchedule={editingSchedule}

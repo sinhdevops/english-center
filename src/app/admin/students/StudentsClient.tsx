@@ -116,6 +116,7 @@ export default function StudentsClient({ initialStudents, branches, courses, sch
 			/>
 
 			<StudentModal
+				key={isModalOpen ? editingStudent?.id || "new" : "closed"}
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 				editingStudent={editingStudent}

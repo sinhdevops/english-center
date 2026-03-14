@@ -65,6 +65,7 @@ export default function BranchesClient({ initialBranches }: BranchesClientProps)
 			<BranchList branches={initialBranches} isLoading={false} onEdit={handleOpenModal} onDelete={handleDelete} />
 
 			<BranchModal
+				key={isModalOpen ? editingBranch?.id || "new" : "closed"}
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 				editingBranch={editingBranch}

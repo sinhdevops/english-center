@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
 import { AdminModal } from "../AdminModal";
 import { AdminFormField } from "../AdminFormField";
 import { studentSchema } from "@/lib/validations/admin";
@@ -30,15 +28,22 @@ export const StudentModal = ({
 	onSubmit,
 	isSubmitting,
 }: StudentModalProps) => {
-	const {
-		register,
-		handleSubmit,
-		reset,
-		control,
-		formState: { errors },
-	} = useForm<StudentFormData>({
-		resolver: zodResolver(studentSchema) as any,
-		defaultValues: {
+	const [formData, setFormData] = useState<StudentFormData>(() => {
+		if (editingStudent) {
+			return {
+				name: editingStudent.name,
+				age: editingStudent.age,
+				grade: editingStudent.grade,
+				parent_name: editingStudent.parent_name,
+				phone: editingStudent.phone,
+				email: editingStudent.email,
+				branch_id: editingStudent.branch_id,
+				course_id: editingStudent.course_id,
+				schedule_id: editingStudent.schedule_id || null,
+				status: editingStudent.status as any,
+			};
+		}
+		return {
 			name: "",
 			age: 0,
 			grade: "",
@@ -49,44 +54,45 @@ export const StudentModal = ({
 			course_id: courses[0]?.id || "",
 			schedule_id: null,
 			status: "active",
-		},
+		};
 	});
+	const [errors, setErrors] = useState<Partial<Record<keyof StudentFormData, string>>>({});
 
-	const selectedBranchId = useWatch({ control, name: "branch_id" });
-	const selectedCourseId = useWatch({ control, name: "course_id" });
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+		const { name, value, type } = e.target;
+		const val = type === "number" ? (value === "" ? 0 : Number(value)) : value;
 
-	useEffect(() => {
-		if (editingStudent) {
-			reset({
-				name: editingStudent.name,
-				age: editingStudent.age,
-				grade: editingStudent.grade,
-				parent_name: editingStudent.parent_name,
-				phone: editingStudent.phone,
-				email: editingStudent.email,
-				branch_id: editingStudent.branch_id,
-				course_id: editingStudent.course_id,
-				schedule_id: editingStudent.schedule_id || null,
-				status: editingStudent.status,
-			});
-		} else {
-			reset({
-				name: "",
-				age: 0,
-				grade: "",
-				parent_name: "",
-				phone: "",
-				email: "",
-				branch_id: branches[0]?.id || "",
-				course_id: courses[0]?.id || "",
-				schedule_id: null,
-				status: "active",
-			});
+		setFormData((prev) => ({
+			...prev,
+			[name]: val,
+		}));
+
+		if (errors[name as keyof StudentFormData]) {
+			setErrors((prev) => ({ ...prev, [name]: undefined }));
 		}
-	}, [editingStudent, reset, branches, courses, isOpen]);
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		const result = studentSchema.safeParse(formData);
+
+		if (!result.success) {
+			const newErrors: Partial<Record<keyof StudentFormData, string>> = {};
+			result.error.issues.forEach((issue) => {
+				const path = issue.path[0] as string;
+				if (path) {
+					newErrors[path as keyof StudentFormData] = issue.message;
+				}
+			});
+			setErrors(newErrors);
+			return;
+		}
+
+		await onSubmit(formData);
+	};
 
 	const filteredSchedules = schedules.filter(
-		(s) => s.branch_id === selectedBranchId && s.course_id === selectedCourseId,
+		(s) => s.branch_id === formData.branch_id && s.course_id === formData.course_id,
 	);
 
 	return (
@@ -95,60 +101,74 @@ export const StudentModal = ({
 			onClose={onClose}
 			title={editingStudent ? "Chỉnh sửa hồ sơ học viên" : "Thêm học viên mới"}
 		>
-			<form onSubmit={handleSubmit(onSubmit as any)} className="grid grid-cols-1 gap-4 md:grid-cols-2">
-				<AdminFormField label="Tên học viên" error={errors.name?.message} required>
+			<form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 md:grid-cols-2">
+				<AdminFormField label="Tên học viên" error={errors.name} required>
 					<input
 						type="text"
+						name="name"
+						value={formData.name}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("name")}
 					/>
 				</AdminFormField>
 
 				<div className="grid grid-cols-2 gap-4">
-					<AdminFormField label="Tuổi" error={errors.age?.message} required>
+					<AdminFormField label="Tuổi" error={errors.age} required>
 						<input
 							type="number"
+							name="age"
+							value={formData.age || ""}
+							onChange={handleChange}
 							className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-							{...register("age", { valueAsNumber: true })}
 						/>
 					</AdminFormField>
-					<AdminFormField label="Lớp" error={errors.grade?.message} required>
+					<AdminFormField label="Lớp" error={errors.grade} required>
 						<input
 							type="text"
+							name="grade"
+							value={formData.grade}
+							onChange={handleChange}
 							className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-							{...register("grade")}
 						/>
 					</AdminFormField>
 				</div>
 
-				<AdminFormField label="Tên phụ huynh" error={errors.parent_name?.message} required>
+				<AdminFormField label="Tên phụ huynh" error={errors.parent_name} required>
 					<input
 						type="text"
+						name="parent_name"
+						value={formData.parent_name}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("parent_name")}
 					/>
 				</AdminFormField>
 
-				<AdminFormField label="Số điện thoại" error={errors.phone?.message} required>
+				<AdminFormField label="Số điện thoại" error={errors.phone} required>
 					<input
 						type="tel"
+						name="phone"
+						value={formData.phone}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("phone")}
 					/>
 				</AdminFormField>
 
-				<AdminFormField label="Email" error={errors.email?.message} required>
+				<AdminFormField label="Email" error={errors.email} required>
 					<input
 						type="email"
+						name="email"
+						value={formData.email}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("email")}
 					/>
 				</AdminFormField>
 
-				<AdminFormField label="Trạng thái" error={errors.status?.message} required>
+				<AdminFormField label="Trạng thái" error={errors.status} required>
 					<select
+						name="status"
+						value={formData.status}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("status")}
 					>
 						<option value="active">Đang học</option>
 						<option value="inactive">Tạm dừng</option>
@@ -156,10 +176,12 @@ export const StudentModal = ({
 					</select>
 				</AdminFormField>
 
-				<AdminFormField label="Cơ sở" error={errors.branch_id?.message} required>
+				<AdminFormField label="Cơ sở" error={errors.branch_id} required>
 					<select
+						name="branch_id"
+						value={formData.branch_id}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("branch_id")}
 					>
 						{branches.map((b) => (
 							<option key={b.id} value={b.id}>
@@ -169,10 +191,12 @@ export const StudentModal = ({
 					</select>
 				</AdminFormField>
 
-				<AdminFormField label="Khóa học" error={errors.course_id?.message} required>
+				<AdminFormField label="Khóa học" error={errors.course_id} required>
 					<select
+						name="course_id"
+						value={formData.course_id}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("course_id")}
 					>
 						{courses.map((c) => (
 							<option key={c.id} value={c.id}>
@@ -184,12 +208,14 @@ export const StudentModal = ({
 
 				<AdminFormField
 					label="Lịch khai giảng (Lớp)"
-					error={errors.schedule_id?.message}
+					error={errors.schedule_id}
 					className="col-span-1 md:col-span-2"
 				>
 					<select
+						name="schedule_id"
+						value={formData.schedule_id || ""}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("schedule_id")}
 					>
 						<option value="">Chưa xếp lớp</option>
 						{filteredSchedules.map((s) => (

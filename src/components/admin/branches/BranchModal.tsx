@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
 import { AdminModal } from "../AdminModal";
 import { AdminFormField } from "../AdminFormField";
 import { branchSchema } from "@/lib/validations/admin";
@@ -18,32 +16,50 @@ interface BranchModalProps {
 }
 
 export const BranchModal = ({ isOpen, onClose, editingBranch, onSubmit, isSubmitting }: BranchModalProps) => {
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { errors },
-	} = useForm<BranchFormData>({
-		resolver: zodResolver(branchSchema) as any,
-		defaultValues: {
-			name: "",
-			address: "",
-		},
-	});
-
-	useEffect(() => {
+	const [formData, setFormData] = useState<BranchFormData>(() => {
 		if (editingBranch) {
-			reset({
+			return {
 				name: editingBranch.name,
 				address: editingBranch.address,
-			});
-		} else {
-			reset({
-				name: "",
-				address: "",
-			});
+			};
 		}
-	}, [editingBranch, reset, isOpen]);
+		return {
+			name: "",
+			address: "",
+		};
+	});
+	const [errors, setErrors] = useState<Partial<Record<keyof BranchFormData, string>>>({});
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+
+		if (errors[name as keyof BranchFormData]) {
+			setErrors((prev) => ({ ...prev, [name]: undefined }));
+		}
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		const result = branchSchema.safeParse(formData);
+
+		if (!result.success) {
+			const newErrors: Partial<Record<keyof BranchFormData, string>> = {};
+			result.error.issues.forEach((issue) => {
+				const path = issue.path[0] as string;
+				if (path) {
+					newErrors[path as keyof BranchFormData] = issue.message;
+				}
+			});
+			setErrors(newErrors);
+			return;
+		}
+
+		await onSubmit(formData);
+	};
 
 	return (
 		<AdminModal
@@ -52,20 +68,24 @@ export const BranchModal = ({ isOpen, onClose, editingBranch, onSubmit, isSubmit
 			title={editingBranch ? "Chỉnh sửa cơ sở" : "Thêm cơ sở mới"}
 			maxWidth="max-w-md"
 		>
-			<form onSubmit={handleSubmit(onSubmit as any)} className="space-y-4">
-				<AdminFormField label="Tên cơ sở" error={errors.name?.message} required>
+			<form onSubmit={handleSubmit} className="space-y-4">
+				<AdminFormField label="Tên cơ sở" error={errors.name} required>
 					<input
 						type="text"
+						name="name"
+						value={formData.name}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("name")}
 					/>
 				</AdminFormField>
 
-				<AdminFormField label="Địa chỉ" error={errors.address?.message} required>
+				<AdminFormField label="Địa chỉ" error={errors.address} required>
 					<input
 						type="text"
+						name="address"
+						value={formData.address}
+						onChange={handleChange}
 						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-						{...register("address")}
 					/>
 				</AdminFormField>
 
