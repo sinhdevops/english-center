@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, CalendarDays, Trophy, Users, MapPin, BookOpen, LogOut, ClipboardList } from "lucide-react";
@@ -25,15 +26,34 @@ const navItems = [
 export function Sidebar() {
 	const pathname = usePathname();
 	const { logout } = useAuthStore();
+	const [isPending, startTransition] = React.useTransition();
+
 	const handleLogout = async () => {
-		await supabase.auth.signOut();
-		const res = await logoutAction();
-		if (res?.error) {
-			toast.error(res.error);
-		} else {
-			logout();
-			toast.success("Đã đăng xuất");
-		}
+		if (isPending) return;
+
+		startTransition(async () => {
+			try {
+				// 1. Sign out on client to clear local state/listeners
+				await supabase.auth.signOut();
+
+				// 2. Clear zustand store
+				logout();
+
+				// 3. Server-side sign out (clears cookies) and redirect
+				const res = await logoutAction();
+
+				if (res?.error) {
+					toast.error(res.error);
+				}
+			} catch (error: any) {
+				console.error("Logout error:", error);
+				// If redirect error occurs, it's actually Next.js handling it
+				if (error?.message?.includes("NEXT_REDIRECT")) {
+					return;
+				}
+				toast.error("Có lỗi xảy ra khi đăng xuất");
+			}
+		});
 	};
 
 	return (
@@ -86,10 +106,11 @@ export function Sidebar() {
 				<div className="mt-auto space-y-1 border-t border-slate-100 pt-4">
 					<button
 						onClick={handleLogout}
-						className="flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 transition-all hover:bg-red-50"
+						disabled={isPending}
+						className="flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 transition-all hover:bg-red-50 disabled:opacity-50"
 					>
 						<LogOut className="mr-3 h-5 w-5" />
-						Đăng xuất
+						{isPending ? "Đang đăng xuất..." : "Đăng xuất"}
 					</button>
 				</div>
 			</div>

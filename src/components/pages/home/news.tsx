@@ -60,7 +60,11 @@ const News = ({ initialNews }: NewsProps) => {
 							>
 								<div className="relative aspect-16/10 overflow-hidden">
 									<Image
-										src={post.image_url || post.img}
+										src={
+											post.image_url ||
+											post.img ||
+											"https://images.unsplash.com/photo-1506744038136-479a7ea31600?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+										}
 										alt={post.title}
 										width={800}
 										height={500}

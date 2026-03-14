@@ -4,12 +4,29 @@ import { motion } from "motion/react";
 import React from "react";
 import { TESTIMONIALS_DATA } from "@/constants";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import Link from "next/link";
 
-const Testimonials = () => {
+interface TestimonialsProps {
+	items?: any[];
+}
+
+const Testimonials = ({ items = [] }: TestimonialsProps) => {
+	// If items are provided from database, use them, otherwise fallback to constants
+	const displayData =
+		items.length > 0
+			? items.map((item) => ({
+					id: item.id,
+					title: item.title,
+					desc: item.excerpt || item.description,
+					img: item.image_url,
+					date: item.date,
+				}))
+			: [];
+
 	return (
 		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
@@ -23,14 +40,12 @@ const Testimonials = () => {
 				</motion.h2>
 
 				{/* Featured Award */}
-				<motion.div
-					initial={{ opacity: 0, y: 30 }}
-					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
-					className="group relative mb-12 aspect-21/9 max-h-[300px] min-h-[220px] w-full overflow-hidden rounded-xl shadow-2xl"
+				<Link
+					href={`/tin-tuc/${displayData[0]?.id}`}
+					className="group relative mb-12 block aspect-21/9 max-h-[300px] min-h-[220px] w-full overflow-hidden rounded-xl shadow-2xl"
 				>
 					<Image
-						src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&q=80&w=1200"
+						src={displayData[0].img}
 						alt="Vinh danh học viên đạt giải thưởng JU AWARDS 2025"
 						width={1200}
 						height={514}
@@ -38,13 +53,17 @@ const Testimonials = () => {
 						className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
 						referrerPolicy="no-referrer"
 					/>
-					<div className="absolute inset-0 flex items-end bg-linear-to-t from-black/90 via-black/20 to-transparent p-4">
-						<p className="text-lg leading-relaxed font-semibold text-white">
-							Bảng Vàng JU AWARDS 2025: Vinh Danh Dàn “Cao Thủ” Cambridge Nhà Ju Tân Bình – TP. Hồ Chí
-							Minh -
-						</p>
+					<div className="absolute inset-0 flex items-end bg-linear-to-t from-black/90 via-black/20 to-transparent p-4 md:p-8">
+						<div className="max-w-2xl">
+							<p className="text-stem-blue mb-2 text-sm font-bold tracking-widest uppercase">
+								Thông báo mới nhất
+							</p>
+							<p className="text-lg leading-relaxed font-black text-white md:text-xl">
+								{displayData[0].title}
+							</p>
+						</div>
 					</div>
-				</motion.div>
+				</Link>
 
 				{/* Award Grid */}
 				<Swiper
@@ -54,10 +73,6 @@ const Testimonials = () => {
 					autoplay={{
 						delay: 5000,
 						disableOnInteraction: false,
-					}}
-					pagination={{
-						clickable: true,
-						dynamicBullets: true,
 					}}
 					breakpoints={{
 						640: {
@@ -69,41 +84,62 @@ const Testimonials = () => {
 							spaceBetween: 30,
 						},
 					}}
-					className="testimonials-swiper"
+					className="testimonials-swiper pb-12!"
 				>
-					{TESTIMONIALS_DATA.map((award: any, i) => (
-						<SwiperSlide key={i} className="h-auto">
+					{displayData.slice(1).map((award: any, i) => (
+						<SwiperSlide key={award.id || i} className="h-auto">
 							<motion.div
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: i * 0.1 }}
-								className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-t-xl bg-white shadow-lg transition-all hover:shadow-xl"
+								className="group hover:border-stem-blue/20 flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-xl hover:shadow-slate-200/50"
 							>
-								<div className="relative aspect-4/3 overflow-hidden">
-									<Image
-										src={award.img}
-										alt={`Giải thưởng: ${award.title}`}
-										width={800}
-										height={600}
-										sizes="(max-width: 768px) 100vw, 33vw"
-										className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-										referrerPolicy="no-referrer"
-									/>
-									<div className="absolute inset-0 bg-black/5 transition-colors group-hover:bg-transparent" />
-								</div>
-								<div className="flex flex-1 flex-col p-6">
-									<h3 className="group-hover:text-stem-blue mb-3 line-clamp-2 text-lg font-bold text-slate-900 transition-colors">
-										{award.title}
-									</h3>
-									<p className="mb-6 line-clamp-3 text-sm leading-relaxed text-slate-500">
-										{award.desc}
-									</p>
-									<div className="text-stem-blue mt-auto flex items-center gap-2 font-bold">
-										<span>Xem chi tiết</span>
-										<ArrowRight size={18} />
+								<Link
+									href={award.id ? `/tin-tuc/${award.id}` : "/goc-ba-me"}
+									className="flex h-full flex-col"
+								>
+									<div className="relative aspect-4/3 overflow-hidden rounded-t-2xl">
+										<Image
+											src={
+												award.img || "https://images.unsplash.com/photo-1543269865-cbf427effbad"
+											}
+											alt={`Giải thưởng: ${award.title}`}
+											width={800}
+											height={600}
+											sizes="(max-width: 768px) 100vw, 33vw"
+											className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+											referrerPolicy="no-referrer"
+										/>
+										<div className="absolute inset-0 bg-slate-900/5 transition-colors group-hover:bg-transparent" />
 									</div>
-								</div>
+									<div className="flex flex-1 flex-col p-6">
+										<div className="mb-3 flex items-center gap-2 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+											<Calendar size={14} className="text-stem-blue/60" />
+											<span>
+												{award.date
+													? new Date(award.date).toLocaleDateString("vi-VN")
+													: "14/03/2026"}
+											</span>
+										</div>
+										<h3 className="group-hover:text-stem-blue mb-3 line-clamp-2 text-lg font-black text-slate-900 transition-colors">
+											{award.title}
+										</h3>
+										<p className="mb-6 line-clamp-3 text-sm leading-relaxed text-slate-500">
+											{award.desc}
+										</p>
+										<div className="text-stem-blue mt-auto flex items-center gap-2 text-sm font-black">
+											<span className="relative overflow-hidden">
+												Xem chi tiết
+												<span className="bg-stem-blue absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-300 group-hover:w-full" />
+											</span>
+											<ArrowRight
+												size={16}
+												className="transition-transform duration-300 group-hover:translate-x-1"
+											/>
+										</div>
+									</div>
+								</Link>
 							</motion.div>
 						</SwiperSlide>
 					))}

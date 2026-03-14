@@ -130,30 +130,6 @@ function SearchResults() {
 										</div>
 
 										<div className="flex flex-1 flex-col p-6">
-											<div className="mb-3 flex items-center gap-2 text-xs text-slate-400">
-												{result.type === "event" ? (
-													<>
-														<Calendar size={14} />
-														<span>
-															{new Date(result.date!).toLocaleDateString("vi-VN")}
-														</span>
-													</>
-												) : (
-													<>
-														<BookOpen size={14} />
-														<span>STEMKey Education</span>
-													</>
-												)}
-											</div>
-
-											<h3 className="group-hover:text-stem-blue mb-3 line-clamp-2 text-xl font-bold text-slate-900 transition-colors">
-												{result.title}
-											</h3>
-
-											<p className="mb-6 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-500">
-												{result.description}
-											</p>
-
 											<Link
 												href={
 													result.type === "event"
@@ -162,9 +138,35 @@ function SearchResults() {
 															? `/khoa-hoc`
 															: `/khoa-hoc`
 												}
-												className="text-stem-blue mt-auto flex items-center gap-2 text-sm font-bold hover:underline"
+												className="text-stem-blue mt-auto gap-2 text-sm font-bold"
 											>
-												Xem chi tiết <ChevronRight size={16} />
+												<div className="mb-3 flex items-center gap-2 text-xs text-slate-400">
+													{result.type === "event" ? (
+														<>
+															<Calendar size={14} />
+															<span>
+																{new Date(result.date!).toLocaleDateString("vi-VN")}
+															</span>
+														</>
+													) : (
+														<>
+															<BookOpen size={14} />
+															<span>STEMKey Education</span>
+														</>
+													)}
+												</div>
+
+												<h3 className="group-hover:text-stem-blue mb-3 line-clamp-2 text-xl font-bold text-slate-900 transition-colors">
+													{result.title}
+												</h3>
+
+												<p className="mb-6 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-500">
+													{result.description}
+												</p>
+
+												<div className="flex items-center gap-2">
+													Xem chi tiết <ChevronRight size={16} />
+												</div>
 											</Link>
 										</div>
 									</motion.div>

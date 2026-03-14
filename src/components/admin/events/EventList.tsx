@@ -73,7 +73,7 @@ export const EventList = ({ events, isLoading, onEdit, onDelete }: EventListProp
 						<div className="mb-2 flex items-center justify-between">
 							<div className="flex items-center gap-2">
 								<span className="text-stem-blue rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-bold tracking-wider uppercase">
-									Sự kiện
+									{event.category || "Hệ thống"}
 								</span>
 								{event.author_image_url && (
 									<div className="relative h-6 w-6 overflow-hidden rounded-full border border-slate-200">

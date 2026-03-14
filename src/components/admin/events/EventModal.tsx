@@ -5,10 +5,11 @@ import { AdminModal } from "../AdminModal";
 import { AdminFormField } from "../AdminFormField";
 import { eventSchema } from "@/lib/validations/admin";
 import { Event } from "@/lib/types";
-import { Upload, User, X } from "lucide-react";
+import { Upload, X, Tag } from "lucide-react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import * as z from "zod";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
 	ssr: false,
@@ -27,7 +28,10 @@ interface EventModalProps {
 	isSubmitting: boolean;
 }
 
+const CATEGORIES = ["Góc ba mẹ", "Góc học tập", "Tin tức"];
+
 export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitting }: EventModalProps) => {
+	const { profile } = useAuthStore();
 	const {
 		register,
 		handleSubmit,
@@ -39,6 +43,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 		resolver: zodResolver(eventSchema) as any,
 		defaultValues: {
 			title: "",
+			category: "Tin tức",
 			description: "",
 			content: "",
 			date: "",
@@ -50,12 +55,12 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 
 	const quillRef = useRef<any>(null);
 	const imageUrl = useWatch({ control, name: "image_url" as any });
-	const authorImageUrl = useWatch({ control, name: "author_image_url" as any });
 
 	useEffect(() => {
 		if (editingEvent) {
 			reset({
 				title: editingEvent.title,
+				category: editingEvent.category || "Tin tức",
 				description: editingEvent.description,
 				content: editingEvent.content || "",
 				date: editingEvent.date,
@@ -66,15 +71,16 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 		} else {
 			reset({
 				title: "",
+				category: "Tin tức",
 				description: "",
 				content: "",
 				date: "",
 				location: "",
 				image_url: "",
-				author_image_url: "",
+				author_image_url: profile?.avatar_url || "",
 			});
 		}
-	}, [editingEvent, reset, isOpen]);
+	}, [editingEvent, reset, isOpen, profile]);
 
 	const uploadImage = async (base64: string, folder: string) => {
 		try {
@@ -92,16 +98,13 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 		}
 	};
 
-	const handleImageUpload = async (
-		e: React.ChangeEvent<HTMLInputElement>,
-		field: "image_url" | "author_image_url",
-	) => {
+	const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (file) {
 			const reader = new FileReader();
 			reader.onloadend = async () => {
-				const url = await uploadImage(reader.result as string, field === "image_url" ? "events" : "authors");
-				if (url) setValue(field, url);
+				const url = await uploadImage(reader.result as string, "events");
+				if (url) setValue("image_url", url);
 			};
 			reader.readAsDataURL(file);
 		}
@@ -168,6 +171,33 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 							/>
 						</AdminFormField>
 
+						<div className="grid grid-cols-2 gap-4">
+							<AdminFormField label="Danh mục" error={errors.category?.message} required>
+								<div className="relative mt-1">
+									<select
+										className="focus:border-stem-blue focus:ring-stem-blue block w-full appearance-none rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 pr-10 text-sm"
+										{...register("category")}
+									>
+										{CATEGORIES.map((cat) => (
+											<option key={cat} value={cat}>
+												{cat}
+											</option>
+										))}
+									</select>
+									<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+										<Tag size={14} />
+									</div>
+								</div>
+							</AdminFormField>
+							<AdminFormField label="Ngày diễn ra" error={errors.date?.message} required>
+								<input
+									type="date"
+									className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+									{...register("date")}
+								/>
+							</AdminFormField>
+						</div>
+
 						<AdminFormField label="Mô tả ngắn" error={errors.description?.message} required>
 							<textarea
 								className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
@@ -176,43 +206,36 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 							/>
 						</AdminFormField>
 
-						<div className="grid grid-cols-2 gap-4">
-							<AdminFormField label="Ngày diễn ra" error={errors.date?.message} required>
-								<input
-									type="date"
-									className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-									{...register("date")}
-								/>
-							</AdminFormField>
-							<AdminFormField label="Địa điểm" error={errors.location?.message} required>
-								<input
-									type="text"
-									className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
-									{...register("location")}
-								/>
-							</AdminFormField>
-						</div>
+						<AdminFormField label="Địa điểm" error={errors.location?.message} required>
+							<input
+								type="text"
+								className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+								{...register("location")}
+							/>
+						</AdminFormField>
 					</div>
 
 					<div className="space-y-4">
 						<AdminFormField label="Ảnh bìa sự kiện">
 							<div className="mt-2 flex items-center gap-4">
-								<div className="hover:border-stem-blue relative flex h-32 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
+								<div className="hover:border-stem-blue relative flex h-[280px] w-full items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
 									{imageUrl ? (
 										<>
 											<Image src={imageUrl} alt="Preview" fill className="object-cover" />
 											<button
 												type="button"
 												onClick={() => setValue("image_url", "")}
-												className="absolute top-2 right-2 rounded-full bg-rose-500 p-1.5 text-white shadow-lg shadow-rose-200 transition-colors hover:bg-rose-600"
+												className="absolute top-4 right-4 rounded-full bg-rose-500 p-2 text-white shadow-xl shadow-rose-200 transition-colors hover:bg-rose-600"
 											>
-												<X size={14} />
+												<X size={16} />
 											</button>
 										</>
 									) : (
-										<div className="flex flex-col items-center gap-1">
-											<Upload size={24} />
-											<span className="text-xs font-bold tracking-wider uppercase">
+										<div className="flex flex-col items-center gap-2">
+											<div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-100">
+												<Upload size={24} className="text-stem-blue" />
+											</div>
+											<span className="text-xs font-black tracking-widest uppercase">
 												Tải lên ảnh bìa
 											</span>
 										</div>
@@ -221,53 +244,36 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 										type="file"
 										accept="image/*"
 										className="absolute inset-0 cursor-pointer opacity-0"
-										onChange={(e) => handleImageUpload(e, "image_url")}
+										onChange={handleImageUpload}
 									/>
 								</div>
 							</div>
 						</AdminFormField>
 
-						<AdminFormField label="Ảnh tác giả">
-							<div className="mt-2 flex items-center gap-4">
-								<div className="hover:border-stem-blue relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
-									{authorImageUrl ? (
-										<>
-											<Image
-												src={authorImageUrl}
-												alt="Author Preview"
-												fill
-												className="object-cover"
-											/>
-											<button
-												type="button"
-												onClick={() => setValue("author_image_url", "")}
-												className="absolute top-0 right-0 rounded-full bg-rose-500 p-1 text-white shadow-md transition-colors hover:bg-rose-600"
-											>
-												<X size={10} />
-											</button>
-										</>
-									) : (
-										<div className="flex flex-col items-center gap-1">
-											<User size={20} />
-											<span className="text-[8px] font-bold tracking-wider uppercase">
-												Tác giả
-											</span>
-										</div>
-									)}
-									<input
-										type="file"
-										accept="image/*"
-										className="absolute inset-0 cursor-pointer opacity-0"
-										onChange={(e) => handleImageUpload(e, "author_image_url")}
+						<div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-4">
+							<p className="mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
+								Thông tin người đăng
+							</p>
+							<div className="flex items-center gap-3">
+								<div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-white">
+									<Image
+										src={
+											profile?.avatar_url ||
+											"https://images.unsplash.com/photo-1543269865-cbf427effbad"
+										}
+										alt="Author"
+										fill
+										className="object-cover"
 									/>
 								</div>
-								<div className="flex-1">
-									<p className="text-[10px] text-slate-500 italic">
-										Ảnh đại diện của người đăng hoặc diễn giả chính của sự kiện.
+								<div>
+									<p className="text-sm font-bold text-slate-900">{profile?.full_name || "Admin"}</p>
+									<p className="text-[10px] font-medium text-slate-500 capitalize">
+										{profile?.role || "Administrator"}
 									</p>
 								</div>
 							</div>
-						</AdminFormField>
+						</div>
 					</div>
 				</div>
 

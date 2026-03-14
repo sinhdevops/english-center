@@ -28,7 +28,18 @@ export const metadata: Metadata = {
 export default async function HomePage() {
 	const supabase = await createClient();
 
-	const { data: newsItems } = await supabase.from("events").select("*").order("date", { ascending: false }).limit(6);
+	const { data: newsItems } = await supabase
+		.from("events")
+		.select("*")
+		.eq("category", "Tin tức")
+		.order("date", { ascending: false })
+		.limit(6);
+	const { data: testimonialItems } = await supabase
+		.from("events")
+		.select("*")
+		.eq("category", "Góc ba mẹ")
+		.order("date", { ascending: false })
+		.limit(9);
 
 	const { data: branches } = await supabase.from("branches").select("id, name");
 	const { data: courses } = await supabase.from("courses").select("id, name");
@@ -43,7 +54,7 @@ export default async function HomePage() {
 				<FlexibleLearning />
 				<Teachers />
 				<News initialNews={newsItems || []} />
-				<Testimonials />
+				<Testimonials items={testimonialItems || []} />
 				<RegistrationSection branches={branches || []} courses={courses || []} />
 				<Partners />
 			</div>
