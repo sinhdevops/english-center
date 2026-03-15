@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react";
 import React from "react";
-import { TESTIMONIALS_DATA } from "@/constants";
 import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -122,10 +121,10 @@ const Testimonials = ({ items = [] }: TestimonialsProps) => {
 													: "14/03/2026"}
 											</span>
 										</div>
-										<h3 className="group-hover:text-stem-blue mb-3 line-clamp-2 text-lg font-black text-slate-900 transition-colors">
+										<h3 className="group-hover:text-stem-blue mb-3 line-clamp-1 text-lg font-black text-slate-900 transition-colors">
 											{award.title}
 										</h3>
-										<p className="mb-6 line-clamp-3 text-sm leading-relaxed text-slate-500">
+										<p className="mb-3 line-clamp-2 h-[3.25em] text-sm leading-relaxed text-slate-500">
 											{award.desc}
 										</p>
 										<div className="text-stem-blue mt-auto flex items-center gap-2 text-sm font-black">

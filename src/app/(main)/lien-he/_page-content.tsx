@@ -12,7 +12,7 @@ const IconMap: Record<string, any> = {
 };
 const PageContent = ({ branches, courses }: { branches: any; courses: any }) => {
 	return (
-		<div className="min-h-screen bg-slate-50 py-12 text-center lg:py-20">
+		<div className="min-h-screen bg-slate-50 py-12 lg:py-20">
 			<div className="mx-auto max-w-7xl px-4">
 				{/* Header Section */}
 				<div className="mb-16 text-center">
@@ -35,7 +35,7 @@ const PageContent = ({ branches, courses }: { branches: any; courses: any }) => 
 				</div>
 
 				{/* Contact Info Cards */}
-				<div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+				<div className="mb-16 grid grid-cols-1 justify-center gap-8 md:grid-cols-3">
 					{CONTACT_INFO.map((item, idx) => (
 						<motion.div
 							key={idx}

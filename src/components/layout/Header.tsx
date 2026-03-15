@@ -161,12 +161,12 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 						) : (
 							<div className="flex items-center gap-2">
 								<Link href="/dang-nhap">
-									<Button variant="primary" className="rounded-full px-6 font-bold">
+									<Button variant="primary" size="sm" className="rounded-full px-6 font-bold">
 										Đăng nhập
 									</Button>
 								</Link>
 								<Link href="/dang-ky">
-									<Button variant="outline" className="rounded-full px-6 font-bold">
+									<Button variant="outline" size="sm" className="rounded-full px-6 font-bold">
 										Đăng ký
 									</Button>
 								</Link>

@@ -6,6 +6,11 @@ export interface Branch {
   created_at?: string;
 }
 
+export interface BrandsAndPartners {
+  id: string;
+  name: string;
+}
+
 export interface Program {
   id: string;
   name: string;

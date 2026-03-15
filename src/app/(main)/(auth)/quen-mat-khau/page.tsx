@@ -53,7 +53,7 @@ export default function ForgotPasswordPage() {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								placeholder="example@gmail.com"
-								className="focus:ring-stem-blue/20 w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pr-4 pl-12 transition-all focus:ring-2 focus:outline-none"
+								className="focus:ring-stem-blue/20 w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pr-4 pl-12 transition-all focus:ring-2 focus:outline-none"
 								required
 							/>
 							<Mail size={18} className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-400" />
@@ -63,7 +63,7 @@ export default function ForgotPasswordPage() {
 					<Button
 						type="submit"
 						disabled={isLoading}
-						className="flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-lg font-bold disabled:opacity-70"
+						className="flex w-full items-center justify-center gap-2 rounded-xl py-4 text-lg font-bold disabled:opacity-70"
 					>
 						{isLoading ? <Loader2 className="animate-spin" size={20} /> : "Gửi yêu cầu"}
 						{!isLoading && <ArrowRight size={20} />}

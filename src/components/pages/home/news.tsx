@@ -56,7 +56,7 @@ const News = ({ initialNews }: NewsProps) => {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: i * 0.1 }}
-								className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-t-xl bg-white shadow-lg transition-all hover:shadow-xl"
+								className="group hover:border-stem-blue/20 flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-xl hover:shadow-slate-200/50"
 							>
 								<div className="relative aspect-16/10 overflow-hidden">
 									<Image
@@ -73,10 +73,10 @@ const News = ({ initialNews }: NewsProps) => {
 									/>
 								</div>
 								<div className="flex flex-1 flex-col p-6">
-									<h3 className="group-hover:text-stem-blue mb-3 line-clamp-2 text-lg font-bold text-slate-900 transition-colors">
+									<h3 className="group-hover:text-stem-blue mb-3 line-clamp-1 text-lg font-bold text-slate-900 transition-colors">
 										{post.title}
 									</h3>
-									<p className="mb-6 line-clamp-3 text-sm leading-relaxed text-slate-500">
+									<p className="mb-6 line-clamp-2 h-[3.25em] text-sm leading-relaxed text-slate-500">
 										{post.excerpt || post.description || post.desc}
 									</p>
 									<div className="text-stem-blue mt-auto flex items-center gap-2 font-bold">
@@ -90,7 +90,7 @@ const News = ({ initialNews }: NewsProps) => {
 				</Swiper>
 				<div className="mt-8 flex items-center justify-center">
 					<Link href="/tin-tuc">
-						<Button>Xem tất cả</Button>
+						<Button size="sm">Xem tất cả</Button>
 					</Link>
 				</div>
 			</div>
