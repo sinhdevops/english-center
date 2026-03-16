@@ -1,39 +1,44 @@
 "use client";
 
 import { motion } from "motion/react";
-import { supabase } from "@/lib/supabase-client";
 import { toast } from "sonner";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { registrationSchema } from "@/lib/validations/admin";
-import { ChevronDown, Loader2, Send } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BrandsAndPartners } from "@/lib/types";
+import { InputValidation } from "@/components/ui/input";
+import { SelectValidation } from "@/components/ui/select";
 
 type RegistrationFormValues = z.infer<typeof registrationSchema>;
 
-const CardRegistration = () => {
-	const [branches, setBranches] = useState<any[]>([]);
-	const [courses, setCourses] = useState<any[]>([]);
+const CardRegistration = ({
+	branches = [],
+	courses = [],
+}: {
+	branches: BrandsAndPartners[];
+	courses: BrandsAndPartners[];
+}) => {
+	const methods = useForm<RegistrationFormValues>({
+		resolver: zodResolver(registrationSchema),
+		defaultValues: {
+			parentName: "",
+			childName: "",
+			phone: "",
+			email: "",
+			childClass: "",
+			course: "",
+			branch: "",
+		},
+	});
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const { data: bData } = await supabase.from("branches").select("id, name");
-			const { data: cData } = await supabase.from("courses").select("id, name");
-			if (bData) setBranches(bData);
-			if (cData) setCourses(cData);
-		};
-		fetchData();
-	}, []);
 	const {
-		register,
 		handleSubmit,
 		reset,
-		formState: { errors, isSubmitting },
-	} = useForm<RegistrationFormValues>({
-		resolver: zodResolver(registrationSchema),
-	});
+		formState: { isSubmitting },
+	} = methods;
 
 	const onSubmit = async (data: RegistrationFormValues) => {
 		try {
@@ -66,152 +71,41 @@ const CardRegistration = () => {
 				<h2 className="text-2xl font-black text-slate-900 lg:text-3xl">Đăng ký nhận tư vấn</h2>
 			</div>
 
-			<form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-				<div className="space-y-2">
-					<label className="ml-1 text-[11px] font-black tracking-wider text-slate-400 uppercase">
-						Họ và tên phụ huynh
-					</label>
-					<input
-						{...register("parentName")}
-						type="text"
-						placeholder="Nhập họ tên bạn"
-						className={`w-full grow rounded-2xl border bg-slate-50 px-5 py-4 text-sm transition-all focus:ring-4 focus:outline-none ${
-							errors.parentName
-								? "border-red-500 focus:ring-red-100"
-								: "border-slate-100 focus:ring-blue-50"
-						}`}
+			<FormProvider {...methods}>
+				<form
+					onSubmit={handleSubmit(onSubmit)}
+					className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
+				>
+					<InputValidation name="parentName" placeholder="Nhập họ tên bạn" label="Họ và tên phụ huynh" />
+					<InputValidation name="childName" placeholder="Nhập họ tên con" label="Họ và tên con" />
+					<InputValidation name="phone" placeholder="Nhập số điện thoại" label="Số điện thoại" />
+					<InputValidation name="email" placeholder="Nhập email" label="Email" />
+					<InputValidation name="childClass" placeholder="Nhập lớp con học" label="Con học lớp" />
+					<SelectValidation
+						name="course"
+						label="Khóa học"
+						placeholder="Nhập khóa học"
+						options={courses.map((item) => ({ label: item.name, value: item.name }))}
 					/>
-					{errors.parentName && (
-						<p className="ml-1 text-[10px] font-bold text-red-500">{errors.parentName.message}</p>
-					)}
-				</div>
-				<div className="space-y-2">
-					<label className="ml-1 text-[11px] font-black tracking-wider text-slate-400 uppercase">
-						Họ tên con
-					</label>
-					<input
-						{...register("childName")}
-						type="text"
-						placeholder="Nhập họ tên con"
-						className={`w-full grow rounded-2xl border bg-slate-50 px-5 py-4 text-sm transition-all focus:ring-4 focus:outline-none ${
-							errors.childName
-								? "border-red-500 focus:ring-red-100"
-								: "border-slate-100 focus:ring-blue-50"
-						}`}
+					<SelectValidation
+						name="branch"
+						label="Chi nhánh"
+						placeholder="Nhập chi nhánh"
+						options={branches.map((item) => ({ label: item.name, value: item.name }))}
 					/>
-					{errors.childName && (
-						<p className="ml-1 text-[10px] font-bold text-red-500">{errors.childName.message}</p>
-					)}
-				</div>
-				<div className="space-y-2">
-					<label className="ml-1 text-[11px] font-black tracking-wider text-slate-400 uppercase">
-						Số điện thoại
-					</label>
-					<input
-						{...register("phone")}
-						type="tel"
-						placeholder="Nhập số điện thoại"
-						className={`w-full grow rounded-2xl border bg-slate-50 px-5 py-4 text-sm transition-all focus:ring-4 focus:outline-none ${
-							errors.phone ? "border-red-500 focus:ring-red-100" : "border-slate-100 focus:ring-blue-50"
-						}`}
-					/>
-					{errors.phone && <p className="ml-1 text-[10px] font-bold text-red-500">{errors.phone.message}</p>}
-				</div>
-				<div className="space-y-2">
-					<label className="ml-1 text-[11px] font-black tracking-wider text-slate-400 uppercase">Email</label>
-					<input
-						{...register("email")}
-						type="email"
-						placeholder="Nhập email"
-						className={`w-full grow rounded-2xl border bg-slate-50 px-5 py-4 text-sm transition-all focus:ring-4 focus:outline-none ${
-							errors.email ? "border-red-500 focus:ring-red-100" : "border-slate-100 focus:ring-blue-50"
-						}`}
-					/>
-					{errors.email && <p className="ml-1 text-[10px] font-bold text-red-500">{errors.email.message}</p>}
-				</div>
-				<div className="space-y-2">
-					<label className="ml-1 text-[11px] font-black tracking-wider text-slate-400 uppercase">
-						Con học lớp
-					</label>
-					<input
-						{...register("childClass")}
-						type="text"
-						placeholder="Nhập lớp con học"
-						className={`w-full grow rounded-2xl border bg-slate-50 px-5 py-4 text-sm transition-all focus:ring-4 focus:outline-none ${
-							errors.childClass
-								? "border-red-500 focus:ring-red-100"
-								: "border-slate-100 focus:ring-blue-50"
-						}`}
-					/>
-					{errors.childClass && (
-						<p className="ml-1 text-[10px] font-bold text-red-500">{errors.childClass.message}</p>
-					)}
-				</div>
-				<div className="space-y-2">
-					<label className="ml-1 text-[11px] font-black tracking-wider text-slate-400 uppercase">
-						Khóa học quan tâm
-					</label>
-					<div className="relative">
-						<select
-							{...register("course")}
-							className={`w-full grow appearance-none rounded-2xl border bg-slate-50 px-5 py-4 text-sm transition-all focus:ring-4 focus:outline-none ${
-								errors.course
-									? "border-red-500 focus:ring-red-100"
-									: "border-slate-100 focus:ring-blue-50"
-							}`}
+					<div className="flex items-end">
+						<Button
+							size="md"
+							type="submit"
+							disabled={isSubmitting}
+							className="flex w-full items-center gap-2 rounded-xl"
 						>
-							<option value="">Chọn khóa học</option>
-							{courses.map((c) => (
-								<option key={c.id} value={c.id}>
-									{c.name}
-								</option>
-							))}
-						</select>
-						<ChevronDown
-							className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-slate-400"
-							size={16}
-						/>
+							{isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+							{isSubmitting ? "Đang gửi..." : "Đăng ký tư vấn"}
+						</Button>
 					</div>
-					{errors.course && (
-						<p className="ml-1 text-[10px] font-bold text-red-500">{errors.course.message}</p>
-					)}
-				</div>
-				<div className="space-y-2">
-					<label className="ml-1 text-[11px] font-black tracking-wider text-slate-400 uppercase">
-						Cơ sở đào tạo
-					</label>
-					<div className="relative">
-						<select
-							{...register("branch")}
-							className={`w-full grow appearance-none rounded-2xl border bg-slate-50 px-5 py-4 text-sm transition-all focus:ring-4 focus:outline-none ${
-								errors.branch
-									? "border-red-500 focus:ring-red-100"
-									: "border-slate-100 focus:ring-blue-50"
-							}`}
-						>
-							<option value="">Chọn cơ sở</option>
-							{branches.map((b) => (
-								<option key={b.id} value={b.id}>
-									{b.name}
-								</option>
-							))}
-						</select>
-						<ChevronDown
-							className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-slate-400"
-							size={16}
-						/>
-					</div>
-					{errors.branch && (
-						<p className="ml-1 text-[10px] font-bold text-red-500">{errors.branch.message}</p>
-					)}
-				</div>
-				<div className="flex items-end">
-					<Button size="md" type="submit" disabled={isSubmitting} className="flex w-full items-center gap-2">
-						{isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
-						{isSubmitting ? "Đang gửi..." : "Đăng ký tư vấn"}
-					</Button>
-				</div>
-			</form>
+				</form>
+			</FormProvider>
 		</motion.div>
 	);
 };
