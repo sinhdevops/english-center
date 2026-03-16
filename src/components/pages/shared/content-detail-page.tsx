@@ -2,7 +2,8 @@
 
 import { Calendar, User, Clock, Share2, Facebook, Twitter, Link as LinkIcon } from "lucide-react";
 import { motion } from "motion/react";
-import { CourserSidebar } from "@/components/ui/courser-sidebar";
+import { CourserSidebarContent } from "@/components/ui/courser-sidebar-content";
+import type { Program } from "@/lib/types";
 import Image from "next/image";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,7 @@ interface ContentDetailPageProps {
 	onBack?: () => void;
 	typeLabel?: string;
 	breadcrumbItems?: { label: string; href?: string; active?: boolean }[];
+	programs?: Program[];
 }
 
 export default function ContentDetailPage({
@@ -28,6 +30,7 @@ export default function ContentDetailPage({
 	onBack,
 	typeLabel = "bài viết",
 	breadcrumbItems,
+	programs = [],
 }: ContentDetailPageProps) {
 	const router = useRouter();
 
@@ -187,7 +190,7 @@ export default function ContentDetailPage({
 
 					{/* Sidebar */}
 					<div className="w-full lg:w-1/3">
-						<CourserSidebar />
+						<CourserSidebarContent programs={programs} />
 					</div>
 				</div>
 			</div>

@@ -17,7 +17,7 @@ interface NewsItemProps {
 }
 
 const NewsItem: React.FC<NewsItemProps> = ({ id, title, category, date, desc, img, onClick }) => (
-	<Link href={`/tin-tuc/${id}`}>
+	<Link href={`/tin-tuc/${id}`} className="block">
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			whileInView={{ opacity: 1, y: 0 }}

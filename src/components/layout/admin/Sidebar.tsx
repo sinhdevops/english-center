@@ -3,15 +3,12 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, CalendarDays, Trophy, Users, MapPin, BookOpen, LogOut, ClipboardList, X } from "lucide-react";
+import { LayoutDashboard, CalendarDays, Trophy, Users, MapPin, BookOpen, ClipboardList, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { IMAGES } from "../../../../public/statics/images";
-import { useAuthStore } from "@/store/useAuthStore";
-import { supabase } from "@/lib/supabase-client";
-import { logout as logoutAction } from "@/app/auth/login/actions";
-import { toast } from "sonner";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 const navItems = [
 	{ name: "Tổng quan", href: "/admin", icon: LayoutDashboard },
@@ -30,29 +27,6 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
 	const pathname = usePathname();
-	const { logout } = useAuthStore();
-	const [isPending, startTransition] = React.useTransition();
-
-	const handleLogout = async () => {
-		if (isPending) return;
-
-		startTransition(async () => {
-			try {
-				await supabase.auth.signOut();
-				logout();
-				const res = await logoutAction();
-				if (res?.error) {
-					toast.error(res.error);
-				}
-			} catch (error: any) {
-				console.error("Logout error:", error);
-				if (error?.message?.includes("NEXT_REDIRECT")) {
-					return;
-				}
-				toast.error("Có lỗi xảy ra khi đăng xuất");
-			}
-		});
-	};
 
 	return (
 		<>
@@ -122,14 +96,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 					</nav>
 
 					<div className="mt-auto space-y-1 border-t border-slate-100 pt-4">
-						<button
-							onClick={handleLogout}
-							disabled={isPending}
+						<LogoutButton
 							className="flex w-full items-center rounded-xl px-3 py-2.5 text-sm font-bold text-red-600 transition-all hover:bg-red-50 disabled:opacity-50"
-						>
-							<LogOut className="mr-3 h-5 w-5" />
-							{isPending ? "Đang đăng xuất..." : "Đăng xuất"}
-						</button>
+							iconSize={20}
+						/>
 					</div>
 				</div>
 			</aside>

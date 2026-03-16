@@ -1,34 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
-import { Phone, MapPin, Search, Menu, LogOut, ChevronDown } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Phone, MapPin, Search, Menu, ChevronDown } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/useAuthStore";
-import { logout as logoutAction } from "@/app/auth/login/actions";
-import { toast } from "sonner";
+import { LogoutButton } from "@/components/auth/logout-button";
 import { motion, AnimatePresence } from "motion/react";
-import { supabase } from "@/lib/supabase-client";
 
 export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => {
-	const { user, profile, logout } = useAuthStore();
+	const { user, profile } = useAuthStore();
 	const [showDropdown, setShowDropdown] = useState(false);
 	const [searchQuery, setSearchQuery] = useState("");
 	const router = useRouter();
 
-	const handleLogout = async () => {
+	useEffect(() => {
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setShowDropdown(false);
-		await supabase.auth.signOut();
-		const res = await logoutAction();
-		if (res?.error) {
-			toast.error(res.error);
-		} else {
-			logout();
-			toast.success("Đã đăng xuất");
-		}
-	};
+	}, [user]);
 
 	const handleSearch = (e?: React.KeyboardEvent | React.MouseEvent) => {
 		if (e && "key" in e && e.key !== "Enter") return;
@@ -145,13 +136,10 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 													</Link>
 												</div> */}
 												<div className="border-t border-slate-50 p-1">
-													<button
-														onClick={handleLogout}
+													<LogoutButton
 														className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold text-red-500 transition-colors hover:bg-red-50"
-													>
-														<LogOut size={18} />
-														Đăng xuất
-													</button>
+														onAfterLogout={() => setShowDropdown(false)}
+													/>
 												</div>
 											</motion.div>
 										</>

@@ -6,7 +6,10 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
 	const { slug } = await params;
 	const supabase = await createClient();
 
-	const { data: event, error } = await supabase.from("events").select("*").eq("id", slug).single();
+	const [{ data: event, error }, { data: programs }] = await Promise.all([
+		supabase.from("events").select("*").eq("id", slug).single(),
+		supabase.from("programs").select("id, name, image_url").order("created_at", { ascending: true }),
+	]);
 
 	if (error || !event) {
 		return notFound();
@@ -28,6 +31,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
 				{ label: "Tin tức", href: "/tin-tuc" },
 				{ label: event.title, active: true },
 			]}
+			programs={programs || []}
 		/>
 	);
 }

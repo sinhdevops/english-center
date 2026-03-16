@@ -1,22 +1,39 @@
-"use client";
-
 import ContentDetailPage from "@/components/pages/shared/content-detail-page";
-import { useParams } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
+import { notFound } from "next/navigation";
 
-export default function LearningCornerDetailPage() {
-	const { slug } = useParams();
+export default async function LearningCornerDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
+	const supabase = await createClient();
+
+	const [{ data: event, error }, { data: programs }] = await Promise.all([
+		supabase.from("events").select("*").eq("id", slug).single(),
+		supabase.from("programs").select("id, name, image_url").order("created_at", { ascending: true }),
+	]);
+
+	if (error || !event) {
+		return notFound();
+	}
 
 	const breadcrumbItems = [
 		{ label: "Trang chủ", href: "/" },
 		{ label: "Góc học tập", href: "/goc-hoc-tap" },
-		{ label: slug as string, active: true },
+		{ label: event.title, active: true },
 	];
 
 	return (
 		<ContentDetailPage
-			article={{ title: slug as string, date: new Date().toLocaleDateString("vi-VN") }}
+			article={{
+				title: event.title,
+				date: event.date,
+				image_url: event.image_url,
+				content: event.content,
+				description: event.description,
+				excerpt: event.excerpt,
+			}}
 			typeLabel="tài liệu"
 			breadcrumbItems={breadcrumbItems}
+			programs={programs || []}
 		/>
 	);
 }

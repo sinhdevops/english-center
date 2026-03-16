@@ -6,10 +6,8 @@ import { ChevronDown, X, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAuthStore } from "@/store/useAuthStore";
-import { logout as logoutAction } from "@/app/auth/login/actions";
-import { toast } from "sonner";
+import { LogoutButton } from "@/components/auth/logout-button";
 import { NAV_ITEMS } from "@/constants";
-import { supabase } from "@/lib/supabase-client";
 
 export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> = ({ isMenuOpen, toggleMenu }) => {
 	const pathname = usePathname();
@@ -46,7 +44,7 @@ const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => 
 		>
 			<Link
 				href={item.href || "#"}
-				className={`relative flex items-center gap-1 pb-1 text-sm font-medium whitespace-nowrap transition-colors ${
+				className={`relative flex items-center gap-1 pb-1 text-base font-medium whitespace-nowrap transition-colors ${
 					pathname === item.href ? "text-stem-blue" : "hover:text-stem-blue"
 				}`}
 			>
@@ -91,15 +89,7 @@ const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => 
 };
 
 const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathname: string }) => {
-	const { user, profile, logout } = useAuthStore();
-
-	const handleLogout = async () => {
-		await supabase.auth.signOut();
-		await logoutAction();
-		logout();
-		toggleMenu();
-		toast.success("Đã đăng xuất");
-	};
+	const { user, profile } = useAuthStore();
 
 	return (
 		<>
@@ -165,12 +155,11 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 									<p className="text-xs text-slate-500">{user.email}</p>
 								</div>
 							</div>
-							<button
-								onClick={handleLogout}
+							<LogoutButton
 								className="w-full rounded-2xl bg-red-50 py-4 text-sm font-black tracking-wider text-red-500 uppercase transition-all active:scale-95"
-							>
-								Đăng xuất
-							</button>
+								showIcon={false}
+								onAfterLogout={toggleMenu}
+							/>
 						</div>
 					) : (
 						<div className="flex flex-col gap-3">

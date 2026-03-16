@@ -72,7 +72,7 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: (index % 3) * 0.1 }}
-							className="flex flex-col rounded-3xl bg-white p-4 shadow-[0px_1px_8px_0px_rgba(0,0,0,0.1)] transition-all hover:shadow-2xl"
+							className="flex flex-col rounded-3xl bg-white p-4 shadow-xl shadow-slate-100 transition-all hover:shadow-2xl"
 						>
 							<div className="mb-6 h-[220px] w-full shrink-0 overflow-hidden rounded-2xl">
 								<Image

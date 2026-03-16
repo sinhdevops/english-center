@@ -22,14 +22,13 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
 	const to = from + ITEMS_PER_PAGE - 1;
 
 	// Fetch count and data
-	const [{ data: events, count }, { data: allEvents }] = await Promise.all([
+	const [{ data: events, count }] = await Promise.all([
 		supabase
 			.from("events")
 			.select("*", { count: "exact" })
 			.eq("category", "Tin tức")
 			.order("date", { ascending: false })
 			.range(from, to),
-		supabase.from("events").select("*").eq("category", "Tin tức").order("date", { ascending: false }),
 	]);
 
 	const newsList = events || [];
