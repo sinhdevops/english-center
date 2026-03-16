@@ -51,40 +51,42 @@ const News = ({ initialNews }: NewsProps) => {
 				>
 					{displayNews.map((post: any, i) => (
 						<SwiperSlide key={i} className="h-auto">
-							<motion.div
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true }}
-								transition={{ delay: i * 0.1 }}
-								className="group hover:border-stem-blue/20 flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-xl hover:shadow-slate-200/50"
-							>
-								<div className="relative aspect-16/10 overflow-hidden">
-									<Image
-										src={
-											post.image_url ||
-											post.img ||
-											"https://images.unsplash.com/photo-1506744038136-479a7ea31600?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-										}
-										alt={post.title}
-										width={800}
-										height={500}
-										className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-										referrerPolicy="no-referrer"
-									/>
-								</div>
-								<div className="flex flex-1 flex-col p-6">
-									<h3 className="group-hover:text-stem-blue mb-3 line-clamp-1 text-lg font-bold text-slate-900 transition-colors">
-										{post.title}
-									</h3>
-									<p className="mb-6 line-clamp-2 h-[3.25em] text-sm leading-relaxed text-slate-500">
-										{post.excerpt || post.description || post.desc}
-									</p>
-									<div className="text-stem-blue mt-auto flex items-center gap-2 font-bold">
-										<span>Xem chi tiết</span>
-										<ArrowRight size={18} />
+							<Link href={`/tin-tuc/${post.id}`}>
+								<motion.div
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									viewport={{ once: true }}
+									transition={{ delay: i * 0.1 }}
+									className="group hover:border-stem-blue/20 flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-xl hover:shadow-slate-200/50"
+								>
+									<div className="relative aspect-16/10 overflow-hidden">
+										<Image
+											src={
+												post.image_url ||
+												post.img ||
+												"https://images.unsplash.com/photo-1506744038136-479a7ea31600?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+											}
+											alt={post.title}
+											width={800}
+											height={500}
+											className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+											referrerPolicy="no-referrer"
+										/>
 									</div>
-								</div>
-							</motion.div>
+									<div className="flex flex-1 flex-col p-6">
+										<h3 className="group-hover:text-stem-blue mb-3 line-clamp-1 text-lg font-bold text-slate-900 transition-colors">
+											{post.title}
+										</h3>
+										<p className="mb-6 line-clamp-2 h-[3.25em] text-sm leading-relaxed text-slate-500">
+											{post.excerpt || post.description || post.desc}
+										</p>
+										<div className="text-stem-blue mt-auto flex items-center gap-2 font-bold">
+											<span>Xem chi tiết</span>
+											<ArrowRight size={18} />
+										</div>
+									</div>
+								</motion.div>
+							</Link>
 						</SwiperSlide>
 					))}
 				</Swiper>
