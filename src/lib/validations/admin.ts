@@ -18,7 +18,7 @@ export const studentSchema = z.object({
   email: z.string().email('Email không hợp lệ'),
   branch_id: z.string().uuid('Cơ sở không hợp lệ'),
   course_id: z.string().uuid('Khóa học không hợp lệ'),
-  schedule_id: z.string().uuid().optional().nullable(),
+  schedule_id: z.string().uuid().optional().nullable().or(z.literal("")),
   status: z.enum(['active', 'inactive', 'graduated']),
 });
 

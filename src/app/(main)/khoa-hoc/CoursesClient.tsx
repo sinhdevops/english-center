@@ -12,8 +12,6 @@ interface Course {
 	title: string;
 	image: string;
 	description: string;
-	bullets: string[];
-	footer: string;
 }
 
 interface CoursesClientProps {
@@ -50,7 +48,7 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 						initial={{ opacity: 0, scale: 0.95 }}
 						animate={{ opacity: 1, scale: 1 }}
 						transition={{ delay: 0.2 }}
-						className="relative mt-[25px] hidden h-full w-[550px] lg:block"
+						className="relative mt-[51px] hidden h-full w-[550px] lg:block"
 					>
 						<div className="flex h-[90%] w-full items-end">
 							<Image
@@ -65,47 +63,39 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 			</section>
 
 			{/* Courses Grid */}
-			<section className="mx-auto max-w-7xl py-[120px]">
-				<div className="grid grid-cols-1 gap-x-20 gap-y-8 px-4 lg:grid-cols-2">
+			<section className="mx-auto max-w-7xl px-4 py-[120px]">
+				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 					{initialCourses.map((course, index) => (
 						<motion.div
 							key={course.id}
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
-							transition={{ delay: (index % 2) * 0.1 }}
-							className="flex items-center overflow-hidden rounded-l-xl bg-slate-50 md:h-[238px] lg:gap-[30px]"
+							transition={{ delay: (index % 3) * 0.1 }}
+							className="flex flex-col rounded-3xl bg-white p-4 shadow-[0px_1px_8px_0px_rgba(0,0,0,0.1)] transition-all hover:shadow-2xl"
 						>
-							<div className="h-[238px] w-[175px] shrink-0">
+							<div className="mb-6 h-[240px] w-full shrink-0 overflow-hidden rounded-2xl">
 								<Image
 									src={course.image}
 									alt={course.title}
-									width={300}
-									height={238}
-									className="size-full border border-slate-50 object-cover shadow-sm"
+									width={400}
+									height={240}
+									className="size-full object-cover transition-transform duration-500 hover:scale-105"
 									referrerPolicy="no-referrer"
 								/>
 							</div>
 
-							<div className="flex-1 px-4 text-center md:px-0 md:text-left">
-								<h2 className="mb-3 text-[22px] font-semibold tracking-wide lg:text-[24px]">
+							<div className="flex flex-1 flex-col px-2">
+								<h2 className="mb-4 text-2xl font-bold tracking-tight text-slate-900">
 									{course.title}
 								</h2>
-								<p className="mb-3 text-sm text-[#3D3D3D] lg:text-base">{course.description}</p>
-								<ul className="mb-4 inline-block list-disc pl-6 text-left text-sm text-[#3D3D3D] md:block lg:text-base">
-									{course.bullets.map((bullet, i) => (
-										<li key={i}>{bullet}</li>
-									))}
-								</ul>
-								<p className="mb-3 text-sm leading-relaxed text-[#3D3D3D] lg:text-base">
-									{course.footer}
-								</p>
+								<div className="mb-6 flex-1 text-slate-600">
+									<p className="mb-4 text-base leading-relaxed">{course.description}</p>
+								</div>
+
 								<Link href={`khoa-hoc/dang-ky`}>
-									<Button
-										size="sm"
-										className="w-full rounded-full bg-[#1d9bf0] py-4 text-sm font-bold tracking-wide text-white shadow-lg shadow-blue-500/20 transition-all hover:bg-[#1a8cd8] active:scale-95 md:w-auto md:px-12"
-									>
-										Đăng ký khóa học ngay
+									<Button size={"sm"} className="w-full rounded-xl">
+										Đăng ký khóa học
 									</Button>
 								</Link>
 							</div>

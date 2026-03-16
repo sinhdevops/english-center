@@ -29,8 +29,16 @@ interface InputValidationProps
 	name: string;
 	label?: string;
 	icon?: LucideIcon;
+	required?: boolean;
 }
-export const InputValidation: React.FC<InputValidationProps> = ({ name, label, icon: Icon, size = "lg", ...props }) => {
+export const InputValidation: React.FC<InputValidationProps> = ({
+	name,
+	label,
+	icon: Icon,
+	size = "lg",
+	required,
+	...props
+}) => {
 	const {
 		control,
 		formState: { errors },
@@ -47,6 +55,7 @@ export const InputValidation: React.FC<InputValidationProps> = ({ name, label, i
 					{label && (
 						<label htmlFor={name} className="ml-1 text-sm font-medium text-slate-700">
 							{label}
+							{required && <span className="ml-1 text-rose-500">*</span>}
 						</label>
 					)}
 					<div className="group relative">

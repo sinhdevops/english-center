@@ -1,6 +1,6 @@
 "use client";
 
-import { User as UserIcon, Menu, Bell, Search } from "lucide-react";
+import { User as UserIcon, Menu } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
 import Image from "next/image";
 
@@ -18,14 +18,14 @@ export function Header({ onMenuClick }: HeaderProps) {
 					<Menu size={22} />
 				</button>
 
-				<div className="hidden items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 text-slate-500 lg:flex">
+				{/* <div className="hidden items-center gap-2 rounded-xl bg-slate-100 px-3 py-1.5 text-slate-500 lg:flex">
 					<Search size={16} />
 					<input
 						type="text"
 						placeholder="Tìm kiếm..."
 						className="bg-transparent text-sm outline-hidden focus:ring-0"
 					/>
-				</div>
+				</div> */}
 			</div>
 
 			<div className="flex items-center gap-3 lg:gap-6">

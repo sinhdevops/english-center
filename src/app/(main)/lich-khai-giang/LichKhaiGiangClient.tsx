@@ -115,7 +115,7 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 				</div>
 			</section>
 
-			<div className="mx-auto max-w-7xl px-6 py-8">
+			<div className="mx-auto max-w-7xl py-8">
 				<nav className="mb-8 text-sm text-slate-500">
 					<Link href="/" className="hover:text-stem-blue">
 						Trang chủ
@@ -249,16 +249,16 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 								</AnimatePresence>
 							</div>
 
-							<div className="hidden overflow-x-auto lg:block">
-								<table className="w-full text-left">
+							<div className="scrollbar-hide hidden w-full overflow-x-auto lg:block">
+								<table className="w-full min-w-[900px] text-left">
 									<thead>
 										<tr className="bg-[#001D44] text-[13px] font-bold tracking-wider text-white uppercase">
-											<th className="rounded-tl-xl px-6 py-4">Chương trình</th>
-											<th className="px-6 py-4">Khóa học</th>
-											<th className="px-6 py-4">Lớp</th>
-											<th className="px-6 py-4 text-nowrap">Lịch học</th>
-											<th className="px-6 py-4">Khai giảng</th>
-											<th className="rounded-tr-xl px-6 py-4 text-center">Hành động</th>
+											<th className="w-[25%] rounded-tl-xl px-6 py-4">Chương trình</th>
+											<th className="w-[20%] px-6 py-4">Khóa học</th>
+											<th className="w-[10%] px-6 py-4">Lớp</th>
+											<th className="w-[20%] px-6 py-4">Lịch học</th>
+											<th className="w-[12%] px-6 py-4">Khai giảng</th>
+											<th className="w-[13%] rounded-tr-xl px-6 py-4 text-center">Hành động</th>
 										</tr>
 									</thead>
 									<tbody className="divide-y divide-slate-100">
@@ -283,15 +283,15 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 																{schedule.class_code}
 															</span>
 														</td>
-														<td className="min-w-[150px] px-6 py-6 text-slate-500">
+														<td className="px-6 py-6 text-slate-500">
 															{schedule.schedule}
 														</td>
-														<td className="px-6 py-6 font-medium text-slate-800">
+														<td className="px-6 py-6 font-medium whitespace-nowrap text-slate-800">
 															{new Date(schedule.start_date).toLocaleDateString("vi-VN")}
 														</td>
 														<td className="px-6 py-6 text-center">
 															<Link href="/khoa-hoc/dang-ky">
-																<button className="hover:text-stem-blue text-[13px] font-black text-slate-900 uppercase transition-colors">
+																<button className="hover:text-stem-blue text-[13px] font-black whitespace-nowrap text-slate-900 uppercase transition-colors hover:cursor-pointer">
 																	Đăng ký
 																</button>
 															</Link>

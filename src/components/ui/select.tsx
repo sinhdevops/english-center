@@ -35,6 +35,7 @@ interface SelectValidationProps extends VariantProps<typeof selectVariants> {
 	placeholder?: string;
 	label?: string;
 	icon?: LucideIcon;
+	required?: boolean;
 }
 
 export const SelectValidation: React.FC<SelectValidationProps> = ({
@@ -44,6 +45,7 @@ export const SelectValidation: React.FC<SelectValidationProps> = ({
 	label,
 	icon: Icon,
 	size = "lg",
+	required,
 }) => {
 	const {
 		control,
@@ -76,7 +78,12 @@ export const SelectValidation: React.FC<SelectValidationProps> = ({
 				const status = error ? "error" : isOpen ? "open" : "default";
 				return (
 					<div className="flex w-full flex-col gap-1.5" ref={containerRef}>
-						{label && <label className="ml-1 text-sm font-medium text-slate-700">{label}</label>}
+						{label && (
+							<label className="ml-1 text-sm font-medium text-slate-700">
+								{label}
+								{required && <span className="ml-1 text-rose-500">*</span>}
+							</label>
+						)}
 
 						<div className="relative">
 							<button

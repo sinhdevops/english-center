@@ -13,34 +13,38 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuthStore } from "@/store/useAuthStore";
 import { InputValidation } from "../ui/input";
 
-const authSchema = z
-	.object({
-		email: z.string().min(1, "Vui lòng nhập email").email("Email không hợp lệ"),
-		password: z.string().min(6, "Mật khẩu phải có ít nhất 6 ký tự"),
-		fullName: z.string().min(2, "Họ tên phải có ít nhất 2 ký tự").optional(),
-		phone: z.string().min(10, "Số điện thoại không hợp lệ").max(11, "Số điện thoại không hợp lệ").optional(),
-		confirmPassword: z.string().min(1, "Vui lòng xác nhận mật khẩu").optional(),
-	})
-	.refine(
-		(data) => {
-			if (data.confirmPassword && data.password !== data.confirmPassword) {
-				return false;
-			}
-			return true;
-		},
-		{
-			message: "Mật khẩu xác nhận không khớp",
-			path: ["confirmPassword"],
-		},
-	);
-
-type AuthFormValues = z.infer<typeof authSchema>;
-
 interface AuthFormProps {
 	mode: "login" | "register";
 }
 
 export function AuthForm({ mode }: AuthFormProps) {
+	const authSchema = z
+		.object({
+			email: z.string().min(1, "Vui lòng nhập email").email("Email không hợp lệ"),
+			password: z.string().min(6, "Mật khẩu phải có ít nhất 6 ký tự"),
+			fullName: mode === "register" ? z.string().min(2, "Họ tên phải có ít nhất 2 ký tự") : z.string().optional(),
+			phone:
+				mode === "register"
+					? z.string().min(10, "Số điện thoại không hợp lệ").max(11, "Số điện thoại không hợp lệ")
+					: z.string().optional(),
+			confirmPassword:
+				mode === "register" ? z.string().min(6, "Mật khẩu phải có ít nhất 6 ký tự") : z.string().optional(),
+		})
+		.refine(
+			(data) => {
+				if (mode === "register" && data.password !== data.confirmPassword) {
+					return false;
+				}
+				return true;
+			},
+			{
+				message: "Mật khẩu xác nhận không khớp",
+				path: ["confirmPassword"],
+			},
+		);
+
+	type AuthFormValues = z.infer<typeof authSchema>;
+
 	const [isLoading, setIsLoading] = useState(false);
 	const router = useRouter();
 	const searchParams = useSearchParams();
