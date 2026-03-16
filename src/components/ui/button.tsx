@@ -13,9 +13,9 @@ const buttonVariants = cva(
 				ghost: "text-slate-700 hover:bg-slate-50",
 			},
 			size: {
-				sm: "px-4 py-1.5 text-xs h-[40px]",
-				md: "px-6 py-2.5 text-sm h-[48px]",
-				lg: "px-10 py-4 text-base h-[56px]",
+				sm: "px-4 py-1.5 text-base h-[40px]",
+				md: "px-6 py-2.5 text-[17px] h-[48px]",
+				lg: "px-10 py-4 text-[18px] h-[56px]",
 			},
 		},
 		defaultVariants: {

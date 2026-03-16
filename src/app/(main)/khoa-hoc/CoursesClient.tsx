@@ -74,19 +74,19 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 							transition={{ delay: (index % 3) * 0.1 }}
 							className="flex flex-col rounded-3xl bg-white p-4 shadow-[0px_1px_8px_0px_rgba(0,0,0,0.1)] transition-all hover:shadow-2xl"
 						>
-							<div className="mb-6 h-[240px] w-full shrink-0 overflow-hidden rounded-2xl">
+							<div className="mb-6 h-[220px] w-full shrink-0 overflow-hidden rounded-2xl">
 								<Image
 									src={course.image}
 									alt={course.title}
 									width={400}
-									height={240}
+									height={220}
 									className="size-full object-cover transition-transform duration-500 hover:scale-105"
 									referrerPolicy="no-referrer"
 								/>
 							</div>
 
 							<div className="flex flex-1 flex-col px-2">
-								<h2 className="mb-4 text-2xl font-bold tracking-tight text-slate-900">
+								<h2 className="mb-4 text-[18px] font-bold tracking-tight text-slate-900">
 									{course.title}
 								</h2>
 								<div className="mb-6 flex-1 text-slate-600">
