@@ -95,7 +95,18 @@ export const CourserSidebarContent: React.FC<CourserSidebarContentProps> = ({ pr
 
 					{SIDEBAR_SOCIALS.map((social, i) => {
 						const Icon = IconMap[social.icon];
-						return (
+						return social.href ? (
+							<Link
+								key={i}
+								href={social.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50"
+							>
+								{Icon && <Icon className={social.color} size={20} fill="currentColor" />}
+								{social.name}
+							</Link>
+						) : (
 							<button
 								key={i}
 								className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50"
@@ -114,7 +125,7 @@ export const CourserSidebarContent: React.FC<CourserSidebarContentProps> = ({ pr
 							<div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white">
 								<Phone size={16} fill="currentColor" />
 							</div>
-							Gọi điện: <span className="ml-auto text-red-600">0965500306</span>
+							Gọi điện: <span className="ml-auto text-red-600">091 255 1090</span>
 						</button>
 					</div>
 				</div>

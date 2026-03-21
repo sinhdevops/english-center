@@ -51,7 +51,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 							<Phone size={18} className="text-stem-blue" />
 						</div>
 						<div className="flex flex-col">
-							<span className="text-[13px]">0325 610 016</span>
+							<span className="text-[13px]">091 255 1090</span>
 						</div>
 					</div>
 					<div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 							<MapPin size={18} className="text-stem-blue" />
 						</div>
 						<div className="flex flex-col">
-							<span className="text-[13px]">Nam An Khánh, Hà Nội</span>
+							<span className="text-[13px]">Tầng 4 - Tòa nhà T4, Thăng Long Victory, An Khánh, Hà Nội</span>
 						</div>
 					</div>
 				</div>

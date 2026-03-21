@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useMemo, useCallback } from "react";
+import React, { useEffect, useRef, useMemo, useCallback, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AdminModal } from "../AdminModal";
 import { AdminFormField } from "../AdminFormField";
 import { eventSchema } from "@/lib/validations/admin";
 import { Event } from "@/lib/types";
-import { Upload, X, Tag } from "lucide-react";
+import { Upload, X, Tag, Loader2 } from "lucide-react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import * as z from "zod";
@@ -32,6 +32,7 @@ const CATEGORIES = ["Góc ba mẹ", "Góc học tập", "Tin tức"];
 
 export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitting }: EventModalProps) => {
 	const { profile } = useAuthStore();
+	const [isUploadingImage, setIsUploadingImage] = useState(false);
 	const {
 		register,
 		handleSubmit,
@@ -103,8 +104,10 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 		if (file) {
 			const reader = new FileReader();
 			reader.onloadend = async () => {
+				setIsUploadingImage(true);
 				const url = await uploadImage(reader.result as string, "events");
 				if (url) setValue("image_url", url);
+				setIsUploadingImage(false);
 			};
 			reader.readAsDataURL(file);
 		}
@@ -219,7 +222,12 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 						<AdminFormField label="Ảnh bìa sự kiện">
 							<div className="mt-2 flex items-center gap-4">
 								<div className="hover:border-stem-blue relative flex h-[280px] w-full items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
-									{imageUrl ? (
+									{isUploadingImage ? (
+										<div className="flex flex-col items-center gap-2">
+											<Loader2 size={32} className="text-stem-blue animate-spin" />
+											<span className="text-xs font-bold text-slate-500">Đang tải ảnh...</span>
+										</div>
+									) : imageUrl ? (
 										<>
 											<Image src={imageUrl} alt="Preview" fill className="object-cover" />
 											<button
@@ -245,6 +253,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 										accept="image/*"
 										className="absolute inset-0 cursor-pointer opacity-0"
 										onChange={handleImageUpload}
+										disabled={isUploadingImage}
 									/>
 								</div>
 							</div>

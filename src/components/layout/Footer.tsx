@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
 
 					<div className="flex gap-4">
 						<Link
-							href="https://facebook.com"
+							href="https://www.facebook.com/people/STEMKey-Edu/61583934994908/"
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Facebook"
@@ -121,8 +121,8 @@ export const Footer: React.FC = () => {
 					<h3 className="mb-6 text-lg font-medium uppercase">THÔNG TIN LIÊN HỆ</h3>
 					<ul className="space-y-4 font-light text-white">
 						<li>Hotline: 091 255 1090</li>
-						<li>Email: info@stemkey.edu.vn</li>
-						<li>Địa chỉ: Nam An Khánh, Hà Nội</li>
+						<li>Email: stemkey.edu@gmail.com</li>
+						<li>Địa chỉ: Tầng 4 - Tòa nhà T4, Thăng Long Victory, An Khánh, Hà Nội</li>
 					</ul>
 				</div>
 			</div>

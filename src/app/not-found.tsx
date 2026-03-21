@@ -18,10 +18,7 @@ export default function NotFound() {
 			<div className="relative z-10 w-full max-w-xl text-center">
 				<Image src={IMAGES.notFound} alt="404" />
 
-				<motion.div
-					initial={{ opacity: 0, scale: 0.9 }}
-					animate={{ opacity: 1, scale: 1 }}
-					transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+				<div
 				>
 					{/* Prominent 404 with STEM colors */}
 
@@ -49,7 +46,7 @@ export default function NotFound() {
 							Quay lại
 						</Button>
 					</div>
-				</motion.div>
+				</div>
 			</div>
 		</div>
 	);

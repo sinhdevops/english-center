@@ -14,9 +14,8 @@ export const SIDEBAR_COURSES = [
 ];
 
 export const SIDEBAR_SOCIALS = [
-  { name: "Fanpage STEMKey", icon: "facebook", color: "text-blue-600" },
-  { name: "Group Cộng đồng STEMKey", icon: "facebook", color: "text-blue-600" },
-  { name: "Youtube STEMKey Việt Nam", icon: "youtube", color: "text-red-600" },
-  { name: "Zalo STEMKey Official", icon: "message-circle", color: "text-blue-400" },
-  { name: "Tik Tok STEMKey", icon: "play", color: "text-black" },
+  { name: "Fanpage STEMKey", icon: "facebook", color: "text-blue-600", href: "https://www.facebook.com/people/STEMKey-Edu/61583934994908/" },
+  { name: "Youtube STEMKey Việt Nam", icon: "youtube", color: "text-red-600", href: "" },
+  { name: "Zalo STEMKey Official", icon: "message-circle", color: "text-blue-400", href: "" },
+  { name: "Tik Tok STEMKey", icon: "play", color: "text-black", href: "" },
 ];

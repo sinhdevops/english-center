@@ -4,7 +4,6 @@ import { toast } from "sonner";
 import { LogOut } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { logout as logoutAction } from "@/app/auth/login/actions";
-import { supabase } from "@/lib/supabase-client";
 import React from "react";
 
 interface LogoutButtonProps {
@@ -30,15 +29,8 @@ export function LogoutButton({
 
 		startTransition(async () => {
 			try {
-				await supabase.auth.signOut();
 				logout();
-				const res = await logoutAction();
-				if (res?.error) {
-					toast.error(res.error);
-				} else {
-					toast.success("Đã đăng xuất thành công");
-					onAfterLogout?.();
-				}
+				await logoutAction();
 			} catch (error: any) {
 				if (error?.message?.includes("NEXT_REDIRECT")) return;
 				toast.error("Có lỗi xảy ra khi đăng xuất");

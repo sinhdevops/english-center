@@ -8,7 +8,7 @@ export const FloatingContact: React.FC = () => {
 		<div className="fixed right-6 bottom-8 z-40 flex flex-col items-center gap-4">
 			{/* Messenger Button */}
 			<motion.a
-				href="https://m.me/stemkey"
+				href="https://m.me/61583934994908"
 				target="_blank"
 				rel="noopener noreferrer"
 				aria-label="Chat với STEMKey qua Messenger"
@@ -28,7 +28,7 @@ export const FloatingContact: React.FC = () => {
 
 			{/* Zalo Button */}
 			<motion.a
-				href="https://zalo.me/0325610016"
+				href="https://zalo.me/0912551090"
 				target="_blank"
 				rel="noopener noreferrer"
 				aria-label="Chat với STEMKey qua Zalo"

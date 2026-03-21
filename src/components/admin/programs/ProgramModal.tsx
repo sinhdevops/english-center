@@ -3,7 +3,7 @@ import { AdminModal } from "../AdminModal";
 import { AdminFormField } from "../AdminFormField";
 import { programSchema } from "@/lib/validations/admin";
 import { Program } from "@/lib/types";
-import { Upload, X } from "lucide-react";
+import { Upload, X, Loader2 } from "lucide-react";
 import Image from "next/image";
 import * as z from "zod";
 
@@ -33,6 +33,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 		};
 	});
 	const [errors, setErrors] = useState<Partial<Record<keyof ProgramFormData, string>>>({});
+	const [isUploadingImage, setIsUploadingImage] = useState(false);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
@@ -51,6 +52,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 		if (file) {
 			const reader = new FileReader();
 			reader.onloadend = async () => {
+				setIsUploadingImage(true);
 				try {
 					const response = await fetch("/api/upload", {
 						method: "POST",
@@ -66,6 +68,8 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 					}
 				} catch (error) {
 					console.error("Upload error:", error);
+				} finally {
+					setIsUploadingImage(false);
 				}
 			};
 			reader.readAsDataURL(file);
@@ -122,7 +126,12 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 				<AdminFormField label="Ảnh đại diện" error={errors.image_url}>
 					<div className="mt-2 flex items-center gap-4">
 						<div className="hover:border-stem-blue relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
-							{formData.image_url ? (
+							{isUploadingImage ? (
+								<div className="flex flex-col items-center gap-1">
+									<Loader2 size={20} className="text-stem-blue animate-spin" />
+									<span className="text-[10px] font-bold tracking-wider uppercase">Đang tải...</span>
+								</div>
+							) : formData.image_url ? (
 								<>
 									<Image src={formData.image_url} alt="Preview" fill className="object-cover" />
 									<button
@@ -144,6 +153,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 								accept="image/*"
 								className="absolute inset-0 cursor-pointer opacity-0"
 								onChange={handleImageUpload}
+								disabled={isUploadingImage}
 							/>
 						</div>
 						<div className="flex-1">
