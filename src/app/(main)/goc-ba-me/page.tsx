@@ -5,7 +5,7 @@ import NewsItem from "@/components/pages/news/news-item";
 import { TrendingUp } from "lucide-react";
 import { Pagination } from "@/components/ui/pagination";
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 10;
 
 export default async function ParentsCornerPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
 	const params = await searchParams;

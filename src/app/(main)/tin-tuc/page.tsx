@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	description: "Cập nhật những tin tức mới nhất về giáo dục, Robotics và các sự kiện tại STEMKey.",
 };
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 10;
 
 export default async function NewsPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
 	const params = await searchParams;
