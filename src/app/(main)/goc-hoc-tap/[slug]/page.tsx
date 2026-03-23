@@ -18,7 +18,7 @@ export default async function LearningCornerDetailPage({ params }: { params: Pro
 	const breadcrumbItems = [
 		{ label: "Trang chủ", href: "/" },
 		{ label: "Góc học tập", href: "/goc-hoc-tap" },
-		{ label: event.title, active: true },
+		{ label: "Tin tức chi tiết", active: true },
 	];
 
 	return (
