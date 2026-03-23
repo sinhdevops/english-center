@@ -14,7 +14,7 @@ const IconMap: Record<string, any> = {
 	play: Play,
 };
 
-const VISIBLE_COUNT = 3;
+const VISIBLE_COUNT = 4;
 const GAP_PX = 16; // space-y-4 = 1rem = 16px
 
 interface CourserSidebarContentProps {
@@ -58,7 +58,7 @@ export const CourserSidebarContent: React.FC<CourserSidebarContentProps> = ({ pr
 						<div
 							key={program.id}
 							ref={i === 0 ? cardRef : undefined}
-							className="group relative aspect-4/3 cursor-pointer overflow-hidden rounded-xl text-center shadow-md"
+							className="group relative aspect-4/3 h-40 w-full cursor-pointer overflow-hidden rounded-xl text-center shadow-md"
 						>
 							<Link href="/khoa-hoc/dang-ky">
 								<Image

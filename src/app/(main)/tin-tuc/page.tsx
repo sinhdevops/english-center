@@ -48,7 +48,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
 				</div>
 			</div>
 
-			<div className="mx-auto max-w-7xl px-4 py-12 lg:py-20">
+			<div className="mx-auto max-w-7xl px-4 py-6">
 				<div className="flex flex-col gap-16 lg:flex-row">
 					<div className="w-full lg:w-2/3">
 						<h1 className="mb-10 flex items-center gap-3 text-3xl font-black text-slate-900">

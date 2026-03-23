@@ -33,7 +33,7 @@ export default async function LearningCornerPage({ searchParams }: { searchParam
 					<Breadcrumb items={[{ label: "Góc học tập", active: true }]} variant="dark" />
 				</div>
 			</div>
-			<div className="mx-auto max-w-7xl px-4 py-12 text-center lg:py-20">
+			<div className="mx-auto max-w-7xl px-4 py-6 text-center">
 				<div className="flex flex-col gap-16 lg:flex-row">
 					<div className="w-full text-left lg:w-2/3">
 						<h1 className="mb-10 flex items-center gap-3 text-3xl font-black text-slate-900 uppercase">

@@ -16,7 +16,7 @@ const RegistrationSection = dynamic(() => import("@/components/pages/home/regist
 export const metadata: Metadata = {
 	title: "STEMKey - Tư duy – Ngôn ngữ – Công nghệ",
 	description:
-		"Hệ thống giáo dục STEMKey dành cho trẻ 4-10 tuổi, phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ với phương pháp R.I.P.L độc quyền.",
+		"Hệ thống giáo dục STEMKey phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ với phương pháp R.I.P.L độc quyền.",
 	keywords: ["STEMKey", "English Center", "Robotics", "Toán tư duy", "Tiếng Anh cho bé"],
 	openGraph: {
 		title: "STEMKey - Phát triển toàn diện cho trẻ",
@@ -47,7 +47,7 @@ export default async function HomePage() {
 	return (
 		<main className="overflow-x-hidden">
 			<Hero />
-			<div className="my-[120px] flex flex-col gap-[120px]">
+			<div className="my-20 flex flex-col gap-20">
 				<AboutSection />
 				<Programs />
 				<ExclusiveModel />

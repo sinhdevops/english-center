@@ -29,7 +29,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
 			breadcrumbItems={[
 				{ label: "Trang chủ", href: "/" },
 				{ label: "Tin tức", href: "/tin-tuc" },
-				{ label: event.title, active: true },
+				{ label: "Tin tức chi tiết", active: true },
 			]}
 			programs={programs || []}
 		/>

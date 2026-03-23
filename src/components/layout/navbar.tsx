@@ -33,8 +33,15 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 
 /* --- Sub-components --- */
 
+const isActiveHref = (pathname: string, href?: string) => {
+	if (!href) return false;
+	if (href === "/") return pathname === "/";
+	return pathname === href || pathname.startsWith(href + "/");
+};
+
 const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => {
 	const [isHovered, setIsHovered] = useState(false);
+	const isActive = isActiveHref(pathname, item.href);
 
 	return (
 		<div
@@ -45,7 +52,7 @@ const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => 
 			<Link
 				href={item.href || "#"}
 				className={`relative flex items-center gap-1 pb-1 text-base font-medium whitespace-nowrap transition-colors ${
-					pathname === item.href ? "text-stem-blue" : "hover:text-stem-blue"
+					isActive ? "text-stem-blue" : "hover:text-stem-blue"
 				}`}
 			>
 				{item.label}
@@ -56,7 +63,7 @@ const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => 
 						aria-hidden="true"
 					/>
 				)}
-				{pathname === item.href && (
+				{isActive && (
 					<motion.div layoutId="activeTab" className="bg-stem-blue absolute right-0 bottom-0 left-0 h-0.5" />
 				)}
 			</Link>
@@ -188,6 +195,7 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 const MobileNavItem = ({ item, pathname, toggleMenu }: { item: any; pathname: string; toggleMenu: () => void }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const hasSubItems = item?.subItems?.length > 0;
+	const isActive = isActiveHref(pathname, item.href);
 
 	return (
 		<div className="space-y-2">
@@ -207,11 +215,11 @@ const MobileNavItem = ({ item, pathname, toggleMenu }: { item: any; pathname: st
 					href={item.href || "#"}
 					onClick={toggleMenu}
 					className={`relative flex items-center gap-1 py-1 text-sm font-medium whitespace-nowrap transition-colors ${
-						pathname === item.href ? "text-stem-blue" : "text-slate-800"
+						isActive ? "text-stem-blue" : "text-slate-800"
 					}`}
 				>
 					{item.label}
-					{pathname === item.href && (
+					{isActive && (
 						<motion.div
 							layoutId="mobileActiveTab"
 							className="bg-stem-blue absolute bottom-0 left-0 h-0.5 w-20"

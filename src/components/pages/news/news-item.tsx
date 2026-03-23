@@ -55,7 +55,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ id, title, category, date, desc, im
 				</div>
 
 				{/* Title */}
-				<h3 className="group-hover:text-stem-blue mb-3 line-clamp-2 text-xl leading-snug font-black text-slate-900 transition-colors md:text-2xl">
+				<h3 className="group-hover:text-stem-blue mb-3 line-clamp-2 text-[18px] leading-snug font-black text-slate-900 transition-colors">
 					{title}
 				</h3>
 

@@ -65,16 +65,16 @@ export default function ContentDetailPage({
 					</div>
 				</div>
 			)}
-			<div className="mx-auto max-w-7xl px-4 py-12 text-center md:text-left lg:py-20">
+			<div className="mx-auto max-w-7xl px-4 py-6 text-center md:text-left">
 				<div className="flex flex-col gap-16 lg:flex-row">
 					{/* Main Content */}
-					<div className="w-full lg:w-2/3">
+					<div className="min-w-0 w-full lg:w-2/3">
 						<motion.article
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5 }}
 						>
-							<h1 className="mb-6 text-3xl leading-tight font-black text-slate-900 uppercase lg:text-5xl">
+							<h1 className="mb-6 text-2xl leading-tight font-black text-slate-900 uppercase">
 								{title}
 							</h1>
 
@@ -111,7 +111,7 @@ export default function ContentDetailPage({
 
 								{htmlContent ? (
 									<div
-										className="dynamic-content text-left"
+										className="dynamic-content text-left overflow-hidden wrap-break-word [&_img]:max-w-full [&_img]:h-auto [&_table]:w-full [&_table]:overflow-x-auto [&_pre]:overflow-x-auto [&_iframe]:max-w-full"
 										dangerouslySetInnerHTML={{ __html: htmlContent }}
 									/>
 								) : (

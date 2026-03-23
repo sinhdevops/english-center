@@ -22,7 +22,7 @@ const Programs = () => {
 						Các chương trình học tại STEMKey
 					</h2>
 					<p className="mx-auto max-w-3xl text-slate-600">
-						Hệ thống giáo dục dành cho trẻ 4-10 tuổi, phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ
+						Hệ thống giáo dục phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ
 					</p>
 				</div>
 
@@ -31,7 +31,7 @@ const Programs = () => {
 						<Link key={p.title} href={`/chuong-trinh/${p.slug}`}>
 							<motion.div
 								whileHover={{ y: -10 }}
-								className="group relative flex min-h-[220px] cursor-pointer flex-col justify-between overflow-hidden rounded-xl p-4 text-white shadow-2xl lg:p-6"
+								className="group relative flex min-h-55 cursor-pointer flex-col justify-between overflow-hidden rounded-xl p-4 text-white shadow-2xl lg:p-6"
 								style={GRADIENTS[i % GRADIENTS.length]}
 							>
 								<div className="relative z-10 w-1/2">

@@ -18,7 +18,7 @@ export default async function ParentsCornerDetailPage({ params }: { params: Prom
 	const breadcrumbItems = [
 		{ label: "Trang chủ", href: "/" },
 		{ label: "Góc ba mẹ", href: "/goc-ba-me" },
-		{ label: event.title, active: true },
+		{ label: "Tin tức chi tiết", active: true },
 	];
 
 	return (
