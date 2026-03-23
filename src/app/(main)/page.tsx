@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import Hero from "@/components/pages/home/hero";
+import BannerSwiper from "@/components/pages/home/banner-swiper";
 import AboutSection from "@/components/pages/home/about-section";
 import Programs from "@/components/pages/home/programs";
 import ExclusiveModel from "@/components/pages/home/exclusive-model";
@@ -43,10 +43,15 @@ export default async function HomePage() {
 
 	const { data: branches } = await supabase.from("branches").select("id, name");
 	const { data: courses } = await supabase.from("courses").select("id, name");
+	const { data: banners } = await supabase
+		.from("banners")
+		.select("*")
+		.eq("is_active", true)
+		.order("display_order", { ascending: true });
 
 	return (
 		<main className="overflow-x-hidden">
-			<Hero />
+			<BannerSwiper banners={banners || []} />
 			<div className="my-20 flex flex-col gap-20">
 				<AboutSection />
 				<Programs />

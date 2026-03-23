@@ -72,6 +72,16 @@ export interface Student {
   created_at?: string;
 }
 
+export interface Banner {
+  id: string;
+  title?: string;
+  image_url: string;
+  link_url?: string;
+  is_active: boolean;
+  display_order: number;
+  created_at?: string;
+}
+
 export interface Registration {
   id: string;
   student_name: string;

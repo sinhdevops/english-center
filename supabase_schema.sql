@@ -84,7 +84,19 @@ CREATE TABLE IF NOT EXISTS public.registrations (
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- 8. Banners Table
+CREATE TABLE IF NOT EXISTS public.banners (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title TEXT,
+    image_url TEXT NOT NULL,
+    link_url TEXT,
+    is_active BOOLEAN NOT NULL DEFAULT true,
+    display_order INTEGER NOT NULL DEFAULT 0,
+    created_at TIMESTAMPTZ DEFAULT now()
+);
+
 -- Enable Row Level Security (RLS) - Optional but recommended
 -- ALTER TABLE public.branches ENABLE ROW LEVEL SECURITY;
 -- ALTER TABLE public.programs ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.banners ENABLE ROW LEVEL SECURITY;
 -- ... and so on

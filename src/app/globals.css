@@ -71,3 +71,12 @@ body {
   border-color: #e2e8f0 !important;
   background-color: #fff;
 }
+
+.banner-swiper .swiper-pagination-bullet {
+					background: white;
+					opacity: 0.6;
+				}
+				.banner-swiper .swiper-pagination-bullet-active {
+					opacity: 1;
+					background: white;
+				}
