@@ -5,6 +5,10 @@ import courser from './courser.webp'
 import logo from './logo.svg'
 import registration from './registration.webp'
 import classImg from './class.webp'
+import flex1 from './flex1.jpg'
+import flex2 from './flex2.jpg'
+import flex3 from './flex3.jpg'
+import flex4 from './flex4.jpg'
 export * from './home'
 
 export const imagePrograms = {
@@ -19,5 +23,9 @@ export const IMAGES = {
     notFound,
     courser,
     logo,registration,
+    flex1,
+    flex2,
+    flex3,
+    flex4,
     classImg
 }

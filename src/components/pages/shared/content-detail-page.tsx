@@ -46,7 +46,9 @@ export default function ContentDetailPage({
 		article?.description ||
 		article?.desc ||
 		"Với mong muốn mang giáo dục STEM đến gần hơn với trẻ em Việt Nam, STEMKey tự hào ra mắt cơ sở mới với không gian học tập sáng tạo, trang thiết bị hiện đại bậc nhất.";
-	const htmlContent = article?.content;
+	const htmlContent = article?.content
+		?.replace(/<br\s*\/?>/gi, "")
+		?.replace(/\n/g, "");
 
 	const handleBack = () => {
 		if (onBack) {
@@ -55,7 +57,13 @@ export default function ContentDetailPage({
 			router.back();
 		}
 	};
-
+const cleanQuillHtml = (html:any) => {
+  if (!html) return '';
+  return html
+    .replace(/&nbsp;/g, ' ')     // thay &nbsp; → space thường
+    .replace(/\s+/g, ' ')        // gộp multiple spaces (nếu có) thành 1
+    .trim();                     // loại bỏ space thừa đầu/cuối
+};
 	return (
 		<div className="min-h-screen bg-white">
 			{breadcrumbItems && (
@@ -111,8 +119,8 @@ export default function ContentDetailPage({
 
 								{htmlContent ? (
 									<div
-										className="dynamic-content text-left overflow-hidden wrap-break-word [&_img]:max-w-full [&_img]:h-auto [&_table]:w-full [&_table]:overflow-x-auto [&_pre]:overflow-x-auto [&_iframe]:max-w-full"
-										dangerouslySetInnerHTML={{ __html: htmlContent }}
+										className="dynamic-content quill-content text-left wrap-break-word"
+										dangerouslySetInnerHTML={{ __html: cleanQuillHtml(htmlContent) }}
 									/>
 								) : (
 									<>

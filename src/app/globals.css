@@ -4,79 +4,88 @@
 @plugin "tailwindcss-animate";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #ffffff;
+	--foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-nunito: var(--font-nunito);
-  --font-italianno: var(--font-italianno);
-  --font-utm-azuki: var(--font-utm-azuki);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-nunito: var(--font-nunito);
+	--font-italianno: var(--font-italianno);
+	--font-utm-azuki: var(--font-utm-azuki);
 
-  /* Brand Colors - Refined and Softer */
-  --color-primary: #1e3a8a;
-  /* Deep Navy Blue */
-  --color-accent: #f59e0b;
-  /* Soft Amber/Gold */
-  --color-dark: #0f172a;
-  /* Midnight Slate */
-  --color-light: #f1f5f9;
-  /* Soft Cool Gray */
-  --color-surface: #ffffff;
-  --color-stem-blue: #1d8cf8;
-  --color-stem-green: #76bc21;
+	/* Brand Colors - Refined and Softer */
+	--color-primary: #1e3a8a;
+	/* Deep Navy Blue */
+	--color-accent: #f59e0b;
+	/* Soft Amber/Gold */
+	--color-dark: #0f172a;
+	/* Midnight Slate */
+	--color-light: #f1f5f9;
+	/* Soft Cool Gray */
+	--color-surface: #ffffff;
+	--color-stem-blue: #1d8cf8;
+	--color-stem-green: #76bc21;
 
-  /* Premium Effects */
-  --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-  --shadow-premium-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+	/* Premium Effects */
+	--shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+	--shadow-premium-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
 }
-
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Nunito Sans;
-  font-size: 15px;
-  font-weight: 300;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: Nunito Sans;
+	font-size: 15px;
+	font-weight: 300;
 }
 
-
 .partners-swiper .swiper-wrapper {
-  transition-timing-function: linear !important;
+	transition-timing-function: linear !important;
 }
 
 .ql-editor {
-  min-height: 200px;
-  font-size: 14px;
-  line-height: 1.6;
+	min-height: 200px;
+	font-size: 14px;
+	line-height: 1.6;
 }
 
 .ql-editor img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 10px 0;
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+	margin: 10px 0;
 }
 
 .ql-container.ql-snow {
-  border-radius: 0 0 12px 12px;
-  border-color: #e2e8f0 !important;
-  background-color: #f8fafc;
+	border-radius: 0 0 12px 12px;
+	border-color: #e2e8f0 !important;
+	background-color: #f8fafc;
 }
 
 .ql-toolbar.ql-snow {
-  border-radius: 12px 12px 0 0;
-  border-color: #e2e8f0 !important;
-  background-color: #fff;
+	border-radius: 12px 12px 0 0;
+	border-color: #e2e8f0 !important;
+	background-color: #fff;
 }
 
 .banner-swiper .swiper-pagination-bullet {
-					background: white;
-					opacity: 0.6;
-				}
-				.banner-swiper .swiper-pagination-bullet-active {
-					opacity: 1;
-					background: white;
-				}
+	background: white;
+	opacity: 0.6;
+}
+.banner-swiper .swiper-pagination-bullet-active {
+	opacity: 1;
+	background: white;
+}
+
+.quill-content {
+	white-space: pre-wrap; /* giữ nguyên xuống dòng + wrap */
+	word-wrap: break-word; /* hoặc word-break: break-word; */
+	line-height: 1.5; /* tăng khoảng cách dòng nếu cần */
+}
+
+
+.quill-content p {
+  white-space: pre-wrap;        /* giữ newline + wrap tự động, &nbsp; vẫn hoạt động */
+}

@@ -4,13 +4,20 @@ import { motion } from "motion/react";
 import React from "react";
 import { ABOUT_STATS, ABOUT_FEATURES } from "@/constants";
 import Image from "next/image";
-import { HomeImages } from "../../../../public/statics/images";
+import { IMAGES } from "../../../../public/statics/images";
+
+const ABOUT_IMAGES = [
+	{ src: IMAGES.flex1, alt: "Học viên STEMKey trong lớp học" },
+	{ src: IMAGES.flex2, alt: "Hoạt động ngoại khóa STEMKey" },
+	{ src: IMAGES.flex3, alt: "Học sinh học robotics tại STEMKey" },
+	{ src: IMAGES.flex4, alt: "Học sinh học tiếng Anh tại STEMKey" },
+];
 
 const AboutSection = () => {
 	return (
 		<section className="overflow-hidden bg-white">
 			<div className="mx-auto max-w-7xl px-4">
-				<div className="flex flex-col items-center gap-16 lg:flex-row">
+				<div className="flex flex-col items-end gap-16 lg:flex-row">
 					{/* Left Content */}
 					<div className="w-full lg:w-1/2">
 						<motion.h2
@@ -65,31 +72,29 @@ const AboutSection = () => {
 						</div>
 					</div>
 
-					{/* Right Image */}
-					<div className="relative w-full lg:w-1/2">
-						<motion.div
-							initial={{ opacity: 0, x: 50 }}
-							whileInView={{ opacity: 1, x: 0 }}
-							viewport={{ once: true }}
-							transition={{ duration: 0.8 }}
-							className="relative overflow-hidden rounded-xl shadow-2xl"
-						>
-							<Image
-								src={HomeImages.image1}
-								alt="Lớp học STEMKey với không gian sáng tạo và hiện đại"
-								width={1000}
-								height={750}
-								sizes="(max-width: 768px) 100vw, 50vw"
-								className="aspect-4/3 h-auto w-full object-cover lg:aspect-auto"
-								referrerPolicy="no-referrer"
-							/>
-							{/* Overlay for branding feel */}
-							<div className="absolute inset-0 bg-linear-to-tr from-slate-900/10 to-transparent" />
-						</motion.div>
+					<motion.div
+						initial={{ opacity: 0, x: 50 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.8 }}
+						className="flex w-full gap-3 lg:w-1/2"
+					>
+						<div className="flex flex-1 flex-col gap-3 mt-10">
+							{[ABOUT_IMAGES[1], ABOUT_IMAGES[3]].map((img, i) => (
+								<div key={i} className="relative aspect-285/201 overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-[#0A7DFF]/60">
+									<Image src={img.src} alt={img.alt} fill sizes="25vw" className="object-cover transition-transform duration-500 hover:scale-105" />
+								</div>
+							))}
+						</div>
 
-						{/* Decorative element */}
-						<div className="bg-stem-blue/10 absolute -right-6 -bottom-6 -z-10 h-32 w-32 rounded-full blur-3xl" />
-					</div>
+						<div className="flex flex-1 flex-col gap-3">
+							{[ABOUT_IMAGES[0], ABOUT_IMAGES[2]].map((img, i) => (
+								<div key={i} className="relative aspect-285/201 overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-[#0A7DFF]/60">
+									<Image src={img.src} alt={img.alt} fill sizes="25vw" className="object-cover transition-transform duration-500 hover:scale-105" />
+								</div>
+							))}
+						</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>
