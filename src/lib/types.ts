@@ -94,3 +94,21 @@ export interface Registration {
   created_at: string;
   status: 'pending' | 'contacted' | 'enrolled' | 'cancelled';
 }
+
+export interface QuizResult {
+  id: string;
+  user_id: string;
+  user_email: string | null;
+  parent_phone: string;
+  quiz_slug: string;
+  score: number | null;
+  total_questions: number;
+  completed_count: number;
+  answers: Record<number, number>;
+  current_question_index: number;
+  time_left: number | null;
+  status: 'in_progress' | 'completed';
+  started_at: string;
+  completed_at: string | null;
+  created_at: string;
+}

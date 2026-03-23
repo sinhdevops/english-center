@@ -47,10 +47,34 @@ export const PROGRAMS_DATA = [
 ];
 
 export const EXCLUSIVE_MODEL_ITEMS = [
-  { id: "4H", text: "Xem trước bài giảng" },
-  { id: "3H", text: "Học trên lớp cùng giáo viên" },
-  { id: "1H", text: "Ba mẹ đồng hành cùng con học tập" },
-  { id: "6H", text: "Trợ giảng hỗ trợ học tập của con" }
+  {
+    step: "STEP 01",
+    title: "Chuẩn bị kiến thức",
+    description: "Xem trước bài giảng và tài liệu trước khi lên lớp để tối ưu hóa thời gian học tập.",
+    icon: "BookOpen",
+    iconBg: "bg-rose-500",
+  },
+  {
+    step: "STEP 02",
+    title: "Tương tác trực tiếp",
+    description: "Hỏi đáp và thảo luận sôi nổi cùng giáo viên và bạn bè trong môi trường năng động.",
+    icon: "Users",
+    iconBg: "bg-orange-500",
+  },
+  {
+    step: "STEP 03",
+    title: "Ôn Tập & Luyện Tập",
+    description: "Hệ thống bài tập thông minh giúp củng cố kiến thức và phát triển kỹ năng thực hành.",
+    icon: "Zap",
+    iconBg: "bg-blue-500",
+  },
+  {
+    step: "STEP 04",
+    title: "Giải đáp thắc mắc",
+    description: "Đội ngũ giáo viên luôn sẵn sàng hỗ trợ và giải đáp mọi thắc mắc của học sinh.",
+    icon: "CheckCircle",
+    iconBg: "bg-sky-400",
+  },
 ];
 
 export const FLEXIBLE_BENEFITS = [
