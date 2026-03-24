@@ -6,7 +6,6 @@ import { Clock, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { QUIZ_SETS } from "@/constants";
 import { useAuthStore } from "@/store/useAuthStore";
-import { supabase } from "@/lib/supabase-client";
 import { QuizIntro } from "@/components/pages/quiz/quiz-intro";
 import { QuizTaking } from "@/components/pages/quiz/quiz-taking";
 import { QuizReview } from "@/components/pages/quiz/quiz-review";
@@ -27,9 +26,23 @@ interface QuizRecord {
 interface Props {
 	slug: string;
 	initialRecord: QuizRecord | null;
+	createQuizRecord: (
+		userId: string,
+		userEmail: string | null,
+		phone: string,
+		quizSlug: string,
+		totalQuestions: number,
+		defaultTime: number,
+	) => Promise<{ data: { id: string } | null; error: unknown }>;
+	updateQuizRecord: (
+		recordId: string,
+		score: number,
+		completedCount: number,
+		answers: Record<number, number>,
+	) => Promise<void>;
 }
 
-export default function PageContent({ slug, initialRecord }: Props) {
+export default function PageContent({ slug, initialRecord, createQuizRecord, updateQuizRecord }: Props) {
 	const router = useRouter();
 	const { user, isLoading } = useAuthStore();
 
@@ -129,16 +142,7 @@ export default function PageContent({ slug, initialRecord }: Props) {
 		setScore(calculatedScore);
 
 		if (recordId) {
-			await supabase
-				.from("quiz_results")
-				.update({
-					score: calculatedScore,
-					completed_count: Object.keys(currentAnswers).length,
-					answers: currentAnswers,
-					status: "completed",
-					completed_at: new Date().toISOString(),
-				})
-				.eq("id", recordId);
+			await updateQuizRecord(recordId, calculatedScore, Object.keys(currentAnswers).length, currentAnswers);
 		}
 
 		if (user && slug) {
@@ -172,19 +176,7 @@ export default function PageContent({ slug, initialRecord }: Props) {
 
 		setParentPhone(phone);
 
-		const { data, error } = await supabase
-			.from("quiz_results")
-			.insert({
-				user_id: user.id,
-				user_email: user.email ?? null,
-				parent_phone: phone,
-				quiz_slug: slug,
-				total_questions: questions.length,
-				status: "in_progress",
-				time_left: defaultTime,
-			})
-			.select("id")
-			.single();
+		const { data, error } = await createQuizRecord(user.id, user.email ?? null, phone, slug, questions.length, defaultTime);
 
 		if (error || !data) {
 			console.error("Error creating quiz result:", error);
