@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { AnimatePresence } from "motion/react";
 import { Clock, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { QUIZ_SETS } from "@/constants";
-import { useAuthStore } from "@/store/useAuthStore";
 import { QuizIntro } from "@/components/pages/quiz/quiz-intro";
 import { QuizTaking } from "@/components/pages/quiz/quiz-taking";
 import { QuizReview } from "@/components/pages/quiz/quiz-review";
@@ -25,6 +24,8 @@ interface QuizRecord {
 
 interface Props {
 	slug: string;
+	userId: string;
+	userEmail: string | null;
 	initialRecord: QuizRecord | null;
 	createQuizRecord: (
 		userId: string,
@@ -42,13 +43,20 @@ interface Props {
 	) => Promise<void>;
 }
 
-export default function PageContent({ slug, initialRecord, createQuizRecord, updateQuizRecord }: Props) {
-	const router = useRouter();
-	const { user, isLoading } = useAuthStore();
+function formatTime(seconds: number) {
+	const h = Math.floor(seconds / 3600);
+	const m = Math.floor((seconds % 3600) / 60);
+	const s = seconds % 60;
+	return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+}
 
-	const quizSet = QUIZ_SETS.find((s) => s.id === slug) ?? QUIZ_SETS[0];
-	const questions = quizSet.questions;
-	const defaultTime = quizSet.durationSeconds;
+export default function PageContent({ slug, userId, userEmail, initialRecord, createQuizRecord, updateQuizRecord }: Props) {
+	const router = useRouter();
+
+	const quizSet = useMemo(() => QUIZ_SETS.find((s) => s.id === slug) ?? QUIZ_SETS[0], [slug]);
+	const { questions, durationSeconds: defaultTime } = quizSet;
+
+	const storageKey = useMemo(() => `quiz_progress_${userId}_${slug}`, [userId, slug]);
 
 	const [gameState, setGameState] = useState<GameState>("loading");
 	const [timeLeft, setTimeLeft] = useState(defaultTime);
@@ -59,19 +67,10 @@ export default function PageContent({ slug, initialRecord, createQuizRecord, upd
 	const [parentPhone, setParentPhone] = useState("");
 	const isFinishing = useRef(false);
 
-	useEffect(() => {
-		if (!isLoading && !user) {
-			router.push("/dang-nhap");
-		}
-	}, [user, isLoading, router]);
-
 	// Init state from server-fetched record or localStorage
 	useEffect(() => {
-		if (!user || isLoading) return;
 
-		const storageKey = `quiz_progress_${user.id}_${slug}`;
 		const saved = localStorage.getItem(storageKey);
-
 		if (saved) {
 			try {
 				const data = JSON.parse(saved);
@@ -115,22 +114,16 @@ export default function PageContent({ slug, initialRecord, createQuizRecord, upd
 		}
 
 		setGameState("intro");
-	}, [user, isLoading]);
+	}, [storageKey]);
 
 	// Auto-save to localStorage on answer/question change
 	useEffect(() => {
-		if (gameState !== "taking" || !recordId || !user || !slug) return;
+		if (gameState !== "taking" || !recordId || !storageKey) return;
 		localStorage.setItem(
-			`quiz_progress_${user.id}_${slug}`,
-			JSON.stringify({
-				recordId,
-				parentPhone,
-				answers: currentAnswers,
-				currentQuestionIndex,
-				timeLeft,
-			}),
+			storageKey,
+			JSON.stringify({ recordId, parentPhone, answers: currentAnswers, currentQuestionIndex, timeLeft }),
 		);
-	}, [currentAnswers, currentQuestionIndex, timeLeft, gameState, recordId, parentPhone, user, slug]);
+	}, [currentAnswers, currentQuestionIndex, timeLeft, gameState, recordId, parentPhone, storageKey]);
 
 	const handleFinish = useCallback(async () => {
 		if (isFinishing.current) return;
@@ -145,72 +138,72 @@ export default function PageContent({ slug, initialRecord, createQuizRecord, upd
 			await updateQuizRecord(recordId, calculatedScore, Object.keys(currentAnswers).length, currentAnswers);
 		}
 
-		if (user && slug) {
-			localStorage.removeItem(`quiz_progress_${user.id}_${slug}`);
-		}
+		if (storageKey) localStorage.removeItem(storageKey);
 
 		setGameState("result");
-	}, [currentAnswers, recordId, user, slug]);
+	}, [currentAnswers, recordId, storageKey, questions, updateQuizRecord]);
 
 	useEffect(() => {
-		let timer: ReturnType<typeof setInterval>;
-		if (gameState === "taking" && timeLeft > 0) {
-			timer = setInterval(() => {
-				setTimeLeft((prev) => prev - 1);
-			}, 1000);
-		} else if (gameState === "taking" && timeLeft === 0) {
+		if (gameState !== "taking") return;
+		if (timeLeft === 0) {
 			handleFinish();
+			return;
 		}
+		const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
 		return () => clearInterval(timer);
 	}, [gameState, timeLeft, handleFinish]);
 
-	const formatTime = (seconds: number) => {
-		const h = Math.floor(seconds / 3600);
-		const m = Math.floor((seconds % 3600) / 60);
-		const s = seconds % 60;
-		return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-	};
+	const handleStart = useCallback(
+		async (phone: string) => {
+			setParentPhone(phone);
 
-	const handleStart = async (phone: string) => {
-		if (!user || !slug) return;
+			const { data, error } = await createQuizRecord(
+				userId,
+				userEmail,
+				phone,
+				slug,
+				questions.length,
+				defaultTime,
+			);
 
-		setParentPhone(phone);
+			if (error || !data) {
+				console.error("Error creating quiz result:", error);
+				return;
+			}
 
-		const { data, error } = await createQuizRecord(user.id, user.email ?? null, phone, slug, questions.length, defaultTime);
+			setRecordId(data.id);
+			setTimeLeft(defaultTime);
+			setCurrentAnswers({});
+			setCurrentQuestionIndex(0);
+			isFinishing.current = false;
 
-		if (error || !data) {
-			console.error("Error creating quiz result:", error);
-			return;
-		}
+			localStorage.setItem(
+				storageKey,
+				JSON.stringify({
+					recordId: data.id,
+					parentPhone: phone,
+					answers: {},
+					currentQuestionIndex: 0,
+					timeLeft: defaultTime,
+				}),
+			);
 
-		setRecordId(data.id);
-		setTimeLeft(defaultTime);
-		setCurrentAnswers({});
-		setCurrentQuestionIndex(0);
-		isFinishing.current = false;
+			setGameState("taking");
+		},
+		[userId, userEmail, storageKey, createQuizRecord, slug, questions.length, defaultTime],
+	);
 
-		localStorage.setItem(
-			`quiz_progress_${user.id}_${slug}`,
-			JSON.stringify({
-				recordId: data.id,
-				parentPhone: phone,
-				answers: {},
-				currentQuestionIndex: 0,
-				timeLeft: defaultTime,
-			}),
-		);
-
-		setGameState("taking");
-	};
-
-	const handleRetake = () => {
-		router.push("/kiem-tra-truc-tuyen");
-	};
-
-	const handleReview = () => {
+	const handleAnswerSelect = useCallback(
+		(qid: number, aid: number) => setCurrentAnswers((prev) => ({ ...prev, [qid]: aid })),
+		[],
+	);
+	const handlePrev = useCallback(() => setCurrentQuestionIndex((prev) => prev - 1), []);
+	const handleNext = useCallback(() => setCurrentQuestionIndex((prev) => prev + 1), []);
+	const handleRetake = useCallback(() => router.push("/kiem-tra-truc-tuyen"), [router]);
+	const handleReview = useCallback(() => {
 		setGameState("review");
 		setCurrentQuestionIndex(0);
-	};
+	}, []);
 
 	if (gameState === "loading") {
 		return (
@@ -286,10 +279,10 @@ export default function PageContent({ slug, initialRecord, createQuizRecord, upd
 						currentQuestionIndex={currentQuestionIndex}
 						currentAnswers={currentAnswers}
 						onQuestionSelect={setCurrentQuestionIndex}
-						onAnswerSelect={(qid, aid) => setCurrentAnswers((prev) => ({ ...prev, [qid]: aid }))}
+						onAnswerSelect={handleAnswerSelect}
 						onFinish={handleFinish}
-						onPrev={() => setCurrentQuestionIndex((prev) => prev - 1)}
-						onNext={() => setCurrentQuestionIndex((prev) => prev + 1)}
+						onPrev={handlePrev}
+						onNext={handleNext}
 					/>
 				)}
 				{gameState === "review" && (
@@ -299,8 +292,8 @@ export default function PageContent({ slug, initialRecord, createQuizRecord, upd
 						currentAnswers={currentAnswers}
 						onQuestionSelect={setCurrentQuestionIndex}
 						onRetake={handleRetake}
-						onPrev={() => setCurrentQuestionIndex((prev) => prev - 1)}
-						onNext={() => setCurrentQuestionIndex((prev) => prev + 1)}
+						onPrev={handlePrev}
+						onNext={handleNext}
 					/>
 				)}
 				<AnimatePresence>

@@ -1,23 +1,23 @@
+import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
 import PageContent from "./_page-content";
-import { supabase } from "@/lib/supabase-client";
 
 export default async function QuizPage({ params }: { params: { slug: string } }) {
 	const { slug } = await params;
+	const supabase = await createClient();
 
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	let initialRecord = null;
-	if (user) {
-		const { data } = await supabase
-			.from("quiz_results")
-			.select("id, status, score, answers, current_question_index, time_left, parent_phone")
-			.eq("user_id", user.id)
-			.eq("quiz_slug", slug)
-			.maybeSingle();
-		initialRecord = data;
-	}
+	if (!user) redirect("/dang-nhap");
+
+	const { data: initialRecord } = await supabase
+		.from("quiz_results")
+		.select("id, status, score, answers, current_question_index, time_left, parent_phone")
+		.eq("user_id", user.id)
+		.eq("quiz_slug", slug)
+		.maybeSingle();
 
 	async function createQuizRecord(
 		userId: string,
@@ -27,7 +27,9 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 		totalQuestions: number,
 		defaultTime: number,
 	) {
-		const { data, error } = await supabase
+		"use server";
+		const sb = await createClient();
+		const { data, error } = await sb
 			.from("quiz_results")
 			.insert({
 				user_id: userId,
@@ -49,7 +51,9 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 		completedCount: number,
 		answers: Record<number, number>,
 	) {
-		await supabase
+		"use server";
+		const sb = await createClient();
+		await sb
 			.from("quiz_results")
 			.update({
 				score,
@@ -64,6 +68,8 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 	return (
 		<PageContent
 			slug={slug}
+			userId={user.id}
+			userEmail={user.email ?? null}
 			initialRecord={initialRecord}
 			createQuizRecord={createQuizRecord}
 			updateQuizRecord={updateQuizRecord}
