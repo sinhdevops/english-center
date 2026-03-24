@@ -122,7 +122,7 @@ export default function AboutPage() {
 						viewport={{ once: true }}
 						className="relative"
 					>
-						<div className="relative aspect-square overflow-hidden rounded-xl shadow-2xl">
+						<div className="relative aspect-square overflow-hidden rounded-xl">
 							<Image
 								src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
 								alt="Vision"

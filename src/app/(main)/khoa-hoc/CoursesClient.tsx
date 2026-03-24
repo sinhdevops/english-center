@@ -25,7 +25,7 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 			<section className="relative h-[250px] overflow-hidden">
 				<div className="absolute inset-0 bg-[linear-gradient(280.15deg,#1999D3_15.09%,#19B24B_93.34%)]" />
 
-				<div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 lg:flex-row lg:justify-between">
+				<div className="relative z-10 mx-auto flex h-full max-w-360 flex-col items-center justify-center px-6 lg:flex-row lg:justify-between">
 					<div className="text-center text-white lg:max-w-2xl lg:text-left">
 						<motion.h1
 							initial={{ opacity: 0, x: -20 }}
@@ -63,8 +63,8 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 			</section>
 
 			{/* Courses Grid */}
-			<section className="mx-auto max-w-7xl px-4 py-[120px]">
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+			<section className="mx-auto max-w-360 px-4 py-20">
+				<div className="grid grid-cols-2 gap-2 lg:gap-7.5 lg:grid-cols-4">
 					{initialCourses.map((course, index) => (
 						<motion.div
 							key={course.id}
@@ -72,9 +72,10 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: (index % 3) * 0.1 }}
-							className="flex flex-col rounded-3xl bg-white p-4 shadow-xl shadow-slate-100 transition-all hover:shadow-2xl"
+							className="flex flex-col rounded-xl bg-white overflow-hidden transition-all"
+							style={{ boxShadow: "0px 1px 8px 0px #0000001A" }}
 						>
-							<div className="mb-6 h-[220px] w-full shrink-0 overflow-hidden rounded-2xl">
+							<div className="mb-3 h-30 lg:h-65 w-full shrink-0 overflow-hidden">
 								<Image
 									src={course.image}
 									alt={course.title}
@@ -85,16 +86,16 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 								/>
 							</div>
 
-							<div className="flex flex-1 flex-col px-2">
-								<h2 className="mb-4 text-[18px] font-bold tracking-tight text-slate-900">
+							<div className="flex flex-1 flex-col px-3 space-y-2">
+								<h2 className="text-[18px] font-semibold tracking-tight">
 									{course.title}
 								</h2>
-								<div className="mb-6 flex-1 text-slate-600">
-									<p className="mb-4 text-base leading-relaxed">{course.description}</p>
+								<div className="h-12 flex-1">
+									<p className="leading-relaxed line-clamp-2">{course.description}</p>
 								</div>
 
 								<Link href={`khoa-hoc/dang-ky`}>
-									<Button size={"sm"} className="w-full rounded-xl">
+									<Button size={"sm"} className="w-full text-xs lg:base text rounded-xl mb-3">
 										Đăng ký khóa học
 									</Button>
 								</Link>

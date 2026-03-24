@@ -20,7 +20,7 @@ const News = ({ initialNews }: NewsProps) => {
 
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-360 px-4">
 				<div className="mb-10">
 					<h2 className="text-3xl font-bold lg:text-4xl">Loạt sự kiện HOT - đừng vội lướt qua!</h2>
 				</div>

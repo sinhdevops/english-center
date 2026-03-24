@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Eye, RotateCcw } from "lucide-react";
+import { Eye, ArrowRight } from "lucide-react";
 
 interface QuizResultProps {
 	score: number;
@@ -34,11 +34,12 @@ export const QuizResult = ({ score, totalQuestions, onReview, onRetake }: QuizRe
 			<div className="relative overflow-hidden rounded-3xl border-2 border-yellow-100 bg-[#fff9e6] p-6 md:rounded-4xl md:p-10">
 				<div className="relative z-10 space-y-3 md:space-y-4">
 					<p className="text-xs font-bold text-slate-500 md:text-sm">Kết quả của bạn:</p>
-					<div className="text-4xl font-black text-slate-800 md:text-6xl">
-						{score}/{totalQuestions} <span className="text-xl md:text-2xl">câu</span>
+					<div className="text-6xl font-black text-slate-800 md:text-8xl">
+						{score}
+						<span className="text-3xl text-slate-400 md:text-4xl">/10</span>
 					</div>
-					<div className="text-base font-bold text-slate-600 md:text-xl">
-						Điểm: <span className="text-stem-red text-xl font-black md:text-3xl">{score * 2}</span>
+					<div className="text-base font-bold text-slate-500 md:text-lg">
+						điểm &nbsp;·&nbsp; {totalQuestions} câu hỏi
 					</div>
 				</div>
 				<div className="absolute -right-10 -bottom-10 h-32 w-32 rounded-full bg-yellow-400/10 blur-2xl md:h-40 md:w-40 md:blur-3xl" />
@@ -57,9 +58,9 @@ export const QuizResult = ({ score, totalQuestions, onReview, onRetake }: QuizRe
 				</button>
 				<button
 					onClick={onRetake}
-					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-orange-500 py-3.5 text-base font-black text-white shadow-lg shadow-orange-500/20 transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
+					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-slate-700 py-3.5 text-base font-black text-white shadow-lg shadow-slate-700/20 transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
 				>
-					<RotateCcw size={20} className="md:h-6 md:w-6" /> Làm lại
+					<ArrowRight size={20} className="md:h-6 md:w-6" /> Xem bài test khác
 				</button>
 			</div>
 		</motion.div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Phone, MapPin, Search, Menu, ChevronDown } from "lucide-react";
+import { Phone, MapPin, Search, Menu, ChevronDown, UserIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -125,16 +125,16 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 													</p>
 													<p className="truncate text-xs text-slate-500">{user.email}</p>
 												</div>
-												{/* <div className="p-1">
-													<Link
-														href="/thong-tin-ca-nhan"
-														onClick={() => setShowDropdown(false)}
-														className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
-													>
-														<UserIcon size={18} />
-														Thông tin cá nhân
-													</Link>
-												</div> */}
+												<div className="p-1">
+												<Link
+													href="/trang-ca-nhan"
+													onClick={() => setShowDropdown(false)}
+													className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
+												>
+													<UserIcon size={18} />
+													Trang cá nhân
+												</Link>
+											</div>
 												<div className="border-t border-slate-50 p-1">
 													<LogoutButton
 														className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold text-red-500 transition-colors hover:bg-red-50"

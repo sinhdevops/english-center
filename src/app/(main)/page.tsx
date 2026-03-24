@@ -52,7 +52,7 @@ export default async function HomePage() {
 	return (
 		<main className="overflow-x-hidden">
 			<BannerSwiper banners={banners || []} />
-			<div className="my-20 flex flex-col gap-20">
+			<div className="my-15 lg:my-20 flex flex-col gap-15 lg:gap-20">
 				<AboutSection />
 				<Programs />
 				<ExclusiveModel />

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import { ClipboardList, GraduationCap, BookOpen, Trophy } from "lucide-react";
+import { ClipboardList, GraduationCap, Trophy } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -42,32 +42,11 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 
 	const testCategories = [
 		{
-			title: "Đề thi học sinh giỏi",
+			title: "Test đánh giá năng lực tư duy",
 			icon: Trophy,
 			colorClass: "bg-[#a8e0d9]",
 			delay: 0.1,
-			slug: "hoc-sinh-gioi",
-		},
-		{
-			title: "Đề thi thử trường CLC",
-			icon: ClipboardList,
-			colorClass: "bg-[#c3b1e1]",
-			delay: 0.2,
-			slug: "thi-thu-truong-clc",
-		},
-		{
-			title: "Đề thi thử học kỳ",
-			icon: GraduationCap,
-			colorClass: "bg-[#fbc4ab]",
-			delay: 0.3,
-			slug: "thi-thu-hoc-ky",
-		},
-		{
-			title: "Bài tập bổ trợ theo SGK",
-			icon: BookOpen,
-			colorClass: "bg-[#f9a8a8]",
-			delay: 0.4,
-			slug: "bai-tap-ho-tro",
+			slug: "danh-gia-nang-luc-tu-duy",
 		},
 	];
 
@@ -113,7 +92,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 								className="relative"
 							>
 								<div className="absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/10 blur-2xl lg:h-80 lg:w-80" />
-								<div className="relative z-10 h-64 w-64 overflow-hidden rounded-full border-8 border-white/20 shadow-2xl lg:h-80 lg:w-80">
+								<div className="relative z-10 h-64 w-64 overflow-hidden rounded-full border-8 border-white/20 lg:h-80 lg:w-80">
 									<Image
 										src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=600"
 										alt="Student"
@@ -154,9 +133,11 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 					<div className="mx-auto h-1.5 w-24 rounded-full bg-[#ED1C24]" />
 				</div>
 
-				<div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+				<div className="flex gap-7.5">
 					{testCategories.map((cat, idx) => (
-						<TestCard key={idx} {...cat} onClick={() => router.push(`kiem-tra-truc-tuyen/${cat.slug}`)} />
+						<div key={idx} className="w-64">
+							<TestCard {...cat} onClick={() => router.push(`kiem-tra-truc-tuyen/${cat.slug}`)} />
+						</div>
 					))}
 				</div>
 			</section>

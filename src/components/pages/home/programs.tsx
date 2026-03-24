@@ -16,7 +16,7 @@ const GRADIENTS = [
 const Programs = () => {
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-360 px-4">
 				<div className="mb-10 text-center">
 					<h2 className="text-2xl font-bold text-slate-900 sm:text-4xl lg:text-4xl">
 						Các chương trình học tại STEMKey

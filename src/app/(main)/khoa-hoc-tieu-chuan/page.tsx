@@ -64,7 +64,7 @@ export default function StandardCoursesPage() {
 							</div>
 						</div>
 						<div className="relative">
-							<div className="relative aspect-video overflow-hidden rounded-4xl border border-white/10 shadow-2xl shadow-emerald-500/20">
+							<div className="relative aspect-video overflow-hidden rounded-4xl border border-white/10">
 								<Image
 									src={STANDARD_COURSES_HERO.img}
 									alt="Standard Course"
@@ -222,7 +222,7 @@ export default function StandardCoursesPage() {
 							</div>
 						</div>
 						<div className="relative">
-							<div className="shadow-premium relative z-10 aspect-square overflow-hidden rounded-[4rem]">
+							<div className="relative z-10 aspect-square overflow-hidden rounded-[4rem]">
 								<Image
 									src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop"
 									alt="Students"

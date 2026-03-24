@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, X, Search } from "lucide-react";
+import { ChevronDown, X, Search, UserIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -162,6 +162,13 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 									<p className="text-xs text-slate-500">{user.email}</p>
 								</div>
 							</div>
+							<Link
+								href="/trang-ca-nhan"
+								onClick={toggleMenu}
+								className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white py-4 text-sm font-black tracking-wider text-slate-700 uppercase transition-all active:scale-95"
+							>
+								<UserIcon size={16} /> Trang cá nhân
+							</Link>
 							<LogoutButton
 								className="w-full rounded-2xl bg-red-50 py-4 text-sm font-black tracking-wider text-red-500 uppercase transition-all active:scale-95"
 								showIcon={false}

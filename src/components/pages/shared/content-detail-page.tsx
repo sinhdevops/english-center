@@ -101,7 +101,7 @@ const cleanQuillHtml = (html:any) => {
 								</div>
 							</div>
 
-							<div className="relative mb-10 aspect-video overflow-hidden rounded-xl shadow-2xl">
+							<div className="relative mb-10 aspect-video overflow-hidden rounded-xl">
 								<Image
 									src={img}
 									alt={title}
@@ -140,7 +140,7 @@ const cleanQuillHtml = (html:any) => {
 											tính cấu hình cao và các khu vực thực hành thí nghiệm chuyên biệt.
 										</p>
 
-										<div className="relative my-10 aspect-video overflow-hidden rounded-2xl shadow-lg">
+										<div className="relative my-10 aspect-video overflow-hidden rounded-2xl">
 											<Image
 												src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1000"
 												alt="Classroom"

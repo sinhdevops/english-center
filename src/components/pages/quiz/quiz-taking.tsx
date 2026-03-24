@@ -122,7 +122,9 @@ export const QuizTaking = ({
 										onChange={() => onAnswerSelect(currentQuestion.id, optIdx)}
 										className="accent-stem-blue h-4 w-4 md:h-6 md:w-6"
 									/>
-									<span className="text-sm font-bold text-slate-700 md:text-xl">{option}</span>
+									<span className="text-sm font-bold text-slate-700 md:text-xl">
+										{String.fromCharCode(65 + optIdx)}. {option}
+									</span>
 								</label>
 							))}
 						</div>

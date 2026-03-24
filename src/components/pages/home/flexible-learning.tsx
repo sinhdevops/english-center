@@ -12,7 +12,7 @@ const FlexibleLearning = () => {
 
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-360 px-4">
 				<div className="flex flex-col items-end gap-16 lg:flex-row">
 					{/* Left: Images */}
 					<div className="w-full lg:w-1/2">
@@ -29,7 +29,7 @@ const FlexibleLearning = () => {
 								initial={{ opacity: 0, scale: 0.95 }}
 								whileInView={{ opacity: 1, scale: 1 }}
 								viewport={{ once: true }}
-								className="relative h-[400px] overflow-hidden rounded-xl shadow-lg lg:h-[471px]"
+								className="relative h-[400px] overflow-hidden rounded-xl lg:h-[471px]"
 							>
 								<Image
 									src={HomeImages.image5}
@@ -45,7 +45,7 @@ const FlexibleLearning = () => {
 								whileInView={{ opacity: 1, scale: 1 }}
 								viewport={{ once: true }}
 								transition={{ delay: 0.2 }}
-								className="relative mt-8 h-[400px] overflow-hidden rounded-xl shadow-lg lg:h-[471px]"
+								className="relative mt-8 h-[400px] overflow-hidden rounded-xl lg:h-[471px]"
 							>
 								<Image
 									src={HomeImages.image6}

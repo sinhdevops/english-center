@@ -44,7 +44,7 @@ export default function ProgramDetailPage() {
 					{/* Main Content Area */}
 					<div className="w-full lg:w-2/3">
 						{/* Banner Banner */}
-						<div className="relative mb-8 aspect-20/11 overflow-hidden rounded-xl shadow-2xl sm:aspect-16/7">
+						<div className="relative mb-8 aspect-20/11 overflow-hidden rounded-xl sm:aspect-16/7">
 							<div className="absolute inset-0 bg-linear-to-r from-[#e96443] to-[#904e95]" />
 							<div className="relative z-10 flex h-full items-center justify-between px-6 sm:px-10">
 								<div className="z-20 max-w-[65%] text-white sm:max-w-xs">

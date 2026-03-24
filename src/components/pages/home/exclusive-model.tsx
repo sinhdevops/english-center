@@ -15,7 +15,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
 const ExclusiveModel = () => {
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-360 px-4">
 				<div className="mb-12 text-center">
 					<h2 className="mb-3 text-3xl font-bold lg:text-4xl">Mô hình lớp học độc quyền</h2>
 					<p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-500 lg:text-base">

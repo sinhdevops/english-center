@@ -14,7 +14,7 @@ interface RegistrationSectionProps {
 const RegistrationSection = ({ branches, courses }: RegistrationSectionProps) => {
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-360 px-4">
 				<div className="relative flex flex-col items-center gap-12 overflow-hidden rounded-xl bg-[#00BA3D] p-4 lg:flex-row lg:gap-20 lg:p-16">
 					{/* Left: Content & Image */}
 					<div className="z-10 w-full text-white lg:w-1/2">
@@ -46,7 +46,7 @@ const RegistrationSection = ({ branches, courses }: RegistrationSectionProps) =>
 							<Image
 								src={home.register}
 								alt="Gifts"
-								className="h-auto w-full drop-shadow-2xl"
+								className="h-auto w-full"
 								referrerPolicy="no-referrer"
 							/>
 						</motion.div>

@@ -28,7 +28,7 @@ const Testimonials = ({ items = [] }: TestimonialsProps) => {
 
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-360 px-4">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ const Testimonials = ({ items = [] }: TestimonialsProps) => {
 				{/* Featured Award */}
 				<Link
 					href={`/tin-tuc/${displayData[0]?.id}`}
-					className="group relative mb-12 block aspect-21/9 max-h-[300px] min-h-[220px] w-full overflow-hidden rounded-xl shadow-2xl"
+					className="group relative mb-12 block aspect-21/9 max-h-[300px] min-h-[220px] w-full overflow-hidden rounded-xl"
 				>
 					<Image
 						src={displayData[0].img}

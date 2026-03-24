@@ -12,7 +12,7 @@ import "swiper/css";
 const Teachers = () => {
 	return (
 		<section className="overflow-hidden bg-[#F1F5F9]">
-			<div className="mx-auto my-[120px] max-w-7xl px-4">
+			<div className="mx-auto my-20 max-w-360 px-4">
 				<div className="mb-10 text-center">
 					<motion.h2
 						initial={{ opacity: 0, y: 20 }}
@@ -68,7 +68,7 @@ const Teachers = () => {
 									className="flex h-full flex-col"
 								>
 									<div
-										className="group relative mb-6 aspect-4/5 overflow-hidden rounded-xl bg-white shadow-sm"
+										className="group relative mb-6 aspect-4/5 overflow-hidden rounded-xl bg-white"
 										aria-hidden="true"
 									>
 										<Image

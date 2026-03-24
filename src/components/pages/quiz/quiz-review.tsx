@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { CheckCircle2, XCircle, ChevronRight, RotateCcw } from "lucide-react";
+import { CheckCircle2, XCircle, ChevronRight, ArrowRight } from "lucide-react";
 
 interface Question {
 	id: number;
@@ -122,7 +122,7 @@ export const QuizReview = ({
 											{isSelected && <div className="h-2 w-2 rounded-full bg-white" />}
 										</div>
 										<span className="flex-1 text-base font-bold text-slate-700 md:text-xl">
-											{option}
+											{String.fromCharCode(65 + optIdx)}. {option}
 										</span>
 										{isCorrect && (
 											<CheckCircle2
@@ -152,9 +152,9 @@ export const QuizReview = ({
 					<div className="flex gap-2 md:gap-4">
 						<button
 							onClick={onRetake}
-							className="flex cursor-pointer items-center gap-1 rounded-full bg-orange-500 px-4 py-3 text-sm font-black text-white shadow-lg shadow-orange-500/20 transition-transform hover:scale-105 md:gap-2 md:px-8 md:py-4 md:text-base"
+							className="flex cursor-pointer items-center gap-1 rounded-full bg-slate-700 px-4 py-3 text-sm font-black text-white shadow-lg shadow-slate-700/20 transition-transform hover:scale-105 md:gap-2 md:px-8 md:py-4 md:text-base"
 						>
-							<RotateCcw size={18} className="md:h-5 md:w-5" /> Làm lại
+							<ArrowRight size={18} className="md:h-5 md:w-5" /> Xem bài test khác
 						</button>
 						{currentQuestionIndex < questions.length - 1 && (
 							<button
