@@ -1,9 +1,8 @@
-import { createClient } from "@/utils/supabase/server";
 import PageContent from "./_page-content";
+import { supabase } from "@/lib/supabase-client";
 
 export default async function QuizPage({ params }: { params: { slug: string } }) {
 	const { slug } = await params;
-	const supabase = await createClient();
 
 	const {
 		data: { user },
@@ -28,9 +27,7 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 		totalQuestions: number,
 		defaultTime: number,
 	) {
-		"use server";
-		const sb = await createClient();
-		const { data, error } = await sb
+		const { data, error } = await supabase
 			.from("quiz_results")
 			.insert({
 				user_id: userId,
@@ -52,9 +49,7 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 		completedCount: number,
 		answers: Record<number, number>,
 	) {
-		"use server";
-		const sb = await createClient();
-		await sb
+		await supabase
 			.from("quiz_results")
 			.update({
 				score,
