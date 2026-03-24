@@ -11,7 +11,7 @@ import "swiper/css";
 const Partners = () => {
 	return (
 		<section className="overflow-hidden bg-white">
-			<div className="mx-auto max-w-360 px-4">
+			<div className="mx-auto max-w-7xl px-4">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}

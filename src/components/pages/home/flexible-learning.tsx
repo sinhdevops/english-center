@@ -12,7 +12,7 @@ const FlexibleLearning = () => {
 
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-360 px-4">
+			<div className="mx-auto max-w-7xl px-4">
 				<div className="flex flex-col items-end gap-16 lg:flex-row">
 					{/* Left: Images */}
 					<div className="w-full lg:w-1/2">
