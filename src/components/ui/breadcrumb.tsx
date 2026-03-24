@@ -25,55 +25,56 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, variant = "light"
 		})),
 	};
 
+	const isLight = variant === "light";
+
 	return (
 		<>
 			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-			<nav className="flex" aria-label="Breadcrumb">
-				<ol className="flex items-center space-x-2 md:space-x-4">
+			<nav aria-label="Breadcrumb">
+				<ol
+					className={`inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm ${
+						isLight
+							? "border border-white/20 bg-white/10 backdrop-blur-sm"
+							: "border border-slate-100 bg-white shadow-sm"
+					}`}
+				>
+					{/* Home */}
 					<li>
-						<div>
-							<Link
-								href="/"
-								className={`${
-									variant === "light"
-										? "text-white/60 hover:text-white"
-										: "text-slate-400 hover:text-slate-600"
-								} transition-colors`}
-							>
-								<Home size={18} />
-								<span className="sr-only">Trang chủ</span>
-							</Link>
-						</div>
+						<Link
+							href="/"
+							className={`flex items-center gap-1.5 font-medium transition-colors ${
+								isLight ? "text-white/70 hover:text-white" : "text-slate-500 hover:text-primary"
+							}`}
+						>
+							<Home size={14} />
+							<span className="sr-only">Trang chủ</span>
+						</Link>
 					</li>
+
+					{/* Items */}
 					{items.map((item, index) => (
-						<li key={index}>
-							<div className="flex items-center">
-								<ChevronRight
-									size={16}
-									className={`${variant === "light" ? "text-white/40" : "text-slate-300"} shrink-0`}
-								/>
-								{item.href && !item.active ? (
-									<Link
-										href={item.href}
-										className={`ml-2 text-sm font-medium md:ml-4 ${
-											variant === "light"
-												? "text-white/60 hover:text-white"
-												: "text-slate-400 hover:text-slate-600"
-										} transition-colors`}
-									>
-										{item.label}
-									</Link>
-								) : (
-									<span
-										className={`ml-2 text-sm font-bold md:ml-4 ${
-											variant === "light" ? "text-white" : "text-slate-900"
-										}`}
-										aria-current={item.active ? "page" : undefined}
-									>
-										{item.label}
-									</span>
-								)}
-							</div>
+						<li key={index} className="flex items-center gap-1">
+							<ChevronRight
+								size={13}
+								className={`shrink-0 ${isLight ? "text-white/30" : "text-accent"}`}
+							/>
+							{item.href && !item.active ? (
+								<Link
+									href={item.href}
+									className={`font-medium transition-colors ${
+										isLight ? "text-white/70 hover:text-white" : "text-slate-500 hover:text-primary"
+									}`}
+								>
+									{item.label}
+								</Link>
+							) : (
+								<span
+									className={`font-bold ${isLight ? "text-white" : "text-primary"}`}
+									aria-current={item.active ? "page" : undefined}
+								>
+									{item.label}
+								</span>
+							)}
 						</li>
 					))}
 				</ol>

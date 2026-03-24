@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { ChevronRight, Calendar, ArrowRight, User, Lock, CheckCircle2 } from "lucide-react";
 import { QUIZ_SETS } from "@/constants";
@@ -47,25 +47,16 @@ const SidebarItem: React.FC<{ icon: any; title: string; colorClass: string; acti
 	</div>
 );
 
-export default function PageContent({ slug, initialTab, quizResults }: Props) {
+export default function PageContent({ initialTab, quizResults }: Props) {
 	const { user } = useAuthStore();
 	const searchParams = useSearchParams();
-	const tabFromUrl = searchParams.get("nhom") ?? initialTab ?? QUIZ_SETS[0].id;
-	const [activeAgeGroup, setActiveAgeGroup] = useState(
-		QUIZ_SETS.find((s) => s.id === tabFromUrl)?.id ?? QUIZ_SETS[0].id,
-	);
+	const activeId = QUIZ_SETS.find((s) => s.id === (searchParams.get("nhom") ?? initialTab))?.id ?? QUIZ_SETS[0].id;
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showDoneModal, setShowDoneModal] = useState(false);
 	const [pendingTestId, setPendingTestId] = useState<string | null>(null);
-	const [doneScore, setDoneScore] = useState<number | null>(null);
 
 	const router = useRouter();
-	const activeQuizSet = QUIZ_SETS.find((s) => s.id === activeAgeGroup) ?? QUIZ_SETS[0];
-
-	const handleTabChange = (id: string) => {
-		setActiveAgeGroup(id);
-		router.replace(`?nhom=${id}`, { scroll: false });
-	};
+	const activeQuizSet = QUIZ_SETS.find((s) => s.id === activeId) ?? QUIZ_SETS[0];
 
 	const handleTestClick = (quizId: string) => {
 		if (!user) {
@@ -74,9 +65,7 @@ export default function PageContent({ slug, initialTab, quizResults }: Props) {
 			return;
 		}
 
-		const result = quizResults[quizId];
-		if (result?.status === "completed") {
-			setDoneScore(result.score ?? null);
+		if (quizResults[quizId]?.status === "completed") {
 			setShowDoneModal(true);
 			return;
 		}
@@ -98,33 +87,10 @@ export default function PageContent({ slug, initialTab, quizResults }: Props) {
 				</div>
 			</div>
 
-			<div className="mx-auto max-w-360 px-4 py-8 lg:py-12">
+			<div className="mx-auto max-w-7xl px-4 py-8 lg:py-12">
 				<div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
 					{/* Main Content */}
 					<div className="w-full lg:w-3/4">
-						{/* Age Group Tabs */}
-						<div className="no-scrollbar mb-8 flex overflow-x-auto border-b border-slate-100 lg:mb-12">
-							{QUIZ_SETS.map((set) => (
-								<button
-									key={set.id}
-									onClick={() => handleTabChange(set.id)}
-									className={`relative px-6 py-3 text-base font-bold whitespace-nowrap transition-all lg:px-10 lg:py-4 lg:text-lg ${
-										activeAgeGroup === set.id
-											? "text-stem-blue"
-											: "text-slate-400 hover:text-slate-600"
-									}`}
-								>
-									{set.ageGroup}
-									{activeAgeGroup === set.id && (
-										<motion.div
-											layoutId="activeAgeTab"
-											className="bg-stem-blue absolute right-0 bottom-0 left-0 h-1"
-										/>
-									)}
-								</button>
-							))}
-						</div>
-
 						{/* Quiz Card */}
 						<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 							<motion.div
@@ -229,24 +195,15 @@ export default function PageContent({ slug, initialTab, quizResults }: Props) {
 			</Modal>
 
 			{/* Modal: Đã hoàn thành bài test */}
-			<Modal isOpen={showDoneModal} onClose={() => setShowDoneModal(false)} title="Bài test đã hoàn thành">
+			<Modal isOpen={showDoneModal} onClose={() => setShowDoneModal(false)} title="Thông báo">
 				<div className="space-y-6 text-center">
 					<div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50 shadow-inner">
 						<CheckCircle2 size={40} className="text-emerald-500" />
 					</div>
 					<div className="space-y-2">
-						<h4 className="text-xl font-bold text-slate-900">Bạn đã hoàn thành bài test này</h4>
+						<h4 className="text-xl font-bold text-slate-900">Bạn đã làm bài này rồi</h4>
 						<p className="text-sm text-slate-500">Mỗi bài test chỉ được làm một lần duy nhất.</p>
 					</div>
-					{doneScore !== null && (
-						<div className="rounded-2xl border border-yellow-100 bg-[#fff9e6] py-5">
-							<p className="text-xs font-bold text-slate-500">Điểm của bạn</p>
-							<div className="mt-1 text-5xl font-black text-slate-800">
-								{doneScore}
-								<span className="text-2xl text-slate-400">/10</span>
-							</div>
-						</div>
-					)}
 					<button
 						onClick={() => setShowDoneModal(false)}
 						className="w-full rounded-2xl bg-slate-100 py-3 text-sm font-bold text-slate-600 transition-colors hover:bg-slate-200"

@@ -17,7 +17,7 @@ const FlexibleLearning = () => {
 					{/* Left: Images */}
 					<div className="w-full lg:w-1/2">
 						<div className="mb-10 text-center lg:text-left">
-							<h2 className="mb-2 text-2xl font-medium lg:text-4xl">
+							<h2 className="mb-2 text-2xl font-bold lg:text-4xl">
 								Học linh hoạt giữa Online và Offline
 							</h2>
 							<p className="text-slate-600">

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Phone, Calendar } from "lucide-react";
 import { IMAGES } from "../../../../public/statics/images";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 interface ScheduleWithJoin {
 	id: string;
@@ -116,13 +117,12 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 			</section>
 
 			<div className="mx-auto max-w-7xl py-8">
-				<nav className="mb-8 text-sm text-slate-500">
-					<Link href="/" className="hover:text-stem-blue">
-						Trang chủ
-					</Link>
-					<span className="mx-2">›</span>
-					<span className="font-medium text-slate-900">Lịch khai giảng</span>
-				</nav>
+				<div className="mb-8">
+					<Breadcrumb
+						items={[{ label: "Trang chủ", href: "/" }, { label: "Lịch khai giảng", active: true }]}
+						variant="dark"
+					/>
+				</div>
 
 				<h2 className="mb-6 text-xl font-bold text-slate-800 uppercase">Chọn khu vực</h2>
 

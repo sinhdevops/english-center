@@ -28,11 +28,9 @@ export default async function LearningCornerPage({ searchParams }: { searchParam
 
 	return (
 		<div className="min-h-screen bg-white">
-			<div className="border-b border-slate-100 bg-slate-50 py-4">
-				<div className="mx-auto max-w-7xl px-4">
+				<div className="mx-auto max-w-7xl px-4 mt-3">
 					<Breadcrumb items={[{ label: "Góc học tập", active: true }]} variant="dark" />
 				</div>
-			</div>
 			<div className="mx-auto max-w-7xl px-4 py-6 text-center">
 				<div className="flex flex-col gap-16 lg:flex-row">
 					<div className="w-full text-left lg:w-2/3">

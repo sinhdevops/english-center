@@ -1,54 +1,63 @@
 "use client";
 
-import React from "react";
 import { motion } from "motion/react";
-import { ClipboardList, GraduationCap, Trophy } from "lucide-react";
+import { Brain, Star, Trophy, Target, Clock, ClipboardList, GraduationCap, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import CardRegistration from "@/components/pages/shared/card-registration";
 
-const TestCard: React.FC<{
-	title: string;
-	icon: any;
-	colorClass: string;
-	delay: number;
-	onClick: () => void;
-}> = ({ title, icon: Icon, colorClass, delay, onClick }) => (
-	<motion.div
-		initial={{ opacity: 0, y: 20 }}
-		whileInView={{ opacity: 1, y: 0 }}
-		viewport={{ once: true }}
-		transition={{ delay }}
-		onClick={onClick}
-		className="group flex cursor-pointer flex-col items-center overflow-hidden rounded-2xl border border-slate-100 bg-white pb-8 text-center shadow-xl shadow-slate-200/50 transition-all hover:shadow-2xl"
-	>
-		<div className={`relative mb-12 h-32 w-full ${colorClass}`}>
-			<div className="absolute top-1/2 left-1/2 z-20 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-2xl bg-white text-slate-700 shadow-lg transition-transform duration-300 group-hover:scale-110">
-				<Icon size={40} className="text-inherit" />
-			</div>
-			<div
-				className="absolute right-0 bottom-0 left-0 h-8 bg-white"
-				style={{ clipPath: "polygon(0 100%, 50% 0, 100% 100%)" }}
-			/>
-		</div>
-		<h3 className="group-hover:text-stem-blue px-6 text-lg leading-tight font-bold text-slate-800 transition-colors">
-			{title}
-		</h3>
-	</motion.div>
-);
+const CATEGORY_SLUG = "danh-gia-nang-luc-tu-duy";
+
+const quizCategories = [
+	{
+		nhom: "tu-duy-3-4-tuoi",
+		ageLabel: "3-4 TUỔI",
+		name: "Mầm Non",
+		description: "Khám phá thế giới quan và tư duy sơ khai thông qua hình ảnh.",
+		icon: Brain,
+		iconBg: "bg-blue-50",
+		iconColor: "text-blue-500",
+		duration: "45 phút",
+		questions: 30,
+	},
+	{
+		nhom: "tu-duy-4-5-tuoi",
+		ageLabel: "4-5 TUỔI",
+		name: "Tiền Tiểu Học",
+		description: "Chuẩn bị hành trang vững chắc với các bài tập nhận diện số và chữ.",
+		icon: Star,
+		iconBg: "bg-green-50",
+		iconColor: "text-green-500",
+		duration: "45 phút",
+		questions: 30,
+	},
+	{
+		nhom: "tu-duy-5-6-tuoi",
+		ageLabel: "5-6 TUỔI",
+		name: "Tiểu Học Cơ Bản",
+		description: "Phát triển tư duy logic, toán học và khả năng giải quyết vấn đề.",
+		icon: Trophy,
+		iconBg: "bg-orange-50",
+		iconColor: "text-orange-500",
+		duration: "60 phút",
+		questions: 30,
+	},
+	{
+		nhom: "tu-duy-tieu-hoc",
+		ageLabel: "Tiểu Học",
+		name: "Tiểu Học Nâng Cao",
+		description: "Thử thách bản thân với các bài toán tư duy phức tạp và trừu tượng.",
+		icon: Target,
+		iconBg: "bg-purple-50",
+		iconColor: "text-purple-500",
+		duration: "60 phút",
+		questions: 30,
+	},
+];
+
 export default function PageContent({ branches = [], courses = [] }: { branches: any; courses: any }) {
 	const router = useRouter();
-
-	const testCategories = [
-		{
-			title: "Test đánh giá năng lực tư duy",
-			icon: Trophy,
-			colorClass: "bg-[#a8e0d9]",
-			delay: 0.1,
-			slug: "danh-gia-nang-luc-tu-duy",
-		},
-	];
 
 	return (
 		<div className="min-h-screen bg-white">
@@ -120,25 +129,48 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 			</div>
 
 			{/* Test Selection Section */}
-			<section className="mx-auto max-w-7xl px-4 py-20">
+			<section className="mx-auto max-w-7xl px-4 pb-20 pt-10">
 				<div className="mb-16 text-center">
 					<motion.h2
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
-						className="mb-4 text-4xl font-black tracking-tight text-slate-900 uppercase lg:text-5xl"
+						className="mb-4 text-4xl font-semibold tracking-tight uppercase lg:text-5xl"
 					>
-						Lựa chọn bài test
+						Đánh giá năng lực
 					</motion.h2>
 					<div className="mx-auto h-1.5 w-24 rounded-full bg-[#ED1C24]" />
 				</div>
 
-				<div className="flex gap-7.5">
-					{testCategories.map((cat, idx) => (
-						<div key={idx} className="w-64">
-							<TestCard {...cat} onClick={() => router.push(`kiem-tra-truc-tuyen/${cat.slug}`)} />
-						</div>
-					))}
+				<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+					{quizCategories.map((cat, idx) => {
+						const Icon = cat.icon;
+						return (
+							<motion.div
+								key={idx}
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ delay: idx * 0.1 }}
+								className="group flex cursor-pointer flex-col rounded-2xl border border-slate-100 bg-white p-6 shadow-md transition-all hover:shadow-xl"
+								onClick={() => router.push(`/kiem-tra-truc-tuyen/${CATEGORY_SLUG}?nhom=${cat.nhom}`)}
+							>
+								<div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${cat.iconBg}`}>
+									<Icon size={24} className={cat.iconColor} />
+								</div>
+								<p className="mb-1 text-xs font-bold tracking-widest text-slate-400 uppercase">{cat.ageLabel}</p>
+								<h3 className="mb-2 text-xl font-bold text-slate-800">{cat.name}</h3>
+								<p className="mb-6 flex-1 text-sm text-slate-500">{cat.description}</p>
+								<div className="mb-4 flex items-center gap-4 text-xs text-slate-400">
+									<span className="flex items-center gap-1"><Clock size={13} /> {cat.duration}</span>
+									<span className="flex items-center gap-1"><ClipboardList size={13} /> {cat.questions} câu</span>
+								</div>
+								<button className="flex items-center gap-1 text-sm font-bold text-[#ED1C24] transition-colors group-hover:text-[#c0151b]">
+									Bắt đầu <ChevronRight size={16} />
+								</button>
+							</motion.div>
+						);
+					})}
 				</div>
 			</section>
 

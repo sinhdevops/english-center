@@ -6,6 +6,7 @@ import { IMAGES } from "../../../../public/statics/images";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 interface Course {
 	id: number;
@@ -25,7 +26,7 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 			<section className="relative h-[250px] overflow-hidden">
 				<div className="absolute inset-0 bg-[linear-gradient(280.15deg,#1999D3_15.09%,#19B24B_93.34%)]" />
 
-				<div className="relative z-10 mx-auto flex h-full max-w-360 flex-col items-center justify-center px-6 lg:flex-row lg:justify-between">
+				<div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 lg:flex-row lg:justify-between">
 					<div className="text-center text-white lg:max-w-2xl lg:text-left">
 						<motion.h1
 							initial={{ opacity: 0, x: -20 }}
@@ -61,9 +62,11 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 					</motion.div>
 				</div>
 			</section>
-
+				<div className="mx-auto max-w-7xl px-4 mt-3">
+					<Breadcrumb items={[{ label: "Trang chủ", href: "/" }, { label: "Khóa học", active: true }]} variant="dark" />
+				</div>
 			{/* Courses Grid */}
-			<section className="mx-auto max-w-360 px-4 py-20">
+			<section className="mx-auto max-w-7xl px-4 py-20">
 				<div className="grid grid-cols-2 gap-2 lg:gap-7.5 lg:grid-cols-4">
 					{initialCourses.map((course, index) => (
 						<motion.div

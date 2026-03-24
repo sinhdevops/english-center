@@ -70,7 +70,7 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 					))}
 				</div>
 
-				<div className="relative z-10 mx-auto max-w-360 px-4 pt-12 pb-36">
+				<div className="relative z-10 mx-auto max-w-7xl px-4 pt-12 pb-36">
 					<motion.div
 						initial={{ opacity: 0, y: 24 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -134,7 +134,7 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 				</div>
 			</div>
 
-			<div className="mx-auto -mt-24 max-w-360 space-y-6 px-4 pb-20">
+			<div className="mx-auto -mt-24 max-w-7xl space-y-6 px-4 pb-20">
 				{/* ── STATS CARDS ── */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}

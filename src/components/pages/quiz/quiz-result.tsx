@@ -50,12 +50,12 @@ export const QuizResult = ({ score, totalQuestions, onReview, onRetake }: QuizRe
 			</p>
 
 			<div className="flex flex-col justify-center gap-3 pt-2 sm:flex-row md:gap-4 md:pt-4">
-				<button
+				{false && <button
 					onClick={onReview}
 					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#00a699] py-3.5 text-base font-black text-white shadow-lg shadow-[#00a699]/20 transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
 				>
 					<Eye size={20} className="md:h-6 md:w-6" /> Xem đáp án
-				</button>
+				</button>}
 				<button
 					onClick={onRetake}
 					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-slate-700 py-3.5 text-base font-black text-white shadow-lg shadow-slate-700/20 transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"

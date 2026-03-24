@@ -42,10 +42,8 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
 
 	return (
 		<div className="min-h-screen bg-white">
-			<div className="border-b border-slate-100 bg-slate-50 py-4">
-				<div className="mx-auto max-w-7xl px-4">
+				<div className="mx-auto max-w-7xl px-4 mt-3">
 					<Breadcrumb items={breadcrumbItems} variant="dark" />
-				</div>
 			</div>
 
 			<div className="mx-auto max-w-7xl px-4 py-6">
