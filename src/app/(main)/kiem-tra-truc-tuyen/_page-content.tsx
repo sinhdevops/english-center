@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Brain, Star, Trophy, Target, Clock, ClipboardList, GraduationCap, ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import CardRegistration from "@/components/pages/shared/card-registration";
@@ -57,8 +57,6 @@ const quizCategories = [
 ];
 
 export default function PageContent({ branches = [], courses = [] }: { branches: any; courses: any }) {
-	const router = useRouter();
-
 	return (
 		<div className="min-h-screen bg-white">
 			{/* Hero Section */}
@@ -146,14 +144,16 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 					{quizCategories.map((cat, idx) => {
 						const Icon = cat.icon;
 						return (
+							<Link
+								href={`/kiem-tra-truc-tuyen/${CATEGORY_SLUG}?nhom=${cat.nhom}`}
+								className="group flex cursor-pointer flex-col rounded-2xl border border-slate-100 bg-white p-6 shadow-md transition-all hover:shadow-xl"
+							>
 							<motion.div
 								key={idx}
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: idx * 0.1 }}
-								className="group flex cursor-pointer flex-col rounded-2xl border border-slate-100 bg-white p-6 shadow-md transition-all hover:shadow-xl"
-								onClick={() => router.push(`/kiem-tra-truc-tuyen/${CATEGORY_SLUG}?nhom=${cat.nhom}`)}
 							>
 								<div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${cat.iconBg}`}>
 									<Icon size={24} className={cat.iconColor} />
@@ -169,6 +169,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 									Bắt đầu <ChevronRight size={16} />
 								</button>
 							</motion.div>
+							</Link>
 						);
 					})}
 				</div>
