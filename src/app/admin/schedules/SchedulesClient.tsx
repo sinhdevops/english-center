@@ -101,7 +101,6 @@ export default function SchedulesClient({ initialSchedules, branches, courses }:
 			<AdminPagination
 				currentPage={currentPage}
 				totalPages={Math.ceil(initialSchedules.length / ITEMS_PER_PAGE)}
-				onPageChange={setCurrentPage}
 			/>
 
 			<ScheduleModal
