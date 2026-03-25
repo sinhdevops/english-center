@@ -1,9 +1,12 @@
 "use client";
 
-import React from "react";
+import { useSearchParams } from "next/navigation";
+
+import React, { useState } from "react";
 import { User, Phone, BookOpen, MapPin, Calendar, Clock, Trash2, Check, MessageSquare } from "lucide-react";
 import { Registration, Branch, Course } from "@/lib/types";
 import { toast } from "sonner";
+import { AdminPagination } from "@/components/admin/AdminPagination";
 import { updateRegistrationStatus, deleteRegistration } from "./actions";
 
 interface RegistrationsClientProps {
@@ -12,7 +15,12 @@ interface RegistrationsClientProps {
 	courses: Course[];
 }
 
+const ITEMS_PER_PAGE = 10;
+
 export default function RegistrationsClient({ initialRegistrations, branches, courses }: RegistrationsClientProps) {
+	const searchParams = useSearchParams();
+	const currentPage = Number(searchParams.get("page")) || 1;
+
 	const handleUpdateStatus = async (id: string, status: Registration["status"]) => {
 		try {
 			await updateRegistrationStatus(id, status);
@@ -66,6 +74,9 @@ export default function RegistrationsClient({ initialRegistrations, branches, co
 		}
 	};
 
+	const totalPages = Math.ceil(initialRegistrations.length / ITEMS_PER_PAGE);
+	const paginatedRegistrations = initialRegistrations.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+
 	return (
 		<>
 			<div className="mb-8">
@@ -87,14 +98,14 @@ export default function RegistrationsClient({ initialRegistrations, branches, co
 							</tr>
 						</thead>
 						<tbody className="divide-y divide-slate-100">
-							{initialRegistrations.length === 0 ? (
+							{paginatedRegistrations.length === 0 ? (
 								<tr>
 									<td colSpan={6} className="px-6 py-12 text-center text-slate-400">
 										Chưa có đăng ký mới nào
 									</td>
 								</tr>
 							) : (
-								initialRegistrations.map((reg) => {
+								paginatedRegistrations.map((reg) => {
 									const branch = branches.find((b) => b.id === reg.branch_id);
 									const course = courses.find((c) => c.id === reg.course_id);
 
@@ -179,6 +190,7 @@ export default function RegistrationsClient({ initialRegistrations, branches, co
 					</div>
 				)}
 			</div>
+			<AdminPagination currentPage={currentPage} totalPages={totalPages} />
 		</>
 	);
 }

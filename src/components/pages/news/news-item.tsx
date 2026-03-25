@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
-import { motion } from "motion/react";
-import { Calendar, ChevronRight, Tag } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import React from"react";
+import { motion } from"motion/react";
+import { Calendar, ChevronRight, Tag } from"lucide-react";
+import Image from"next/image";
+import Link from"next/link";
 
 interface NewsItemProps {
 	id: string;
@@ -23,12 +23,12 @@ const NewsItem: React.FC<NewsItemProps> = ({ id, title, category, date, desc, im
 			whileInView={{ opacity: 1, y: 0 }}
 			viewport={{ once: true }}
 			onClick={onClick}
-			className="group hover:border-stem-blue/10 relative flex cursor-pointer flex-col gap-6 rounded-3xl border border-slate-100 bg-white p-5 transition-all duration-500 hover:bg-slate-50/30 hover:shadow-xl hover:shadow-slate-200/40 md:flex-row"
+			className="group hover:border-stem-blue/10 relative flex cursor-pointer flex-col gap-6 rounded-3xl border border-slate-100 bg-white p-5 transition-all duration-500 hover:bg-slate-50/30 hover: hover: md:flex-row"
 		>
 			{/* Image Container */}
 			<div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-2xl md:h-48 md:w-72 lg:w-80">
 				<Image
-					src={img || "https://images.unsplash.com/photo-1543269865-cbf427effbad"}
+					src={img ||"https://images.unsplash.com/photo-1543269865-cbf427effbad"}
 					alt={title}
 					width={400}
 					height={300}
@@ -50,7 +50,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ id, title, category, date, desc, im
 					<div className="h-4 w-px bg-slate-100" />
 					<div className="text-stem-blue flex items-center gap-2 text-[11px] font-bold tracking-wider uppercase">
 						<Tag size={12} />
-						{category || "Tin tức"}
+						{category ||"Tin tức"}
 					</div>
 				</div>
 

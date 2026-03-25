@@ -1,9 +1,15 @@
-import { CourserSidebar } from "@/components/ui/courser-sidebar";
+import type { Metadata } from "next";
+import { Newspaper } from "lucide-react";
+import NewsCard from "@/components/pages/news/news-card";
+import FeaturedNewsItem from "@/components/pages/news/featured-news-item";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { supabase } from "@/lib/supabase-client";
-import NewsItem from "@/components/pages/news/news-item";
-import { TrendingUp } from "lucide-react";
 import { Pagination } from "@/components/ui/pagination";
+
+export const metadata: Metadata = {
+	title: "Góc ba mẹ - STEMKey",
+	description: "Những thông tin hữu ích dành cho ba mẹ tại STEMKey.",
+};
 
 const ITEMS_PER_PAGE = 10;
 
@@ -11,11 +17,9 @@ export default async function ParentsCornerPage({ searchParams }: { searchParams
 	const params = await searchParams;
 	const currentPage = Number(params.page) || 1;
 
-	// Calculate range for pagination
 	const from = (currentPage - 1) * ITEMS_PER_PAGE;
 	const to = from + ITEMS_PER_PAGE - 1;
 
-	// Fetch count and data
 	const { data: events, count } = await supabase
 		.from("events")
 		.select("*", { count: "exact" })
@@ -27,44 +31,65 @@ export default async function ParentsCornerPage({ searchParams }: { searchParams
 	const totalItems = count || 0;
 	const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
-	return (
-		<div className="min-h-screen bg-white">
-				<div className="mx-auto max-w-7xl px-4 mt-3">
-					<Breadcrumb items={[{ label: "Góc ba mẹ", active: true }]} variant="dark" />
-				</div>
-			<div className="mx-auto max-w-7xl px-4 py-6">
-				<div className="flex flex-col gap-16 lg:flex-row">
-					<div className="w-full text-left lg:w-2/3">
-						<h1 className="mb-10 flex items-center justify-center gap-3 text-3xl font-black text-slate-900 uppercase md:justify-start">
-							<TrendingUp className="text-stem-blue" />
-							Góc ba mẹ
-						</h1>
-						{newsList.length ? (
-							<>
-								<div className="space-y-4">
-									{newsList.map((item, idx) => (
-										<NewsItem
-											id={item.id}
-											category="Góc ba mẹ"
-											key={idx}
-											title={item.title}
-											date={item.date}
-											desc={item.excerpt || item.description}
-											img={item.image_url}
-										/>
-									))}
-								</div>
+	const featured = currentPage === 1 ? newsList[0] : null;
+	const gridItems = currentPage === 1 ? newsList.slice(1) : newsList;
 
-								<Pagination totalPages={totalPages} currentPage={currentPage} />
-							</>
-						) : (
-							<p className="text-slate-500 italic">Hiện tại chưa có bài viết.</p>
-						)}
-					</div>
-					<div className="w-full lg:w-1/3">
-						<CourserSidebar />
-					</div>
+	const breadcrumbItems = [
+		{ label: "Trang chủ", href: "/" },
+		{ label: "Góc ba mẹ", active: true },
+	];
+
+	return (
+		<div className="min-h-screen bg-slate-50">
+			{/* Page Header */}
+			<div className="border-b border-slate-100 bg-white">
+				<div className="mx-auto max-w-7xl px-4 pt-3">
+					<Breadcrumb items={breadcrumbItems} variant="dark" />
 				</div>
+			</div>
+
+			{/* Content */}
+			<div className="mx-auto max-w-7xl px-4 py-10">
+				{newsList.length ? (
+					<>
+						{featured && (
+							<div className="mb-10">
+								<FeaturedNewsItem
+									id={featured.id}
+									title={featured.title}
+									category="Góc ba mẹ"
+									date={featured.date}
+									desc={featured.excerpt || featured.description}
+									img={featured.image_url}
+								/>
+							</div>
+						)}
+
+						{gridItems.length > 0 && (
+							<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+								{gridItems.map((item, i) => (
+									<NewsCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										category="Góc ba mẹ"
+										date={item.date}
+										desc={item.excerpt || item.description}
+										img={item.image_url}
+										index={i}
+									/>
+								))}
+							</div>
+						)}
+
+						<Pagination totalPages={totalPages} currentPage={currentPage} />
+					</>
+				) : (
+					<div className="flex flex-col items-center justify-center py-24 text-center">
+						<Newspaper size={48} className="mb-4 text-slate-200" />
+						<p className="text-lg font-semibold text-slate-400">Hiện tại chưa có bài viết.</p>
+					</div>
+				)}
 			</div>
 		</div>
 	);

@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ChevronRight, Download, Search, Filter, ArrowRight, Gift, Star, Clock, CheckCircle2 } from "lucide-react";
+import React from"react";
+import Image from"next/image";
+import Link from"next/link";
+import { ChevronRight, Download, Search, Filter, ArrowRight, Gift, Star, Clock, CheckCircle2 } from"lucide-react";
 
 const categories = [
 	"Tất cả",
@@ -14,52 +14,52 @@ const categories = [
 
 const resources = [
 	{
-		title: "Tổng hợp Đề thi chuyên vào 10 môn Tiếng Anh cả nước",
-		category: "Đề thi chuyên",
-		desc: "Bộ đề thi chính thức kèm đáp án chi tiết từ các trường chuyên hàng đầu Việt Nam.",
-		tag: "Hot",
-		date: "24/02/2026",
-		img: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1973&auto=format&fit=crop",
+		title:"Tổng hợp Đề thi chuyên vào 10 môn Tiếng Anh cả nước",
+		category:"Đề thi chuyên",
+		desc:"Bộ đề thi chính thức kèm đáp án chi tiết từ các trường chuyên hàng đầu Việt Nam.",
+		tag:"Hot",
+		date:"24/02/2026",
+		img:"https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1973&auto=format&fit=crop",
 	},
 	{
-		title: "Trọn bộ đề thi Học sinh giỏi Tiếng Anh THCS (Lớp 6 - 9)",
-		category: "Tiếng Anh THCS",
-		desc: "Hệ thống bài tập nâng cao giúp con rèn luyện tư duy ngôn ngữ và kỹ năng làm bài thi.",
-		tag: "Free",
-		date: "20/02/2026",
-		img: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop",
+		title:"Trọn bộ đề thi Học sinh giỏi Tiếng Anh THCS (Lớp 6 - 9)",
+		category:"Tiếng Anh THCS",
+		desc:"Hệ thống bài tập nâng cao giúp con rèn luyện tư duy ngôn ngữ và kỹ năng làm bài thi.",
+		tag:"Free",
+		date:"20/02/2026",
+		img:"https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop",
 	},
 	{
-		title: "Bộ Sách Tổng Ôn Tiếng Anh Ms Hoa Junior [PDF]",
-		category: "Sách & Giáo trình",
-		desc: "Giải pháp ôn tập hiệu quả dành riêng cho học sinh tiểu học theo chuẩn Cambridge.",
-		tag: "PDF",
-		date: "15/02/2026",
-		img: "https://images.unsplash.com/photo-1512820790803-73cad7a2599f?q=80&w=2027&auto=format&fit=crop",
+		title:"Bộ Sách Tổng Ôn Tiếng Anh Ms Hoa Junior [PDF]",
+		category:"Sách & Giáo trình",
+		desc:"Giải pháp ôn tập hiệu quả dành riêng cho học sinh tiểu học theo chuẩn Cambridge.",
+		tag:"PDF",
+		date:"15/02/2026",
+		img:"https://images.unsplash.com/photo-1512820790803-73cad7a2599f?q=80&w=2027&auto=format&fit=crop",
 	},
 	{
-		title: "Trọn bộ đề thi học kỳ Tiếng Anh lớp 6, 7, 8, 9",
-		category: "Tiếng Anh THCS",
-		desc: "Đầy đủ đề minh họa, đáp án và file nghe chuẩn cho kỳ thi học kỳ sắp tới.",
-		tag: "Audio",
-		date: "10/02/2026",
-		img: "https://images.unsplash.com/photo-1434030216411-0bb7c3f3dfad?q=80&w=2070&auto=format&fit=crop",
+		title:"Trọn bộ đề thi học kỳ Tiếng Anh lớp 6, 7, 8, 9",
+		category:"Tiếng Anh THCS",
+		desc:"Đầy đủ đề minh họa, đáp án và file nghe chuẩn cho kỳ thi học kỳ sắp tới.",
+		tag:"Audio",
+		date:"10/02/2026",
+		img:"https://images.unsplash.com/photo-1434030216411-0bb7c3f3dfad?q=80&w=2070&auto=format&fit=crop",
 	},
 	{
-		title: "English for Everyone JUNIOR – Bộ học liệu toàn diện",
-		category: "Tiếng Anh Tiểu học",
-		desc: "Kết hợp giữa hình ảnh sinh động và kiến thức chuẩn hóa cho trẻ 5-11 tuổi.",
-		tag: "PDF+Audio",
-		date: "05/02/2026",
-		img: "https://images.unsplash.com/photo-1503676260728-1c00da07bb5e?q=80&w=2026&auto=format&fit=crop",
+		title:"English for Everyone JUNIOR – Bộ học liệu toàn diện",
+		category:"Tiếng Anh Tiểu học",
+		desc:"Kết hợp giữa hình ảnh sinh động và kiến thức chuẩn hóa cho trẻ 5-11 tuổi.",
+		tag:"PDF+Audio",
+		date:"05/02/2026",
+		img:"https://images.unsplash.com/photo-1503676260728-1c00da07bb5e?q=80&w=2026&auto=format&fit=crop",
 	},
 	{
-		title: "900 Mẫu câu giao tiếp tiếng Anh hằng ngày cho trẻ em",
-		category: "Tiếng Anh Tiểu học",
-		desc: "Cẩm nang giao tiếp thực tế giúp trẻ tự tin nói tiếng Anh trong các tình huống thường gặp.",
-		tag: "Hot",
-		date: "01/02/2026",
-		img: "https://images.unsplash.com/photo-1544717297-fa20d00f796b?q=80&w=2024&auto=format&fit=crop",
+		title:"900 Mẫu câu giao tiếp tiếng Anh hằng ngày cho trẻ em",
+		category:"Tiếng Anh Tiểu học",
+		desc:"Cẩm nang giao tiếp thực tế giúp trẻ tự tin nói tiếng Anh trong các tình huống thường gặp.",
+		tag:"Hot",
+		date:"01/02/2026",
+		img:"https://images.unsplash.com/photo-1544717297-fa20d00f796b?q=80&w=2024&auto=format&fit=crop",
 	},
 ];
 
@@ -82,8 +82,8 @@ export default function ResourcesPage() {
 
 					<div className="mt-12 flex flex-col items-center text-center">
 						<h1 className="font-heading text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
-							Kho Học Liệu{" "}
-							<span className="text-accent italic underline decoration-white/10 underline-offset-8 text-shadow-sm">
+							Kho Học Liệu{""}
+							<span className="text-accent italic underline decoration-white/10 underline-offset-8 text-">
 								Tri Thức
 							</span>
 						</h1>
@@ -112,7 +112,7 @@ export default function ResourcesPage() {
 
 			{/* Gift Box Section */}
 			<section className="relative -mt-12 px-4">
-				<div className="shadow-premium mx-auto flex max-w-5xl flex-col items-center gap-8 rounded-[3rem] border border-white/20 bg-white/80 p-8 backdrop-blur-2xl md:flex-row md:p-12">
+				<div className=" mx-auto flex max-w-5xl flex-col items-center gap-8 rounded-[3rem] border border-white/20 bg-white/80 p-8 backdrop-blur-2xl md:flex-row md:p-12">
 					<div className="bg-accent/10 flex h-24 w-24 shrink-0 items-center justify-center rounded-3xl md:h-32 md:w-32">
 						<Gift className="text-accent h-12 w-12 md:h-16 md:w-16" />
 					</div>
@@ -126,7 +126,7 @@ export default function ResourcesPage() {
 					</div>
 					<Link
 						href="#register"
-						className="bg-primary hover:bg-primary/90 flex shrink-0 items-center gap-2 rounded-full px-10 py-5 font-extrabold text-white shadow-xl transition-all active:scale-95"
+						className="bg-primary hover:bg-primary/90 flex shrink-0 items-center gap-2 rounded-full px-10 py-5 font-extrabold text-white transition-all active:scale-95"
 					>
 						Nhận tài liệu ngay <ArrowRight className="h-5 w-5" />
 					</Link>
@@ -148,11 +148,11 @@ export default function ResourcesPage() {
 									{categories.map((cat, idx) => (
 										<button
 											key={idx}
-											className={`flex items-center justify-between rounded-xl px-4 py-3 text-left transition-all ${idx === 0 ? "bg-primary font-bold text-white shadow-lg" : "text-zinc-600 hover:bg-zinc-100"}`}
+											className={`flex items-center justify-between rounded-xl px-4 py-3 text-left transition-all ${idx === 0 ?"bg-primary font-bold text-white" :"text-zinc-600 hover:bg-zinc-100"}`}
 										>
 											<span>{cat}</span>
 											<ChevronRight
-												className={`h-4 w-4 ${idx === 0 ? "opacity-100" : "opacity-0"}`}
+												className={`h-4 w-4 ${idx === 0 ?"opacity-100" :"opacity-0"}`}
 											/>
 										</button>
 									))}
@@ -194,7 +194,7 @@ export default function ResourcesPage() {
 								{resources.map((item, idx) => (
 									<div
 										key={idx}
-										className="group shadow-premium relative overflow-hidden rounded-[2.5rem] border border-zinc-50 bg-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+										className="group relative overflow-hidden rounded-[2.5rem] border border-zinc-50 bg-white transition-all duration-500 hover:-translate-y-2 hover:"
 									>
 										<div className="relative h-60 overflow-hidden">
 											<Image
@@ -204,10 +204,10 @@ export default function ResourcesPage() {
 												className="object-cover transition-transform duration-700 group-hover:scale-110"
 											/>
 											<div className="absolute top-4 left-4 flex gap-2">
-												<span className="bg-accent rounded-full px-4 py-1 text-xs font-bold text-white shadow-lg">
+												<span className="bg-accent rounded-full px-4 py-1 text-xs font-bold text-white">
 													{item.tag}
 												</span>
-												<span className="text-dark rounded-full bg-white/90 px-4 py-1 text-xs font-bold shadow-sm backdrop-blur-sm">
+												<span className="text-dark rounded-full bg-white/90 px-4 py-1 text-xs font-bold backdrop-blur-sm">
 													{item.category}
 												</span>
 											</div>
@@ -239,10 +239,10 @@ export default function ResourcesPage() {
 
 							{/* Pagination */}
 							<div className="mt-16 flex items-center justify-center gap-2">
-								{[1, 2, 3, "...", 9].map((page, idx) => (
+								{[1, 2, 3,"...", 9].map((page, idx) => (
 									<button
 										key={idx}
-										className={`h-12 w-12 rounded-2xl font-bold transition-all ${idx === 0 ? "bg-primary shadow-primary/20 text-white shadow-lg" : "text-dark hover:bg-zinc-100"}`}
+										className={`h-12 w-12 rounded-2xl font-bold transition-all ${idx === 0 ?"bg-primary text-white" :"text-dark hover:bg-zinc-100"}`}
 									>
 										{page}
 									</button>
@@ -268,8 +268,8 @@ export default function ResourcesPage() {
 								Đăng ký nhận tài liệu
 							</h2>
 							<h3 className="font-heading mb-8 text-4xl font-extrabold md:text-5xl lg:text-6xl">
-								Nhận ngay <br /> Bộ quà tặng{" "}
-								<span className="text-accent italic drop-shadow-sm">Tri Thức</span>
+								Nhận ngay <br /> Bộ quà tặng{""}
+								<span className="text-accent italic drop-">Tri Thức</span>
 							</h3>
 
 							<div className="space-y-6">
@@ -313,7 +313,7 @@ export default function ResourcesPage() {
 							</div>
 						</div>
 
-						<div className="rounded-[3.5rem] bg-white p-8 shadow-2xl md:p-14">
+						<div className="rounded-[3.5rem] bg-white p-8 md:p-14">
 							<h4 className="text-dark font-heading mb-10 text-center text-3xl font-extrabold">
 								Thông tin đăng ký
 							</h4>
@@ -325,7 +325,7 @@ export default function ResourcesPage() {
 									<input
 										type="text"
 										placeholder="Nguyễn Văn A"
-										className="text-dark focus:border-primary focus:ring-primary/5 w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-4 shadow-sm transition-all outline-none focus:bg-white focus:ring-4"
+										className="text-dark focus:border-primary focus:ring-primary/5 w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-4 transition-all outline-none focus:bg-white focus:ring-4"
 									/>
 								</div>
 								<div className="space-y-2">
@@ -335,7 +335,7 @@ export default function ResourcesPage() {
 									<input
 										type="tel"
 										placeholder="0912 xxx xxx"
-										className="text-dark focus:border-primary focus:ring-primary/5 w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-4 shadow-sm transition-all outline-none focus:bg-white focus:ring-4"
+										className="text-dark focus:border-primary focus:ring-primary/5 w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-4 transition-all outline-none focus:bg-white focus:ring-4"
 									/>
 								</div>
 								<div className="space-y-2">
@@ -345,14 +345,14 @@ export default function ResourcesPage() {
 									<input
 										type="email"
 										placeholder="example@mail.com"
-										className="text-dark focus:border-primary focus:ring-primary/5 w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-4 shadow-sm transition-all outline-none focus:bg-white focus:ring-4"
+										className="text-dark focus:border-primary focus:ring-primary/5 w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-6 py-4 transition-all outline-none focus:bg-white focus:ring-4"
 									/>
 								</div>
-								<button className="bg-accent hover:bg-accent/90 shadow-accent/20 w-full rounded-2xl py-6 text-xl font-extrabold text-white shadow-xl transition-all active:scale-95">
+								<button className="bg-accent hover:bg-accent/90 w-full rounded-2xl py-6 text-xl font-extrabold text-white transition-all active:scale-95">
 									Đăng ký nhận bộ quà tặng
 								</button>
 								<p className="text-center text-xs leading-relaxed font-medium text-zinc-400">
-									Chúng tôi sẽ gửi tài liệu và quà tặng qua Email/Zalo của bạn{" "}
+									Chúng tôi sẽ gửi tài liệu và quà tặng qua Email/Zalo của bạn{""}
 									<br className="hidden md:block" /> trong vòng 10 phút.
 								</p>
 							</form>

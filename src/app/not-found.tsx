@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import Image from "next/image";
-import { IMAGES } from "../../public/statics/images";
+import { motion } from"motion/react";
+import { Button } from"@/components/ui/button";
+import Link from"next/link";
+import Image from"next/image";
+import { IMAGES } from"../../public/statics/images";
 
 export default function NotFound() {
 	return (
@@ -32,7 +32,7 @@ export default function NotFound() {
 
 					<div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
 						<Link href={"/"} className="w-full sm:w-auto">
-							<Button variant="primary" size="lg" className="w-full shadow-lg shadow-blue-200 sm:w-auto">
+							<Button variant="primary" size="lg" className="w-full sm:w-auto">
 								Về trang chủ
 							</Button>
 						</Link>

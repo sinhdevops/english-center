@@ -22,7 +22,7 @@ export const QuizResult = ({ score, totalQuestions, onReview, onRetake }: QuizRe
 			initial={{ opacity: 0, scale: 0.8, y: 40 }}
 			animate={{ opacity: 1, scale: 1, y: 0 }}
 			exit={{ opacity: 0, scale: 0.8, y: 40 }}
-			className="md:rounded-5xl relative w-full max-w-2xl space-y-6 rounded-3xl bg-white p-6 text-center shadow-2xl md:space-y-8 md:p-12"
+			className="md:rounded-5xl relative w-full max-w-2xl space-y-6 rounded-3xl bg-white p-6 text-center md:space-y-8 md:p-12"
 		>
 			<div className="space-y-1 md:space-y-2">
 				<h2 className="text-stem-red text-2xl leading-tight font-black uppercase md:text-4xl">Chúc mừng bạn</h2>
@@ -52,13 +52,13 @@ export const QuizResult = ({ score, totalQuestions, onReview, onRetake }: QuizRe
 			<div className="flex flex-col justify-center gap-3 pt-2 sm:flex-row md:gap-4 md:pt-4">
 				{false && <button
 					onClick={onReview}
-					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#00a699] py-3.5 text-base font-black text-white shadow-lg shadow-[#00a699]/20 transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
+					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#00a699] py-3.5 text-base font-black text-white transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
 				>
 					<Eye size={20} className="md:h-6 md:w-6" /> Xem đáp án
 				</button>}
 				<button
 					onClick={onRetake}
-					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-slate-700 py-3.5 text-base font-black text-white shadow-lg shadow-slate-700/20 transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
+					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-slate-700 py-3.5 text-base font-black text-white transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
 				>
 					<ArrowRight size={20} className="md:h-6 md:w-6" /> Xem bài test khác
 				</button>

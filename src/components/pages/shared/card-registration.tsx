@@ -1,16 +1,16 @@
 "use client";
 
-import { motion } from "motion/react";
-import { toast } from "sonner";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { registrationSchema } from "@/lib/validations/admin";
-import { Loader2, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { BrandsAndPartners } from "@/lib/types";
-import { InputValidation } from "@/components/ui/input";
-import { SelectValidation } from "@/components/ui/select";
+import { motion } from"motion/react";
+import { toast } from"sonner";
+import { FormProvider, useForm } from"react-hook-form";
+import { zodResolver } from"@hookform/resolvers/zod";
+import * as z from"zod";
+import { registrationSchema } from"@/lib/validations/admin";
+import { Loader2, Send } from"lucide-react";
+import { Button } from"@/components/ui/button";
+import { BrandsAndPartners } from"@/lib/types";
+import { InputValidation } from"@/components/ui/input";
+import { SelectValidation } from"@/components/ui/select";
 
 type RegistrationFormValues = z.infer<typeof registrationSchema>;
 
@@ -24,13 +24,13 @@ const CardRegistration = ({
 	const methods = useForm<RegistrationFormValues>({
 		resolver: zodResolver(registrationSchema),
 		defaultValues: {
-			parentName: "",
-			childName: "",
-			phone: "",
-			email: "",
-			childClass: "",
-			course: "",
-			branch: "",
+			parentName:"",
+			childName:"",
+			phone:"",
+			email:"",
+			childClass:"",
+			course:"",
+			branch:"",
 		},
 	});
 
@@ -43,29 +43,29 @@ const CardRegistration = ({
 	const onSubmit = async (data: RegistrationFormValues) => {
 		try {
 			const response = await fetch("/api/registrations", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
+				method:"POST",
+				headers: {"Content-Type":"application/json" },
 				body: JSON.stringify(data),
 			});
 
 			const result = await response.json();
 
 			if (!response.ok) {
-				throw new Error(result.error || "Lỗi khi gửi thông tin");
+				throw new Error(result.error ||"Lỗi khi gửi thông tin");
 			}
 
 			toast.success("Đăng ký tư vấn thành công! Chúng tôi sẽ liên hệ lại sớm.");
 			reset();
 		} catch (error: any) {
 			console.error("Error submitting registration:", error);
-			toast.error(error.message || "Lỗi khi gửi thông tin đăng ký. Vui lòng thử lại.");
+			toast.error(error.message ||"Lỗi khi gửi thông tin đăng ký. Vui lòng thử lại.");
 		}
 	};
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 40 }}
 			animate={{ opacity: 1, y: 0 }}
-			className="rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-2xl shadow-black/10 lg:p-12"
+			className="rounded-[2.5rem] border border-slate-100 bg-white p-8 lg:p-12"
 		>
 			<div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-center">
 				<h2 className="text-2xl font-black text-slate-900 lg:text-3xl">Đăng ký nhận tư vấn</h2>
@@ -101,7 +101,7 @@ const CardRegistration = ({
 							className="flex w-full items-center gap-2 rounded-xl"
 						>
 							{isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
-							{isSubmitting ? "Đang gửi..." : "Đăng ký tư vấn"}
+							{isSubmitting ?"Đang gửi..." :"Đăng ký tư vấn"}
 						</Button>
 					</div>
 				</form>

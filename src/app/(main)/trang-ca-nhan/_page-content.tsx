@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion } from"motion/react";
 import {
 	ClipboardList,
 	Calendar,
@@ -12,11 +12,11 @@ import {
 	Award,
 	BookOpen,
 	ChevronRight,
-} from "lucide-react";
-import { useAuthStore } from "@/store/useAuthStore";
-import { LogoutButton } from "@/components/auth/logout-button";
-import type { QuizResult } from "@/lib/types";
-import Link from "next/link";
+} from"lucide-react";
+import { useAuthStore } from"@/store/useAuthStore";
+import { LogoutButton } from"@/components/auth/logout-button";
+import type { QuizResult } from"@/lib/types";
+import Link from"next/link";
 
 interface ProfilePageContentProps {
 	quizResults: QuizResult[];
@@ -25,11 +25,11 @@ interface ProfilePageContentProps {
 export default function ProfilePageContent({ quizResults }: ProfilePageContentProps) {
 	const { user, profile } = useAuthStore();
 
-	const avatarLetter = profile?.full_name?.charAt(0) || user?.email?.charAt(0) || "U";
-	const displayName = profile?.full_name || "Thành viên";
+	const avatarLetter = profile?.full_name?.charAt(0) || user?.email?.charAt(0) ||"U";
+	const displayName = profile?.full_name ||"Thành viên";
 	const memberSince = user
-		? new Date(user.created_at).toLocaleDateString("vi-VN", { year: "numeric", month: "long" })
-		: "";
+		? new Date(user.created_at).toLocaleDateString("vi-VN", { year:"numeric", month:"long" })
+		:"";
 
 	const avgScore =
 		quizResults.length > 0
@@ -39,19 +39,19 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 	const bestScore = quizResults.length > 0 ? Math.max(...quizResults.map((r) => r.score ?? 0)) : null;
 
 	const getScoreBg = (score: number | null) => {
-		if (!score) return "from-slate-400 to-slate-500";
-		if (score >= 8) return "from-emerald-400 to-emerald-600";
-		if (score >= 5) return "from-amber-400 to-orange-500";
-		return "from-red-400 to-red-600";
+		if (!score) return"from-slate-400 to-slate-500";
+		if (score >= 8) return"from-emerald-400 to-emerald-600";
+		if (score >= 5) return"from-amber-400 to-orange-500";
+		return"from-red-400 to-red-600";
 	};
 
 	const getScoreLabel = (score: number | null) => {
-		if (!score) return "Chưa có";
-		if (score >= 9) return "Xuất sắc";
-		if (score >= 8) return "Giỏi";
-		if (score >= 6.5) return "Khá";
-		if (score >= 5) return "Trung bình";
-		return "Cần cố gắng";
+		if (!score) return"Chưa có";
+		if (score >= 9) return"Xuất sắc";
+		if (score >= 8) return"Giỏi";
+		if (score >= 6.5) return"Khá";
+		if (score >= 5) return"Trung bình";
+		return"Cần cố gắng";
 	};
 
 	return (
@@ -80,10 +80,10 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 						{/* Avatar */}
 						<div className="relative shrink-0">
 							<div className="absolute inset-0 rounded-full bg-white/30 blur-xl scale-110" />
-							<div className="relative flex h-28 w-28 items-center justify-center rounded-full border-4 border-white/40 bg-white text-5xl font-black text-[#ED1C24] shadow-2xl uppercase ring-4 ring-white/20">
+							<div className="relative flex h-28 w-28 items-center justify-center rounded-full border-4 border-white/40 bg-white text-5xl font-black text-[#ED1C24] uppercase ring-4 ring-white/20">
 								{avatarLetter}
 							</div>
-							<div className="absolute -right-1 -bottom-1 flex h-8 w-8 items-center justify-center rounded-full bg-yellow-400 shadow-lg ring-2 ring-white">
+							<div className="absolute -right-1 -bottom-1 flex h-8 w-8 items-center justify-center rounded-full bg-yellow-400 ring-2 ring-white">
 								<Star size={14} className="fill-white text-white" />
 							</div>
 						</div>
@@ -144,30 +144,30 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 				>
 					{[
 						{
-							label: "Bài đã làm",
+							label:"Bài đã làm",
 							value: quizResults.length,
 							icon: ClipboardList,
-							gradient: "from-[#ED1C24] to-[#ff6b6b]",
-							bg: "bg-red-50",
-							text: "text-[#ED1C24]",
+							gradient:"from-[#ED1C24] to-[#ff6b6b]",
+							bg:"bg-red-50",
+							text:"text-[#ED1C24]",
 						},
 						{
-							label: "Điểm TB",
-							value: avgScore ? `${avgScore}` : "—",
-							sub: avgScore ? "/10" : "",
+							label:"Điểm TB",
+							value: avgScore ?`${avgScore}` :"—",
+							sub: avgScore ?"/10" :"",
 							icon: TrendingUp,
-							gradient: "from-amber-400 to-orange-500",
-							bg: "bg-amber-50",
-							text: "text-amber-600",
+							gradient:"from-amber-400 to-orange-500",
+							bg:"bg-amber-50",
+							text:"text-amber-600",
 						},
 						{
-							label: "Điểm cao nhất",
-							value: bestScore ?? "—",
-							sub: bestScore ? "/10" : "",
+							label:"Điểm cao nhất",
+							value: bestScore ??"—",
+							sub: bestScore ?"/10" :"",
 							icon: Award,
-							gradient: "from-emerald-400 to-teal-500",
-							bg: "bg-emerald-50",
-							text: "text-emerald-600",
+							gradient:"from-emerald-400 to-teal-500",
+							bg:"bg-emerald-50",
+							text:"text-emerald-600",
 						},
 					].map((stat, i) => (
 						<motion.div
@@ -175,9 +175,9 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.25 + i * 0.07 }}
-							className="relative overflow-hidden rounded-2xl bg-white p-4 shadow-lg shadow-slate-200/60 sm:p-6"
+							className="relative overflow-hidden rounded-2xl bg-white p-4 sm:p-6"
 						>
-							<div className={`mb-3 inline-flex rounded-xl bg-gradient-to-br ${stat.gradient} p-2.5 shadow-md`}>
+							<div className={`mb-3 inline-flex rounded-xl bg-gradient-to-br ${stat.gradient} p-2.5`}>
 								<stat.icon size={18} className="text-white" />
 							</div>
 							<div className="flex items-baseline gap-0.5">
@@ -198,7 +198,7 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 					initial={{ opacity: 0, y: 24 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.35 }}
-					className="overflow-hidden rounded-2xl bg-white shadow-lg shadow-slate-200/60"
+					className="overflow-hidden rounded-2xl bg-white"
 				>
 					<div className="flex items-center justify-between border-b border-slate-100 px-6 py-4">
 						<div className="flex items-center gap-2.5">
@@ -225,7 +225,7 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 							</div>
 							<Link
 								href="/kiem-tra-truc-tuyen"
-								className="flex items-center gap-2 rounded-full bg-[#ED1C24] px-6 py-2.5 text-sm font-black text-white shadow-lg shadow-red-200 transition-all hover:shadow-xl active:scale-95"
+								className="flex items-center gap-2 rounded-full bg-[#ED1C24] px-6 py-2.5 text-sm font-black text-white transition-all hover: active:scale-95"
 							>
 								Làm bài ngay <ChevronRight size={14} />
 							</Link>
@@ -242,10 +242,10 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 								>
 									{/* Score badge */}
 									<div
-										className={`flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-2xl bg-gradient-to-br ${getScoreBg(result.score)} shadow-md`}
+										className={`flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-2xl bg-gradient-to-br ${getScoreBg(result.score)}`}
 									>
 										<span className="text-lg font-black leading-none text-white">
-											{result.score ?? "—"}
+											{result.score ??"—"}
 										</span>
 										<span className="text-[9px] font-bold text-white/80">/10</span>
 									</div>
@@ -269,7 +269,7 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 										<div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
 											<div
 												className={`h-full rounded-full bg-gradient-to-r ${getScoreBg(result.score)} transition-all`}
-												style={{ width: `${((result.score ?? 0) / 10) * 100}%` }}
+												style={{ width:`${((result.score ?? 0) / 10) * 100}%` }}
 											/>
 										</div>
 									</div>
@@ -278,10 +278,10 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 									<span
 										className={`hidden shrink-0 rounded-full px-2.5 py-1 text-xs font-black sm:block ${
 											(result.score ?? 0) >= 8
-												? "bg-emerald-50 text-emerald-600"
+												?"bg-emerald-50 text-emerald-600"
 												: (result.score ?? 0) >= 5
-													? "bg-amber-50 text-amber-600"
-													: "bg-red-50 text-red-500"
+													?"bg-amber-50 text-amber-600"
+													:"bg-red-50 text-red-500"
 										}`}
 									>
 										{getScoreLabel(result.score)}

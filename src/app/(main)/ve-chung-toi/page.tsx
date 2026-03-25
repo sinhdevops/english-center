@@ -1,173 +1,406 @@
+
 "use client";
 
 import React from "react";
 import { motion } from "motion/react";
-import { Target, Eye, Zap, Shield, Users, Rocket, Globe, Award, BookOpen } from "lucide-react";
 import Image from "next/image";
-import { ABOUT_HERO, MISSION_VISION, CORE_VALUES, LEADERSHIP_TEAM, ABOUT_STATS_GRID } from "@/constants";
+import Link from "next/link";
+import {
+	Target,
+	Eye,
+	Zap,
+	Shield,
+	Users,
+	Rocket,
+	BookOpen,
+	CheckCircle,
+	ArrowRight,
+} from "lucide-react";
+import {
+	ABOUT_STATS,
+	ABOUT_FEATURES,
+	PROGRAMS_DATA,
+	EXCLUSIVE_MODEL_ITEMS,
+	MISSION_VISION,
+	CORE_VALUES,
+} from "@/constants";
 import Teachers from "@/components/pages/home/teachers";
+import { HomeImages } from "../../../../public/statics/images";
+import { LucideIcon } from "lucide-react";
 
-const SectionTitle: React.FC<{ children: React.ReactNode; subtitle?: string; dark?: boolean }> = ({
-	children,
-	subtitle,
-	dark,
-}) => (
-	<div className="mb-16 text-center">
-		<motion.h2
-			initial={{ opacity: 0, y: 20 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true }}
-			className={`mb-4 text-3xl font-extrabold tracking-tight uppercase lg:text-5xl ${dark ? "text-white" : "text-slate-900"}`}
-		>
-			{children}
-		</motion.h2>
-		{subtitle && (
-			<motion.p
-				initial={{ opacity: 0, y: 20 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				viewport={{ once: true }}
-				transition={{ delay: 0.1 }}
-				className={`mx-auto max-w-2xl text-lg ${dark ? "text-slate-300" : "text-slate-600"}`}
-			>
-				{subtitle}
-			</motion.p>
-		)}
-		<div className={`mx-auto mt-6 h-1.5 w-20 rounded-full ${dark ? "bg-white" : "bg-stem-blue"}`} />
-	</div>
-);
+const ICON_MAP: Record<string, LucideIcon> = { BookOpen, Users, Zap, CheckCircle };
+const VALUE_ICONS = [Zap, Shield, Users, Rocket];
+
+const GRADIENTS = [
+	{ background: "linear-gradient(286.12deg, #FFCA74 9.13%, #C80057 86.64%)" },
+	{ background: "linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)" },
+	{ background: "linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)" },
+];
 
 export default function AboutPage() {
 	return (
 		<div className="overflow-hidden bg-white">
-			{/* Hero Section */}
-			<section className="relative flex h-[70vh] items-center justify-center overflow-hidden">
-				<div className="absolute inset-0 z-0">
-					<Image
-						src={ABOUT_HERO.bgImg}
-						alt="STEM Education"
-						fill
-						className="object-cover brightness-50"
-						priority
-						referrerPolicy="no-referrer"
+			{/* ── 1. HERO ── */}
+			<section className="relative max-h-[400px] min-h-[400px] overflow-hidden bg-slate-950 lg:flex">
+
+				{/* ── LEFT PANEL ── */}
+				<div className="relative z-10 flex flex-col justify-center px-8 py-10 lg:w-[52%] lg:px-16 lg:py-0">
+
+					{/* oversized watermark */}
+					<div
+						aria-hidden
+						className="font-utm-azuki pointer-events-none absolute -bottom-4 left-0 select-none text-[120px] leading-none font-black tracking-tighter text-white/[0.04] uppercase lg:text-[160px]"
+					>
+						STEMKEY
+					</div>
+
+					{/* accent bar */}
+					<motion.div
+						initial={{ scaleX: 0 }}
+						animate={{ scaleX: 1 }}
+						transition={{ duration: 0.6, ease: "easeOut" }}
+						className="bg-stem-blue mb-4 h-1 w-12 origin-left rounded-full"
 					/>
-				</div>
-				<div className="relative z-10 mx-auto max-w-7xl px-4 text-center text-white">
-					<motion.span
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						className="bg-stem-blue mb-6 inline-block rounded-full px-4 py-1 text-xs font-bold tracking-widest uppercase"
-					>
-						{ABOUT_HERO.tag}
-					</motion.span>
-					<motion.h1
-						initial={{ opacity: 0, y: 30 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: 0.1 }}
-						className="mb-8 text-5xl leading-tight font-bold tracking-tighter lg:text-8xl"
-					>
-						{ABOUT_HERO.title.split(" ").map((word, i) =>
-							word === "SÁNG" || word === "TẠO" ? (
-								<span
-									key={i}
-									className="bg-linear-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent"
-								>
-									{word}{" "}
-								</span>
-							) : (
-								<span key={i}>{word} </span>
-							),
-						)}
-					</motion.h1>
-					<motion.p
+
+<motion.h1
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.2 }}
-						className="mx-auto max-w-3xl text-xl leading-relaxed font-medium opacity-90 lg:text-2xl"
+						className="mb-6 text-4xl leading-[1.1] font-black tracking-tight text-white uppercase lg:text-5xl"
 					>
-						{ABOUT_HERO.subtitle}
-					</motion.p>
-				</div>
-			</section>
+						Về <span className="text-stem-blue">Chúng Tôi</span>
+					</motion.h1>
 
-			{/* Mission & Vision */}
-			<section className="mx-auto max-w-7xl px-4 py-24 lg:py-32">
-				<div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+					{/* Program badges */}
 					<motion.div
-						initial={{ opacity: 0, x: -50 }}
-						whileInView={{ opacity: 1, x: 0 }}
-						viewport={{ once: true }}
-						className="space-y-12"
+						initial={{ opacity: 0, y: 12 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.35 }}
+						className="flex flex-wrap gap-2"
 					>
-						{MISSION_VISION.map((item, i) => (
-							<div key={i} className="flex gap-6">
-								<div
-									className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-xl ${
-										item.color === "blue"
-											? "text-stem-blue bg-blue-100"
-											: "bg-emerald-100 text-emerald-600"
-									}`}
-								>
-									{item.title === "Sứ mệnh" ? <Target size={32} /> : <Eye size={32} />}
-								</div>
-								<div>
-									<h3 className="mb-4 text-2xl font-semibold text-slate-900">{item.title}</h3>
-									<p className="text-lg leading-relaxed text-slate-600">{item.desc}</p>
-								</div>
-							</div>
+						{[
+							{ label: "Toán Tư Duy", color: "bg-rose-500" },
+							{ label: "Robotics", color: "bg-indigo-500" },
+							{ label: "Tiếng Anh", color: "bg-emerald-500" },
+						].map((b, i) => (
+							<span
+								key={i}
+								className={`${b.color} rounded-full px-3.5 py-1 text-xs font-bold tracking-wider text-white uppercase`}
+							>
+								{b.label}
+							</span>
 						))}
 					</motion.div>
-					<motion.div
-						initial={{ opacity: 0, x: 50 }}
-						whileInView={{ opacity: 1, x: 0 }}
-						viewport={{ once: true }}
-						className="relative"
+				</div>
+
+				{/* ── RIGHT PANEL — image ── */}
+				<div className="relative hidden lg:block lg:w-[48%]">
+					{/* diagonal clip */}
+					<div
+						className="absolute inset-0"
+						style={{ clipPath: "polygon(8% 0, 100% 0, 100% 100%, 0% 100%)" }}
 					>
-						<div className="relative aspect-square overflow-hidden rounded-xl">
-							<Image
-								src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=800"
-								alt="Vision"
-								width={800}
-								height={800}
-								className="h-full w-full object-cover"
-								referrerPolicy="no-referrer"
-							/>
-						</div>
-						<div className="absolute -bottom-8 -left-8 hidden rounded-xl border border-slate-100 bg-white p-8 shadow-xl lg:block">
-							<div className="text-stem-blue mb-1 text-4xl font-semibold">10+</div>
-							<div className="text-sm font-bold tracking-wider text-slate-500 uppercase">
-								Cơ sở đào tạo
-							</div>
-						</div>
+						<Image
+							src={HomeImages.image5}
+							alt="Học sinh STEMKey"
+							fill
+							className="object-cover"
+							priority
+						/>
+						{/* gradient overlay */}
+						<div
+							className="absolute inset-0"
+							style={{
+								background:
+									"linear-gradient(to right, rgba(2,6,23,0.6) 0%, transparent 40%), linear-gradient(to top, rgba(2,6,23,0.5) 0%, transparent 50%)",
+							}}
+						/>
+					</div>
+
+					{/* floating stat card */}
+					<motion.div
+						initial={{ opacity: 0, x: 30 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ delay: 0.8, type: "spring" }}
+						className="absolute right-8 bottom-12 rounded-2xl border border-white/10 bg-slate-900/80 p-5 backdrop-blur-md"
+					>
+						<div className="mb-1 text-3xl font-black text-white">1+</div>
+						<div className="text-xs font-bold tracking-wider text-slate-400 uppercase">Năm hoạt động</div>
+						<div className="bg-stem-blue mt-3 h-0.5 w-8 rounded-full" />
 					</motion.div>
+
+					
+				</div>
+
+				{/* mobile background */}
+				<div className="absolute inset-0 lg:hidden">
+					<Image src={HomeImages.image5} alt="" fill className="object-cover opacity-20" />
 				</div>
 			</section>
 
-			{/* Core Values */}
-			<section className="bg-slate-900 py-24 text-white lg:py-32">
+			{/* ── 2. STORY ── */}
+			<section className="bg-white py-20 lg:py-28">
 				<div className="mx-auto max-w-7xl px-4">
-					<SectionTitle
-						dark
-						subtitle="Những giá trị cốt lõi định hình nên văn hóa và phương pháp giảng dạy tại STEMKey."
+					<div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
+						{/* Left text */}
+						<motion.div
+							initial={{ opacity: 0, x: -40 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							viewport={{ once: true }}
+						>
+							<span className="bg-stem-blue/10 text-stem-blue mb-4 inline-block rounded-full px-3 py-1 text-xs font-bold tracking-widest uppercase">
+								Câu chuyện của chúng tôi
+							</span>
+							<h2 className="mb-5 text-3xl font-bold text-slate-900 lg:text-4xl">
+								Khơi nguồn đam mê — <br className="hidden lg:block" />
+								Định hình tương lai
+							</h2>
+							<p className="mb-8 text-base leading-relaxed text-slate-600">
+								STEMKey ra đời từ niềm tin rằng mỗi đứa trẻ đều mang trong mình tiềm năng vô hạn. Chúng tôi
+								xây dựng một môi trường học tập nơi sự sáng tạo được nuôi dưỡng, tư duy được rèn luyện và
+								ngôn ngữ trở thành cầu nối với thế giới.
+							</p>
+
+							<div className="space-y-4">
+								{ABOUT_FEATURES.map((f, i) => (
+									<motion.div
+										key={i}
+										initial={{ opacity: 0, x: -20 }}
+										whileInView={{ opacity: 1, x: 0 }}
+										viewport={{ once: true }}
+										transition={{ delay: i * 0.1 }}
+										className="flex items-start gap-3"
+									>
+										<div className="bg-stem-blue mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
+											<CheckCircle size={12} className="text-white" />
+										</div>
+										<span className="text-sm leading-relaxed text-slate-700">{f}</span>
+									</motion.div>
+								))}
+							</div>
+
+							<Link
+								href="/khoa-hoc/dang-ky"
+								className="bg-stem-blue mt-10 inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 active:scale-95"
+							>
+								Đăng ký học thử miễn phí
+								<ArrowRight size={16} />
+							</Link>
+						</motion.div>
+
+						{/* Right image collage */}
+						<motion.div
+							initial={{ opacity: 0, x: 40 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							viewport={{ once: true }}
+							className="grid grid-cols-2 gap-4"
+						>
+							<div className="relative h-64 overflow-hidden rounded-2xl lg:h-80">
+								<Image
+									src={HomeImages.image5}
+									alt="Học sinh STEMKey"
+									fill
+									className="object-cover"
+								/>
+							</div>
+							<div className="relative mt-8 h-64 overflow-hidden rounded-2xl lg:h-80">
+								<Image
+									src={HomeImages.image6}
+									alt="Lớp học STEMKey"
+									fill
+									className="object-cover"
+								/>
+							</div>
+							<div className="relative h-48 overflow-hidden rounded-2xl lg:h-60">
+								<Image
+									src={HomeImages.image1}
+									alt="Robotics STEMKey"
+									fill
+									className="object-cover"
+								/>
+							</div>
+							<div className="relative h-48 overflow-hidden rounded-2xl lg:h-60">
+								<Image
+									src={HomeImages.image3}
+									alt="Tiếng Anh STEMKey"
+									fill
+									className="object-cover"
+								/>
+							</div>
+						</motion.div>
+					</div>
+				</div>
+			</section>
+
+			{/* ── 3. STATS ── */}
+			<section className="bg-slate-950 py-16">
+				<div className="mx-auto max-w-7xl px-4">
+					<motion.p
+						initial={{ opacity: 0, y: 12 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						className="mb-10 text-center text-2xl font-bold text-white lg:text-3xl"
 					>
-						Giá trị cốt lõi
-					</SectionTitle>
-					<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-						{CORE_VALUES.map((value, idx) => {
-							const Icon = [Zap, Shield, Users, Rocket][idx];
-							return (
+						Con số nói lên tất cả
+					</motion.p>
+					<div className="grid grid-cols-2 divide-x divide-y divide-white/5 border border-white/5 md:grid-cols-3 lg:grid-cols-6 lg:divide-y-0">
+						{ABOUT_STATS.map((stat, i) => (
+							<motion.div
+								key={i}
+								initial={{ opacity: 0, y: 16 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ delay: i * 0.07 }}
+								className="flex flex-col items-center px-6 py-8 text-center"
+							>
+								<div className="text-stem-blue mb-1 text-4xl font-black lg:text-5xl">{stat.value}</div>
+								<div className="text-xs font-semibold tracking-wider text-slate-500 uppercase">{stat.label}</div>
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* ── 4. MISSION & VISION ── */}
+			<section className="bg-white py-20 lg:py-28">
+				<div className="mx-auto max-w-7xl px-4">
+					<div className="mb-12 text-center">
+						<h2 className="mb-3 text-3xl font-bold text-slate-900 lg:text-4xl">Sứ mệnh & Tầm nhìn</h2>
+						<p className="mx-auto max-w-xl text-sm text-slate-500 lg:text-base">
+							Kim chỉ nam định hướng mọi hoạt động và quyết định của STEMKey.
+						</p>
+					</div>
+					<div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+						{MISSION_VISION.map((item, i) => (
+							<motion.div
+								key={i}
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ delay: i * 0.15 }}
+								className={`relative overflow-hidden rounded-2xl p-8 lg:p-10 ${
+									i === 0
+										? "bg-stem-blue text-white"
+										: "border border-slate-100 bg-slate-50 text-slate-900"
+								}`}
+							>
+								{/* decorative circle */}
+								<div
+									className={`pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-10 ${
+										i === 0 ? "bg-white" : "bg-stem-blue"
+									}`}
+								/>
+								<div
+									className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl ${
+										i === 0 ? "bg-white/20" : "bg-stem-blue/10"
+									}`}
+								>
+									{i === 0 ? (
+										<Target size={28} className="text-white" />
+									) : (
+										<Eye size={28} className="text-stem-blue" />
+									)}
+								</div>
+								<h3
+									className={`mb-4 text-2xl font-bold ${
+										i === 0 ? "text-white" : "text-slate-900"
+									}`}
+								>
+									{item.title}
+								</h3>
+								<p
+									className={`text-base leading-relaxed ${
+										i === 0 ? "text-white/85" : "text-slate-600"
+									}`}
+								>
+									{item.desc}
+								</p>
+							</motion.div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* ── 5. PROGRAMS ── */}
+			<section className="bg-white py-20">
+				<div className="mx-auto max-w-7xl px-4">
+					<div className="mb-12 text-center">
+						<h2 className="mb-3 text-3xl font-bold text-slate-900 lg:text-4xl">
+							3 chương trình học cốt lõi
+						</h2>
+						<p className="mx-auto max-w-xl text-sm text-slate-500 lg:text-base">
+							Hệ thống giáo dục phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ
+						</p>
+					</div>
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+						{PROGRAMS_DATA.map((p, i) => (
+							<Link key={p.slug} href={`/chuong-trinh/${p.slug}`}>
 								<motion.div
-									key={idx}
 									initial={{ opacity: 0, y: 20 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
-									transition={{ delay: idx * 0.1 }}
-									className="group rounded-xl border border-white/10 bg-white/5 p-8 transition-colors hover:bg-white/10"
+									transition={{ delay: i * 0.1 }}
+									whileHover={{ y: -8 }}
+									className="group relative flex min-h-56 cursor-pointer flex-col justify-between overflow-hidden rounded-2xl p-6 text-white lg:p-8"
+									style={GRADIENTS[i % GRADIENTS.length]}
 								>
-									<div className="bg-stem-blue mb-6 flex h-14 w-14 items-center justify-center rounded-xl transition-transform group-hover:scale-110">
-										<Icon size={28} />
+									<div className="relative z-10 w-3/5">
+										<h3 className="mb-3 text-2xl font-bold lg:text-3xl">{p.title}</h3>
+										<p className="mb-8 text-sm font-medium leading-relaxed opacity-90">{p.desc}</p>
+										<div className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/20 px-5 py-2 text-xs font-bold backdrop-blur-md transition-all hover:bg-white/30">
+											Xem chi tiết <ArrowRight size={13} />
+										</div>
 									</div>
-									<h4 className="mb-4 text-xl font-bold">{value.title}</h4>
-									<p className="leading-relaxed text-slate-400">{value.desc}</p>
+									<div className="pointer-events-none absolute right-0 bottom-0 flex h-full w-1/2 items-end justify-end overflow-hidden">
+										<Image
+											src={p.img}
+											alt={p.title}
+											width={220}
+											height={200}
+											className="h-full w-full transform object-contain object-bottom-right transition-transform duration-500 group-hover:scale-110"
+										/>
+									</div>
+								</motion.div>
+							</Link>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* ── 6. EXCLUSIVE MODEL ── */}
+			<section className="bg-white py-20 lg:py-28">
+				<div className="mx-auto max-w-7xl px-4">
+					<div className="mb-12 text-center">
+						<h2 className="mb-3 text-3xl font-bold text-slate-900 lg:text-4xl">
+							Mô hình lớp học độc quyền
+						</h2>
+						<p className="mx-auto max-w-3xl text-sm leading-relaxed text-slate-500 lg:text-base">
+							Lớp học đảo ngược thúc đẩy khả năng tự học, tính chủ động và tích cực trong học tập ở học
+							trò — các con không phụ thuộc, chờ thầy cô đưa kiến thức.
+						</p>
+					</div>
+					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+						{EXCLUSIVE_MODEL_ITEMS.map((item, i) => {
+							const Icon = ICON_MAP[item.icon];
+							return (
+								<motion.div
+									key={i}
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									viewport={{ once: true }}
+									transition={{ delay: i * 0.1 }}
+									className="flex flex-col items-center rounded-2xl border border-slate-100 bg-[#EFEFEF] p-8 text-center"
+								>
+									<div className="mb-2 text-xs font-black tracking-widest text-slate-400 uppercase">
+										{item.step}
+									</div>
+									<div
+										className={`my-4 flex h-14 w-14 items-center justify-center rounded-2xl ${item.iconBg}`}
+									>
+										{Icon && <Icon className="h-7 w-7 text-white" strokeWidth={1.8} />}
+									</div>
+									<h3 className="mb-3 text-lg font-bold text-slate-900">{item.title}</h3>
+									<p className="text-sm leading-relaxed text-slate-500">{item.description}</p>
 								</motion.div>
 							);
 						})}
@@ -175,83 +408,89 @@ export default function AboutPage() {
 				</div>
 			</section>
 
-			{/* Team Section */}
-			{/* <section className="mx-auto max-w-7xl px-4 py-24 lg:py-32">
-				<SectionTitle subtitle="Đội ngũ chuyên gia và giáo viên tâm huyết, giàu kinh nghiệm trong lĩnh vực giáo dục STEM.">
-					Đội ngũ lãnh đạo
-				</SectionTitle>
-				<div className="grid grid-cols-1 gap-12 md:grid-cols-3">
-					{LEADERSHIP_TEAM.map((member, idx) => (
-						<motion.div
-							key={idx}
-							initial={{ opacity: 0, scale: 0.9 }}
-							whileInView={{ opacity: 1, scale: 1 }}
-							viewport={{ once: true }}
-							className="group text-center"
-						>
-							<div className="relative mb-6 aspect-4/5 overflow-hidden rounded-3xl shadow-xl">
-								<Image
-									src={member.img}
-									alt={member.name}
-									width={400}
-									height={500}
-									className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
-									referrerPolicy="no-referrer"
-								/>
-								<div className="absolute inset-0 bg-linear-to-t from-slate-900/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-							</div>
-							<h4 className="mb-1 text-2xl font-semibold text-slate-900">{member.name}</h4>
-							<p className="text-stem-blue text-xs font-bold tracking-widest uppercase">{member.role}</p>
-						</motion.div>
-					))}
-				</div>
-			</section> */}
-
-			<Teachers />
-
-			{/* Stats Section */}
-			<section className="bg-slate-50 py-24 text-center">
-				<div className="mx-auto grid max-w-7xl grid-cols-2 gap-12 px-4 lg:grid-cols-4">
-					{ABOUT_STATS_GRID.map((stat, idx) => {
-						const Icon = [Users, Globe, Award, BookOpen][idx];
-						return (
-							<div key={idx} className="text-center">
-								<div className="text-stem-blue mb-4 flex justify-center opacity-20">
-									<Icon size={48} />
-								</div>
-								<div className="mb-2 text-4xl font-semibold text-slate-900 lg:text-5xl">
-									{stat.value}
-								</div>
-								<div className="text-sm font-bold tracking-widest text-slate-500 uppercase">
-									{stat.label}
-								</div>
-							</div>
-						);
-					})}
+			{/* ── 7. CORE VALUES ── */}
+			<section className="bg-slate-900 py-20 lg:py-28">
+				<div className="mx-auto max-w-7xl px-4">
+					<div className="mb-12 text-center">
+						<h2 className="mb-3 text-3xl font-bold text-white lg:text-4xl">Giá trị cốt lõi</h2>
+						<p className="mx-auto max-w-xl text-sm text-slate-400 lg:text-base">
+							Những giá trị định hình văn hóa và phương pháp giảng dạy tại STEMKey.
+						</p>
+					</div>
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+						{CORE_VALUES.map((value, idx) => {
+							const Icon = VALUE_ICONS[idx];
+							return (
+								<motion.div
+									key={idx}
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									viewport={{ once: true }}
+									transition={{ delay: idx * 0.1 }}
+									className="group rounded-2xl border border-white/10 bg-white/5 p-8 transition-colors hover:bg-white/10"
+								>
+									<div className="bg-stem-blue mb-5 flex h-12 w-12 items-center justify-center rounded-xl transition-transform group-hover:scale-110">
+										<Icon size={24} className="text-white" />
+									</div>
+									<h4 className="mb-3 text-lg font-bold text-white">{value.title}</h4>
+									<p className="text-sm leading-relaxed text-slate-400">{value.desc}</p>
+								</motion.div>
+							);
+						})}
+					</div>
 				</div>
 			</section>
 
-			{/* CTA Section */}
-			<section className="bg-stem-blue relative overflow-hidden py-24 text-center text-white lg:py-32">
-				<div className="pointer-events-none absolute top-0 left-0 h-full w-full opacity-10">
-					<div className="absolute top-10 left-10 h-64 w-64 rounded-full bg-white blur-3xl" />
-					<div className="absolute right-10 bottom-10 h-96 w-96 rounded-full bg-emerald-400 blur-3xl" />
+			{/* ── 8. TEACHERS ── */}
+			<Teachers />
+
+			{/* ── 9. CTA ── */}
+			<section className="relative overflow-hidden bg-[#00BA3D] py-20 text-white">
+				<div className="pointer-events-none absolute inset-0">
+					<div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+					<div className="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-emerald-800/30 blur-3xl" />
 				</div>
-				<div className="relative z-10 mx-auto max-w-4xl px-4">
-					<h2 className="mb-8 text-4xl leading-tight lg:text-6xl">
-						SẴN SÀNG CHO HÀNH TRÌNH <br /> KHÁM PHÁ CÙNG STEMKEY?
-					</h2>
-					<p className="text-xl opacity-90">
-						Hãy để chúng tôi đồng hành cùng con bạn trên con đường chinh phục tri thức và công nghệ.
-					</p>
-					{/* <div className="flex flex-wrap justify-center gap-6">
-						<button className="text-stem-blue rounded-full bg-white px-10 py-4 font-semibold tracking-wider uppercase shadow-xl transition-all hover:bg-slate-50 active:scale-95">
-							Đăng ký ngay
-						</button>
-						<button className="rounded-full border-2 border-white px-10 py-4 font-semibold tracking-wider text-white uppercase transition-all hover:bg-white/10 active:scale-95">
-							Liên hệ tư vấn
-						</button>
-					</div> */}
+				<div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
+					<motion.h2
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						className="mb-5 text-3xl font-black tracking-tight lg:text-5xl"
+					>
+						Sẵn sàng đồng hành cùng con?
+					</motion.h2>
+					<motion.p
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ delay: 0.1 }}
+						className="mb-10 text-base font-medium opacity-90 lg:text-lg"
+					>
+						Hãy để STEMKey đồng hành cùng con trên hành trình chinh phục tri thức và công nghệ. Đăng ký học
+						thử miễn phí ngay hôm nay.
+					</motion.p>
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ delay: 0.2 }}
+						className="flex flex-wrap justify-center gap-4"
+					>
+						<Link
+							href="/khoa-hoc/dang-ky"
+							className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-[#00BA3D] transition-all hover:bg-slate-50 active:scale-95"
+						>
+							Đăng ký học thử miễn phí
+						</Link>
+						<a
+							href="https://zalo.me/0325610016"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="rounded-full border-2 border-white/40 bg-white/15 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-all hover:bg-white/25 active:scale-95"
+						>
+							Tư vấn lộ trình học
+						</a>
+					</motion.div>
 				</div>
 			</section>
 		</div>

@@ -1,15 +1,15 @@
 "use client";
 
-import { motion } from "motion/react";
-import React from "react";
-import { NEWS_DATA } from "@/constants";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { motion } from"motion/react";
+import React from"react";
+import { NEWS_DATA } from"@/constants";
+import Image from"next/image";
+import { ArrowRight } from"lucide-react";
+import { Swiper, SwiperSlide } from"swiper/react";
+import { Autoplay } from"swiper/modules";
+import"swiper/css";
+import { Button } from"@/components/ui/button";
+import Link from"next/link";
 
 interface NewsProps {
 	initialNews?: any[];
@@ -57,7 +57,7 @@ const News = ({ initialNews }: NewsProps) => {
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
 									transition={{ delay: i * 0.1 }}
-									className="group hover:border-stem-blue/20 flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-xl hover:shadow-slate-200/50"
+									className="group hover:border-stem-blue/20 flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all hover: hover:"
 								>
 									<div className="relative aspect-16/10 overflow-hidden">
 										<Image

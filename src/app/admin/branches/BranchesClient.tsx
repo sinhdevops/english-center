@@ -1,9 +1,12 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import React, { useState } from "react";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { BranchList } from "@/components/admin/branches/BranchList";
 import { BranchModal } from "@/components/admin/branches/BranchModal";
+import { AdminPagination } from "@/components/admin/AdminPagination";
 import { Branch } from "@/lib/types";
 import { toast } from "sonner";
 import { createBranch, updateBranch, deleteBranch } from "./actions";
@@ -12,10 +15,14 @@ interface BranchesClientProps {
 	initialBranches: Branch[];
 }
 
+const ITEMS_PER_PAGE = 10;
+
 export default function BranchesClient({ initialBranches }: BranchesClientProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [editingBranch, setEditingBranch] = useState<Branch | null>(null);
+	const searchParams = useSearchParams();
+	const currentPage = Number(searchParams.get("page")) || 1;
 
 	const handleOpenModal = (branch?: Branch) => {
 		setEditingBranch(branch || null);
@@ -53,6 +60,9 @@ export default function BranchesClient({ initialBranches }: BranchesClientProps)
 		}
 	};
 
+	const totalPages = Math.ceil(initialBranches.length / ITEMS_PER_PAGE);
+	const paginatedBranches = initialBranches.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+
 	return (
 		<>
 			<AdminPageHeader
@@ -62,7 +72,9 @@ export default function BranchesClient({ initialBranches }: BranchesClientProps)
 				onAction={() => handleOpenModal()}
 			/>
 
-			<BranchList branches={initialBranches} isLoading={false} onEdit={handleOpenModal} onDelete={handleDelete} />
+			<BranchList branches={paginatedBranches} isLoading={false} onEdit={handleOpenModal} onDelete={handleDelete} />
+
+			<AdminPagination currentPage={currentPage} totalPages={totalPages} />
 
 			<BranchModal
 				key={isModalOpen ? editingBranch?.id || "new" : "closed"}

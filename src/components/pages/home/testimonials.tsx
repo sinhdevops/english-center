@@ -1,13 +1,13 @@
 "use client";
 
-import { motion } from "motion/react";
-import React from "react";
-import Image from "next/image";
-import { ArrowRight, Calendar } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import Link from "next/link";
+import { motion } from"motion/react";
+import React from"react";
+import Image from"next/image";
+import { ArrowRight, Calendar } from"lucide-react";
+import { Swiper, SwiperSlide } from"swiper/react";
+import { Autoplay } from"swiper/modules";
+import"swiper/css";
+import Link from"next/link";
 
 interface TestimonialsProps {
 	items?: any[];
@@ -92,16 +92,16 @@ const Testimonials = ({ items = [] }: TestimonialsProps) => {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: i * 0.1 }}
-								className="group hover:border-stem-blue/20 flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all hover:shadow-xl hover:shadow-slate-200/50"
+								className="group hover:border-stem-blue/20 flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all hover: hover:"
 							>
 								<Link
-									href={award.id ? `/tin-tuc/${award.id}` : "/goc-ba-me"}
+									href={award.id ?`/tin-tuc/${award.id}` :"/goc-ba-me"}
 									className="flex h-full flex-col"
 								>
 									<div className="relative aspect-4/3 overflow-hidden rounded-t-2xl">
 										<Image
 											src={
-												award.img || "https://images.unsplash.com/photo-1543269865-cbf427effbad"
+												award.img ||"https://images.unsplash.com/photo-1543269865-cbf427effbad"
 											}
 											alt={`Giải thưởng: ${award.title}`}
 											width={800}
@@ -118,7 +118,7 @@ const Testimonials = ({ items = [] }: TestimonialsProps) => {
 											<span>
 												{award.date
 													? new Date(award.date).toLocaleDateString("vi-VN")
-													: "14/03/2026"}
+													:"14/03/2026"}
 											</span>
 										</div>
 										<h3 className="group-hover:text-stem-blue mb-3 line-clamp-1 text-lg font-black text-slate-900 transition-colors">

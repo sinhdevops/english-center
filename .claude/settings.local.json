@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(sed -i 's|0325 610 016|091 255 1090|g' \"e:/Works/EmSinhKay-company/english-center/src/components/layout/Header.tsx\")",
-      "Bash(sed -i 's|Nam An Khánh, Hà Nội|Tầng 4 - Tòa nhà T4, Thăng Long Victory, An Khánh, Hà Nội|g' \"e:/Works/EmSinhKay-company/english-center/src/components/layout/Header.tsx\")"
+      "Bash(sed -i 's|Nam An Khánh, Hà Nội|Tầng 4 - Tòa nhà T4, Thăng Long Victory, An Khánh, Hà Nội|g' \"e:/Works/EmSinhKay-company/english-center/src/components/layout/Header.tsx\")",
+      "Bash(node -e \":*)"
     ],
     "additionalDirectories": [
       "e:\\Works\\EmSinhKay-company\\english-center\\src\\components\\pages\\home"

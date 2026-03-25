@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { AnimatePresence } from "motion/react";
-import { Clock, ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { QUIZ_SETS } from "@/constants";
-import { QuizIntro } from "@/components/pages/quiz/quiz-intro";
-import { QuizTaking } from "@/components/pages/quiz/quiz-taking";
-import { QuizReview } from "@/components/pages/quiz/quiz-review";
-import { QuizResult } from "@/components/pages/quiz/quiz-result";
+import { useState, useEffect, useCallback, useRef, useMemo } from"react";
+import { AnimatePresence } from"motion/react";
+import { Clock, ChevronRight } from"lucide-react";
+import { useRouter } from"next/navigation";
+import { QUIZ_SETS } from"@/constants";
+import { QuizIntro } from"@/components/pages/quiz/quiz-intro";
+import { QuizTaking } from"@/components/pages/quiz/quiz-taking";
+import { QuizReview } from"@/components/pages/quiz/quiz-review";
+import { QuizResult } from"@/components/pages/quiz/quiz-result";
 
-type GameState = "loading" | "intro" | "taking" | "result" | "review";
+type GameState ="loading" |"intro" |"taking" |"result" |"review";
 
 interface QuizRecord {
 	id: string;
@@ -47,7 +47,7 @@ function formatTime(seconds: number) {
 	const h = Math.floor(seconds / 3600);
 	const m = Math.floor((seconds % 3600) / 60);
 	const s = seconds % 60;
-	return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+	return`${h.toString().padStart(2,"0")}:${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
 }
 
 export default function PageContent({ slug, userId, userEmail, initialRecord, createQuizRecord, updateQuizRecord }: Props) {
@@ -56,7 +56,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 	const quizSet = useMemo(() => QUIZ_SETS.find((s) => s.id === slug) ?? QUIZ_SETS[0], [slug]);
 	const { questions, durationSeconds: defaultTime } = quizSet;
 
-	const storageKey = useMemo(() => `quiz_progress_${userId}_${slug}`, [userId, slug]);
+	const storageKey = useMemo(() =>`quiz_progress_${userId}_${slug}`, [userId, slug]);
 
 	const [gameState, setGameState] = useState<GameState>("loading");
 	const [timeLeft, setTimeLeft] = useState(defaultTime);
@@ -75,7 +75,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 			try {
 				const data = JSON.parse(saved);
 				setRecordId(data.recordId);
-				setParentPhone(data.parentPhone || "");
+				setParentPhone(data.parentPhone ||"");
 				setCurrentAnswers(data.answers || {});
 				setCurrentQuestionIndex(data.currentQuestionIndex || 0);
 				setTimeLeft(data.timeLeft ?? defaultTime);
@@ -86,16 +86,16 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 			}
 		}
 
-		if (initialRecord?.status === "completed") {
+		if (initialRecord?.status ==="completed") {
 			setScore(initialRecord.score ?? 0);
 			setCurrentAnswers(initialRecord.answers || {});
 			setGameState("result");
 			return;
 		}
 
-		if (initialRecord?.status === "in_progress") {
+		if (initialRecord?.status ==="in_progress") {
 			setRecordId(initialRecord.id);
-			setParentPhone(initialRecord.parent_phone || "");
+			setParentPhone(initialRecord.parent_phone ||"");
 			setCurrentAnswers(initialRecord.answers || {});
 			setCurrentQuestionIndex(initialRecord.current_question_index || 0);
 			setTimeLeft(initialRecord.time_left ?? defaultTime);
@@ -103,7 +103,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 				storageKey,
 				JSON.stringify({
 					recordId: initialRecord.id,
-					parentPhone: initialRecord.parent_phone || "",
+					parentPhone: initialRecord.parent_phone ||"",
 					answers: initialRecord.answers || {},
 					currentQuestionIndex: initialRecord.current_question_index || 0,
 					timeLeft: initialRecord.time_left ?? defaultTime,
@@ -118,7 +118,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 
 	// Auto-save to localStorage on answer/question change
 	useEffect(() => {
-		if (gameState !== "taking" || !recordId || !storageKey) return;
+		if (gameState !=="taking" || !recordId || !storageKey) return;
 		localStorage.setItem(
 			storageKey,
 			JSON.stringify({ recordId, parentPhone, answers: currentAnswers, currentQuestionIndex, timeLeft }),
@@ -144,7 +144,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 	}, [currentAnswers, recordId, storageKey, questions, updateQuizRecord]);
 
 	useEffect(() => {
-		if (gameState !== "taking") return;
+		if (gameState !=="taking") return;
 		if (timeLeft === 0) {
 			handleFinish();
 			return;
@@ -205,7 +205,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 		setCurrentQuestionIndex(0);
 	}, []);
 
-	if (gameState === "loading") {
+	if (gameState ==="loading") {
 		return (
 			<div className="flex min-h-screen items-center justify-center bg-[#ff9f43]">
 				<div className="h-10 w-10 animate-spin rounded-full border-4 border-white border-t-transparent" />
@@ -226,20 +226,20 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 
 			{/* Header */}
 			<div className="relative z-20 mx-auto mb-6 flex max-w-7xl flex-col items-center gap-3 md:mb-12 md:gap-4">
-				<div className="rounded-full bg-white px-5 py-1 shadow-lg md:px-8 md:py-1.5">
+				<div className="rounded-full bg-white px-5 py-1 md:px-8 md:py-1.5">
 					<span className="text-sm font-black tracking-widest text-slate-800 uppercase md:text-xl">
 						StemKey
 					</span>
 				</div>
 
-				<h1 className="px-4 text-center text-xl font-black text-white uppercase drop-shadow-lg md:text-4xl lg:text-5xl">
+				<h1 className="px-4 text-center text-xl font-black text-white uppercase drop- md:text-4xl lg:text-5xl">
 					{quizSet.title} – {quizSet.ageGroup}
 				</h1>
 
 				<div className="flex w-full flex-wrap items-center justify-center gap-2 md:gap-6">
-					{gameState === "taking" && (
+					{gameState ==="taking" && (
 						<>
-							<div className="flex items-center gap-2 rounded-xl border-b-2 border-slate-200 bg-white/95 p-2 shadow-xl backdrop-blur-sm md:gap-3 md:border-b-4 md:p-4">
+							<div className="flex items-center gap-2 rounded-xl border-b-2 border-slate-200 bg-white/95 p-2 backdrop-blur-sm md:gap-3 md:border-b-4 md:p-4">
 								<div className="text-[8px] font-extrabold text-slate-400 uppercase md:text-xs">
 									Tiến độ
 								</div>
@@ -247,14 +247,14 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 									{Object.keys(currentAnswers).length}/{questions.length}
 								</div>
 							</div>
-							<div className="relative flex items-center gap-2 rounded-xl border-b-2 border-slate-200 bg-white/95 p-2 shadow-xl backdrop-blur-sm md:gap-3 md:border-b-4 md:p-4">
+							<div className="relative flex items-center gap-2 rounded-xl border-b-2 border-slate-200 bg-white/95 p-2 backdrop-blur-sm md:gap-3 md:border-b-4 md:p-4">
 								<div className="text-[8px] font-extrabold text-slate-400 uppercase md:text-xs">
 									Thời gian
 								</div>
 								<div className="font-mono text-sm font-black text-slate-800 md:text-2xl">
 									{formatTime(timeLeft)}
 								</div>
-								<div className="absolute -top-1.5 -right-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-yellow-400 shadow-lg md:-top-4 md:-right-4 md:h-12 md:w-12 md:border-4">
+								<div className="absolute -top-1.5 -right-1.5 flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-yellow-400 md:-top-4 md:-right-4 md:h-12 md:w-12 md:border-4">
 									<Clock size={12} className="text-white md:hidden" />
 									<Clock size={24} className="hidden text-white md:block" />
 								</div>
@@ -266,14 +266,14 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 
 			{/* Main Content Area */}
 			<div className="relative z-20">
-				{gameState === "intro" && (
+				{gameState ==="intro" && (
 					<QuizIntro
 						questionCount={questions.length}
 						timeLimit={defaultTime / 60}
 						onStart={handleStart}
 					/>
 				)}
-				{gameState === "taking" && (
+				{gameState ==="taking" && (
 					<QuizTaking
 						questions={questions}
 						currentQuestionIndex={currentQuestionIndex}
@@ -285,7 +285,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 						onNext={handleNext}
 					/>
 				)}
-				{gameState === "review" && (
+				{gameState ==="review" && (
 					<QuizReview
 						questions={questions}
 						currentQuestionIndex={currentQuestionIndex}
@@ -297,7 +297,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 					/>
 				)}
 				<AnimatePresence>
-					{gameState === "result" && (
+					{gameState ==="result" && (
 						<QuizResult
 							score={score}
 							totalQuestions={questions.length}
@@ -311,7 +311,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 			{/* Back Button */}
 			<button
 				onClick={() => router.back()}
-				className="fixed bottom-6 left-4 z-50 flex cursor-pointer items-center gap-2 rounded-full bg-white/30 px-5 py-2.5 text-xs font-black text-white shadow-lg backdrop-blur-md transition-all hover:bg-white/40 active:scale-95 md:bottom-8 md:left-8 md:px-6 md:py-3 md:text-base"
+				className="fixed bottom-6 left-4 z-50 flex cursor-pointer items-center gap-2 rounded-full bg-white/30 px-5 py-2.5 text-xs font-black text-white backdrop-blur-md transition-all hover:bg-white/40 active:scale-95 md:bottom-8 md:left-8 md:px-6 md:py-3 md:text-base"
 			>
 				<ChevronRight size={16} className="rotate-180 md:h-5 md:w-5" /> Quay lại
 			</button>

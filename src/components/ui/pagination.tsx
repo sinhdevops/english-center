@@ -57,7 +57,7 @@ export const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
 					href={createPageURL(page)}
 					className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold transition-all ${
 						isCurrent
-							? "bg-stem-blue text-white shadow-lg shadow-blue-200"
+							? "bg-stem-blue text-white"
 							: "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
 					}`}
 				>

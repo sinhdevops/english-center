@@ -1,9 +1,12 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import React, { useState } from "react";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { ScheduleTable } from "@/components/admin/schedules/ScheduleTable";
 import { ScheduleModal } from "@/components/admin/schedules/ScheduleModal";
+import { AdminPagination } from "@/components/admin/AdminPagination";
 import { ClassSchedule, Branch, Course } from "@/lib/types";
 import { toast } from "sonner";
 import { Filter } from "lucide-react";
@@ -15,10 +18,14 @@ interface SchedulesClientProps {
 	courses: Course[];
 }
 
+const ITEMS_PER_PAGE = 10;
+
 export default function SchedulesClient({ initialSchedules, branches, courses }: SchedulesClientProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [editingSchedule, setEditingSchedule] = useState<ClassSchedule | null>(null);
+	const searchParams = useSearchParams();
+	const currentPage = Number(searchParams.get("page")) || 1;
 
 	const handleOpenModal = (schedule?: ClassSchedule) => {
 		setEditingSchedule(schedule || null);
@@ -83,12 +90,18 @@ export default function SchedulesClient({ initialSchedules, branches, courses }:
 			</div>
 
 			<ScheduleTable
-				schedules={initialSchedules}
+				schedules={initialSchedules.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)}
 				branches={branches}
 				courses={courses}
 				isLoading={false}
 				onEdit={handleOpenModal}
 				onDelete={handleDelete}
+			/>
+
+			<AdminPagination
+				currentPage={currentPage}
+				totalPages={Math.ceil(initialSchedules.length / ITEMS_PER_PAGE)}
+				onPageChange={setCurrentPage}
 			/>
 
 			<ScheduleModal

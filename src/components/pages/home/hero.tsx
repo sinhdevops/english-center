@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { HERO_TARGETS } from "@/constants";
-import React from "react";
-import Link from "next/link";
+import { motion } from"motion/react";
+import { Button } from"@/components/ui/button";
+import { HERO_TARGETS } from"@/constants";
+import React from"react";
+import Link from"next/link";
 const Hero = () => {
 	return (
 		<section className="relative flex min-h-[1024px] overflow-hidden lg:min-h-[640px]">
@@ -37,7 +37,7 @@ const Hero = () => {
 						y: [0, -20, 0],
 						opacity: [0.2, 0.4, 0.2],
 					}}
-					transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+					transition={{ duration: 5, repeat: Infinity, ease:"easeInOut" }}
 					className="absolute -top-10 -left-10 z-0 h-64 w-64 rounded-full bg-white/10 blur-3xl"
 				/>
 				<motion.div
@@ -45,7 +45,7 @@ const Hero = () => {
 						y: [0, 20, 0],
 						opacity: [0.1, 0.3, 0.1],
 					}}
-					transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+					transition={{ duration: 7, repeat: Infinity, ease:"easeInOut", delay: 1 }}
 					className="absolute -right-20 bottom-20 z-0 h-80 w-80 rounded-full bg-white/10 blur-3xl"
 				/>
 			</div>
@@ -61,7 +61,7 @@ const Hero = () => {
 							<motion.p
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
-								className="font-italianno text-4xl text-white drop-shadow-sm lg:text-5xl"
+								className="font-italianno text-4xl text-white drop- lg:text-5xl"
 							>
 								Phát triển toàn diện
 							</motion.p>
@@ -90,7 +90,7 @@ const Hero = () => {
 								<Button
 									size="lg"
 									variant="primary"
-									className="w-full rounded-full text-base font-bold tracking-wider uppercase shadow-xl transition-all active:scale-95 sm:w-auto"
+									className="w-full rounded-full text-base font-bold tracking-wider uppercase transition-all active:scale-95 sm:w-auto"
 								>
 									Đăng ký học thử miễn phí
 								</Button>

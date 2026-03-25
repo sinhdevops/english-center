@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { AuthForm } from "@/components/auth/auth-form";
+import { motion } from"framer-motion";
+import { AuthForm } from"@/components/auth/auth-form";
 
 export default function LoginPage() {
 	return (
@@ -9,7 +9,7 @@ export default function LoginPage() {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="w-full max-w-md rounded-3xl bg-white p-8 shadow-xl lg:p-10"
+				className="w-full max-w-md rounded-3xl bg-white p-8 lg:p-10"
 			>
 				<div className="mb-10 text-center">
 					<h2 className="mb-2 text-3xl font-bold text-slate-900">Chào mừng trở lại!</h2>

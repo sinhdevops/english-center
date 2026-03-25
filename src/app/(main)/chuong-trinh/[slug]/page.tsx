@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { Calendar, Book } from "lucide-react";
-import { PROGRAMS_DETAIL_DATA } from "@/constants";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
+import React from"react";
+import Image from"next/image";
+import Link from"next/link";
+import { useParams } from"next/navigation";
+import { Calendar, Book } from"lucide-react";
+import { PROGRAMS_DETAIL_DATA } from"@/constants";
+import { Breadcrumb } from"@/components/ui/breadcrumb";
 
 export default function ProgramDetailPage() {
 	const { slug } = useParams();
@@ -31,7 +31,7 @@ export default function ProgramDetailPage() {
 				<div className="mx-auto max-w-7xl px-4">
 					<Breadcrumb
 						items={[
-							{ label: "Học online", href: "#" },
+							{ label:"Học online", href:"#" },
 							{ label: program.breadcrumb, active: true },
 						]}
 						variant="dark"
@@ -70,7 +70,7 @@ export default function ProgramDetailPage() {
 						</div>
 
 						{/* Description Content */}
-						<div className="rounded-4xl bg-white p-8 shadow-sm lg:p-12">
+						<div className="rounded-4xl bg-white p-8 lg:p-12">
 							<h2 className="mb-6 text-2xl font-black text-slate-800 lg:text-4xl">{program.title}</h2>
 							<div className="prose prose-slate max-w-none space-y-6 leading-relaxed text-slate-600">
 								<p className="border-stem-blue border-l-4 pl-6 text-lg font-medium text-slate-900 italic">
@@ -84,7 +84,7 @@ export default function ProgramDetailPage() {
 					{/* Sidebar */}
 					<div className="w-full space-y-8 lg:w-1/3">
 						{/* Registration CTA */}
-						<div className="overflow-hidden rounded-4xl border border-slate-100 bg-white p-2 shadow-xl shadow-slate-200/50">
+						<div className="overflow-hidden rounded-4xl border border-slate-100 bg-white p-2">
 							<div className="p-6 text-center">
 								<p className="mb-2 text-sm font-medium text-slate-500">Thay đổi để đón cơ hội mới</p>
 								<p className="mb-6 font-bold text-slate-800">Nhận lộ trình FREE cho con</p>
@@ -97,7 +97,7 @@ export default function ProgramDetailPage() {
 						</div>
 
 						{/* Quick Links Menu */}
-						<div className="overflow-hidden rounded-4xl border border-slate-100 bg-white shadow-sm">
+						<div className="overflow-hidden rounded-4xl border border-slate-100 bg-white">
 							<div className="border-b border-slate-50 bg-slate-50/30 p-5 px-8">
 								<h3 className="h-4 leading-none font-black text-slate-900">Liên kết nhanh</h3>
 							</div>

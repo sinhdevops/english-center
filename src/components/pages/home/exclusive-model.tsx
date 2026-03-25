@@ -14,7 +14,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 const ExclusiveModel = () => {
 	return (
-		<section className="bg-white">
+		<section className="bg-[#EFEFEF] py-20">
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="mb-12 text-center">
 					<h2 className="mb-3 text-3xl font-bold lg:text-4xl">Mô hình lớp học độc quyền</h2>
@@ -34,7 +34,7 @@ const ExclusiveModel = () => {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: i * 0.1 }}
-								className="flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-8 text-center shadow-sm transition-shadow hover:shadow-md"
+								className="flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-8 text-center"
 							>
 								<div className={`mb-5 flex size-14 items-center justify-center rounded-2xl ${item.iconBg}`}>
 									{Icon && <Icon className="size-7 text-white" strokeWidth={1.8} />}

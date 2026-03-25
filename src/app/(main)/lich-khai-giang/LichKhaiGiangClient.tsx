@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
-import { motion, AnimatePresence } from "motion/react";
-import Image from "next/image";
-import Link from "next/link";
-import { MapPin, Phone, Calendar } from "lucide-react";
-import { IMAGES } from "../../../../public/statics/images";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
+import React from"react";
+import { motion, AnimatePresence } from"motion/react";
+import Image from"next/image";
+import Link from"next/link";
+import { MapPin, Phone, Calendar } from"lucide-react";
+import { IMAGES } from"../../../../public/statics/images";
+import { Breadcrumb } from"@/components/ui/breadcrumb";
 
 interface ScheduleWithJoin {
 	id: string;
@@ -33,20 +33,7 @@ interface Branch {
 
 const CITIES = [
 	"TP.Hồ Chí Minh",
-	"Đà Nẵng",
-	"Hải Phòng",
-	"Bình Dương",
-	"Bắc Ninh",
-	"Đồng Nai",
-	"Nghệ An",
-	"Thanh Hóa",
 	"Hà Nội",
-	"Quảng Ninh",
-	"Hà Tĩnh",
-	"Nha Trang",
-	"Thừa Thiên Huế",
-	"Vũng Tàu",
-	"Lớp online",
 ];
 
 interface LichKhaiGiangClientProps {
@@ -55,12 +42,26 @@ interface LichKhaiGiangClientProps {
 }
 
 export default function LichKhaiGiangClient({ initialBranches, initialSchedules }: LichKhaiGiangClientProps) {
-	const [activeCity, setActiveCity] = React.useState("Đà Nẵng");
+	const [activeCity, setActiveCity] = React.useState("TP.Hồ Chí Minh");
 	const [selectedBranchId, setSelectedBranchId] = React.useState<string | null>(
 		initialBranches.length > 0 ? initialBranches[0].id : null,
 	);
 
-	const filteredBranches = initialBranches.filter((b) => b.city === activeCity || activeCity === "Đà Nẵng" || true);
+	const normalize = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+	const CITY_KEYWORDS: Record<string, string[]> = {
+		"TP.Hồ Chí Minh": ["ho chi minh", "hcm", "sai gon"],
+		"Hà Nội": ["ha noi"],
+	};
+	const filteredBranches = initialBranches.filter((b) => {
+		const keywords = CITY_KEYWORDS[activeCity] ?? [normalize(activeCity)];
+		const normalizedAddress = normalize(b.city ?? b.address ?? "");
+		return keywords.some((kw) => normalizedAddress.includes(kw));
+	});
+
+	React.useEffect(() => {
+		setSelectedBranchId(filteredBranches[0]?.id ?? null);
+	}, [activeCity]);
+
 	const selectedBranch = initialBranches.find((b) => b.id === selectedBranchId);
 	const branchSchedules = initialSchedules.filter((s) => s.branch_id === selectedBranchId);
 
@@ -93,7 +94,7 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 							initial={{ opacity: 0, scale: 0.8 }}
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ delay: 0.2 }}
-							className="w-fit rounded-lg bg-[#FBB03B] px-4 py-1.5 shadow-lg lg:px-6 lg:py-2"
+							className="w-fit rounded-lg bg-[#FBB03B] px-4 py-1.5 lg:px-6 lg:py-2"
 						>
 							<span className="text-sm font-bold text-[#ED1C24] uppercase lg:text-lg">
 								Hệ thống giáo dục STEMKey
@@ -119,7 +120,7 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 			<div className="mx-auto max-w-7xl py-8">
 				<div className="mb-8">
 					<Breadcrumb
-						items={[{ label: "Trang chủ", href: "/" }, { label: "Lịch khai giảng", active: true }]}
+						items={[{ label:"Trang chủ", href:"/" }, { label:"Lịch khai giảng", active: true }]}
 						variant="dark"
 					/>
 				</div>
@@ -133,8 +134,8 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 							onClick={() => setActiveCity(city)}
 							className={`shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-all lg:px-6 ${
 								activeCity === city
-									? "bg-[#ED1C24] text-white shadow-md"
-									: "border border-slate-200 bg-white text-slate-600 hover:border-[#ED1C24] hover:text-[#ED1C24]"
+									?"bg-[#ED1C24] text-white"
+									:"border border-slate-200 bg-white text-slate-600 hover:border-[#ED1C24] hover:text-[#ED1C24]"
 							}`}
 						>
 							{city}
@@ -158,10 +159,10 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 									key={branch.id}
 									whileHover={{ y: -4 }}
 									onClick={() => setSelectedBranchId(branch.id)}
-									className={`cursor-pointer rounded-xl border-2 bg-white p-6 shadow-sm transition-all ${
+									className={`cursor-pointer rounded-xl border-2 bg-white p-6 transition-all ${
 										selectedBranchId === branch.id
-											? "border-stem-blue ring-4 ring-blue-50/50"
-											: "border-transparent"
+											?"border-stem-blue ring-4 ring-blue-50/50"
+											:"border-transparent"
 									}`}
 								>
 									<h4 className="mb-3 font-bold text-slate-900">{branch.address}</h4>
@@ -181,7 +182,7 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 					</div>
 
 					<div className="flex-1">
-						<div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-xl lg:p-8">
+						<div className="rounded-2xl border border-slate-100 bg-white p-6 lg:p-8">
 							<div className="mb-8 flex items-center justify-between">
 								<div>
 									<h3 className="text-xl font-black tracking-tight text-slate-900 uppercase lg:text-2xl">
@@ -202,15 +203,15 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 												initial={{ opacity: 0, y: 10 }}
 												animate={{ opacity: 1, y: 0 }}
 												transition={{ delay: idx * 0.05 }}
-												className="rounded-xl border border-slate-100 bg-slate-50/30 p-5 shadow-sm"
+												className="rounded-xl border border-slate-100 bg-slate-50/30 p-5"
 											>
 												<div className="mb-4 flex items-start justify-between">
 													<div>
 														<p className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">
-															{schedule.course?.program?.name || "Tiêu chuẩn"}
+															{schedule.course?.program?.name ||"Tiêu chuẩn"}
 														</p>
 														<h4 className="text-stem-blue text-lg leading-tight font-black">
-															{schedule.course?.name || "Robotics"}
+															{schedule.course?.name ||"Robotics"}
 														</h4>
 													</div>
 													<span className="rounded bg-slate-100 px-2 py-1 font-mono text-[10px] font-bold text-slate-600">
@@ -228,14 +229,14 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 															<div className="h-full w-full rounded-full bg-[#ED1C24]" />
 														</div>
 														<span className="font-medium">
-															Khai giảng:{" "}
+															Khai giảng:{""}
 															{new Date(schedule.start_date).toLocaleDateString("vi-VN")}
 														</span>
 													</div>
 												</div>
 
 												<Link href="/khoa-hoc/dang-ky">
-													<button className="bg-stem-blue w-full rounded-xl py-3.5 text-sm font-black tracking-widest text-white uppercase shadow-lg shadow-blue-500/20 active:scale-95">
+													<button className="bg-stem-blue w-full rounded-xl py-3.5 text-sm font-black tracking-widest text-white uppercase active:scale-95">
 														Đăng ký ngay
 													</button>
 												</Link>
@@ -273,10 +274,10 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 														className="text-sm transition-colors hover:bg-slate-50/50"
 													>
 														<td className="px-6 py-6 font-bold text-slate-800">
-															{schedule.course?.program?.name || "Tiêu chuẩn"}
+															{schedule.course?.program?.name ||"Tiêu chuẩn"}
 														</td>
 														<td className="text-stem-blue px-6 py-6 font-semibold">
-															{schedule.course?.name || "Robotics"}
+															{schedule.course?.name ||"Robotics"}
 														</td>
 														<td className="px-6 py-6">
 															<span className="rounded bg-slate-100 px-2 py-1 font-mono text-xs font-bold text-slate-700">

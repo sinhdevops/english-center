@@ -1,17 +1,17 @@
 "use client";
 
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
-import { ChevronLeft, ChevronRight, Calendar, ArrowUpRight, User } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
+import React from"react";
+import { Swiper, SwiperSlide } from"swiper/react";
+import { Navigation, Pagination, Autoplay, EffectFade } from"swiper/modules";
+import { ChevronLeft, ChevronRight, Calendar, ArrowUpRight, User } from"lucide-react";
+import Link from"next/link";
+import Image from"next/image";
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
+import"swiper/css";
+import"swiper/css/navigation";
+import"swiper/css/pagination";
+import"swiper/css/effect-fade";
 
 interface NewsCarouselProps {
 	items: any[];
@@ -27,14 +27,14 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ items = [] }) => {
 				spaceBetween={30}
 				slidesPerView={1}
 				navigation={{
-					nextEl: ".swiper-button-next-custom",
-					prevEl: ".swiper-button-prev-custom",
+					nextEl:".swiper-button-next-custom",
+					prevEl:".swiper-button-prev-custom",
 				}}
 				pagination={{
 					clickable: true,
 					bulletClass:
 						"swiper-pagination-bullet !bg-slate-300 !opacity-50 !w-2 !h-2 !transition-all !duration-300",
-					bulletActiveClass: "!bg-stem-blue !opacity-100 !w-6 !rounded-full",
+					bulletActiveClass:"!bg-stem-blue !opacity-100 !w-6 !rounded-full",
 				}}
 				autoplay={{
 					delay: 6000,
@@ -46,7 +46,7 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ items = [] }) => {
 					<SwiperSlide key={slide.id}>
 						<Link
 							href={`/tin-tuc/${slide.id}`}
-							className="group/card relative block overflow-hidden rounded-4xl bg-white shadow-2xl ring-1 shadow-slate-200/40 ring-slate-100 transition-all duration-500"
+							className="group/card relative block overflow-hidden rounded-4xl bg-white ring-1 ring-slate-100 transition-all duration-500"
 						>
 							<div className="flex flex-col lg:flex-row">
 								{/* Image Section */}
@@ -66,8 +66,8 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ items = [] }) => {
 									<div className="absolute inset-0 bg-linear-to-t from-slate-900/40 via-transparent to-transparent opacity-60" />
 
 									<div className="absolute top-6 left-6 z-10">
-										<span className="rounded-full bg-white/95 px-6 py-2 text-[11px] font-black tracking-[0.2em] text-slate-900 uppercase shadow-lg ring-1 ring-slate-200/50 backdrop-blur-md">
-											{slide.category || "Bài viết mới"}
+										<span className="rounded-full bg-white/95 px-6 py-2 text-[11px] font-black tracking-[0.2em] text-slate-900 uppercase ring-1 ring-slate-200/50 backdrop-blur-md">
+											{slide.category ||"Bài viết mới"}
 										</span>
 									</div>
 								</div>
@@ -95,7 +95,7 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ items = [] }) => {
 									</p>
 
 									<div className="mt-auto flex">
-										<span className="group/btn hover:bg-stem-blue hover:shadow-stem-blue/20 relative flex items-center gap-3 overflow-hidden rounded-2xl bg-slate-900 px-8 py-4 text-sm font-black text-white transition-all hover:shadow-xl">
+										<span className="group/btn hover:bg-stem-blue hover: relative flex items-center gap-3 overflow-hidden rounded-2xl bg-slate-900 px-8 py-4 text-sm font-black text-white transition-all hover:">
 											<span>Khám phá ngay</span>
 											<ArrowUpRight
 												size={20}
@@ -112,12 +112,12 @@ const NewsCarousel: React.FC<NewsCarouselProps> = ({ items = [] }) => {
 
 			{/* Custom Elegant Navigation */}
 			<div className="absolute top-[45%] -left-8 z-20 hidden -translate-y-1/2 lg:block">
-				<button className="swiper-button-prev-custom group/nav hover:bg-stem-blue flex h-16 w-16 items-center justify-center rounded-3xl bg-white text-slate-900 shadow-2xl ring-1 shadow-slate-200 ring-slate-100 transition-all hover:-translate-x-1 hover:text-white disabled:opacity-0">
+				<button className="swiper-button-prev-custom group/nav hover:bg-stem-blue flex h-16 w-16 items-center justify-center rounded-3xl bg-white text-slate-900 ring-1 ring-slate-100 transition-all hover:-translate-x-1 hover:text-white disabled:opacity-0">
 					<ChevronLeft size={28} className="transition-transform group-hover/nav:scale-110" />
 				</button>
 			</div>
 			<div className="absolute top-[45%] -right-8 z-20 hidden -translate-y-1/2 lg:block">
-				<button className="swiper-button-next-custom group/nav hover:bg-stem-blue flex h-16 w-16 items-center justify-center rounded-3xl bg-white text-slate-900 shadow-2xl ring-1 shadow-slate-200 ring-slate-100 transition-all hover:translate-x-1 hover:text-white disabled:opacity-0">
+				<button className="swiper-button-next-custom group/nav hover:bg-stem-blue flex h-16 w-16 items-center justify-center rounded-3xl bg-white text-slate-900 ring-1 ring-slate-100 transition-all hover:translate-x-1 hover:text-white disabled:opacity-0">
 					<ChevronRight size={28} className="transition-transform group-hover/nav:scale-110" />
 				</button>
 			</div>

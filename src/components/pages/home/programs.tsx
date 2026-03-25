@@ -1,16 +1,16 @@
 "use client";
 
-import React from "react";
-import { motion } from "motion/react";
-import Image from "next/image";
-import Link from "next/link";
+import React from"react";
+import { motion } from"motion/react";
+import Image from"next/image";
+import Link from"next/link";
 
-import { PROGRAMS_DATA } from "@/constants";
+import { PROGRAMS_DATA } from"@/constants";
 
 const GRADIENTS = [
-	{ background: "linear-gradient(286.12deg, #FFCA74 9.13%, #C80057 86.64%)" },
-	{ background: "linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)" },
-	{ background: "linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)" },
+	{ background:"linear-gradient(286.12deg, #FFCA74 9.13%, #C80057 86.64%)" },
+	{ background:"linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)" },
+	{ background:"linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)" },
 ];
 
 const Programs = () => {
@@ -31,7 +31,7 @@ const Programs = () => {
 						<Link key={p.title} href={`/chuong-trinh/${p.slug}`}>
 							<motion.div
 								whileHover={{ y: -10 }}
-								className="group relative flex min-h-55 cursor-pointer flex-col justify-between overflow-hidden rounded-xl p-4 text-white shadow-2xl lg:p-6"
+								className="group relative flex min-h-55 cursor-pointer flex-col justify-between overflow-hidden rounded-xl p-4 text-white lg:p-6"
 								style={GRADIENTS[i % GRADIENTS.length]}
 							>
 								<div className="relative z-10 w-1/2">
@@ -49,7 +49,7 @@ const Programs = () => {
 
 								<div className="pointer-events-none absolute right-0 bottom-0 flex h-full w-[60%] items-end justify-end overflow-hidden">
 									<Image
-										src={p.img || "https://picsum.photos/seed/program/400/300"}
+										src={p.img ||"https://picsum.photos/seed/program/400/300"}
 										alt={p.title}
 										width={234}
 										height={220}

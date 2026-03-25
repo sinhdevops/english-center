@@ -35,7 +35,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, variant = "light"
 					className={`inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm ${
 						isLight
 							? "border border-white/20 bg-white/10 backdrop-blur-sm"
-							: "border border-slate-100 bg-white shadow-sm"
+							: "border border-slate-100 bg-white"
 					}`}
 				>
 					{/* Home */}

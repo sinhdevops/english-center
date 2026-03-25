@@ -108,7 +108,7 @@ export const SelectValidation: React.FC<SelectValidationProps> = ({
 							</button>
 
 							{isOpen && (
-								<div className="animate-in fade-in zoom-in-95 absolute z-50 mt-2 w-full overflow-hidden rounded-xl border border-slate-100 bg-white shadow-xl duration-150">
+								<div className="animate-in fade-in zoom-in-95 absolute z-50 mt-2 w-full overflow-hidden rounded-xl border border-slate-100 bg-white duration-150">
 									<div className="flex items-center gap-2 border-b border-slate-50 bg-slate-50/50 p-2">
 										<Search className="h-4 w-4 text-slate-400" />
 										<input

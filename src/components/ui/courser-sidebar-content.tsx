@@ -58,7 +58,7 @@ export const CourserSidebarContent: React.FC<CourserSidebarContentProps> = ({ pr
 						<div
 							key={program.id}
 							ref={i === 0 ? cardRef : undefined}
-							className="group relative aspect-4/3 h-40 w-full cursor-pointer overflow-hidden rounded-xl text-center shadow-md"
+							className="group relative aspect-4/3 h-40 w-full cursor-pointer overflow-hidden rounded-xl text-center"
 						>
 							<Link href="/khoa-hoc/dang-ky">
 								<Image
@@ -74,7 +74,7 @@ export const CourserSidebarContent: React.FC<CourserSidebarContentProps> = ({ pr
 								/>
 								<div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/40" />
 								<div className="absolute inset-0 flex items-center justify-center p-6">
-									<h5 className="text-center text-xl leading-tight font-black text-white drop-shadow-lg">
+									<h5 className="text-center text-xl leading-tight font-black text-white">
 										{program.name}
 									</h5>
 								</div>
@@ -101,7 +101,7 @@ export const CourserSidebarContent: React.FC<CourserSidebarContentProps> = ({ pr
 								href={social.href}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50"
+								className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 transition-colors hover:bg-slate-50"
 							>
 								{Icon && <Icon className={social.color} size={20} fill="currentColor" />}
 								{social.name}
@@ -109,7 +109,7 @@ export const CourserSidebarContent: React.FC<CourserSidebarContentProps> = ({ pr
 						) : (
 							<button
 								key={i}
-								className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50"
+								className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 transition-colors hover:bg-slate-50"
 							>
 								{Icon && <Icon className={social.color} size={20} fill="currentColor" />}
 								{social.name}
@@ -121,7 +121,7 @@ export const CourserSidebarContent: React.FC<CourserSidebarContentProps> = ({ pr
 						<p className="mb-3 text-xs font-bold tracking-wider text-white uppercase opacity-90">
 							Liên lạc trực tiếp
 						</p>
-						<button className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 shadow-sm transition-colors hover:bg-slate-50">
+						<button className="flex w-full items-center gap-3 rounded-md bg-white px-4 py-3 text-sm font-bold text-slate-800 transition-colors hover:bg-slate-50">
 							<div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white">
 								<Phone size={16} fill="currentColor" />
 							</div>

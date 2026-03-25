@@ -1,14 +1,14 @@
 "use client";
 
-import { motion } from "motion/react";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { CONTACT_INFO } from "@/constants";
-import FormRegistration from "@/components/pages/shared/form-registration";
+import { motion } from"motion/react";
+import { MapPin, Phone, Mail, Clock } from"lucide-react";
+import { CONTACT_INFO } from"@/constants";
+import FormRegistration from"@/components/pages/shared/form-registration";
 
 const IconMap: Record<string, any> = {
-	phone: <Phone className="text-stem-blue" />,
-	email: <Mail className="text-stem-green" />,
-	time: <Clock className="text-orange-500" />,
+	phone: <Phone className="text-stem-blue"/>,
+	email: <Mail className="text-stem-green"/>,
+	time: <Clock className="text-orange-500"/>,
 };
 const PageContent = ({ branches, courses }: { branches: any; courses: any }) => {
 	return (
@@ -43,7 +43,7 @@ const PageContent = ({ branches, courses }: { branches: any; courses: any }) => 
 							whileInView={{ opacity: 1, scale: 1 }}
 							viewport={{ once: true }}
 							transition={{ delay: idx * 0.1 }}
-							className="rounded-xl border border-slate-100 bg-white p-8 text-center shadow-sm transition-shadow hover:shadow-md"
+							className="rounded-xl border border-slate-100 bg-white p-8 text-center "
 						>
 							<div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50">
 								{IconMap[item.type]}
@@ -60,7 +60,7 @@ const PageContent = ({ branches, courses }: { branches: any; courses: any }) => 
 					initial={{ opacity: 0, y: 40 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="overflow-hidden rounded-xl border border-slate-100 bg-white shadow-xl"
+					className="overflow-hidden rounded-xl border border-slate-100 bg-white"
 				>
 					<div className="flex flex-col lg:flex-row">
 						{/* Form Side */}
@@ -77,7 +77,7 @@ const PageContent = ({ branches, courses }: { branches: any; courses: any }) => 
 							></iframe>
 
 							{/* Overlay info */}
-							<div className="absolute right-6 bottom-6 left-6 rounded-2xl border border-white/20 bg-white/90 p-6 shadow-lg backdrop-blur-sm">
+							<div className="absolute right-6 bottom-6 left-6 rounded-2xl border border-white/20 bg-white/90 p-6 backdrop-blur-sm">
 								<div className="flex items-start gap-3">
 									<div className="bg-stem-blue flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white">
 										<MapPin size={20} />

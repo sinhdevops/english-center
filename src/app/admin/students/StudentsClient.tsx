@@ -1,11 +1,14 @@
 "use client";
 
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+
 import React, { useState } from "react";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { StudentTable } from "@/components/admin/students/StudentTable";
 import { StudentModal } from "@/components/admin/students/StudentModal";
 import { Student, Branch, Course, ClassSchedule } from "@/lib/types";
 import { toast } from "sonner";
+import { AdminPagination } from "@/components/admin/AdminPagination";
 import { Filter, Search } from "lucide-react";
 import { createStudent, updateStudent, deleteStudent } from "./actions";
 
@@ -16,11 +19,24 @@ interface StudentsClientProps {
 	schedules: ClassSchedule[];
 }
 
+const ITEMS_PER_PAGE = 10;
+
 export default function StudentsClient({ initialStudents, branches, courses, schedules }: StudentsClientProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [editingStudent, setEditingStudent] = useState<Student | null>(null);
 	const [searchQuery, setSearchQuery] = useState("");
+	const searchParams = useSearchParams();
+	const currentPage = Number(searchParams.get("page")) || 1;
+	const router = useRouter();
+	const pathname = usePathname();
+
+	const handleSearchChange = (value: string) => {
+		setSearchQuery(value);
+		const params = new URLSearchParams(searchParams.toString());
+		params.delete("page");
+		router.replace(`${pathname}?${params.toString()}`);
+	};
 
 	const handleOpenModal = (student?: Student) => {
 		setEditingStudent(student || null);
@@ -70,6 +86,9 @@ export default function StudentsClient({ initialStudents, branches, courses, sch
 			s.email.toLowerCase().includes(searchQuery.toLowerCase()),
 	);
 
+	const totalPages = Math.ceil(filteredStudents.length / ITEMS_PER_PAGE);
+	const paginatedStudents = filteredStudents.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+
 	return (
 		<>
 			<AdminPageHeader
@@ -86,7 +105,7 @@ export default function StudentsClient({ initialStudents, branches, courses, sch
 						type="text"
 						placeholder="Tìm kiếm học viên..."
 						value={searchQuery}
-						onChange={(e) => setSearchQuery(e.target.value)}
+						onChange={(e) => handleSearchChange(e.target.value)}
 						className="focus:border-stem-blue focus:ring-stem-blue w-full rounded-xl border-slate-200 bg-white py-2 pr-4 pl-10 text-sm transition-all"
 					/>
 				</div>
@@ -107,13 +126,15 @@ export default function StudentsClient({ initialStudents, branches, courses, sch
 			</div>
 
 			<StudentTable
-				students={filteredStudents}
+				students={paginatedStudents}
 				branches={branches}
 				courses={courses}
 				isLoading={false}
 				onEdit={handleOpenModal}
 				onDelete={handleDelete}
 			/>
+
+			<AdminPagination currentPage={currentPage} totalPages={totalPages} />
 
 			<StudentModal
 				key={isModalOpen ? `student-${editingStudent?.id || "new"}` : "student-closed"}

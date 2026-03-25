@@ -1,10 +1,13 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import React, { useState } from "react";
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { ProgramList } from "@/components/admin/programs/ProgramList";
 import { ProgramModal } from "@/components/admin/programs/ProgramModal";
 import { CourseModal } from "@/components/admin/programs/CourseModal";
+import { AdminPagination } from "@/components/admin/AdminPagination";
 import { Program, Course } from "@/lib/types";
 import { toast } from "sonner";
 import { createProgram, updateProgram, deleteProgram, createCourse, updateCourse, deleteCourse } from "./actions";
@@ -14,10 +17,14 @@ interface ProgramsClientProps {
 	initialCourses: Course[];
 }
 
+const ITEMS_PER_PAGE = 10;
+
 export default function ProgramsClient({ initialPrograms, initialCourses }: ProgramsClientProps) {
 	const [isProgramModalOpen, setIsProgramModalOpen] = useState(false);
 	const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const searchParams = useSearchParams();
+	const currentPage = Number(searchParams.get("page")) || 1;
 
 	const [editingProgram, setEditingProgram] = useState<Program | null>(null);
 	const [editingCourse, setEditingCourse] = useState<Course | null>(null);
@@ -99,6 +106,9 @@ export default function ProgramsClient({ initialPrograms, initialCourses }: Prog
 		}
 	};
 
+	const totalPages = Math.ceil(initialPrograms.length / ITEMS_PER_PAGE);
+	const paginatedPrograms = initialPrograms.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+
 	return (
 		<>
 			<AdminPageHeader
@@ -109,7 +119,7 @@ export default function ProgramsClient({ initialPrograms, initialCourses }: Prog
 			/>
 
 			<ProgramList
-				programs={initialPrograms}
+				programs={paginatedPrograms}
 				courses={initialCourses}
 				isLoading={false}
 				onEditProgram={handleOpenProgramModal}
@@ -118,6 +128,8 @@ export default function ProgramsClient({ initialPrograms, initialCourses }: Prog
 				onEditCourse={handleOpenCourseModal}
 				onDeleteCourse={handleCourseDelete}
 			/>
+
+			<AdminPagination currentPage={currentPage} totalPages={totalPages} />
 
 			<ProgramModal
 				key={isProgramModalOpen ? `program-${editingProgram?.id || "new"}` : "program-closed"}

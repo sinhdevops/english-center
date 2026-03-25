@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { AuthForm } from "@/components/auth/auth-form";
+import { motion } from"framer-motion";
+import { AuthForm } from"@/components/auth/auth-form";
 
 export default function RegisterPage() {
 	return (
@@ -9,7 +9,7 @@ export default function RegisterPage() {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="w-full max-w-lg rounded-3xl bg-white p-8 shadow-xl lg:p-12"
+				className="w-full max-w-lg rounded-3xl bg-white p-8 lg:p-12"
 			>
 				<div className="mb-12 text-center">
 					<h2 className="mb-3 text-3xl font-bold text-slate-900 lg:text-4xl">Tham gia STEMKey</h2>

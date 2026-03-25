@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "motion/react";
-import { ChevronRight, Calendar, ArrowRight, User, Lock, CheckCircle2 } from "lucide-react";
-import { QUIZ_SETS } from "@/constants";
-import { Button } from "@/components/ui/button";
-import { Modal } from "@/components/ui/modal";
-import { useRouter, useSearchParams } from "next/navigation";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { useAuthStore } from "@/store/useAuthStore";
-import Link from "next/link";
+import { useState } from"react";
+import { motion } from"motion/react";
+import { ChevronRight, Calendar, ArrowRight, User, Lock, CheckCircle2 } from"lucide-react";
+import { QUIZ_SETS } from"@/constants";
+import { Button } from"@/components/ui/button";
+import { Modal } from"@/components/ui/modal";
+import { useRouter, useSearchParams } from"next/navigation";
+import { Breadcrumb } from"@/components/ui/breadcrumb";
+import { useAuthStore } from"@/store/useAuthStore";
+import Link from"next/link";
 
 interface Props {
 	slug: string;
@@ -26,8 +26,8 @@ const SidebarItem: React.FC<{ icon: any; title: string; colorClass: string; acti
 	<div
 		className={`group flex cursor-pointer items-center gap-3 rounded-xl border p-2.5 transition-all lg:gap-4 lg:p-3 ${
 			active
-				? "border-slate-200 bg-white shadow-lg"
-				: "border-transparent bg-white hover:border-slate-100 hover:shadow-md"
+				?"border-slate-200 bg-white"
+				:"border-transparent bg-white hover:border-slate-100 hover:"
 		}`}
 	>
 		<div
@@ -37,7 +37,7 @@ const SidebarItem: React.FC<{ icon: any; title: string; colorClass: string; acti
 			<Icon size={24} className="hidden lg:block" />
 		</div>
 		<span
-			className={`text-xs font-bold lg:text-sm ${active ? "text-stem-blue" : "group-hover:text-stem-blue text-slate-600"}`}
+			className={`text-xs font-bold lg:text-sm ${active ?"text-stem-blue" :"group-hover:text-stem-blue text-slate-600"}`}
 		>
 			{title}
 		</span>
@@ -65,7 +65,7 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 			return;
 		}
 
-		if (quizResults[quizId]?.status === "completed") {
+		if (quizResults[quizId]?.status ==="completed") {
 			setShowDoneModal(true);
 			return;
 		}
@@ -79,7 +79,7 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 				<div className="mx-auto max-w-7xl px-4">
 					<Breadcrumb
 						items={[
-							{ label: "Test", href: "/kiem-tra-truc-tuyen" },
+							{ label:"Test", href:"/kiem-tra-truc-tuyen" },
 							{ label: activeQuizSet.ageGroup, active: true },
 						]}
 						variant="dark"
@@ -99,9 +99,9 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 								className="group cursor-pointer"
 								onClick={() => handleTestClick(activeQuizSet.id)}
 							>
-								<div className="relative mb-3 aspect-16/10 overflow-hidden rounded-2xl border border-slate-100 shadow-md lg:mb-4">
+								<div className="relative mb-3 aspect-16/10 overflow-hidden rounded-2xl border border-slate-100 lg:mb-4">
 									<div className="absolute inset-0 bg-[#a8e0d9]" />
-									<div className="absolute inset-3 flex flex-col items-center justify-center rounded-xl border border-slate-100 bg-white/90 p-3 text-center shadow-sm lg:inset-4 lg:p-4">
+									<div className="absolute inset-3 flex flex-col items-center justify-center rounded-xl border border-slate-100 bg-white/90 p-3 text-center lg:inset-4 lg:p-4">
 										<div className="text-stem-blue mb-0.5 text-[8px] font-black tracking-widest uppercase lg:mb-1 lg:text-[10px]">
 											STEMKey
 										</div>
@@ -109,7 +109,7 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 											{activeQuizSet.ageGroup}
 										</div>
 										<div className="text-[8px] text-slate-500 lg:text-[10px]">
-											{activeQuizSet.durationSeconds / 60} phút •{" "}
+											{activeQuizSet.durationSeconds / 60} phút •{""}
 											{activeQuizSet.questions.length} câu
 										</div>
 									</div>
@@ -135,7 +135,7 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 							/>
 						</div>
 
-						<div className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
+						<div className="overflow-hidden rounded-3xl border border-slate-100 bg-white">
 							<div className="border-b border-slate-100 bg-slate-50/30 p-5">
 								<h3 className="font-bold text-slate-900">Liên kết nhanh</h3>
 							</div>
@@ -160,7 +160,7 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 			{/* Modal: Yêu cầu đăng nhập */}
 			<Modal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} title="Yêu cầu đăng nhập">
 				<div className="space-y-6 text-center">
-					<div className="text-stem-red mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-slate-50 shadow-inner">
+					<div className="text-stem-red mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-slate-50">
 						<Lock size={40} />
 					</div>
 					<div className="space-y-2">
@@ -177,7 +177,7 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 							onClick={() => {
 								setShowLoginModal(false);
 								const redirectPath = pendingTestId
-									? `/bai-thi/${pendingTestId}`
+									?`/bai-thi/${pendingTestId}`
 									: window.location.pathname;
 								router.push(`/dang-nhap?redirect=${encodeURIComponent(redirectPath)}`);
 							}}
@@ -197,7 +197,7 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 			{/* Modal: Đã hoàn thành bài test */}
 			<Modal isOpen={showDoneModal} onClose={() => setShowDoneModal(false)} title="Thông báo">
 				<div className="space-y-6 text-center">
-					<div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50 shadow-inner">
+					<div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50">
 						<CheckCircle2 size={40} className="text-emerald-500" />
 					</div>
 					<div className="space-y-2">

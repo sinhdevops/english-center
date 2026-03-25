@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Lock, ArrowRight, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { supabase } from "@/lib/supabase-client";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useState } from"react";
+import { motion } from"framer-motion";
+import { Lock, ArrowRight, Loader2 } from"lucide-react";
+import { Button } from"@/components/ui/button";
+import { supabase } from"@/lib/supabase-client";
+import { toast } from"sonner";
+import { useRouter } from"next/navigation";
 
 export default function UpdatePasswordPage() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +26,7 @@ export default function UpdatePasswordPage() {
 			toast.success("Mật khẩu đã được cập nhật thành công!");
 			router.push("/login");
 		} catch (error: any) {
-			toast.error(error.message || "Có lỗi xảy ra, vui lòng thử lại.");
+			toast.error(error.message ||"Có lỗi xảy ra, vui lòng thử lại.");
 		} finally {
 			setIsLoading(false);
 		}
@@ -37,7 +37,7 @@ export default function UpdatePasswordPage() {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="w-full max-w-md rounded-3xl bg-white p-8 shadow-xl lg:p-10"
+				className="w-full max-w-md rounded-3xl bg-white p-8 lg:p-10"
 			>
 				<div className="mb-10 text-center">
 					<h2 className="mb-2 text-3xl font-bold text-slate-900">Cập nhật mật khẩu</h2>
@@ -65,7 +65,7 @@ export default function UpdatePasswordPage() {
 						disabled={isLoading}
 						className="flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-lg font-bold disabled:opacity-70"
 					>
-						{isLoading ? <Loader2 className="animate-spin" size={20} /> : "Cập nhật mật khẩu"}
+						{isLoading ? <Loader2 className="animate-spin" size={20} /> :"Cập nhật mật khẩu"}
 						{!isLoading && <ArrowRight size={20} />}
 					</Button>
 				</form>

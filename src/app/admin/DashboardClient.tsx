@@ -266,7 +266,7 @@ export default function DashboardClient({
 				>
 					<h3 className="font-semibold text-slate-900">Lịch khai giảng sắp tới</h3>
 					<p className="text-sm text-slate-500">Các lớp học dự kiến mở trong thời gian tới</p>
-					<div className="mt-5 space-y-3">
+					<div className="mt-5 max-h-[calc(3*5.75rem+2*0.75rem)] overflow-y-auto space-y-3 pr-1">
 						{latestSchedules.length === 0 ? (
 							<p className="py-10 text-center text-sm text-slate-400">Chưa có lịch khai giảng</p>
 						) : (

@@ -63,7 +63,7 @@ const FormRegistration = ({ branches = [], courses = [] }: FormRegistrationProps
 			initial={{ opacity: 0, x: 30 }}
 			whileInView={{ opacity: 1, x: 0 }}
 			viewport={{ once: true }}
-			className="w-full rounded-xl bg-white p-4 shadow-2xl lg:w-1/2 lg:p-12"
+			className="w-full rounded-xl bg-white p-4 lg:w-1/2 lg:p-12"
 		>
 			<h3 className="mb-8 flex items-center gap-2 text-[18px] font-medium">
 				Tư vấn lộ trình học và ưu đãi → Đăng ký giữ chỗ ngay
@@ -98,7 +98,7 @@ const FormRegistration = ({ branches = [], courses = [] }: FormRegistrationProps
 						type="submit"
 						size="md"
 						disabled={isSubmitting}
-						className="mt-4 w-full rounded-xl text-lg font-black tracking-wider text-white uppercase shadow-lg shadow-blue-200 transition-all hover:bg-blue-600 active:scale-[0.98] disabled:opacity-70"
+						className="mt-4 w-full rounded-xl text-lg font-black tracking-wider text-white uppercase transition-all hover:bg-blue-600 active:scale-[0.98] disabled:opacity-70"
 					>
 						{isSubmitting ? "ĐANG XỬ LÝ..." : "GIỮ CHỖ NGAY"}
 					</Button>

@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React from"react";
+import Image from"next/image";
+import Link from"next/link";
 import {
 	ChevronRight,
 	CheckCircle2,
@@ -14,9 +14,9 @@ import {
 	Award,
 	PlayCircle,
 	Quote,
-} from "lucide-react";
-import { STANDARD_COURSES_HERO, STANDARD_BENEFITS, STANDARD_ROADMAP, RIPL_METHODOLOGY } from "@/constants";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
+} from"lucide-react";
+import { STANDARD_COURSES_HERO, STANDARD_BENEFITS, STANDARD_ROADMAP, RIPL_METHODOLOGY } from"@/constants";
+import { Breadcrumb } from"@/components/ui/breadcrumb";
 
 const IconMap: Record<string, any> = {
 	Target,
@@ -35,14 +35,14 @@ export default function StandardCoursesPage() {
 				<div className="absolute bottom-0 left-0 h-1/2 w-full bg-emerald-500/10 blur-[100px]" />
 
 				<div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
-					<Breadcrumb items={[{ label: "Khóa học tiêu chuẩn", active: true }]} variant="light" />
+					<Breadcrumb items={[{ label:"Khóa học tiêu chuẩn", active: true }]} variant="light" />
 
 					<div className="mt-12 grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
 						<div className="md:text-left">
 							<h1 className="font-heading text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl">
-								{STANDARD_COURSES_HERO.title.split(" ").slice(0, 2).join(" ")} <br />
+								{STANDARD_COURSES_HERO.title.split("").slice(0, 2).join("")} <br />
 								<span className="text-emerald-400 underline decoration-white/10 underline-offset-8">
-									{STANDARD_COURSES_HERO.title.split(" ").slice(2).join(" ")}
+									{STANDARD_COURSES_HERO.title.split("").slice(2).join("")}
 								</span>
 							</h1>
 							<p className="mt-8 text-xl leading-relaxed text-zinc-400 md:text-2xl">
@@ -51,7 +51,7 @@ export default function StandardCoursesPage() {
 							<div className="mt-10 flex flex-wrap justify-center gap-4 md:justify-start">
 								<Link
 									href="#roadmap"
-									className="bg-stem-blue hover:bg-stem-blue/90 flex items-center gap-2 rounded-full px-8 py-4 font-bold text-white shadow-lg shadow-blue-500/20 transition-all active:scale-95"
+									className="bg-stem-blue hover:bg-stem-blue/90 flex items-center gap-2 rounded-full px-8 py-4 font-bold text-white transition-all active:scale-95"
 								>
 									Khám phá lộ trình <ArrowRight className="h-5 w-5" />
 								</Link>
@@ -107,11 +107,11 @@ export default function StandardCoursesPage() {
 							return (
 								<div
 									key={idx}
-									className={`group shadow-premium relative overflow-hidden rounded-[2.5rem] border border-slate-50 bg-white p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${benefit.span}`}
+									className={`group relative overflow-hidden rounded-[2.5rem] border border-slate-50 bg-white p-10 transition-all duration-500 hover:-translate-y-2 hover: ${benefit.span}`}
 								>
 									<div className="relative z-10 text-left">
 										<div
-											className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:scale-110 ${benefit.theme === "primary" ? "text-stem-blue border-blue-100 bg-blue-50" : "border-emerald-100 bg-emerald-50 text-emerald-500"}`}
+											className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:scale-110 ${benefit.theme ==="primary" ?"text-stem-blue border-blue-100 bg-blue-50" :"border-emerald-100 bg-emerald-50 text-emerald-500"}`}
 										>
 											{Icon && <Icon className="h-8 w-8" />}
 										</div>
@@ -121,7 +121,7 @@ export default function StandardCoursesPage() {
 										<p className="leading-relaxed text-zinc-500">{benefit.desc}</p>
 									</div>
 									<div
-										className={`absolute -right-4 -bottom-4 h-16 w-16 rounded-full opacity-0 transition-all duration-500 group-hover:opacity-10 ${benefit.theme === "primary" ? "bg-stem-blue" : "bg-emerald-400"}`}
+										className={`absolute -right-4 -bottom-4 h-16 w-16 rounded-full opacity-0 transition-all duration-500 group-hover:opacity-10 ${benefit.theme ==="primary" ?"bg-stem-blue" :"bg-emerald-400"}`}
 									/>
 								</div>
 							);
@@ -146,7 +146,7 @@ export default function StandardCoursesPage() {
 						{STANDARD_ROADMAP.map((step, idx) => (
 							<div
 								key={idx}
-								className="group relative overflow-hidden rounded-[3rem] border border-slate-100 bg-white shadow-2xl transition-all duration-500"
+								className="group relative overflow-hidden rounded-[3rem] border border-slate-100 bg-white transition-all duration-500"
 							>
 								<div className="grid grid-cols-1 md:grid-cols-12">
 									<div className="relative h-64 md:col-span-4 md:h-auto">
@@ -233,7 +233,7 @@ export default function StandardCoursesPage() {
 							<div className="absolute -right-10 -bottom-10 -z-10 h-1/2 w-1/2 rounded-[4rem] bg-emerald-400" />
 							<div className="absolute -top-10 -left-10 -z-10 h-1/2 w-1/2 rounded-full bg-blue-500/10" />
 							<div className="absolute top-1/2 -right-12 z-20 hidden md:block">
-								<div className="shadow-premium rounded-2xl border border-slate-100 bg-white p-6">
+								<div className=" rounded-2xl border border-slate-100 bg-white p-6">
 									<Quote className="mb-2 h-8 w-8 text-emerald-400" />
 									<p className="max-w-[200px] text-sm font-medium text-zinc-600 italic">
 										&ldquo;Phương pháp này giúp bé nhà mình tự tin nói tiếng Anh chỉ sau 3
@@ -257,11 +257,11 @@ export default function StandardCoursesPage() {
 								Đăng ký <br />
 								<span className="text-emerald-400 italic underline decoration-white/10 underline-offset-8">
 									Nhận tư vấn
-								</span>{" "}
+								</span>{""}
 								ngay
 							</h3>
 							<p className="mb-10 text-xl leading-relaxed text-zinc-400">
-								Tham gia cùng hơn 200,000 học viên đã thành công cán đích.{" "}
+								Tham gia cùng hơn 200,000 học viên đã thành công cán đích.{""}
 								<br className="hidden md:block" />
 								Hãy để chúng tôi đồng hành cùng con bạn.
 							</p>
@@ -323,7 +323,7 @@ export default function StandardCoursesPage() {
 								</div>
 								<button
 									type="button"
-									className="mt-4 w-full rounded-2xl bg-emerald-400 py-6 text-lg font-extrabold text-slate-900 shadow-2xl transition-all hover:bg-emerald-300 active:scale-95"
+									className="mt-4 w-full rounded-2xl bg-emerald-400 py-6 text-lg font-extrabold text-slate-900 transition-all hover:bg-emerald-300 active:scale-95"
 								>
 									Gửi yêu cầu đăng ký
 								</button>
