@@ -12,11 +12,11 @@ export default async function TestOnlineDetailPage({
 	params,
 	searchParams,
 }: {
-	params: { slug: string };
-	searchParams: { nhom?: string };
+	params: Promise<{ slug: string }>;
+	searchParams: Promise<{ nhom?: string }>;
 }) {
-	const { slug } = params;
-	const { nhom } = searchParams;
+	const { slug } = await params;
+	const { nhom } = await searchParams;
 	const supabase = await createClient();
 
 	const {
