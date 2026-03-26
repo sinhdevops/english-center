@@ -7,7 +7,7 @@ interface Question {
 	id: number;
 	text: string;
 	options: string[];
-	correctAnswer: number;
+	correct_answer: number;
 }
 
 interface QuizTakingProps {

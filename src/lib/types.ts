@@ -95,6 +95,25 @@ export interface Registration {
   status: 'pending' | 'contacted' | 'enrolled' | 'cancelled';
 }
 
+export interface QuizQuestion {
+  id: number;
+  quiz_set_id: string;
+  question_order: number;
+  text: string;
+  options: string[];
+  correct_answer: number;
+}
+
+export interface QuizSet {
+  id: string;
+  title: string;
+  age_group: string;
+  duration_seconds: number;
+  is_active: boolean;
+  created_at?: string;
+  questions: QuizQuestion[];
+}
+
 export interface QuizResult {
   id: string;
   user_id: string;

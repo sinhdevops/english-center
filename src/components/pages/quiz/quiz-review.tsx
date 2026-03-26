@@ -7,7 +7,7 @@ interface Question {
 	id: number;
 	text: string;
 	options: string[];
-	correctAnswer: number;
+	correct_answer: number;
 }
 
 interface QuizReviewProps {
@@ -39,7 +39,7 @@ export const QuizReview = ({
 
 				<div className="grid grid-cols-5 gap-2 sm:grid-cols-10 md:gap-3 lg:grid-cols-5">
 					{questions.map((q, idx) => {
-						const isCorrect = currentAnswers[q.id] === q.correctAnswer;
+						const isCorrect = currentAnswers[q.id] === q.correct_answer;
 						const isActive = currentQuestionIndex === idx;
 
 						return (
@@ -82,7 +82,7 @@ export const QuizReview = ({
 						<div className="bg-stem-blue inline-block rounded-xl px-6 py-1.5 text-sm font-black text-white uppercase md:text-xl">
 							Câu hỏi {currentQuestionIndex + 1}
 						</div>
-						{currentAnswers[currentQuestion.id] === currentQuestion.correctAnswer ? (
+						{currentAnswers[currentQuestion.id] === currentQuestion.correct_answer ? (
 							<div className="flex items-center gap-1 text-sm font-black text-emerald-500 md:gap-2 md:text-base">
 								<CheckCircle2 size={20} className="md:h-6 md:w-6" /> ĐÚNG
 							</div>
@@ -100,7 +100,7 @@ export const QuizReview = ({
 
 						<div className="grid grid-cols-1 gap-3 md:gap-4">
 							{currentQuestion.options.map((option, optIdx) => {
-								const isCorrect = optIdx === currentQuestion.correctAnswer;
+								const isCorrect = optIdx === currentQuestion.correct_answer;
 								const isSelected = currentAnswers[currentQuestion.id] === optIdx;
 
 								return (

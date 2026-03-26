@@ -3,7 +3,6 @@
 import { useState } from"react";
 import { motion } from"motion/react";
 import { ChevronRight, Calendar, ArrowRight, User, Lock, CheckCircle2 } from"lucide-react";
-import { QUIZ_SETS } from"@/constants";
 import { Button } from"@/components/ui/button";
 import { Modal } from"@/components/ui/modal";
 import { useRouter, useSearchParams } from"next/navigation";
@@ -11,9 +10,18 @@ import { Breadcrumb } from"@/components/ui/breadcrumb";
 import { useAuthStore } from"@/store/useAuthStore";
 import Link from"next/link";
 
+interface QuizSetPreview {
+	id: string;
+	title: string;
+	age_group: string;
+	duration_seconds: number;
+	is_active: boolean;
+}
+
 interface Props {
 	slug: string;
 	initialTab?: string;
+	quizSets: QuizSetPreview[];
 	quizResults: Record<string, { status: string; score: number | null }>;
 }
 
@@ -47,16 +55,18 @@ const SidebarItem: React.FC<{ icon: any; title: string; colorClass: string; acti
 	</div>
 );
 
-export default function PageContent({ initialTab, quizResults }: Props) {
+export default function PageContent({ initialTab, quizSets, quizResults }: Props) {
 	const { user } = useAuthStore();
 	const searchParams = useSearchParams();
-	const activeId = QUIZ_SETS.find((s) => s.id === (searchParams.get("nhom") ?? initialTab))?.id ?? QUIZ_SETS[0].id;
+	const activeId = quizSets.find((s) => s.id === (searchParams.get("nhom") ?? initialTab))?.id ?? quizSets[0]?.id;
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showDoneModal, setShowDoneModal] = useState(false);
 	const [pendingTestId, setPendingTestId] = useState<string | null>(null);
 
 	const router = useRouter();
-	const activeQuizSet = QUIZ_SETS.find((s) => s.id === activeId) ?? QUIZ_SETS[0];
+	const activeQuizSet = quizSets.find((s) => s.id === activeId) ?? quizSets[0];
+
+	if (!activeQuizSet) return null;
 
 	const handleTestClick = (quizId: string) => {
 		if (!user) {
@@ -80,7 +90,7 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 					<Breadcrumb
 						items={[
 							{ label:"Test", href:"/kiem-tra-truc-tuyen" },
-							{ label: activeQuizSet.ageGroup, active: true },
+							{ label: activeQuizSet.age_group, active: true },
 						]}
 						variant="dark"
 					/>
@@ -106,16 +116,15 @@ export default function PageContent({ initialTab, quizResults }: Props) {
 											STEMKey
 										</div>
 										<div className="mb-0.5 text-[10px] font-bold text-slate-800 lg:mb-1 lg:text-xs">
-											{activeQuizSet.ageGroup}
+											{activeQuizSet.age_group}
 										</div>
 										<div className="text-[8px] text-slate-500 lg:text-[10px]">
-											{activeQuizSet.durationSeconds / 60} phút •{""}
-											{activeQuizSet.questions.length} câu
+											{activeQuizSet.duration_seconds / 60} phút
 										</div>
 									</div>
 								</div>
 								<h3 className="group-hover:text-stem-blue line-clamp-2 text-sm leading-snug font-bold text-slate-700 transition-colors">
-									{activeQuizSet.title} – {activeQuizSet.ageGroup}
+									{activeQuizSet.title} – {activeQuizSet.age_group}
 								</h3>
 							</motion.div>
 						</div>

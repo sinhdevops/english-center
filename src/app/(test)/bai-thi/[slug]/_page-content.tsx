@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, useMemo } from"react";
+import { useState, useEffect, useCallback, useRef } from"react";
 import { AnimatePresence } from"motion/react";
 import { Clock, ChevronRight } from"lucide-react";
 import { useRouter } from"next/navigation";
-import { QUIZ_SETS } from"@/constants";
+import { QuizSet } from"@/lib/types";
 import { QuizIntro } from"@/components/pages/quiz/quiz-intro";
 import { QuizTaking } from"@/components/pages/quiz/quiz-taking";
 import { QuizReview } from"@/components/pages/quiz/quiz-review";
@@ -26,6 +26,7 @@ interface Props {
 	slug: string;
 	userId: string;
 	userEmail: string | null;
+	quizSet: QuizSet;
 	initialRecord: QuizRecord | null;
 	createQuizRecord: (
 		userId: string,
@@ -50,13 +51,12 @@ function formatTime(seconds: number) {
 	return`${h.toString().padStart(2,"0")}:${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
 }
 
-export default function PageContent({ slug, userId, userEmail, initialRecord, createQuizRecord, updateQuizRecord }: Props) {
+export default function PageContent({ slug, userId, userEmail, quizSet, initialRecord, createQuizRecord, updateQuizRecord }: Props) {
 	const router = useRouter();
 
-	const quizSet = useMemo(() => QUIZ_SETS.find((s) => s.id === slug) ?? QUIZ_SETS[0], [slug]);
-	const { questions, durationSeconds: defaultTime } = quizSet;
+	const { questions, duration_seconds: defaultTime } = quizSet;
 
-	const storageKey = useMemo(() =>`quiz_progress_${userId}_${slug}`, [userId, slug]);
+	const storageKey =`quiz_progress_${userId}_${slug}`;
 
 	const [gameState, setGameState] = useState<GameState>("loading");
 	const [timeLeft, setTimeLeft] = useState(defaultTime);
@@ -129,7 +129,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 		if (isFinishing.current) return;
 		isFinishing.current = true;
 
-		const correct = questions.filter((q) => currentAnswers[q.id] === q.correctAnswer).length;
+		const correct = questions.filter((q) => currentAnswers[q.id] === q.correct_answer).length;
 		const calculatedScore = Math.round((correct / questions.length) * 10 * 10) / 10;
 
 		setScore(calculatedScore);
@@ -233,7 +233,7 @@ export default function PageContent({ slug, userId, userEmail, initialRecord, cr
 				</div>
 
 				<h1 className="px-4 text-center text-xl font-black text-white uppercase drop- md:text-4xl lg:text-5xl">
-					{quizSet.title} – {quizSet.ageGroup}
+					{quizSet.title} – {quizSet.age_group}
 				</h1>
 
 				<div className="flex w-full flex-wrap items-center justify-center gap-2 md:gap-6">

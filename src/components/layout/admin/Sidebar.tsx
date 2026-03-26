@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, CalendarDays, Trophy, Users, MapPin, BookOpen, ClipboardList, X, ImagePlay, FileText } from "lucide-react";
+import { LayoutDashboard, CalendarDays, Trophy, Users, MapPin, BookOpen, ClipboardList, X, ImagePlay, FileText, ClipboardEdit } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
@@ -20,6 +20,7 @@ const navItems = [
 	{ name: "Chương trình học", href: "/admin/programs", icon: BookOpen },
 	{ name: "Banner", href: "/admin/banners", icon: ImagePlay },
 	{ name: "Kết quả bài test", href: "/admin/quiz-results", icon: FileText },
+	{ name: "Quản lý bài test", href: "/admin/quiz-sets", icon: ClipboardEdit },
 ];
 
 interface SidebarProps {

@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import PageContent from "./_page-content";
 
@@ -11,6 +11,21 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 	} = await supabase.auth.getUser();
 
 	if (!user) redirect("/dang-nhap");
+
+	const { data: quizSet } = await supabase
+		.from("quiz_sets")
+		.select("*, questions:quiz_questions(*)")
+		.eq("id", slug)
+		.eq("is_active", true)
+		.maybeSingle();
+
+	if (!quizSet) notFound();
+
+	// Sort questions by order
+	quizSet.questions = quizSet.questions.sort(
+		(a: { question_order: number }, b: { question_order: number }) =>
+			a.question_order - b.question_order,
+	);
 
 	const { data: initialRecord } = await supabase
 		.from("quiz_results")
@@ -70,6 +85,7 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 			slug={slug}
 			userId={user.id}
 			userEmail={user.email ?? null}
+			quizSet={quizSet}
 			initialRecord={initialRecord}
 			createQuizRecord={createQuizRecord}
 			updateQuizRecord={updateQuizRecord}
