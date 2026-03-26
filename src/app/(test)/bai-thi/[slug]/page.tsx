@@ -19,7 +19,7 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 		.eq("is_active", true)
 		.maybeSingle();
 
-	if (!quizSet) notFound();
+	if (!quizSet || !quizSet.questions?.length) notFound();
 
 	// Sort questions by order
 	quizSet.questions = quizSet.questions.sort(

@@ -2,13 +2,20 @@
 
 import { useState } from"react";
 import { motion } from"motion/react";
-import { ChevronRight, Calendar, ArrowRight, User, Lock, CheckCircle2 } from"lucide-react";
+import { ChevronRight, Calendar, ArrowRight, User, Lock, CheckCircle2, Clock, ClipboardList } from"lucide-react";
 import { Button } from"@/components/ui/button";
 import { Modal } from"@/components/ui/modal";
 import { useRouter, useSearchParams } from"next/navigation";
 import { Breadcrumb } from"@/components/ui/breadcrumb";
 import { useAuthStore } from"@/store/useAuthStore";
 import Link from"next/link";
+
+const AGE_GROUP_LABELS: Record<string, string> = {
+	"3-4-tuoi": "3-4 tuổi",
+	"4-5-tuoi": "4-5 tuổi",
+	"5-6-tuoi": "5-6 tuổi",
+	"tieu-hoc": "Tiểu học",
+};
 
 interface QuizSetPreview {
 	id: string;
@@ -58,15 +65,14 @@ const SidebarItem: React.FC<{ icon: any; title: string; colorClass: string; acti
 export default function PageContent({ initialTab, quizSets, quizResults }: Props) {
 	const { user } = useAuthStore();
 	const searchParams = useSearchParams();
-	const activeId = quizSets.find((s) => s.id === (searchParams.get("nhom") ?? initialTab))?.id ?? quizSets[0]?.id;
+	const router = useRouter();
+
+	const nhomParam = searchParams.get("nhom") ?? initialTab ?? "";
+	const ageGroupLabel = AGE_GROUP_LABELS[nhomParam] ?? quizSets[0]?.age_group ?? "";
+
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showDoneModal, setShowDoneModal] = useState(false);
 	const [pendingTestId, setPendingTestId] = useState<string | null>(null);
-
-	const router = useRouter();
-	const activeQuizSet = quizSets.find((s) => s.id === activeId) ?? quizSets[0];
-
-	if (!activeQuizSet) return null;
 
 	const handleTestClick = (quizId: string) => {
 		if (!user) {
@@ -90,7 +96,7 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 					<Breadcrumb
 						items={[
 							{ label:"Test", href:"/kiem-tra-truc-tuyen" },
-							{ label: activeQuizSet.age_group, active: true },
+							{ label: ageGroupLabel, active: true },
 						]}
 						variant="dark"
 					/>
@@ -101,33 +107,57 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 				<div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
 					{/* Main Content */}
 					<div className="w-full lg:w-3/4">
-						{/* Quiz Card */}
-						<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-							<motion.div
-								key={activeQuizSet.id}
-								whileHover={{ y: -5 }}
-								className="group cursor-pointer"
-								onClick={() => handleTestClick(activeQuizSet.id)}
-							>
-								<div className="relative mb-3 aspect-16/10 overflow-hidden rounded-2xl border border-slate-100 lg:mb-4">
-									<div className="absolute inset-0 bg-[#a8e0d9]" />
-									<div className="absolute inset-3 flex flex-col items-center justify-center rounded-xl border border-slate-100 bg-white/90 p-3 text-center lg:inset-4 lg:p-4">
-										<div className="text-stem-blue mb-0.5 text-[8px] font-black tracking-widest uppercase lg:mb-1 lg:text-[10px]">
-											STEMKey
-										</div>
-										<div className="mb-0.5 text-[10px] font-bold text-slate-800 lg:mb-1 lg:text-xs">
-											{activeQuizSet.age_group}
-										</div>
-										<div className="text-[8px] text-slate-500 lg:text-[10px]">
-											{activeQuizSet.duration_seconds / 60} phút
-										</div>
-									</div>
-								</div>
-								<h3 className="group-hover:text-stem-blue line-clamp-2 text-sm leading-snug font-bold text-slate-700 transition-colors">
-									{activeQuizSet.title} – {activeQuizSet.age_group}
-								</h3>
-							</motion.div>
-						</div>
+						{quizSets.length === 0 ? (
+							<div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50 py-20 text-center">
+								<p className="text-slate-400">Chưa có bài test nào cho nhóm này.</p>
+							</div>
+						) : (
+							<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+								{quizSets.map((qs) => {
+									const result = quizResults[qs.id];
+									const isDone = result?.status ==="completed";
+
+									return (
+										<motion.div
+											key={qs.id}
+											whileHover={{ y: -5 }}
+											className="group relative cursor-pointer"
+											onClick={() => handleTestClick(qs.id)}
+										>
+											{isDone && (
+												<div className="absolute -top-2 -right-2 z-10 flex items-center gap-1 rounded-full bg-emerald-500 px-2.5 py-1 text-[10px] font-bold text-white shadow-md">
+													<CheckCircle2 size={11} /> Đã làm
+												</div>
+											)}
+											<div className="relative mb-3 aspect-16/10 overflow-hidden rounded-2xl border border-slate-100 lg:mb-4">
+												<div className="absolute inset-0 bg-[#a8e0d9]" />
+												<div className="absolute inset-3 flex flex-col items-center justify-center rounded-xl border border-slate-100 bg-white/90 p-3 text-center lg:inset-4 lg:p-4">
+													<div className="text-stem-blue mb-0.5 text-[8px] font-black tracking-widest uppercase lg:mb-1 lg:text-[10px]">
+														STEMKey
+													</div>
+													<div className="mb-0.5 text-[10px] font-bold text-slate-800 lg:mb-1 lg:text-xs">
+														{qs.age_group}
+													</div>
+													<div className="flex items-center gap-2 text-[8px] text-slate-500 lg:text-[10px]">
+														<span className="flex items-center gap-0.5">
+															<Clock size={9} /> {qs.duration_seconds / 60} phút
+														</span>
+													</div>
+												</div>
+											</div>
+											<h3 className="group-hover:text-stem-blue line-clamp-2 text-sm leading-snug font-bold text-slate-700 transition-colors">
+												{qs.title} – {qs.age_group}
+											</h3>
+											{isDone && result.score !== null && (
+												<p className="mt-1 text-xs text-emerald-600 font-medium">
+													Điểm: {result.score}/10
+												</p>
+											)}
+										</motion.div>
+									);
+								})}
+							</div>
+						)}
 					</div>
 
 					{/* Sidebar */}
