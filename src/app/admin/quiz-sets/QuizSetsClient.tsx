@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { QuizSet, QuizQuestion } from "@/lib/types";
+import { Modal } from "@/components/ui/modal";
 import {
 	createQuizSet,
 	updateQuizSet,
@@ -262,6 +263,11 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 	const [addingQuestion, setAddingQuestion] = useState(false);
 	const [title, setTitle] = useState(quizSet.title);
 	const [ageGroup, setAgeGroup] = useState(quizSet.age_group);
+	const [confirmModal, setConfirmModal] = useState<{
+		open: boolean;
+		message: string;
+		onConfirm: () => void;
+	}>({ open: false, message: "", onConfirm: () => {} });
 	const [durationMinutes, setDurationMinutes] = useState(Math.round(quizSet.duration_seconds / 60));
 	const [isActive, setIsActive] = useState(quizSet.is_active);
 	const [saving, setSaving] = useState(false);
@@ -284,14 +290,19 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 		}
 	};
 
-	const handleDeleteSet = async () => {
-		if (!confirm(`Xóa quiz set "${quizSet.title}"? Tất cả câu hỏi cũng sẽ bị xóa.`)) return;
-		try {
-			await deleteQuizSet(quizSet.id);
-			toast.success("Đã xóa quiz set");
-		} catch {
-			toast.error("Lỗi khi xóa quiz set");
-		}
+	const handleDeleteSet = () => {
+		setConfirmModal({
+			open: true,
+			message: `Xóa quiz set "${quizSet.title}"? Tất cả câu hỏi cũng sẽ bị xóa.`,
+			onConfirm: async () => {
+				try {
+					await deleteQuizSet(quizSet.id);
+					toast.success("Đã xóa quiz set");
+				} catch {
+					toast.error("Lỗi khi xóa quiz set");
+				}
+			},
+		});
 	};
 
 	const handleToggleActive = async () => {
@@ -304,14 +315,19 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 		}
 	};
 
-	const handleDeleteQuestion = async (id: number) => {
-		if (!confirm("Xóa câu hỏi này?")) return;
-		try {
-			await deleteQuizQuestion(id);
-			toast.success("Đã xóa câu hỏi");
-		} catch {
-			toast.error("Lỗi khi xóa câu hỏi");
-		}
+	const handleDeleteQuestion = (id: number) => {
+		setConfirmModal({
+			open: true,
+			message: "Xóa câu hỏi này?",
+			onConfirm: async () => {
+				try {
+					await deleteQuizQuestion(id);
+					toast.success("Đã xóa câu hỏi");
+				} catch {
+					toast.error("Lỗi khi xóa câu hỏi");
+				}
+			},
+		});
 	};
 
 	const nextOrder = quizSet.questions.length > 0
@@ -491,6 +507,36 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 					</td>
 				</tr>
 			)}
+
+			<Modal
+				isOpen={confirmModal.open}
+				onClose={() => setConfirmModal((prev) => ({ ...prev, open: false }))}
+				title="Xác nhận xóa"
+			>
+				<div className="space-y-5 text-center">
+					<div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
+						<Trash2 size={28} className="text-red-500" />
+					</div>
+					<p className="text-sm text-slate-600">{confirmModal.message}</p>
+					<div className="flex gap-3">
+						<button
+							onClick={() => setConfirmModal((prev) => ({ ...prev, open: false }))}
+							className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50"
+						>
+							Huỷ
+						</button>
+						<button
+							onClick={() => {
+								setConfirmModal((prev) => ({ ...prev, open: false }));
+								confirmModal.onConfirm();
+							}}
+							className="flex-1 rounded-xl bg-red-500 py-2.5 text-sm font-bold text-white hover:bg-red-600"
+						>
+							Xóa
+						</button>
+					</div>
+				</div>
+			</Modal>
 		</>
 	);
 }
@@ -590,6 +636,11 @@ function AddQuizSetForm({ onDone }: { onDone: () => void }) {
 
 export default function QuizSetsClient({ initialQuizSets }: Props) {
 	const [showAddForm, setShowAddForm] = useState(false);
+	const [filterAge, setFilterAge] = useState<string>("all");
+
+	const filtered = filterAge === "all"
+		? initialQuizSets
+		: initialQuizSets.filter((qs) => qs.age_group === filterAge);
 
 	return (
 		<>
@@ -608,6 +659,23 @@ export default function QuizSetsClient({ initialQuizSets }: Props) {
 
 			{showAddForm && <AddQuizSetForm onDone={() => setShowAddForm(false)} />}
 
+			{/* Filter */}
+			<div className="mb-4 flex flex-wrap gap-2">
+				{["all", ...AGE_GROUPS].map((ag) => (
+					<button
+						key={ag}
+						onClick={() => setFilterAge(ag)}
+						className={`rounded-full px-4 py-1.5 text-xs font-bold transition-colors ${
+							filterAge === ag
+								? "bg-indigo-600 text-white"
+								: "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
+						}`}
+					>
+						{ag === "all" ? "Tất cả" : ag}
+					</button>
+				))}
+			</div>
+
 			<div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
 				<div className="overflow-x-auto">
 					<table className="w-full border-collapse text-left text-sm">
@@ -622,14 +690,14 @@ export default function QuizSetsClient({ initialQuizSets }: Props) {
 							</tr>
 						</thead>
 						<tbody>
-							{initialQuizSets.length === 0 ? (
+							{filtered.length === 0 ? (
 								<tr>
 									<td colSpan={6} className="px-6 py-12 text-center text-slate-400">
-										Chưa có quiz set nào
+										Không có quiz set nào
 									</td>
 								</tr>
 							) : (
-								initialQuizSets.map((qs) => <QuizSetRow key={qs.id} quizSet={qs} />)
+								filtered.map((qs) => <QuizSetRow key={qs.id} quizSet={qs} />)
 							)}
 						</tbody>
 					</table>

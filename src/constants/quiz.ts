@@ -1,3 +1,0 @@
-export const QUIZ_SETTINGS = {
-	POINTS_PER_QUESTION: 2,
-};
