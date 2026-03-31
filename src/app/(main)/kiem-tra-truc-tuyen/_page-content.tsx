@@ -134,7 +134,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 			</section>
 
 			{/* Registration Form Overlay */}
-			<div className="relative z-20 mx-auto -mt-16 max-w-6xl px-4 lg:-mt-20">
+			<div className="relative z-20 mx-auto -mt-16 max-w-7xl px-4 lg:-mt-20 lg:px-0">
 				<motion.div
 					initial={{ opacity: 0, y: 40 }}
 					animate={{ opacity: 1, y: 0 }}

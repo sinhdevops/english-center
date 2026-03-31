@@ -45,7 +45,7 @@ const PageContent = ({ branches, courses }: PageContentProps) => {
         </div>
 
         {/* Contact Info Cards — overlapping bottom */}
-        <div className="relative z-10 -mt-24 px-4 md:absolute md:right-0 md:bottom-0 md:left-0 md:mt-0 md:translate-y-1/2">
+        <div className="relative z-10 lg:-mt-24 mt-5 px-4 md:absolute md:right-0 md:bottom-0 md:left-0 md:mt-0 md:translate-y-1/2">
             <div className="relative overflow-hidden bg-white pt-6 pb-8 px-6 md:px-15 max-w-7xl mx-auto rounded-[20px] shadow-[0px_4px_4px_0px_#0000001A]">
               {/* Decorative blobs inside box */}
               <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-1/3 translate-y-1/3 rounded-full bg-[#50FF2980]/30" />
@@ -75,14 +75,14 @@ const PageContent = ({ branches, courses }: PageContentProps) => {
       <div className="h-0 md:h-[120px]" />
 
       {/* Form & Map Section */}
-      <div className="mx-auto max-w-7xl px-4 py-12 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-12 lg:py-16 lg:px-0">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm"
         >
-          <div className="flex flex-col lg:flex-row">
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-20">
             {/* Form Side */}
             <FormRegistration courses={courses} branches={branches} />
 

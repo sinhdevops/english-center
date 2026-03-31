@@ -33,7 +33,7 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 			</section>
 
 			{/* Section 2 — Bảng khóa học từ API */}
-			<section className="mx-auto max-w-5xl px-4 py-12">
+			<section className="mx-auto max-w-7xl px-4 py-12 lg:px-0">
 				<h2 className="mb-8 text-center text-2xl font-bold uppercase tracking-wide text-gray-900">
 					TOÁN TƯ DUY, TIẾNG ANH STEM, ROBOTICS, TIỀN TIỂU HỌC
 				</h2>

@@ -15,7 +15,7 @@ const Teachers = () => {
 
 	return (
 		<section className="overflow-hidden bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-7xl px-4 lg:px-0">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
@@ -25,17 +25,19 @@ const Teachers = () => {
 					300+ GIÁO VIÊN TRUYỀN CẢM HỨNG
 				</motion.h2>
 
-				<div className="relative flex items-center gap-4">
+				<div className="relative w-full">
 					{/* Prev */}
 					<button
 						onClick={() => swiperRef.current?.slidePrev()}
-						className="hidden shrink-0 items-center justify-center rounded-full border border-slate-300 p-3 transition hover:bg-slate-100 lg:flex"
+						className="absolute top-1/2 left-4 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-slate-300 bg-white/80 shadow-sm backdrop-blur-sm transition hover:bg-white lg:flex xl:-left-16"
 					>
-						<ChevronLeft size={20} className="text-slate-600" />
+						<ChevronLeft size={24} className="text-slate-600" />
 					</button>
 
 					<Swiper
-						onSwiper={(swiper) => { swiperRef.current = swiper; }}
+						onSwiper={(swiper) => {
+							swiperRef.current = swiper;
+						}}
 						modules={[Navigation, Autoplay]}
 						spaceBetween={16}
 						slidesPerView={1.3}
@@ -53,7 +55,7 @@ const Teachers = () => {
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
 									transition={{ delay: i * 0.08 }}
-									className="group relative w-full overflow-hidden rounded-2xl aspect-282/401 bg-slate-100"
+									className="group relative aspect-[282/401] w-full overflow-hidden rounded-2xl bg-slate-100"
 								>
 									<Image
 										src={t.img}
@@ -76,9 +78,9 @@ const Teachers = () => {
 					{/* Next */}
 					<button
 						onClick={() => swiperRef.current?.slideNext()}
-						className="hidden shrink-0 items-center justify-center rounded-full border border-slate-300 p-3 transition hover:bg-slate-100 lg:flex"
+						className="absolute top-1/2 right-4 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-slate-300 bg-white/80 shadow-sm backdrop-blur-sm transition hover:bg-white lg:flex xl:-right-16"
 					>
-						<ChevronRight size={20} className="text-slate-600" />
+						<ChevronRight size={24} className="text-slate-600" />
 					</button>
 				</div>
 			</div>

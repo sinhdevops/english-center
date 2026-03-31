@@ -1,15 +1,18 @@
 "use client";
 
-import React, { useState } from"react";
-import { motion } from"framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { IMAGES } from "../../../public/statics/images";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { SiZalo } from "react-icons/si";
 import FloatingRegistration from "@/components/common/FloatingRegistration";
+import { usePathname } from "next/navigation";
 
 export const FloatingContact: React.FC = () => {
 	const [showForm, setShowForm] = useState(true);
+	const pathname = usePathname();
+	const isContactPage = pathname === "/lien-he";
 
 	return (
 		<div className="fixed right-6 bottom-8 z-40 flex flex-col items-center gap-4">
@@ -28,7 +31,7 @@ export const FloatingContact: React.FC = () => {
 					Chat Messenger
 				</div>
 				<FaFacebookMessenger className="h-7 w-7" />
-				<span className="pointer-events-none absolute inset-0 animate-ping rounded-full bg-purple-400 opacity-20"/>
+				<span className="pointer-events-none absolute inset-0 animate-ping rounded-full bg-purple-400 opacity-20" />
 			</motion.a>
 
 			{/* Zalo Button */}
@@ -49,27 +52,25 @@ export const FloatingContact: React.FC = () => {
 				<SiZalo className="h-7 w-7" />
 			</motion.a>
 
-			{/* Floating mascot — toggle form */}
-			<motion.button
-				onClick={() => setShowForm((v) => !v)}
-				initial={{ opacity: 0, scale: 0.5, y: 20 }}
-				animate={{ opacity: 1, scale: 1, y: 0 }}
-				transition={{ delay: 0.2 }}
-				whileHover={{ scale: 1.1 }}
-				whileTap={{ scale: 0.95 }}
-				aria-label="Đăng ký tư vấn"
-				className="relative h-14 w-14 overflow-hidden rounded-full shadow-lg"
-			>
-				<Image
-					src={IMAGES.floating}
-					alt="STEMKey mascot"
-					fill
-					className="object-cover"
-					sizes="56px"
-				/>
-			</motion.button>
+			{!isContactPage && (
+				<>
+					{/* Floating mascot — toggle form */}
+					<motion.button
+						onClick={() => setShowForm((v) => !v)}
+						initial={{ opacity: 0, scale: 0.5, y: 20 }}
+						animate={{ opacity: 1, scale: 1, y: 0 }}
+						transition={{ delay: 0.2 }}
+						whileHover={{ scale: 1.1 }}
+						whileTap={{ scale: 0.95 }}
+						aria-label="Đăng ký tư vấn"
+						className="relative h-14 w-14 overflow-hidden rounded-full shadow-lg"
+					>
+						<Image src={IMAGES.floating} alt="STEMKey mascot" fill className="object-cover" sizes="56px" />
+					</motion.button>
 
-			<FloatingRegistration open={showForm} />
+					<FloatingRegistration open={showForm} />
+				</>
+			)}
 		</div>
 	);
 };
