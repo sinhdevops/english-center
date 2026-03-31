@@ -148,9 +148,9 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 											<h3 className="group-hover:text-stem-blue line-clamp-2 text-sm leading-snug font-bold text-slate-700 transition-colors">
 												{qs.title} – {qs.age_group}
 											</h3>
-											{isDone && result.score !== null && (
+											{isDone && (
 												<p className="mt-1 text-xs text-emerald-600 font-medium">
-													Điểm: {result.score}/10
+													Chờ trung tâm trả kết quả
 												</p>
 											)}
 										</motion.div>

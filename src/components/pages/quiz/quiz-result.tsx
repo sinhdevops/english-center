@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Eye, ArrowRight } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 
 interface QuizResultProps {
 	score: number;
@@ -10,7 +10,7 @@ interface QuizResultProps {
 	onRetake: () => void;
 }
 
-export const QuizResult = ({ score, totalQuestions, onReview, onRetake }: QuizResultProps) => (
+export const QuizResult = ({ totalQuestions, onRetake }: QuizResultProps) => (
 	<div className="fixed inset-0 z-100 flex items-center justify-center p-4">
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -25,44 +25,41 @@ export const QuizResult = ({ score, totalQuestions, onReview, onRetake }: QuizRe
 			className="md:rounded-5xl relative w-full max-w-2xl space-y-6 rounded-3xl bg-white p-6 text-center md:space-y-8 md:p-12"
 		>
 			<div className="space-y-1 md:space-y-2">
-				<h2 className="text-stem-red text-2xl leading-tight font-black uppercase md:text-4xl">Chúc mừng bạn</h2>
-				<h2 className="text-stem-red text-2xl leading-tight font-black uppercase md:text-4xl">
+				<h2 className="text-2xl leading-tight font-black uppercase text-slate-800 md:text-4xl">Chúc mừng bạn</h2>
+				<h2 className="text-2xl leading-tight font-black uppercase text-slate-800 md:text-4xl">
 					Hoàn thành bài test
 				</h2>
 			</div>
 
-			<div className="relative overflow-hidden rounded-3xl border-2 border-yellow-100 bg-[#fff9e6] p-6 md:rounded-4xl md:p-10">
-				<div className="relative z-10 space-y-3 md:space-y-4">
-					<p className="text-xs font-bold text-slate-500 md:text-sm">Kết quả của bạn:</p>
-					<div className="text-6xl font-black text-slate-800 md:text-8xl">
-						{score}
-						<span className="text-3xl text-slate-400 md:text-4xl">/10</span>
+			<div className="relative overflow-hidden rounded-3xl border-2 border-green-100 bg-green-50 p-6 md:rounded-4xl md:p-10">
+				<div className="relative z-10 flex flex-col items-center gap-4">
+					<div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100 md:h-20 md:w-20">
+						<Clock className="h-8 w-8 text-green-600 md:h-10 md:w-10" />
 					</div>
-					<div className="text-base font-bold text-slate-500 md:text-lg">
-						điểm &nbsp;·&nbsp; {totalQuestions} câu hỏi
-					</div>
+					<p className="text-sm font-bold text-slate-600 md:text-base">
+						Bài làm của bạn đã được ghi nhận
+					</p>
+					<p className="text-xs text-slate-400 md:text-sm">
+						{totalQuestions} câu hỏi &nbsp;·&nbsp; Ngày làm: {new Date().toLocaleDateString("vi-VN")}
+					</p>
 				</div>
-				<div className="absolute -right-10 -bottom-10 h-32 w-32 rounded-full bg-yellow-400/10 blur-2xl md:h-40 md:w-40 md:blur-3xl" />
 			</div>
 
-			<p className="text-xs font-bold text-slate-400 md:text-sm">
-				Ngày làm bài: {new Date().toLocaleDateString("vi-VN")}
-			</p>
-
-			<div className="flex flex-col justify-center gap-3 pt-2 sm:flex-row md:gap-4 md:pt-4">
-				{false && <button
-					onClick={onReview}
-					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#00a699] py-3.5 text-base font-black text-white transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
-				>
-					<Eye size={20} className="md:h-6 md:w-6" /> Xem đáp án
-				</button>}
-				<button
-					onClick={onRetake}
-					className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl bg-slate-700 py-3.5 text-base font-black text-white transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
-				>
-					<ArrowRight size={20} className="md:h-6 md:w-6" /> Xem bài test khác
-				</button>
+			<div className="space-y-2 rounded-2xl bg-slate-50 p-4 md:p-6">
+				<p className="text-sm font-bold text-slate-700 md:text-base">
+					Trung tâm sẽ chấm điểm và phản hồi kết quả sớm nhất!
+				</p>
+				<p className="text-xs text-slate-400 md:text-sm">
+					Bạn có thể xem kết quả trong mục <span className="font-bold text-slate-600">Trang cá nhân</span> sau khi được chấm.
+				</p>
 			</div>
+
+			<button
+				onClick={onRetake}
+				className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-slate-700 py-3.5 text-base font-black text-white transition-all active:scale-95 md:rounded-2xl md:py-5 md:text-lg"
+			>
+				<ArrowRight size={20} className="md:h-6 md:w-6" /> Xem bài test khác
+			</button>
 		</motion.div>
 	</div>
 );

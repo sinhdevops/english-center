@@ -5,6 +5,7 @@ import { FloatingContact } from "@/components/layout/floating-contact";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Navbar } from "@/components/layout/navbar";
+import FloatingRegistration from "@/components/common/FloatingRegistration";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 			<main className="grow">{children}</main>
 			<Footer />
 			<FloatingContact />
+			<FloatingRegistration />
 		</div>
 	);
 }

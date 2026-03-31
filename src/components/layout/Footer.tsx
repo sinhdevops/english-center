@@ -3,43 +3,31 @@ import React from "react";
 import Image from "next/image";
 import { PROGRAMS_DATA } from "@/constants";
 import Link from "next/link";
+import { FooterCta } from "./FooterCta";
 
 export const Footer: React.FC = () => {
 	return (
-		<footer className="bg-[#282828] text-white">
-			<div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 border-b border-[#454545] px-4 py-4 md:grid-cols-4 lg:px-[120px] lg:pt-[60px] lg:pb-[30px]">
-				<div className="col-span-1 space-y-4 md:col-span-2">
+		<footer className="bg-white text-gray-800">
+			<div className="px-4 lg:px-0">
+				
+			<FooterCta />
+
+			</div>
+			<div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 border-b border-gray-200 px-4 lg:px-0 py-8 md:grid-cols-4 lg:pt-15 lg:pb-7.5">
+				<div className="col-span-2 space-y-4 md:col-span-1">
 					<Image
 						src="/statics/images/logo.svg"
 						alt="Logo"
-						width={200}
-						height={200}
+						width={160}
+						height={60}
 						className="object-contain"
 					/>
-					<p className="max-w-md font-light text-white">
+					<p className="max-w-xs text-sm font-light text-gray-700">
 						Hệ thống đào tạo tiếng Anh trẻ em uy tín top đầu Việt Nam về đảm bảo mục tiêu kép: Toàn diện 4
 						kỹ năng chuẩn Cambridge và Điểm giỏi trên trường
 					</p>
 
-					{/* <div className="relative h-10 max-w-sm">
-						<label htmlFor="footer-email" className="sr-only">
-							Nhập email nhận tin tức
-						</label>
-						<input
-							id="footer-email"
-							type="email"
-							placeholder="Nhập email nhận tin tức"
-							className="h-full w-full rounded-lg bg-white px-4 py-[9px] pr-14 text-slate-900 focus:outline-none"
-						/>
-						<button
-							aria-label="Đăng ký nhận bản tin"
-							className="absolute top-1/2 right-2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-slate-400 transition-colors hover:text-slate-900"
-						>
-							<ArrowRight size={20} aria-hidden="true" />
-						</button>
-					</div> */}
-
-					<div className="flex gap-4">
+					<div className="flex gap-3">
 						<Link
 							href="https://www.facebook.com/people/STEMKey-Edu/61583934994908/"
 							target="_blank"
@@ -107,26 +95,44 @@ export const Footer: React.FC = () => {
 				</div>
 
 				<div>
-					<h3 className="mb-6 text-lg font-medium uppercase">Khóa học</h3>
-					<ul className="space-y-4 font-light text-white">
+					<h3 className="mb-6 text-sm font-bold uppercase tracking-wide text-gray-900">STEMKEY</h3>
+					<ul className="space-y-3 text-sm font-light text-gray-700">
+						<li className="cursor-pointer transition-colors hover:text-gray-900">
+							<Link href="/ve-chung-toi">Về chúng tôi</Link>
+						</li>
+						<li className="cursor-pointer transition-colors hover:text-gray-900">
+							<Link href="/goc-ba-me">Góc ba mẹ</Link>
+						</li>
+						<li className="cursor-pointer transition-colors hover:text-gray-900">
+							<Link href="/goc-hoc-tap">Góc học tập</Link>
+						</li>
+						<li className="cursor-pointer transition-colors hover:text-gray-900">
+							<Link href="/tin-tuc">Tin tức</Link>
+						</li>
+					</ul>
+				</div>
+
+				<div>
+					<h3 className="mb-6 text-sm font-bold uppercase tracking-wide text-gray-900">KHÓA HỌC</h3>
+					<ul className="space-y-3 text-sm font-light text-gray-700">
 						{PROGRAMS_DATA.map((item) => (
-							<li key={item.title} className="cursor-pointer transition-colors hover:text-white">
+							<li key={item.title} className="cursor-pointer transition-colors hover:text-gray-900">
 								<Link href={`/chuong-trinh/${item.slug}`}>{item.title}</Link>
 							</li>
 						))}
 					</ul>
 				</div>
 
-				<div>
-					<h3 className="mb-6 text-lg font-medium uppercase">THÔNG TIN LIÊN HỆ</h3>
-					<ul className="space-y-4 font-light text-white">
+				<div className="col-span-2 md:col-span-1">
+					<h3 className="mb-6 text-sm font-bold uppercase tracking-wide text-gray-900">THÔNG TIN LIÊN HỆ</h3>
+					<ul className="space-y-3 text-sm font-light text-gray-700">
 						<li>Hotline: 091 255 1090</li>
-						<li>Email: stemkey.edu@gmail.com</li>
+						<li>Email hỗ trợ học tập: info@stemkey.edu.vn</li>
 						<li>Địa chỉ: Tầng 4 - Tòa nhà T4, Thăng Long Victory, An Khánh, Hà Nội</li>
 					</ul>
 				</div>
 			</div>
-			<div className="mx-auto max-w-7xl border-t border-slate-800 px-4 py-5 text-center text-sm text-white lg:px-[120px]">
+			<div className="mx-auto max-w-7xl px-4 py-5 text-center text-sm text-gray-600">
 				© {new Date().getFullYear()} STEMKey Education. All rights reserved.
 			</div>
 		</footer>

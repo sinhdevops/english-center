@@ -33,6 +33,7 @@ export const CourseModal = ({
 				name: editingCourse.name,
 				duration: editingCourse.duration || "",
 				level: editingCourse.level || "",
+				description: editingCourse.description || "",
 			};
 		}
 		return {
@@ -40,9 +41,18 @@ export const CourseModal = ({
 			name: "",
 			duration: "",
 			level: "",
+			description: "",
 		};
 	});
 	const [errors, setErrors] = useState<Partial<Record<keyof CourseFormData, string>>>({});
+
+	const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({ ...prev, [name]: value }));
+		if (errors[name as keyof CourseFormData]) {
+			setErrors((prev) => ({ ...prev, [name]: undefined }));
+		}
+	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
@@ -131,6 +141,17 @@ export const CourseModal = ({
 						/>
 					</AdminFormField>
 				</div>
+
+				<AdminFormField label="Mô tả ngắn" error={errors.description}>
+					<textarea
+						name="description"
+						value={formData.description || ""}
+						onChange={handleTextareaChange}
+						placeholder="Mô tả ngắn về khóa học..."
+						rows={3}
+						className="mt-1 block w-full resize-none rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+					/>
+				</AdminFormField>
 
 				<div className="mt-8 flex gap-3 border-t border-slate-100 pt-4">
 					<button

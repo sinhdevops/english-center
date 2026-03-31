@@ -13,6 +13,7 @@ import {
 	BookOpen,
 	ToggleLeft,
 	ToggleRight,
+	ImageIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 import { QuizSet, QuizQuestion } from "@/lib/types";
@@ -24,6 +25,7 @@ import {
 	createQuizQuestion,
 	updateQuizQuestion,
 	deleteQuizQuestion,
+	uploadQuizImage,
 } from "./actions";
 
 interface Props {
@@ -31,6 +33,49 @@ interface Props {
 }
 
 const AGE_GROUPS = ["3-4 tuổi", "4-5 tuổi", "5-6 tuổi", "Tiểu học"];
+
+function ImageUploadSlot({
+	index,
+	existingUrl,
+	newFile,
+	newPreview,
+	onFileChange,
+}: {
+	index: number;
+	existingUrl?: string;
+	newFile: File | null;
+	newPreview: string;
+	onFileChange: (idx: number, file: File | null) => void;
+}) {
+	const preview = newPreview || existingUrl || "";
+	const label = String.fromCharCode(65 + index);
+	return (
+		<div className="flex flex-col items-center gap-1">
+			<label className="cursor-pointer group">
+				<div
+					className={`relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed transition-colors ${
+						preview ? "border-indigo-300 bg-slate-50" : "border-slate-300 bg-slate-50 hover:border-indigo-400"
+					}`}
+				>
+					{preview ? (
+						<img src={preview} alt={label} className="h-full w-full object-cover" />
+					) : (
+						<ImageIcon size={18} className="text-slate-300 group-hover:text-indigo-400" />
+					)}
+					<span className="absolute bottom-0 right-0 rounded-tl bg-black/50 px-1 text-[9px] font-black text-white">
+						{label}
+					</span>
+				</div>
+				<input
+					type="file"
+					accept="image/*"
+					className="sr-only"
+					onChange={(e) => onFileChange(index, e.target.files?.[0] ?? null)}
+				/>
+			</label>
+		</div>
+	);
+}
 
 function QuestionRow({
 	question,
@@ -43,12 +88,43 @@ function QuestionRow({
 	const [text, setText] = useState(question.text);
 	const [options, setOptions] = useState<string[]>(question.options);
 	const [correctAnswer, setCorrectAnswer] = useState(question.correct_answer);
+	const [optionType, setOptionType] = useState<'text' | 'image'>(question.option_type ?? 'text');
+	const [imageFiles, setImageFiles] = useState<(File | null)[]>([null, null, null, null]);
+	const [imagePreviews, setImagePreviews] = useState<string[]>(["", "", "", ""]);
 	const [saving, setSaving] = useState(false);
+
+	const handleImageChange = (idx: number, file: File | null) => {
+		const newFiles = [...imageFiles];
+		newFiles[idx] = file;
+		setImageFiles(newFiles);
+		const newPreviews = [...imagePreviews];
+		newPreviews[idx] = file ? URL.createObjectURL(file) : "";
+		setImagePreviews(newPreviews);
+	};
 
 	const handleSave = async () => {
 		setSaving(true);
 		try {
-			await updateQuizQuestion(question.id, { text, options, correct_answer: correctAnswer });
+			let imageUrls: string[] | null = question.option_images ?? null;
+			if (optionType === 'image') {
+				// Upload only slots where a new file was selected
+				const urls = [...(question.option_images ?? ["", "", "", ""])];
+				for (let i = 0; i < 4; i++) {
+					if (imageFiles[i]) {
+						const fd = new FormData();
+						fd.append("file", imageFiles[i]!);
+						urls[i] = await uploadQuizImage(fd);
+					}
+				}
+				imageUrls = urls;
+			}
+			await updateQuizQuestion(question.id, {
+				text,
+				options,
+				correct_answer: correctAnswer,
+				option_type: optionType,
+				option_images: optionType === 'image' ? imageUrls : null,
+			});
 			toast.success("Đã cập nhật câu hỏi");
 			setEditing(false);
 		} catch {
@@ -70,29 +146,72 @@ function QuestionRow({
 					/>
 				</td>
 				<td className="px-4 py-3">
-					<div className="space-y-1">
-						{options.map((opt, i) => (
-							<div key={i} className="flex items-center gap-1">
-								<span className="text-xs text-slate-400 w-4">{i}.</span>
-								<input
-									className="flex-1 rounded border border-slate-200 px-2 py-0.5 text-xs"
-									value={opt}
-									onChange={(e) => {
-										const next = [...options];
-										next[i] = e.target.value;
-										setOptions(next);
-									}}
-								/>
-								<input
-									type="radio"
-									name={`correct-${question.id}`}
-									checked={correctAnswer === i}
-									onChange={() => setCorrectAnswer(i)}
-									title="Đáp án đúng"
-								/>
-							</div>
-						))}
+					<div className="mb-2">
+						<select
+							className="rounded border border-slate-200 px-2 py-0.5 text-xs"
+							value={optionType}
+							onChange={(e) => setOptionType(e.target.value as 'text' | 'image')}
+						>
+							<option value="text">Text</option>
+							<option value="image">Hình ảnh</option>
+						</select>
 					</div>
+					{optionType === 'image' ? (
+						<div className="space-y-1.5">
+							{options.map((opt, i) => (
+								<div key={i} className="flex items-center gap-2">
+									<ImageUploadSlot
+										index={i}
+										existingUrl={question.option_images?.[i] ?? ""}
+										newFile={imageFiles[i]}
+										newPreview={imagePreviews[i]}
+										onFileChange={handleImageChange}
+									/>
+									<input
+										className="flex-1 rounded border border-slate-200 px-2 py-0.5 text-xs"
+										placeholder={`Nhãn đáp án ${String.fromCharCode(65 + i)}`}
+										value={opt}
+										onChange={(e) => {
+											const next = [...options];
+											next[i] = e.target.value;
+											setOptions(next);
+										}}
+									/>
+									<input
+										type="radio"
+										name={`correct-${question.id}`}
+										checked={correctAnswer === i}
+										onChange={() => setCorrectAnswer(i)}
+										title="Đáp án đúng"
+									/>
+								</div>
+							))}
+						</div>
+					) : (
+						<div className="space-y-1">
+							{options.map((opt, i) => (
+								<div key={i} className="flex items-center gap-1">
+									<span className="text-xs text-slate-400 w-4">{i}.</span>
+									<input
+										className="flex-1 rounded border border-slate-200 px-2 py-0.5 text-xs"
+										value={opt}
+										onChange={(e) => {
+											const next = [...options];
+											next[i] = e.target.value;
+											setOptions(next);
+										}}
+									/>
+									<input
+										type="radio"
+										name={`correct-${question.id}`}
+										checked={correctAnswer === i}
+										onChange={() => setCorrectAnswer(i)}
+										title="Đáp án đúng"
+									/>
+								</div>
+							))}
+						</div>
+					)}
 				</td>
 				<td className="px-4 py-3 text-right">
 					<div className="flex items-center justify-end gap-1">
@@ -122,20 +241,38 @@ function QuestionRow({
 			<td className="px-4 py-3 text-xs text-slate-400">{question.question_order}</td>
 			<td className="px-4 py-3 text-sm font-medium text-slate-700">{question.text}</td>
 			<td className="px-4 py-3">
-				<div className="flex flex-wrap gap-1">
-					{question.options.map((opt, i) => (
-						<span
-							key={i}
-							className={`rounded px-2 py-0.5 text-xs font-medium ${
-								i === question.correct_answer
-									? "bg-emerald-100 text-emerald-700"
-									: "bg-slate-100 text-slate-500"
-							}`}
-						>
-							{opt}
-						</span>
-					))}
-				</div>
+				{question.option_type === 'image' ? (
+					<div className="flex items-center gap-1.5">
+						<ImageIcon size={12} className="text-indigo-400" />
+						<div className="flex gap-1">
+							{(question.option_images ?? []).map((url, i) => (
+								<img
+									key={i}
+									src={url}
+									alt={question.options[i]}
+									className={`h-8 w-8 rounded object-cover ring-2 ${
+										i === question.correct_answer ? "ring-emerald-400" : "ring-transparent"
+									}`}
+								/>
+							))}
+						</div>
+					</div>
+				) : (
+					<div className="flex flex-wrap gap-1">
+						{question.options.map((opt, i) => (
+							<span
+								key={i}
+								className={`rounded px-2 py-0.5 text-xs font-medium ${
+									i === question.correct_answer
+										? "bg-emerald-100 text-emerald-700"
+										: "bg-slate-100 text-slate-500"
+								}`}
+							>
+								{opt}
+							</span>
+						))}
+					</div>
+				)}
 			</td>
 			<td className="px-4 py-3 text-right">
 				<div className="flex items-center justify-end gap-1">
@@ -171,21 +308,56 @@ function AddQuestionRow({
 	const [text, setText] = useState("");
 	const [options, setOptions] = useState(["", "", "", ""]);
 	const [correctAnswer, setCorrectAnswer] = useState(0);
+	const [optionType, setOptionType] = useState<'text' | 'image'>('text');
+	const [imageFiles, setImageFiles] = useState<(File | null)[]>([null, null, null, null]);
+	const [imagePreviews, setImagePreviews] = useState<string[]>(["", "", "", ""]);
 	const [saving, setSaving] = useState(false);
 
+	const handleImageChange = (idx: number, file: File | null) => {
+		const newFiles = [...imageFiles];
+		newFiles[idx] = file;
+		setImageFiles(newFiles);
+		const newPreviews = [...imagePreviews];
+		newPreviews[idx] = file ? URL.createObjectURL(file) : "";
+		setImagePreviews(newPreviews);
+	};
+
 	const handleSave = async () => {
-		if (!text.trim() || options.some((o) => !o.trim())) {
-			toast.error("Vui lòng điền đầy đủ câu hỏi và các đáp án");
+		if (!text.trim()) {
+			toast.error("Vui lòng điền câu hỏi");
 			return;
+		}
+		if (optionType === 'image') {
+			if (imageFiles.some((f) => !f)) {
+				toast.error("Vui lòng chọn đủ 4 ảnh đáp án");
+				return;
+			}
+		} else {
+			if (options.some((o) => !o.trim())) {
+				toast.error("Vui lòng điền đầy đủ các đáp án");
+				return;
+			}
 		}
 		setSaving(true);
 		try {
+			let imageUrls: string[] | null = null;
+			if (optionType === 'image') {
+				const urls: string[] = [];
+				for (const file of imageFiles) {
+					const fd = new FormData();
+					fd.append("file", file!);
+					urls.push(await uploadQuizImage(fd));
+				}
+				imageUrls = urls;
+			}
 			await createQuizQuestion({
 				quiz_set_id: quizSetId,
 				question_order: nextOrder,
 				text: text.trim(),
 				options: options.map((o) => o.trim()),
 				correct_answer: correctAnswer,
+				option_type: optionType,
+				option_images: imageUrls,
 			});
 			toast.success("Đã thêm câu hỏi");
 			onDone();
@@ -209,30 +381,73 @@ function AddQuestionRow({
 				/>
 			</td>
 			<td className="px-4 py-3">
-				<div className="space-y-1">
-					{options.map((opt, i) => (
-						<div key={i} className="flex items-center gap-1">
-							<span className="text-xs text-slate-400 w-4">{i}.</span>
-							<input
-								className="flex-1 rounded border border-slate-200 px-2 py-0.5 text-xs"
-								placeholder={`Đáp án ${i}`}
-								value={opt}
-								onChange={(e) => {
-									const next = [...options];
-									next[i] = e.target.value;
-									setOptions(next);
-								}}
-							/>
-							<input
-								type="radio"
-								name={`new-correct-${quizSetId}`}
-								checked={correctAnswer === i}
-								onChange={() => setCorrectAnswer(i)}
-								title="Đáp án đúng"
-							/>
-						</div>
-					))}
+				<div className="mb-2">
+					<select
+						className="rounded border border-slate-200 px-2 py-0.5 text-xs"
+						value={optionType}
+						onChange={(e) => setOptionType(e.target.value as 'text' | 'image')}
+					>
+						<option value="text">Text</option>
+						<option value="image">Hình ảnh</option>
+					</select>
 				</div>
+				{optionType === 'image' ? (
+					<div className="space-y-1.5">
+						{options.map((opt, i) => (
+							<div key={i} className="flex items-center gap-2">
+								<ImageUploadSlot
+									index={i}
+									existingUrl=""
+									newFile={imageFiles[i]}
+									newPreview={imagePreviews[i]}
+									onFileChange={handleImageChange}
+								/>
+								<input
+									className="flex-1 rounded border border-slate-200 px-2 py-0.5 text-xs"
+									placeholder={`Nhãn đáp án ${String.fromCharCode(65 + i)} (vd: Quả táo)`}
+									value={opt}
+									onChange={(e) => {
+										const next = [...options];
+										next[i] = e.target.value;
+										setOptions(next);
+									}}
+								/>
+								<input
+									type="radio"
+									name={`new-correct-${quizSetId}`}
+									checked={correctAnswer === i}
+									onChange={() => setCorrectAnswer(i)}
+									title="Đáp án đúng"
+								/>
+							</div>
+						))}
+					</div>
+				) : (
+					<div className="space-y-1">
+						{options.map((opt, i) => (
+							<div key={i} className="flex items-center gap-1">
+								<span className="text-xs text-slate-400 w-4">{i}.</span>
+								<input
+									className="flex-1 rounded border border-slate-200 px-2 py-0.5 text-xs"
+									placeholder={`Đáp án ${i}`}
+									value={opt}
+									onChange={(e) => {
+										const next = [...options];
+										next[i] = e.target.value;
+										setOptions(next);
+									}}
+								/>
+								<input
+									type="radio"
+									name={`new-correct-${quizSetId}`}
+									checked={correctAnswer === i}
+									onChange={() => setCorrectAnswer(i)}
+									title="Đáp án đúng"
+								/>
+							</div>
+						))}
+					</div>
+				)}
 			</td>
 			<td className="px-4 py-3 text-right">
 				<div className="flex items-center justify-end gap-1">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import BannerSwiper from "@/components/pages/home/banner-swiper";
+import ThinkingSection from "@/components/pages/home/thinking-section";
 import AboutSection from "@/components/pages/home/about-section";
 import Programs from "@/components/pages/home/programs";
 import ExclusiveModel from "@/components/pages/home/exclusive-model";
@@ -34,6 +35,7 @@ export default async function HomePage() {
 		.eq("category", "Tin tức")
 		.order("date", { ascending: false })
 		.limit(6);
+
 	const { data: testimonialItems } = await supabase
 		.from("events")
 		.select("*")
@@ -41,8 +43,6 @@ export default async function HomePage() {
 		.order("date", { ascending: false })
 		.limit(9);
 
-	const { data: branches } = await supabase.from("branches").select("id, name");
-	const { data: courses } = await supabase.from("courses").select("id, name");
 	const { data: banners } = await supabase
 		.from("banners")
 		.select("*")
@@ -52,15 +52,14 @@ export default async function HomePage() {
 	return (
 		<main className="overflow-x-hidden">
 			<BannerSwiper banners={banners || []} />
+			<ThinkingSection />
 			<div className="my-15 lg:my-20 flex flex-col gap-15 lg:gap-20">
 				<AboutSection />
 				<Programs />
-				<ExclusiveModel />
 				<FlexibleLearning />
 				<Teachers />
-				<News initialNews={newsItems || []} />
 				<Testimonials items={testimonialItems || []} />
-				<RegistrationSection branches={branches || []} courses={courses || []} />
+				<News initialNews={newsItems || []} />
 				<Partners />
 			</div>
 		</main>

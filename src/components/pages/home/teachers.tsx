@@ -1,95 +1,85 @@
 "use client";
 
 import { motion } from "motion/react";
-import React from "react";
+import React, { useRef } from "react";
 import { TEACHERS_DATA } from "@/constants";
 import Image from "next/image";
-import { IMAGES } from "../../../../public/statics/images";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import "swiper/css";
 
 const Teachers = () => {
-	return (
-		<section className="overflow-hidden bg-[#F1F5F9]">
-			<div className="mx-auto my-20 max-w-7xl px-4">
-				<div className="mb-10 text-center">
-					<motion.h2
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						className="text-3xl font-bold text-slate-900 lg:text-4xl"
-					>
-						300+ giáo viên truyền cảm hứng
-					</motion.h2>
-					<motion.p
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ delay: 0.1 }}
-						className="text-slate-600"
-					>
-						Tài năng, cá tính và tâm huyết trong từng bài giảng
-					</motion.p>
-				</div>
+	const swiperRef = useRef<SwiperType | null>(null);
 
-				<div className="relative">
+	return (
+		<section className="overflow-hidden bg-white">
+			<div className="mx-auto max-w-7xl px-4">
+				<motion.h2
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					className="mb-10 text-center text-2xl font-semibold lg:text-4xl"
+				>
+					300+ GIÁO VIÊN TRUYỀN CẢM HỨNG
+				</motion.h2>
+
+				<div className="relative flex items-center gap-4">
+					{/* Prev */}
+					<button
+						onClick={() => swiperRef.current?.slidePrev()}
+						className="hidden shrink-0 items-center justify-center rounded-full border border-slate-300 p-3 transition hover:bg-slate-100 lg:flex"
+					>
+						<ChevronLeft size={20} className="text-slate-600" />
+					</button>
+
 					<Swiper
-						modules={[Autoplay]}
+						onSwiper={(swiper) => { swiperRef.current = swiper; }}
+						modules={[Navigation, Autoplay]}
 						spaceBetween={16}
-						slidesPerView={1.2}
-						autoplay={{
-							delay: 5000,
-							disableOnInteraction: false,
-						}}
-						pagination={{
-							clickable: true,
-							dynamicBullets: true,
-						}}
+						slidesPerView={1.3}
+						autoplay={{ delay: 4000, disableOnInteraction: false }}
 						breakpoints={{
-							640: {
-								slidesPerView: 2.2,
-								spaceBetween: 20,
-							},
-							1024: {
-								slidesPerView: 4,
-								spaceBetween: 30,
-							},
+							640: { slidesPerView: 2.2, spaceBetween: 20 },
+							1024: { slidesPerView: 4, spaceBetween: 24 },
 						}}
-						className="teachers-swiper"
+						className="w-full"
 					>
 						{TEACHERS_DATA.map((t, i) => (
-							<SwiperSlide key={i} className="h-auto">
+							<SwiperSlide key={i}>
 								<motion.div
 									initial={{ opacity: 0, y: 20 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
-									transition={{ delay: i * 0.1 }}
-									className="flex h-full flex-col"
+									transition={{ delay: i * 0.08 }}
+									className="group relative w-full overflow-hidden rounded-2xl aspect-282/401 bg-slate-100"
 								>
-									<div
-										className="group relative mb-6 aspect-4/5 overflow-hidden rounded-xl bg-white"
-										aria-hidden="true"
-									>
-										<Image
-											src={t.img}
-											alt={t.name}
-											width={400}
-											height={500}
-											sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-											className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-											referrerPolicy="no-referrer"
-										/>
-										<div className="absolute top-3 left-2 text-white">
-											<Image src={IMAGES.logo} alt="logo" width={80} />
-										</div>
+									<Image
+										src={t.img}
+										alt={t.name}
+										fill
+										sizes="(max-width: 640px) 80vw, (max-width: 1024px) 45vw, 25vw"
+										className="object-cover transition-transform duration-700 group-hover:scale-105"
+										referrerPolicy="no-referrer"
+									/>
+									{/* Gradient overlay */}
+									<div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/70 via-black/30 to-transparent px-4 py-5">
+										<p className="text-base font-semibold text-white">{t.name}</p>
+										<p className="mt-1 text-sm leading-snug text-white/80">{t.role}</p>
 									</div>
-									<h3 className="mb-[6px] text-lg font-semibold text-slate-900">{t.name}</h3>
-									<p className="leading-relaxed text-slate-600">{t.role}</p>
 								</motion.div>
 							</SwiperSlide>
 						))}
 					</Swiper>
+
+					{/* Next */}
+					<button
+						onClick={() => swiperRef.current?.slideNext()}
+						className="hidden shrink-0 items-center justify-center rounded-full border border-slate-300 p-3 transition hover:bg-slate-100 lg:flex"
+					>
+						<ChevronRight size={20} className="text-slate-600" />
+					</button>
 				</div>
 			</div>
 		</section>

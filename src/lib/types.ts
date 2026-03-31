@@ -25,6 +25,7 @@ export interface Course {
   name: string;
   duration?: string;
   level?: string;
+  description?: string;
   created_at?: string;
 }
 
@@ -54,6 +55,8 @@ export interface Event {
   location: string;
   image_url?: string;
   author_image_url?: string;
+  type?: 'article' | 'video';
+  youtube_id?: string;
   created_at?: string;
 }
 
@@ -102,6 +105,8 @@ export interface QuizQuestion {
   text: string;
   options: string[];
   correct_answer: number;
+  option_type: 'text' | 'image';
+  option_images?: string[] | null;
 }
 
 export interface QuizSet {

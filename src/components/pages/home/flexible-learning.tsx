@@ -1,128 +1,70 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Sparkles, Minus } from "lucide-react";
+import { Settings2 } from "lucide-react";
 import { FLEXIBLE_BENEFITS } from "@/constants";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { HomeImages } from "../../../../public/statics/images";
 
 const FlexibleLearning = () => {
-	const [openIndex, setOpenIndex] = useState(0);
+  return (
+    <section className="bg-white">
+      <div className="mx-auto max-w-7xl px-4">
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-10 text-2xl font-semibold lg:text-4xl"
+        >
+          VÌ SAO NÊN CHỌN STEMKey ĐỂ TRẺ PHÁT TRIỂN TƯ DUY TOÀN DIỆN
+        </motion.h2>
 
-	return (
-		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
-				<div className="flex flex-col items-end gap-16 lg:flex-row">
-					{/* Left: Images */}
-					<div className="w-full lg:w-1/2">
-						<div className="mb-10 text-center lg:text-left">
-							<h2 className="mb-2 text-2xl font-bold lg:text-4xl">
-								Học linh hoạt giữa Online và Offline
-							</h2>
-							<p className="text-slate-600">
-								Tham gia Lớp học Offline và Online tại STEMKey bạn sẽ được:
-							</p>
-						</div>
-						<div className="grid grid-cols-2 gap-4">
-							<motion.div
-								initial={{ opacity: 0, scale: 0.95 }}
-								whileInView={{ opacity: 1, scale: 1 }}
-								viewport={{ once: true }}
-								className="relative h-[400px] overflow-hidden rounded-xl lg:h-[471px]"
-							>
-								<Image
-									src={HomeImages.image5}
-									alt="Học sinh tham gia lớp học Online"
-									fill
-									sizes="(max-width: 768px) 50vw, 25vw"
-									className="object-cover"
-									referrerPolicy="no-referrer"
-								/>
-							</motion.div>
-							<motion.div
-								initial={{ opacity: 0, scale: 0.95 }}
-								whileInView={{ opacity: 1, scale: 1 }}
-								viewport={{ once: true }}
-								transition={{ delay: 0.2 }}
-								className="relative mt-8 h-[400px] overflow-hidden rounded-xl lg:h-[471px]"
-							>
-								<Image
-									src={HomeImages.image6}
-									alt="Học sinh tham gia lớp học Offline"
-									fill
-									sizes="(max-width: 768px) 50vw, 25vw"
-									className="object-cover"
-									referrerPolicy="no-referrer"
-								/>
-							</motion.div>
-						</div>
-					</div>
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12">
+          {/* Left — Benefit cards */}
+          <div className="flex w-full flex-col gap-4 lg:w-1/2">
+            {FLEXIBLE_BENEFITS.map((benefit, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex items-start gap-4 rounded-2xl border border-slate-200 px-5 py-4"
+              >
+                <div className="mt-0.5 flex shrink-0 items-center justify-center rounded-full bg-blue-100 p-2">
+                  <Settings2 size={18} className="text-blue-500" />
+                </div>
+                <p className="text-sm leading-relaxed text-slate-700 lg:text-base">
+                  {benefit.title}
+                </p>
+              </motion.div>
+            ))}
+          </div>
 
-					{/* Right: Content & Accordion */}
-					<div className="w-full lg:w-1/2">
-						<div className="space-y-4">
-							{FLEXIBLE_BENEFITS.map((benefit, i) => (
-								<div
-									key={i}
-									className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-										openIndex === i ? "border-blue-500 bg-blue-50/50" : "border-slate-100 bg-white"
-									}`}
-								>
-									<button
-										onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-										aria-expanded={openIndex === i}
-										aria-controls={`benefit-content-${i}`}
-										className="flex w-full items-center justify-between p-4 pb-3 text-left"
-									>
-										<div className="flex items-center gap-4">
-											<div
-												className={`rounded-lg p-2 ${openIndex === i ? "bg-blue-500 text-white" : "bg-slate-50 text-slate-400"}`}
-											>
-												<Sparkles size={20} />
-											</div>
-											<span className={`text-base font-semibold text-slate-900 lg:text-lg`}>
-												{benefit.title}
-											</span>
-										</div>
-										<div
-											className={`transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`}
-										>
-											{openIndex === i ? (
-												<motion.span className="flex items-center justify-center text-2xl">
-													<Minus />
-												</motion.span>
-											) : (
-												<motion.span className="flex items-center justify-center text-2xl">
-													+
-												</motion.span>
-											)}
-										</div>
-									</button>
-
-									<motion.div
-										id={`benefit-content-${i}`}
-										role="region"
-										aria-labelledby={`benefit-header-${i}`}
-										initial={false}
-										animate={{
-											height: openIndex === i ? "auto" : 0,
-											opacity: openIndex === i ? 1 : 0,
-										}}
-										className="overflow-hidden"
-									>
-										<div className="p-5 pt-0 pl-[68px] text-sm leading-relaxed text-slate-600">
-											{benefit.content}
-										</div>
-									</motion.div>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+          {/* Right — Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="w-full lg:w-1/2"
+          >
+            <div className="relative w-full overflow-hidden rounded-2xl aspect-video">
+              <Image
+                src={HomeImages.shoudImage}
+                alt="Lớp học STEMKey"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default React.memo(FlexibleLearning);

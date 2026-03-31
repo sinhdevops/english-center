@@ -1,5 +1,8 @@
 import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { Resend } from "resend";
+import { render } from "@react-email/render";
+import { QuizSubmittedEmail } from "@/lib/emails/quiz-submitted";
 import PageContent from "./_page-content";
 
 export default async function QuizPage({ params }: { params: { slug: string } }) {
@@ -65,9 +68,13 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 		score: number,
 		completedCount: number,
 		answers: Record<number, number>,
+		userEmail: string | null,
+		parentPhone: string,
 	) {
 		"use server";
 		const sb = await createClient();
+		const completedAt = new Date().toISOString();
+
 		await sb
 			.from("quiz_results")
 			.update({
@@ -75,9 +82,36 @@ export default async function QuizPage({ params }: { params: { slug: string } })
 				completed_count: completedCount,
 				answers,
 				status: "completed",
-				completed_at: new Date().toISOString(),
+				completed_at: completedAt,
 			})
 			.eq("id", recordId);
+
+		// Gửi email thông báo cho giáo viên
+		const teacherEmail = process.env.TEACHER_EMAIL;
+		const resendKey = process.env.RESEND_API_KEY;
+		if (teacherEmail && resendKey) {
+			try {
+				const resend = new Resend(resendKey);
+				const html = await render(
+					QuizSubmittedEmail({
+						userEmail: userEmail ?? "Không rõ",
+						parentPhone,
+						quizSlug: slug,
+						quizTitle: quizSet.title,
+						totalQuestions: completedCount,
+						completedAt: new Date(completedAt).toLocaleString("vi-VN"),
+					}),
+				);
+				await resend.emails.send({
+					from: process.env.NEXT_PUBLIC_BASE_EMAIL ?? "noreply@stemkey.edu.vn",
+					to: teacherEmail,
+					subject: `[STEMKey] Học viên vừa nộp bài: ${quizSet.title}`,
+					html,
+				});
+			} catch (err) {
+				console.error("[updateQuizRecord] Failed to send email:", err);
+			}
+		}
 	}
 
 	return (

@@ -1,9 +1,9 @@
-import { CourserSidebar } from "@/components/ui/courser-sidebar";
+import HeaderPage from "@/components/common/HeaderPage";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { supabase } from "@/lib/supabase-client";
-import NewsItem from "@/components/pages/news/news-item";
-import { TrendingUp } from "lucide-react";
+import { Newspaper } from "lucide-react";
 import { Pagination } from "@/components/ui/pagination";
+import NewsListWithSidebar from "@/components/pages/news/NewsListWithSidebar";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -11,60 +11,48 @@ export default async function LearningCornerPage({ searchParams }: { searchParam
 	const params = await searchParams;
 	const currentPage = Number(params.page) || 1;
 
-	// Calculate range for pagination
 	const from = (currentPage - 1) * ITEMS_PER_PAGE;
 	const to = from + ITEMS_PER_PAGE - 1;
 
-	const { data: events, count } = await supabase
-		.from("events")
-		.select("*", { count: "exact" })
-		.eq("category", "Góc học tập")
-		.order("date", { ascending: false })
-		.range(from, to);
+	const [{ data: events, count }, { data: courses }] = await Promise.all([
+		supabase
+			.from("events")
+			.select("*", { count: "exact" })
+			.eq("category", "Góc học tập")
+			.neq("type", "video")
+			.order("date", { ascending: false })
+			.range(from, to),
 
-	const newsList = events || [];
+		supabase.from("courses").select("id, name, duration").order("created_at", { ascending: true }).limit(20),
+	]);
+
+	const articleItems = events || [];
+	const videoItems: any[] = [];
 	const totalItems = count || 0;
 	const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
 
 	return (
 		<div className="min-h-screen bg-white">
-				<div className="mx-auto max-w-7xl px-4 mt-3">
-					<Breadcrumb items={[{ label: "Góc học tập", active: true }]} variant="dark" />
-				</div>
-			<div className="mx-auto max-w-7xl px-4 py-6 text-center">
-				<div className="flex flex-col gap-16 lg:flex-row">
-					<div className="w-full text-left lg:w-2/3">
-						<h1 className="mb-10 flex items-center gap-3 text-3xl font-black text-slate-900 uppercase">
-							<TrendingUp className="text-stem-blue" />
-							Góc học tập
-						</h1>
-
-						{newsList.length ? (
-							<>
-								<div className="space-y-4">
-									{newsList.map((news) => (
-										<NewsItem
-											key={news.id}
-											id={news.id}
-											title={news.title}
-											category="Góc học tập"
-											date={news.date}
-											desc={news.excerpt || news.description}
-											img={news.image_url}
-										/>
-									))}
-								</div>
-
-								<Pagination totalPages={totalPages} currentPage={currentPage} />
-							</>
-						) : (
-							<p className="text-slate-500 italic">Hiện tại chưa có bài viết trong góc học tập.</p>
-						)}
+			<HeaderPage title="Góc học tập" />
+			<div className="mx-auto max-w-7xl px-4 py-25">
+				{articleItems.length || videoItems.length ? (
+					<>
+						<NewsListWithSidebar
+							newsTitle="GÓC HỌC TẬP"
+							videoItems={videoItems}
+							articleItems={articleItems}
+							courses={courses || []}
+							detailBase="/tin-tuc"
+							variant="news"
+						/>
+						<Pagination totalPages={totalPages} currentPage={currentPage} />
+					</>
+				) : (
+					<div className="flex flex-col items-center justify-center py-24 text-center">
+						<Newspaper size={48} className="mb-4 text-slate-200" />
+						<p className="text-lg font-semibold text-slate-400">Hiện tại chưa có bài viết.</p>
 					</div>
-					<div className="w-full text-left lg:w-1/3">
-						<CourserSidebar />
-					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);

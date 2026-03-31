@@ -9,8 +9,9 @@ import { PROGRAMS_DATA } from"@/constants";
 
 const GRADIENTS = [
 	{ background:"linear-gradient(286.12deg, #FFCA74 9.13%, #C80057 86.64%)" },
-	{ background:"linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)" },
 	{ background:"linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)" },
+	{ background:"linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)" },
+	{ background:"linear-gradient(284.83deg, #7CC9FF 16%, #003777 96.5%)" },
 ];
 
 const Programs = () => {
@@ -18,7 +19,7 @@ const Programs = () => {
 		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4">
 				<div className="mb-10 text-center">
-					<h2 className="text-2xl font-bold text-slate-900 sm:text-4xl lg:text-4xl">
+					<h2 className="text-2xl font-semibold lg:text-4xl">
 						Các chương trình học tại STEMKey
 					</h2>
 					<p className="mx-auto max-w-3xl text-slate-600">
@@ -26,7 +27,7 @@ const Programs = () => {
 					</p>
 				</div>
 
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+				<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
 					{PROGRAMS_DATA.map((p, i) => (
 						<Link key={p.title} href={`/chuong-trinh/${p.slug}`}>
 							<motion.div
@@ -36,7 +37,7 @@ const Programs = () => {
 							>
 								<div className="relative z-10 w-1/2">
 									<h3 className="mb-4 text-2xl font-bold lg:text-3xl">{p.title}</h3>
-									<p className="mb-10 line-clamp-2 text-sm leading-relaxed font-medium opacity-90 lg:text-base">
+									<p className="mb-10 line-clamp-3 text-sm leading-relaxed font-medium opacity-90 lg:text-[15px]">
 										{p.desc}
 									</p>
 									<div

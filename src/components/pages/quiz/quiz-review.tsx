@@ -8,6 +8,8 @@ interface Question {
 	text: string;
 	options: string[];
 	correct_answer: number;
+	option_type?: 'text' | 'image';
+	option_images?: string[] | null;
 }
 
 interface QuizReviewProps {
@@ -98,45 +100,85 @@ export const QuizReview = ({
 							{currentQuestion.text}
 						</h3>
 
-						<div className="grid grid-cols-1 gap-3 md:gap-4">
-							{currentQuestion.options.map((option, optIdx) => {
-								const isCorrect = optIdx === currentQuestion.correct_answer;
-								const isSelected = currentAnswers[currentQuestion.id] === optIdx;
-
-								return (
-									<div
-										key={optIdx}
-										className={`flex items-center gap-3 rounded-xl border-2 p-4 transition-all md:gap-4 md:rounded-2xl md:p-6 ${
-											isCorrect
-												? "border-emerald-500 bg-emerald-50"
-												: isSelected
-													? "border-red-500 bg-red-50"
-													: "border-transparent bg-slate-50 opacity-80"
-										}`}
-									>
+						{currentQuestion.option_type === 'image' ? (
+							<div className="grid grid-cols-2 gap-3 md:gap-4">
+								{currentQuestion.options.map((option, optIdx) => {
+									const isCorrect = optIdx === currentQuestion.correct_answer;
+									const isSelected = currentAnswers[currentQuestion.id] === optIdx;
+									return (
 										<div
-											className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 md:h-6 md:w-6 ${
-												isSelected ? "border-slate-800 bg-slate-800" : "border-slate-300"
+											key={optIdx}
+											className={`relative overflow-hidden rounded-2xl border-4 md:rounded-3xl ${
+												isCorrect
+													? "border-emerald-500"
+													: isSelected
+														? "border-red-500"
+														: "border-transparent opacity-60"
 											}`}
 										>
-											{isSelected && <div className="h-2 w-2 rounded-full bg-white" />}
-										</div>
-										<span className="flex-1 text-base font-bold text-slate-700 md:text-xl">
-											{String.fromCharCode(65 + optIdx)}. {option}
-										</span>
-										{isCorrect && (
-											<CheckCircle2
-												className="shrink-0 text-emerald-500 md:h-6 md:w-6"
-												size={20}
+											<img
+												src={currentQuestion.option_images?.[optIdx] ?? ""}
+												alt={option}
+												className="h-32 w-full object-cover md:h-44"
 											/>
-										)}
-										{isSelected && !isCorrect && (
-											<XCircle className="shrink-0 text-red-500 md:h-6 md:w-6" size={20} />
-										)}
-									</div>
-								);
-							})}
-						</div>
+											<div className="absolute bottom-0 left-0 right-0 bg-black/60 py-1.5 text-center text-xs font-black text-white md:text-sm">
+												{String.fromCharCode(65 + optIdx)}. {option}
+											</div>
+											{isCorrect && (
+												<div className="absolute top-2 right-2">
+													<CheckCircle2 size={24} className="text-emerald-400 drop-shadow-md" />
+												</div>
+											)}
+											{isSelected && !isCorrect && (
+												<div className="absolute top-2 right-2">
+													<XCircle size={24} className="text-red-400 drop-shadow-md" />
+												</div>
+											)}
+										</div>
+									);
+								})}
+							</div>
+						) : (
+							<div className="grid grid-cols-1 gap-3 md:gap-4">
+								{currentQuestion.options.map((option, optIdx) => {
+									const isCorrect = optIdx === currentQuestion.correct_answer;
+									const isSelected = currentAnswers[currentQuestion.id] === optIdx;
+
+									return (
+										<div
+											key={optIdx}
+											className={`flex items-center gap-3 rounded-xl border-2 p-4 transition-all md:gap-4 md:rounded-2xl md:p-6 ${
+												isCorrect
+													? "border-emerald-500 bg-emerald-50"
+													: isSelected
+														? "border-red-500 bg-red-50"
+														: "border-transparent bg-slate-50 opacity-80"
+											}`}
+										>
+											<div
+												className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 md:h-6 md:w-6 ${
+													isSelected ? "border-slate-800 bg-slate-800" : "border-slate-300"
+												}`}
+											>
+												{isSelected && <div className="h-2 w-2 rounded-full bg-white" />}
+											</div>
+											<span className="flex-1 text-base font-bold text-slate-700 md:text-xl">
+												{String.fromCharCode(65 + optIdx)}. {option}
+											</span>
+											{isCorrect && (
+												<CheckCircle2
+													className="shrink-0 text-emerald-500 md:h-6 md:w-6"
+													size={20}
+												/>
+											)}
+											{isSelected && !isCorrect && (
+												<XCircle className="shrink-0 text-red-500 md:h-6 md:w-6" size={20} />
+											)}
+										</div>
+									);
+								})}
+							</div>
+						)}
 					</div>
 				</div>
 

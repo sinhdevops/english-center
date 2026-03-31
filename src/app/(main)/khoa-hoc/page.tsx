@@ -5,15 +5,18 @@ import CoursesClient from "./CoursesClient";
 export default async function CoursesPage() {
 	const supabase = await createClient();
 
-	const { data } = await supabase.from("programs").select("*").order("created_at", { ascending: true });
+	const { data } = await supabase
+		.from("programs")
+		.select("*")
+		.order("created_at", { ascending: true });
 
-	const mappedCourses = (data || []).map((p) => ({
+	const mappedCourses = (data || []).map((p, index) => ({
 		id: p.id,
+		stt: index + 1,
 		title: p.name,
-		image: p.image_url || "https://picsum.photos/seed/student1/600/450",
-		description: p.description || "Lộ trình khóa học tại STEMKey",
-		bullets: ["Khóa học chuẩn STEM", "Phương pháp R.I.P.L"],
-		footer: "Phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ.",
+		description: p.description || "Làm quen với lập trình và robot, khơi gợi tư duy công nghệ, sáng tạo và kỹ năng.",
+		duration: p.duration || "6 tháng",
+		schedule: p.schedule || "Thứ 2, 4, 6",
 	}));
 
 	return <CoursesClient initialCourses={mappedCourses} />;

@@ -31,7 +31,8 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 	return (
 		<header className="sticky top-0 z-60 border-b border-slate-50 bg-white px-4 py-3 lg:static lg:border-none">
 			<div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-				{/* Logo */}
+			<div className="flex items-center gap-10">
+					{/* Logo */}
 				<div className="relative h-[54px] w-[136px]">
 					<Link href="/" aria-label="Trang chủ STEMKey">
 						<Image
@@ -45,24 +46,17 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 				</div>
 
 				{/* Contact Info (Desktop Only) */}
-				<div className="hidden items-center gap-8 text-sm text-slate-600 lg:flex">
-					<div className="flex items-center gap-3">
-						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50">
-							<Phone size={18} className="text-stem-blue" />
-						</div>
-						<div className="flex flex-col">
-							<span className="text-[13px]">091 255 1090</span>
-						</div>
+				<div className="hidden items-center gap-3 lg:flex">
+					<div className="flex items-center gap-2 rounded-xl bg-[#E4E4E4] px-4 py-2 text-sm text-slate-600">
+						<Phone size={15} className="shrink-0 text-[#3D3D3D] font-medium" />
+						<span>091 255 1090</span>
 					</div>
-					<div className="flex items-center gap-3">
-						<div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50">
-							<MapPin size={18} className="text-stem-blue" />
-						</div>
-						<div className="flex flex-col">
-							<span className="text-[13px]">Tầng 4 - Tòa nhà T4, Thăng Long Victory, An Khánh, Hà Nội</span>
-						</div>
+					<div className="flex items-center gap-2 rounded-xl bg-[#E4E4E4] px-4 py-2 text-sm text-slate-600">
+						<MapPin size={15} className="shrink-0 text-[#3D3D3D] font-medium" />
+						<span>Nam An Khánh, Hà Nội</span>
 					</div>
 				</div>
+			</div>
 
 				{/* Search & Auth (Responsive) */}
 				<div className="flex items-center gap-3 lg:gap-4">
@@ -126,14 +120,14 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 													<p className="truncate text-xs text-slate-500">{user.email}</p>
 												</div>
 												<div className="p-1">
-												<Link
+												{/* <Link
 													href="/trang-ca-nhan"
 													onClick={() => setShowDropdown(false)}
 													className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
 												>
 													<UserIcon size={18} />
 													Trang cá nhân
-												</Link>
+												</Link> */}
 											</div>
 												<div className="border-t border-slate-50 p-1">
 													<LogoutButton
@@ -148,16 +142,16 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 							</div>
 						) : (
 							<div className="flex items-center gap-2">
-								<Link href="/dang-nhap">
+							<Link href="/dang-ky">
+									<Button variant="outline" size="sm" className="rounded-full px-6 font-bold">
+										Đăng ký
+									</Button>
+								</Link>	<Link href="/dang-nhap">
 									<Button variant="primary" size="sm" className="rounded-full px-6 font-bold">
 										Đăng nhập
 									</Button>
 								</Link>
-								<Link href="/dang-ky">
-									<Button variant="outline" size="sm" className="rounded-full px-6 font-bold">
-										Đăng ký
-									</Button>
-								</Link>
+								
 							</div>
 						)}
 					</div>

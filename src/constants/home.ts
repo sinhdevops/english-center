@@ -25,24 +25,32 @@ export const ABOUT_FEATURES = [
 export const PROGRAMS_DATA = [
   {
     title: "Toán tư duy",
-    desc: "Phát triển tư duy - Vững nền tảng",
+    desc: "Phát triển tư duy logic và khả năng giải quyết vấn đề thông qua toán học, giúp trẻ luyện tư duy phân tích và sáng tạo",
     slug: "toan-tu-duy",
     style: { background: 'linear-gradient(286.12deg, #FFCA74 9.13%, #C80057 86.64%)' },
-    img: imagePrograms.program1
+    img: HomeImages.program
+  },
+   {
+    title: "Tiếng anh",
+    desc: "Tiếng anh tư duy phản biện STEMKey English kích thích tư duy toàn diện thông qua giáo dục STEM-STEAM",
+    slug: "tieng-anh",
+    style: { background: 'linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)' },
+
+    img: HomeImages.program1
   },
   {
     title: "Robotics",
-    desc: "Lắp ráp & lập trình - Tư duy Stem",
+    desc: "Làm quen với lập trình và robot, khơi gợi tư duy công nghệ, sáng tạo và kỹ năng giải quyết vấn đề.",
     slug: "robotics",
     style: { background: 'linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)' },
-    img: HomeImages.image2
+    img: HomeImages.program2
   },
   {
-    title: "Tiếng anh",
-    desc: "Nghe nói tự nhiên - Tự tin giao tiếp",
-    slug: "tieng-anh",
-    style: { background: 'linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)' },
-    img: HomeImages.image3
+    title: "Tiền tiểu học",
+    desc: "Chuẩn bị nền tảng kiến thức và kỹ năng cần thiết. giúp trẻ tự tin sẵn sàng bước vào lớp 1",
+    slug: "tieu-hoc",
+    style: { background: 'linear-gradient(284.83deg, #7CC9FF 16%, #003777 96.5%)' },
+    img: HomeImages.program3
   }
 ];
 
@@ -79,25 +87,17 @@ export const EXCLUSIVE_MODEL_ITEMS = [
 
 export const FLEXIBLE_BENEFITS = [
   {
-    title: "Trải nghiệm môi trường học tiếng Anh truyền cảm hứng",
-    content: "Nhờ phương pháp P&A độc quyền giúp các con chinh phục mục tiêu kép hiệu quả là sử dụng thành thạo tiếng Anh và đạt điểm giỏi trên trường. Học viên Online được nghe giảng, làm bài, trao đổi tài liệu và thảo luận trực tiếp với giáo viên, bạn bè như đến tận lớp học Offline."
+    title: "Nội dung chương trình học được xây dựng bởi đội ngũ chuyên gia hàng đầu Thế Giới. Học cụ được thiết kế chuyên biệt, tối ưu hóa hiệu quả bài học.",
   },
   {
-    title: "Đội ngũ tư vấn 24/7",
-    content: "Chúng tôi luôn sẵn sàng hỗ trợ phụ huynh và học sinh mọi lúc, mọi nơi để đảm bảo quá trình học tập diễn ra thông suốt."
+    title: "Lớp học được thiết kế hiện đại và trang bị màn hình tương tác thông minh, giúp trẻ chủ động và yêu thích việc học hơn",
   },
   {
-    title: "Tiết kiệm chi phí và thời gian",
-    content: "Học tập linh hoạt giúp giảm bớt gánh nặng di chuyển, tối ưu hóa thời gian và chi phí cho gia đình."
+    title: "Đội ngũ giáo viên nhiệt huyết, yêu trẻ, được đào tạo bài bản",
   },
   {
-    title: "Lịch học linh hoạt",
-    content: "Học sinh có thể lựa chọn ca học phù hợp với lịch trình cá nhân, dễ dàng sắp xếp việc học và chơi."
+    title: "Hệ thống trung tâm trải khắp với cam kết về chất lượng đồng bộ trên toàn quốc",
   },
-  {
-    title: "Freeship giáo trình và học liệu",
-    content: "Tất cả giáo trình và học liệu cần thiết sẽ được gửi tận tay học viên hoàn toàn miễn phí."
-  }
 ];
 
 export const TEACHERS_DATA = [
@@ -170,12 +170,12 @@ export const NEWS_DATA = [
 ];
 
 export const PARTNERS_DATA = [
-  { name: "Partner 1", logo: HomeImages.partner1 },
-  { name: "Partner 2", logo: HomeImages.partner1 },
-  { name: "Partner 3", logo: HomeImages.partner1 },
-  { name: "Partner 4", logo: HomeImages.partner1 },
-  { name: "Partner 5", logo: HomeImages.partner1 },
-  { name: "Partner 6", logo: HomeImages.partner1 },
-  { name: "Partner 7", logo: HomeImages.partner1 },
-  { name: "Partner 8", logo: HomeImages.partner1 },
+  { name: "Partner 1", logo: HomeImages.partner },
+  { name: "Partner 2", logo: HomeImages.partner2 },
+  { name: "Partner 3", logo: HomeImages.partner },
+  { name: "Partner 4", logo: HomeImages.partner2 },
+  { name: "Partner 5", logo: HomeImages.partner },
+  { name: "Partner 6", logo: HomeImages.partner2 },
+  { name: "Partner 7", logo: HomeImages.partner},
+  { name: "Partner 8", logo: HomeImages.partner2 },
 ];

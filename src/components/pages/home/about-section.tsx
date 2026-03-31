@@ -2,103 +2,91 @@
 
 import { motion } from "motion/react";
 import React from "react";
-import { ABOUT_STATS, ABOUT_FEATURES } from "@/constants";
 import Image from "next/image";
-import { IMAGES } from "../../../../public/statics/images";
+import { HomeImages, IMAGES } from "../../../../public/statics/images";
 
-const ABOUT_IMAGES = [
-	{ src: IMAGES.flex1, alt: "Học viên STEMKey trong lớp học" },
-	{ src: IMAGES.flex2, alt: "Hoạt động ngoại khóa STEMKey" },
-	{ src: IMAGES.flex3, alt: "Học sinh học robotics tại STEMKey" },
-	{ src: IMAGES.flex4, alt: "Học sinh học tiếng Anh tại STEMKey" },
+const FEATURES = [
+  "Làm quen môi trường học tập mới",
+  "Có nền tảng vững trước khi vào lớp 1",
+  "Không bỏ ngõ – không áp lực",
 ];
 
 const AboutSection = () => {
-	return (
-		<section className="overflow-hidden bg-white">
-			<div className="mx-auto max-w-7xl px-4">
-				<div className="flex flex-col items-end gap-16 lg:flex-row">
-					{/* Left Content */}
-					<div className="w-full lg:w-1/2">
-						<motion.h2
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							className="mb-10 text-3xl font-bold lg:text-4xl"
-						>
-							Giới thiệu về STEMKey
-						</motion.h2>
+  return (
+    <section className="overflow-hidden bg-white">
+      <div className="mx-auto max-w-7xl px-4">
+        <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-16 py-3">
+          {/* Left — Text */}
+          <div className="w-full lg:w-1/2">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-6 text-2xl font-semibold lg:text-4xl"
+            >
+              VỀ STEMKey
+            </motion.h2>
 
-						<motion.p
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.1 }}
-							className="mb-3 leading-relaxed text-slate-600"
-						>
-							STEMKey Việt Nam. Với sứ mệnh giúp hàng triệu trẻ em Việt Nam yêu tiếng Anh, robotics, toán
-							tư duy giúp các em chinh phục từ nhỏ.
-						</motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="mb-4 leading-relaxed text-slate-600"
+            >
+              STEMKey là hệ thống trung tâm phát triển tư duy sáng tạo &amp; phản biện cho các bé từ 3-16 tuổi, tập trung xây dựng{" "}
+              <strong className="text-slate-900">tư duy – ngôn ngữ – kỹ năng</strong> học tập ngay từ gốc. Chúng tôi không chỉ dạy kiến thức, mà giúp trẻ hiểu – tự tin – chủ động học tập lâu dài.
+            </motion.p>
 
-						<motion.ul
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: 0.2 }}
-							className="mb-6 space-y-2 pl-5"
-						>
-							{ABOUT_FEATURES.map((item, i) => (
-								<li key={i} className="list-disc text-slate-600">
-									{item}
-								</li>
-							))}
-						</motion.ul>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.15 }}
+              className="mb-4 leading-relaxed text-slate-600"
+            >
+              Đặc biệt, chương trình Tiền tiểu học giúp trẻ:
+            </motion.p>
 
-						{/* Stats Grid */}
-						<div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-							{ABOUT_STATS.map((stat, i) => (
-								<motion.div
-									key={i}
-									initial={{ opacity: 0, scale: 0.9 }}
-									whileInView={{ opacity: 1, scale: 1 }}
-									viewport={{ once: true }}
-									transition={{ delay: 0.3 + i * 0.05 }}
-									className="rounded-xl border border-slate-100 bg-slate-50 p-6 transition-colors hover:border-slate-200"
-								>
-									<div className="mb-2 text-2xl font-medium text-slate-900">{stat.value}</div>
-									<div className="text-sm leading-tight font-medium text-slate-500">{stat.label}</div>
-								</motion.div>
-							))}
-						</div>
-					</div>
+            <motion.ul
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="space-y-2"
+            >
+              {FEATURES.map((item, i) => (
+                <li key={i} className="flex items-center gap-2 text-slate-700">
+                  <span className="text-lg">👉</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </motion.ul>
+          </div>
 
-					<motion.div
-						initial={{ opacity: 0, x: 50 }}
-						whileInView={{ opacity: 1, x: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.8 }}
-						className="flex w-full gap-3 lg:w-1/2"
-					>
-						<div className="flex flex-1 flex-col gap-3 mt-10">
-							{[ABOUT_IMAGES[1], ABOUT_IMAGES[3]].map((img, i) => (
-								<div key={i} className="relative aspect-285/201 overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-[#0A7DFF]/60">
-									<Image src={img.src} alt={img.alt} fill sizes="25vw" className="object-cover transition-transform duration-500 hover:scale-105" />
-								</div>
-							))}
-						</div>
+          {/* Right — Robot mascot */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="flex w-full items-center justify-center lg:w-1/2"
+          >
+            <div className="relative w-full aspect-588/276">
+              <Image
+                src={HomeImages.about}
+                alt="Robot mascot STEMKey"
+                fill
+                className="object-contain"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          </motion.div>
 
-						<div className="flex flex-1 flex-col gap-3">
-							{[ABOUT_IMAGES[0], ABOUT_IMAGES[2]].map((img, i) => (
-								<div key={i} className="relative aspect-285/201 overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-[#0A7DFF]/60">
-									<Image src={img.src} alt={img.alt} fill sizes="25vw" className="object-cover transition-transform duration-500 hover:scale-105" />
-								</div>
-							))}
-						</div>
-					</motion.div>
-				</div>
-			</div>
-		</section>
-	);
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default React.memo(AboutSection);

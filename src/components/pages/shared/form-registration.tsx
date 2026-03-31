@@ -63,10 +63,10 @@ const FormRegistration = ({ branches = [], courses = [] }: FormRegistrationProps
 			initial={{ opacity: 0, x: 30 }}
 			whileInView={{ opacity: 1, x: 0 }}
 			viewport={{ once: true }}
-			className="w-full rounded-xl bg-white p-4 lg:w-1/2 lg:p-12"
+			className="w-full rounded-xl bg-white p-6 pb-20 shadow-sm sm:p-8 md:pb-8 lg:w-1/2 lg:p-12"
 		>
-			<h3 className="mb-8 flex items-center gap-2 text-[18px] font-medium">
-				Tư vấn lộ trình học và ưu đãi → Đăng ký giữ chỗ ngay
+			<h3 className="mb-8 flex items-center gap-2 text-2xl font-bold uppercase lg:text-[32px]">
+				ĐĂNG KÝ TƯ VẤN
 			</h3>
 
 			<FormProvider {...methods}>
@@ -96,14 +96,14 @@ const FormRegistration = ({ branches = [], courses = [] }: FormRegistrationProps
 
 					<Button
 						type="submit"
-						size="md"
+						size="lg"
 						disabled={isSubmitting}
-						className="mt-4 w-full rounded-xl text-lg font-black tracking-wider text-white uppercase transition-all hover:bg-blue-600 active:scale-[0.98] disabled:opacity-70"
+						className="mt-6 w-full rounded-xl py-6 text-sm font-black tracking-wider text-white uppercase transition-all hover:bg-blue-600 active:scale-[0.98] disabled:opacity-70 sm:text-base md:text-lg"
 					>
 						{isSubmitting ? "ĐANG XỬ LÝ..." : "GIỮ CHỖ NGAY"}
 					</Button>
 
-					<p className="mt-6 text-center font-medium text-slate-600">
+					<p className="mt-1 text-center font-medium text-slate-600">
 						* Vui lòng để ý điện thoại, chúng tôi sẽ liên hệ bạn sớm (trong vòng 24h)
 					</p>
 				</form>

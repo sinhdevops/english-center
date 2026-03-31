@@ -38,7 +38,7 @@ const BannerSwiper = ({ banners }: BannerSwiperProps) => {
 								src={banner.image_url}
 								alt={banner.title || "Banner"}
 								fill
-								className="object-cover"
+								className="lg:object-cover"
 								priority
 								sizes="100vw"
 							/>

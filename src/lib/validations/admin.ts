@@ -38,19 +38,28 @@ export const courseSchema = z.object({
   name: z.string().min(1, 'Tên khóa học không được để trống'),
   duration: z.string().optional(),
   level: z.string().optional(),
+  description: z.string().optional(),
 });
 
 export const eventSchema = z.object({
+  type: z.enum(['article', 'video']).default('article'),
   title: z.string().min(1, 'Tiêu đề không được để trống'),
   category: z.string().optional(),
-  description: z.string().min(1, 'Mô tả không được để trống'),
+  description: z.string().optional(),
   excerpt: z.string().optional(),
   content: z.string().optional(),
   date: z.string().min(1, 'Ngày diễn ra không được để trống'),
   location: z.string().optional(),
   image_url: z.string().url('URL hình ảnh không hợp lệ').optional().or(z.literal('')),
   author_image_url: z.string().url('URL hình ảnh không hợp lệ').optional().or(z.literal('')),
-});
+  youtube_id: z.string().optional().or(z.literal('')),
+}).refine(
+  (data) => data.type === 'video' || (data.description && data.description.length > 0),
+  { message: 'Mô tả không được để trống', path: ['description'] }
+).refine(
+  (data) => data.type === 'article' || (data.youtube_id && data.youtube_id.length > 0),
+  { message: 'ID YouTube không được để trống', path: ['youtube_id'] }
+);
 
 export const registrationSchema = z.object({
   parentName: z.string().min(1, 'Vui lòng nhập họ tên'),

@@ -8,6 +8,8 @@ interface Question {
 	text: string;
 	options: string[];
 	correct_answer: number;
+	option_type?: 'text' | 'image';
+	option_images?: string[] | null;
 }
 
 interface QuizTakingProps {
@@ -105,29 +107,62 @@ export const QuizTaking = ({
 							{currentQuestion.text}
 						</h3>
 
-						<div className="grid grid-cols-1 gap-2 md:gap-4">
-							{currentQuestion.options.map((option, optIdx) => (
-								<label
-									key={optIdx}
-									className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3.5 transition-all md:gap-4 md:rounded-2xl md:p-6 ${
-										currentAnswers[currentQuestion.id] === optIdx
-											?"border-stem-blue bg-white"
-											:"border-transparent bg-white/60 hover:bg-white/90"
-									}`}
-								>
-									<input
-										type="radio"
-										name={`q-${currentQuestion.id}`}
-										checked={currentAnswers[currentQuestion.id] === optIdx}
-										onChange={() => onAnswerSelect(currentQuestion.id, optIdx)}
-										className="accent-stem-blue h-4 w-4 md:h-6 md:w-6"
-									/>
-									<span className="text-sm font-bold text-slate-700 md:text-xl">
-										{String.fromCharCode(65 + optIdx)}. {option}
-									</span>
-								</label>
-							))}
-						</div>
+						{currentQuestion.option_type === 'image' ? (
+							<div className="grid grid-cols-2 gap-3 md:gap-4">
+								{currentQuestion.options.map((option, optIdx) => {
+									const selected = currentAnswers[currentQuestion.id] === optIdx;
+									return (
+										<button
+											key={optIdx}
+											type="button"
+											onClick={() => onAnswerSelect(currentQuestion.id, optIdx)}
+											className={`relative overflow-hidden rounded-2xl border-4 transition-all active:scale-95 md:rounded-3xl ${
+												selected
+													? "border-stem-blue scale-[1.02]"
+													: "border-transparent hover:border-slate-300"
+											}`}
+										>
+											<img
+												src={currentQuestion.option_images?.[optIdx] ?? ""}
+												alt={option}
+												className="h-32 w-full object-cover md:h-44"
+											/>
+											<div
+												className={`absolute bottom-0 left-0 right-0 py-1.5 text-center text-xs font-black md:text-sm ${
+													selected ? "bg-stem-blue text-white" : "bg-black/50 text-white"
+												}`}
+											>
+												{String.fromCharCode(65 + optIdx)}. {option}
+											</div>
+										</button>
+									);
+								})}
+							</div>
+						) : (
+							<div className="grid grid-cols-1 gap-2 md:gap-4">
+								{currentQuestion.options.map((option, optIdx) => (
+									<label
+										key={optIdx}
+										className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3.5 transition-all md:gap-4 md:rounded-2xl md:p-6 ${
+											currentAnswers[currentQuestion.id] === optIdx
+												?"border-stem-blue bg-white"
+												:"border-transparent bg-white/60 hover:bg-white/90"
+										}`}
+									>
+										<input
+											type="radio"
+											name={`q-${currentQuestion.id}`}
+											checked={currentAnswers[currentQuestion.id] === optIdx}
+											onChange={() => onAnswerSelect(currentQuestion.id, optIdx)}
+											className="accent-stem-blue h-4 w-4 md:h-6 md:w-6"
+										/>
+										<span className="text-sm font-bold text-slate-700 md:text-xl">
+											{String.fromCharCode(65 + optIdx)}. {option}
+										</span>
+									</label>
+								))}
+							</div>
+						)}
 					</div>
 				</div>
 

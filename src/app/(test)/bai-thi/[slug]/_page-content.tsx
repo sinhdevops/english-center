@@ -41,6 +41,8 @@ interface Props {
 		score: number,
 		completedCount: number,
 		answers: Record<number, number>,
+		userEmail: string | null,
+		parentPhone: string,
 	) => Promise<void>;
 }
 
@@ -135,7 +137,7 @@ export default function PageContent({ slug, userId, userEmail, quizSet, initialR
 		setScore(calculatedScore);
 
 		if (recordId) {
-			await updateQuizRecord(recordId, calculatedScore, Object.keys(currentAnswers).length, currentAnswers);
+			await updateQuizRecord(recordId, calculatedScore, Object.keys(currentAnswers).length, currentAnswers, userEmail, parentPhone);
 		}
 
 		if (storageKey) localStorage.removeItem(storageKey);

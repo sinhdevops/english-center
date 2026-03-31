@@ -51,7 +51,7 @@ const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => 
 		>
 			<Link
 				href={item.href ||"#"}
-				className={`relative flex items-center gap-1 pb-1 text-base font-medium whitespace-nowrap transition-colors ${
+				className={`relative flex items-center gap-1 pb-1 uppercase text-base font-medium whitespace-nowrap transition-colors ${
 					isActive ?"text-stem-blue" :"hover:text-stem-blue"
 				}`}
 			>
@@ -162,13 +162,13 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 									<p className="text-xs text-slate-500">{user.email}</p>
 								</div>
 							</div>
-							<Link
+							{/* <Link
 								href="/trang-ca-nhan"
 								onClick={toggleMenu}
 								className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white py-4 text-sm font-black tracking-wider text-slate-700 uppercase transition-all active:scale-95"
 							>
 								<UserIcon size={16} /> Trang cá nhân
-							</Link>
+							</Link> */}
 							<LogoutButton
 								className="w-full rounded-2xl bg-red-50 py-4 text-sm font-black tracking-wider text-red-500 uppercase transition-all active:scale-95"
 								showIcon={false}

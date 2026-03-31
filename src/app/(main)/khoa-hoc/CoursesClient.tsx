@@ -1,18 +1,18 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
 import { IMAGES } from "../../../../public/statics/images";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 
 interface Course {
 	id: number;
+	stt: number;
 	title: string;
-	image: string;
 	description: string;
+	duration: string;
+	schedule: string;
 }
 
 interface CoursesClientProps {
@@ -21,91 +21,97 @@ interface CoursesClientProps {
 
 export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 	return (
-		<div className="min-h-screen bg-white">
-			{/* Header Banner */}
-			<section className="relative h-[250px] overflow-hidden">
-				<div className="absolute inset-0 bg-[linear-gradient(280.15deg,#1999D3_15.09%,#19B24B_93.34%)]" />
-
-				<div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center justify-center px-6 lg:flex-row lg:justify-between">
-					<div className="text-center text-white lg:max-w-2xl lg:text-left">
-						<motion.h1
-							initial={{ opacity: 0, x: -20 }}
-							animate={{ opacity: 1, x: 0 }}
-							className="mb-4 text-2xl leading-tight font-semibold tracking-tight md:text-3xl lg:text-4xl"
-						>
-							CÁC KHÓA HỌC TẠI STEMKey
-						</motion.h1>
-						<motion.p
-							initial={{ opacity: 0, x: -20 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: 0.1 }}
-							className="text-sm font-normal md:text-base"
-						>
-							Cơ hội nhận học bổng lên tới 40% và các phần quà hấp dẫn khác đang chờ bạn
-						</motion.p>
-					</div>
-
-					<motion.div
-						initial={{ opacity: 0, scale: 0.95 }}
-						animate={{ opacity: 1, scale: 1 }}
-						transition={{ delay: 0.2 }}
-						className="relative mt-[51px] hidden h-full w-[550px] lg:block"
-					>
-						<div className="flex h-[90%] w-full items-end">
-							<Image
-								src={IMAGES.courser}
-								alt="Happy Students"
-								className="h-full w-full object-contain object-bottom"
-								referrerPolicy="no-referrer"
-							/>
-						</div>
-					</motion.div>
-				</div>
+		<div className="min-h-screen" style={{ background: "linear-gradient(180deg, #15B248 0%, rgba(71, 255, 131, 0.5) 50%, rgba(21, 178, 72, 0) 100%)" }}>
+			{/* Section 1 — Chương trình học banner */}
+			<section className="w-full">
+				<Image
+					src={IMAGES.courser1}
+					alt="Chương trình học STEMKey"
+					className="w-full object-contain"
+					priority
+				/>
 			</section>
-				<div className="mx-auto max-w-7xl px-4 mt-3">
-					<Breadcrumb items={[{ label: "Trang chủ", href: "/" }, { label: "Khóa học", active: true }]} variant="dark" />
-				</div>
-			{/* Courses Grid */}
-			<section className="mx-auto max-w-7xl px-4 py-20">
-				<div className="grid grid-cols-2 gap-2 lg:gap-7.5 lg:grid-cols-4">
-					{initialCourses.map((course, index) => (
-						<motion.div
-							key={course.id}
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
-							transition={{ delay: (index % 3) * 0.1 }}
-							className="flex flex-col rounded-xl bg-white overflow-hidden transition-all"
-							style={{ boxShadow: "0px 1px 8px 0px #0000001A" }}
-						>
-							<div className="mb-3 h-30 lg:h-65 w-full shrink-0 overflow-hidden">
-								<Image
-									src={course.image}
-									alt={course.title}
-									width={400}
-									height={220}
-									className="size-full object-cover transition-transform duration-500 hover:scale-105"
-									referrerPolicy="no-referrer"
-								/>
-							</div>
 
-							<div className="flex flex-1 flex-col px-3 space-y-2">
-								<h2 className="text-[18px] font-semibold tracking-tight">
-									{course.title}
-								</h2>
-								<div className="h-12 flex-1">
-									<p className="leading-relaxed line-clamp-2">{course.description}</p>
-								</div>
+			{/* Section 2 — Bảng khóa học từ API */}
+			<section className="mx-auto max-w-5xl px-4 py-12">
+				<h2 className="mb-8 text-center text-2xl font-bold uppercase tracking-wide text-gray-900">
+					TOÁN TƯ DUY, TIẾNG ANH STEM, ROBOTICS, TIỀN TIỂU HỌC
+				</h2>
 
-								<Link href={`khoa-hoc/dang-ky`}>
-									<Button size={"sm"} className="w-full text-xs lg:base text rounded-xl mb-3">
-										Đăng ký khóa học
-									</Button>
-								</Link>
+				{/* Mobile — cards */}
+				<div className="grid grid-cols-2 gap-3 md:hidden">
+					{initialCourses.length === 0 && (
+						<p className="py-10 text-center text-gray-400">Chưa có khóa học nào.</p>
+					)}
+					{initialCourses.map((course) => (
+						<div key={course.id} className="rounded-2xl border border-gray-200 bg-white p-4">
+							<div className="mb-3 flex items-center gap-3">
+								<span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-green-100 text-sm font-bold text-green-600">
+									{course.stt}
+								</span>
+								<h3 className="font-bold text-gray-900">{course.title}</h3>
 							</div>
-						</motion.div>
+							<p className="mb-1 line-clamp-2 text-sm text-gray-500">{course.description}</p>
+							<div className="mb-4 flex flex-col gap-1 text-sm text-gray-500">
+								<span>⏱ {course.duration}</span>
+								<span>📅 {course.schedule}</span>
+							</div>
+							<Link href="khoa-hoc/dang-ky">
+								<Button size="sm" className="w-full rounded-xl">Đăng ký ngay</Button>
+							</Link>
+						</div>
 					))}
 				</div>
+
+				{/* Desktop — table */}
+				<div className="hidden overflow-hidden rounded-2xl border border-gray-200 bg-white md:block">
+					<table className="w-full text-sm">
+						<thead>
+							<tr className="border-b border-gray-200 bg-gray-100">
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">STT</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Tên Khóa Học</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Chi Tiết</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Thời Gian</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Suất Học</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Đăng Ký</th>
+							</tr>
+						</thead>
+						<tbody className="divide-y divide-gray-100">
+							{initialCourses.map((course) => (
+								<tr key={course.id} className="bg-white transition-colors hover:bg-gray-50">
+									<td className="px-5 py-5 text-gray-500">{course.stt}</td>
+									<td className="px-5 py-5 font-semibold text-gray-900">{course.title}</td>
+									<td className="max-w-60 px-5 py-5 text-gray-500">
+										<p className="line-clamp-2">{course.description}</p>
+									</td>
+									<td className="px-5 py-5 text-gray-500">{course.duration}</td>
+									<td className="px-5 py-5 text-gray-500">{course.schedule}</td>
+									<td className="px-5 py-5">
+										<Link href="khoa-hoc/dang-ky">
+											<Button variant="outline" size="sm">Đăng ký</Button>
+										</Link>
+									</td>
+								</tr>
+							))}
+							{initialCourses.length === 0 && (
+								<tr>
+									<td colSpan={6} className="px-4 py-10 text-center text-gray-400">
+										Chưa có khóa học nào.
+									</td>
+								</tr>
+							)}
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			{/* Section 3 — Cam kết chuẩn đầu ra */}
+			<section className="w-full">
+				<Image
+					src={IMAGES.courser2}
+					alt="Cam kết chuẩn đầu ra theo từng trình độ"
+					className="w-full object-contain"
+				/>
 			</section>
 		</div>
 	);
