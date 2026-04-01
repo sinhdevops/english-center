@@ -82,11 +82,10 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 								<button
 									key={city}
 									onClick={() => setActiveCity(city)}
-									className={`shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-all lg:px-6 ${
-										activeCity === city
+									className={`shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-all lg:px-6 ${activeCity === city
 											? "bg-[#ED1C24] text-white"
 											: "border border-slate-200 bg-white text-slate-600 hover:border-[#ED1C24] hover:text-[#ED1C24]"
-									}`}
+										}`}
 								>
 									{city}
 								</button>
@@ -107,11 +106,10 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 									key={branch.id}
 									whileHover={{ y: -4 }}
 									onClick={() => setSelectedBranchId(branch.id)}
-									className={`cursor-pointer rounded-xl border-2 bg-white p-6 transition-all ${
-										selectedBranchId === branch.id
+									className={`cursor-pointer rounded-xl border-2 bg-white p-6 transition-all ${selectedBranchId === branch.id
 											? "border-stem-blue ring-4 ring-blue-50/50"
 											: "border-transparent"
-									}`}
+										}`}
 								>
 									<h4 className="mb-3 font-bold text-slate-900">{branch.address}</h4>
 									<div className="space-y-2 text-sm text-slate-500">
@@ -151,7 +149,7 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 												initial={{ opacity: 0, y: 10 }}
 												animate={{ opacity: 1, y: 0 }}
 												transition={{ delay: idx * 0.05 }}
-												className="rounded-xl border border-slate-100 bg-slate-50/30 p-5"
+												className="rounded-xl border border-slate-100 /30 p-5"
 											>
 												<div className="mb-4 flex items-start justify-between">
 													<div>
@@ -219,7 +217,7 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 														initial={{ opacity: 0, y: 10 }}
 														animate={{ opacity: 1, y: 0 }}
 														transition={{ delay: idx * 0.05 }}
-														className="text-sm transition-colors hover:bg-slate-50/50"
+														className="text-sm transition-colors hover:/50"
 													>
 														<td className="px-6 py-6 font-bold text-slate-800">
 															{schedule.course?.program?.name || "Tiêu chuẩn"}

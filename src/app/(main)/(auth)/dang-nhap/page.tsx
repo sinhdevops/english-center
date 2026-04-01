@@ -1,23 +1,48 @@
 "use client";
 
-import { motion } from"framer-motion";
-import { AuthForm } from"@/components/auth/auth-form";
+import { motion } from "framer-motion";
+import { AuthForm } from "@/components/auth/auth-form";
+import Image from "next/image";
+import Link from "next/link";
+import { IMAGES } from "../../../../../public/statics/images";
 
 export default function LoginPage() {
 	return (
-		<div className="flex min-h-[80vh] items-center justify-center bg-slate-50 px-4 py-12">
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				className="w-full max-w-md rounded-3xl bg-white p-8 lg:p-10"
-			>
-				<div className="mb-10 text-center">
-					<h2 className="mb-2 text-3xl font-bold text-slate-900">Chào mừng trở lại!</h2>
-					<p className="text-slate-500">Đăng nhập để tiếp tục hành trình cùng STEMKey</p>
+		<div className="flex min-h-screen font-montserrat">
+			{/* Left Column — Form */}
+			<div className="relative flex w-full flex-col bg-white p-6 lg:w-1/2 lg:p-12 xl:p-20">
+				{/* Center Content — Form Container */}
+				<div className="flex-1 flex flex-col justify-center">
+					<div className="mx-auto w-full max-w-md">
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							className="mb-8"
+						>
+							<h1 className="mb-2 text-[32px] font-semibold tracking-tight leading-tight">
+								CHÀO MỪNG TRỞ LẠI
+							</h1>
+							<p className="text-slate-500">
+								Đăng nhập để tiếp tục hành trình cùng STEMKey
+							</p>
+						</motion.div>
+
+						<AuthForm mode="login" />
+					</div>
 				</div>
 
-				<AuthForm mode="login" />
-			</motion.div>
+			</div>
+
+			{/* Right Column — Illustration Background */}
+			<div className="hidden lg:block lg:w-1/2 h-screen sticky top-0 overflow-hidden aspect-721/1024">
+				<Image
+					src={IMAGES.login}
+					alt="Login Illustration"
+					fill
+					className="object-cover"
+					priority
+				/>
+			</div>
 		</div>
 	);
 }

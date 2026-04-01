@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 const Teachers = dynamic(() => import("@/components/pages/home/teachers"), { ssr: true });
 
 export default function PageContent() {
-	const videoId = "GGUXB4XoKnU";
+	const videoId = "xhdN5fJ1Dxc";
 
 	return (
 		<>
@@ -17,7 +17,7 @@ export default function PageContent() {
 					<div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
 						{/* Left: Content */}
 						<div className="text-left md:text-left">
-							<h2 className="mb-8 text-2xl leading-tight font-semibold tracking-tight uppercase lg:text-[32px]">
+							<h2 className="mb-6 text-2xl leading-tight font-semibold tracking-tight uppercase lg:text-[32px]">
 								KHƠI NGUỒN ĐAM MÊ - ĐỊNH HÌNH TƯƠNG LAI
 							</h2>
 							<div className="space-y-6 leading-relaxed font-medium text-[#4E4E4E]">
@@ -46,7 +46,7 @@ export default function PageContent() {
 						</div>
 
 						{/* Right: Video Placeholder (Inline Play Logic) */}
-						<div className="group relative aspect-[588/362] overflow-hidden rounded-[20px] bg-black shadow-2xl">
+						<div className="group relative aspect-[588/362] overflow-hidden rounded-[20px] bg-black">
 							<iframe
 								src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
 								title="STEMKey Intro Video"
@@ -60,11 +60,11 @@ export default function PageContent() {
 
 				{/* Mission Section */}
 				<section className="mx-auto max-w-7xl px-4 lg:px-0">
-					<h2 className="mb-16 text-left text-[32px] font-semibold tracking-tight text-slate-900 uppercase md:text-center">
+					<h2 className="mb-6 text-left text-[32px] font-semibold tracking-tight text-slate-900 uppercase md:text-center">
 						SỨ MỆNH - TẦM NHÌN - GIÁ TRỊ CỐT LÕI
 					</h2>
 
-					<div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+					<div className="grid grid-cols-1 gap-6 md:grid-cols-3">
 						{/* Sứ mệnh */}
 						<div className="relative overflow-hidden rounded-[20px] bg-[#E3F2E4] p-5 transition-transform hover:-translate-y-2">
 							<div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#98D8A3]/30" />

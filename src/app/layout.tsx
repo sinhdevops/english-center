@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito_Sans, Italianno } from "next/font/google";
+import { Nunito_Sans, Italianno, Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import AppProvider from "@/providers/app-provider";
 import { AuthProvider } from "@/components/auth/auth-provider";
@@ -7,10 +7,10 @@ import { Toaster } from "sonner";
 import { utmAzuki } from "@/lib/fonts";
 import NextTopLoader from "nextjs-toploader";
 
-const nunito = Nunito_Sans({
+const montserrat = Montserrat({
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "600", "700", "800"],
-	variable: "--font-nunito",
+	variable: "--font-montserrat",
 	display: "swap",
 });
 const italianno = Italianno({
@@ -63,7 +63,7 @@ export default async function RootLayout({
 	return (
 		<html lang="vi" suppressHydrationWarning>
 			<body
-				className={`${nunito.variable} ${italianno.variable} ${utmAzuki.variable} bg-white font-sans text-slate-900 antialiased`}
+				className={`${montserrat.variable} ${italianno.variable} ${utmAzuki.variable} bg-white font-sans text-slate-900 antialiased`}
 			>
 				<NextTopLoader showSpinner={false} color="#1d8cf8" />
 				<AppProvider>

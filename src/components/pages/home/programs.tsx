@@ -1,33 +1,30 @@
 "use client";
 
-import React from"react";
-import { motion } from"motion/react";
-import Image from"next/image";
-import Link from"next/link";
+import React from "react";
+import { motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
 
-import { PROGRAMS_DATA } from"@/constants";
+import { PROGRAMS_DATA } from "@/constants";
 
 const GRADIENTS = [
-	{ background:"linear-gradient(286.12deg, #FFCA74 9.13%, #C80057 86.64%)" },
-	{ background:"linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)" },
-	{ background:"linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)" },
-	{ background:"linear-gradient(284.83deg, #7CC9FF 16%, #003777 96.5%)" },
+	{ background: "linear-gradient(286.12deg, #FFCA74 9.13%, #C80057 86.64%)" },
+	{ background: "linear-gradient(284.83deg, #FFF357 16%, #00771E 96.5%)" },
+	{ background: "linear-gradient(106.99deg, #211BCF 12.88%, #FF60B2 92.58%)" },
+	{ background: "linear-gradient(284.83deg, #7CC9FF 16%, #003777 96.5%)" },
 ];
 
 const Programs = () => {
 	return (
 		<section className="bg-white">
 			<div className="mx-auto max-w-7xl px-4 lg:px-0">
-				<div className="mb-10 text-center">
+				<div className="mb-6 text-center">
 					<h2 className="text-2xl font-semibold lg:text-4xl">
 						CÁC CHƯƠNG TRÌNH HỌC TẠI STEMKey
 					</h2>
-					<p className="mx-auto max-w-3xl text-slate-600">
-						Hệ thống giáo dục phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ
-					</p>
 				</div>
 
-				<div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+				<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					{PROGRAMS_DATA.map((p, i) => (
 						<Link key={p.title} href={`/chuong-trinh/${p.slug}`}>
 							<motion.div
@@ -50,7 +47,7 @@ const Programs = () => {
 
 								<div className="pointer-events-none absolute right-0 bottom-0 flex h-full w-[60%] items-end justify-end overflow-hidden">
 									<Image
-										src={p.img ||"https://picsum.photos/seed/program/400/300"}
+										src={p.img || "https://picsum.photos/seed/program/400/300"}
 										alt={p.title}
 										width={234}
 										height={220}

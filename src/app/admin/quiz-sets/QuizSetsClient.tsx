@@ -53,9 +53,8 @@ function ImageUploadSlot({
 		<div className="flex flex-col items-center gap-1">
 			<label className="cursor-pointer group">
 				<div
-					className={`relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed transition-colors ${
-						preview ? "border-indigo-300 bg-slate-50" : "border-slate-300 bg-slate-50 hover:border-indigo-400"
-					}`}
+					className={`relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed transition-colors ${preview ? "border-indigo-300 " : "border-slate-300  hover:border-indigo-400"
+						}`}
 				>
 					{preview ? (
 						<img src={preview} alt={label} className="h-full w-full object-cover" />
@@ -237,7 +236,7 @@ function QuestionRow({
 	}
 
 	return (
-		<tr className="border-t border-slate-100 hover:bg-slate-50/60">
+		<tr className="border-t border-slate-100 hover:/60">
 			<td className="px-4 py-3 text-xs text-slate-400">{question.question_order}</td>
 			<td className="px-4 py-3 text-sm font-medium text-slate-700">{question.text}</td>
 			<td className="px-4 py-3">
@@ -250,9 +249,8 @@ function QuestionRow({
 									key={i}
 									src={url}
 									alt={question.options[i]}
-									className={`h-8 w-8 rounded object-cover ring-2 ${
-										i === question.correct_answer ? "ring-emerald-400" : "ring-transparent"
-									}`}
+									className={`h-8 w-8 rounded object-cover ring-2 ${i === question.correct_answer ? "ring-emerald-400" : "ring-transparent"
+										}`}
 								/>
 							))}
 						</div>
@@ -262,11 +260,10 @@ function QuestionRow({
 						{question.options.map((opt, i) => (
 							<span
 								key={i}
-								className={`rounded px-2 py-0.5 text-xs font-medium ${
-									i === question.correct_answer
+								className={`rounded px-2 py-0.5 text-xs font-medium ${i === question.correct_answer
 										? "bg-emerald-100 text-emerald-700"
 										: "bg-slate-100 text-slate-500"
-								}`}
+									}`}
 							>
 								{opt}
 							</span>
@@ -482,7 +479,7 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 		open: boolean;
 		message: string;
 		onConfirm: () => void;
-	}>({ open: false, message: "", onConfirm: () => {} });
+	}>({ open: false, message: "", onConfirm: () => { } });
 	const [durationMinutes, setDurationMinutes] = useState(Math.round(quizSet.duration_seconds / 60));
 	const [isActive, setIsActive] = useState(quizSet.is_active);
 	const [saving, setSaving] = useState(false);
@@ -552,7 +549,7 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 	return (
 		<>
 			{/* Quiz Set Row */}
-			<tr className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+			<tr className="border-b border-slate-100 hover: transition-colors">
 				<td className="px-6 py-4">
 					<button
 						onClick={() => setExpanded((v) => !v)}
@@ -625,9 +622,8 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 				<td className="px-6 py-4">
 					<button
 						onClick={handleToggleActive}
-						className={`flex items-center gap-1 text-xs font-bold ${
-							isActive ? "text-emerald-600" : "text-slate-400"
-						}`}
+						className={`flex items-center gap-1 text-xs font-bold ${isActive ? "text-emerald-600" : "text-slate-400"
+							}`}
 					>
 						{isActive ? <ToggleRight size={20} /> : <ToggleLeft size={20} />}
 						{isActive ? "Hoạt động" : "Ẩn"}
@@ -678,11 +674,11 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 			{/* Expanded questions */}
 			{expanded && (
 				<tr>
-					<td colSpan={6} className="bg-slate-50/50 px-6 py-4">
+					<td colSpan={6} className="/50 px-6 py-4">
 						<div className="rounded-xl border border-slate-200 bg-white overflow-hidden">
 							<table className="w-full text-sm">
 								<thead>
-									<tr className="border-b border-slate-100 bg-slate-50">
+									<tr className="border-b border-slate-100 ">
 										<th className="px-4 py-2 text-left text-xs font-bold text-slate-500 w-10">#</th>
 										<th className="px-4 py-2 text-left text-xs font-bold text-slate-500">Câu hỏi</th>
 										<th className="px-4 py-2 text-left text-xs font-bold text-slate-500">Đáp án (xanh = đúng)</th>
@@ -736,7 +732,7 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 					<div className="flex gap-3">
 						<button
 							onClick={() => setConfirmModal((prev) => ({ ...prev, open: false }))}
-							className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50"
+							className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-bold text-slate-600 hover:"
 						>
 							Huỷ
 						</button>
@@ -840,7 +836,7 @@ function AddQuizSetForm({ onDone }: { onDone: () => void }) {
 				</button>
 				<button
 					onClick={onDone}
-					className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-bold text-slate-600 hover:bg-slate-50"
+					className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-bold text-slate-600 hover:"
 				>
 					Huỷ
 				</button>
@@ -880,11 +876,10 @@ export default function QuizSetsClient({ initialQuizSets }: Props) {
 					<button
 						key={ag}
 						onClick={() => setFilterAge(ag)}
-						className={`rounded-full px-4 py-1.5 text-xs font-bold transition-colors ${
-							filterAge === ag
+						className={`rounded-full px-4 py-1.5 text-xs font-bold transition-colors ${filterAge === ag
 								? "bg-indigo-600 text-white"
-								: "border border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
-						}`}
+								: "border border-slate-200 bg-white text-slate-600 hover:"
+							}`}
 					>
 						{ag === "all" ? "Tất cả" : ag}
 					</button>
@@ -895,7 +890,7 @@ export default function QuizSetsClient({ initialQuizSets }: Props) {
 				<div className="overflow-x-auto">
 					<table className="w-full border-collapse text-left text-sm">
 						<thead>
-							<tr className="border-b border-slate-100 bg-slate-50/50">
+							<tr className="border-b border-slate-100 /50">
 								<th className="px-6 py-4 font-bold text-slate-700">Tiêu đề</th>
 								<th className="px-6 py-4 font-bold text-slate-700">Nhóm tuổi</th>
 								<th className="px-6 py-4 font-bold text-slate-700">Câu hỏi</th>

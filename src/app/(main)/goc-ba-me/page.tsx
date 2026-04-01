@@ -55,8 +55,8 @@ export default async function ParentsCornerPage({ searchParams }: { searchParams
 	];
 
 	return (
-		<div className="min-h-screen bg-slate-50">
-			<HeaderPage title="Góc ba mẹ"/>
+		<div className="min-h-screen ">
+			<HeaderPage title="Góc ba mẹ" />
 			<div className="mx-auto max-w-7xl px-4 py-20 lg:px-0">
 				{articleItems.length || videoItems.length ? (
 					<>

@@ -18,7 +18,7 @@ interface PageContentProps {
 
 const PageContent = ({ branches, courses }: PageContentProps) => {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen ">
       {/* Green Hero Section */}
       <div className="relative bg-[#00842B] pb-32 pt-16 md:h-[360px]">
         {/* Decorative blobs — dùng clip-path để không lòi ra ngoài */}
@@ -46,10 +46,10 @@ const PageContent = ({ branches, courses }: PageContentProps) => {
 
         {/* Contact Info Cards — overlapping bottom */}
         <div className="relative z-10 lg:-mt-24 mt-5 px-4 md:absolute md:right-0 md:bottom-0 md:left-0 md:mt-0 md:translate-y-1/2">
-            <div className="relative overflow-hidden bg-white pt-6 pb-8 px-6 md:px-15 max-w-7xl mx-auto rounded-[20px] shadow-[0px_4px_4px_0px_#0000001A]">
-              {/* Decorative blobs inside box */}
-              <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-1/3 translate-y-1/3 rounded-full bg-[#50FF2980]/30" />
-              <div className="absolute right-0 -top-20 h-[275px] w-[275px] translate-x-1/3 rounded-full bg-[#50FF2980]/30" />
+          <div className="relative overflow-hidden bg-white pt-6 pb-8 px-6 md:px-15 max-w-7xl mx-auto rounded-[20px] shadow-[0px_4px_4px_0px_#0000001A]">
+            {/* Decorative blobs inside box */}
+            <div className="absolute bottom-0 left-0 h-24 w-24 -translate-x-1/3 translate-y-1/3 rounded-full bg-[#50FF2980]/30" />
+            <div className="absolute right-0 -top-20 h-[275px] w-[275px] translate-x-1/3 rounded-full bg-[#50FF2980]/30" />
             <div className="relative grid grid-cols-1 gap-4 md:grid-cols-3">
               {CONTACT_INFO.map((item, idx) => (
                 <motion.div

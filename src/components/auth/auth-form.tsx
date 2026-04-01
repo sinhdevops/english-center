@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Lock, ArrowRight, Phone, UserCheck, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,6 +46,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 	type AuthFormValues = z.infer<typeof authSchema>;
 
 	const [isLoading, setIsLoading] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const redirect = searchParams.get("redirect") || "/";
@@ -124,22 +125,22 @@ export function AuthForm({ mode }: AuthFormProps) {
 	return (
 		<div className="w-full">
 			<FormProvider {...methods}>
-				<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+				<form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
 					{mode === "register" && (
 						<InputValidation
 							name="fullName"
 							placeholder="Nguyễn Văn A"
 							label="Họ và tên"
-							icon={UserCheck}
+							required
 						/>
 					)}
 
 					<InputValidation
 						name="email"
-						placeholder="example@gmail.com"
-						label="Email / Gmail"
-						icon={Mail}
+						placeholder="abc@gmail.com"
+						label="Email"
 						type="email"
+						required
 					/>
 
 					{mode === "register" && (
@@ -148,28 +149,25 @@ export function AuthForm({ mode }: AuthFormProps) {
 							type="tel"
 							label="Số điện thoại"
 							placeholder="0912345678"
-							icon={Phone}
+							required
 						/>
 					)}
 
-					<div className="space-y-1">
+					<div className="relative">
 						<InputValidation
 							name="password"
 							placeholder="••••••••"
 							label="Mật khẩu"
-							icon={Lock}
-							type="password"
+							type={showPassword ? "text" : "password"}
+							required
 						/>
-						<div className="flex items-center justify-end px-1">
-							{mode === "login" && (
-								<Link
-									href="/quen-mat-khau"
-									className="text-stem-blue text-xs font-medium hover:underline"
-								>
-									Quên mật khẩu?
-								</Link>
-							)}
-						</div>
+						<button
+							type="button"
+							onClick={() => setShowPassword(!showPassword)}
+							className="absolute right-4 top-[51px] -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+						>
+							{showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+						</button>
 					</div>
 
 					{mode === "register" && (
@@ -178,35 +176,44 @@ export function AuthForm({ mode }: AuthFormProps) {
 							type="password"
 							label="Nhập lại mật khẩu"
 							placeholder="••••••••"
-							icon={UserCheck}
+							required
 						/>
+					)}
+
+					{mode === "login" && (
+						<div className="flex justify-end">
+							<Link
+								href="/quen-mat-khau"
+								className="text-[13px] font-medium text-slate-400 hover:text-blue-500 transition-colors"
+							>
+								Quên mật khẩu?
+							</Link>
+						</div>
 					)}
 
 					<Button
 						type="submit"
-						size="md"
 						disabled={isLoading}
-						className="flex w-full items-center justify-center gap-2 rounded-xl py-4 text-lg font-bold disabled:opacity-70"
+						className="flex w-full items-center justify-center gap-2 rounded-xl bg-stem-blue py-6 text-base font-bold text-white hover:opacity-90 transition-all disabled:opacity-70 shadow-lg shadow-blue-100"
 					>
 						{isLoading ? (
 							<Loader2 className="animate-spin" size={20} />
 						) : mode === "login" ? (
 							"Đăng nhập"
 						) : (
-							"Đăng ký tài khoản"
+							"Đăng ký"
 						)}
-						{!isLoading && <ArrowRight size={20} />}
 					</Button>
 				</form>
 			</FormProvider>
 
-			<div className="relative my-10">
+			<div className="relative my-8">
 				<div className="absolute inset-0 flex items-center">
 					<div className="w-full border-t border-slate-100"></div>
 				</div>
-				<div className="relative flex justify-center text-sm">
-					<span className="bg-white px-4 text-slate-400">
-						Hoặc {mode === "login" ? "đăng nhập" : "đăng ký"} bằng
+				<div className="relative flex justify-center text-xs">
+					<span className="bg-white px-4 font-medium text-slate-400">
+						Hoặc đăng nhập bằng
 					</span>
 				</div>
 			</div>
@@ -214,7 +221,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 			<button
 				onClick={handleGoogleLogin}
 				disabled={isLoading}
-				className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-xl border border-slate-200 px-4 py-3 font-medium text-slate-700 transition-colors hover:bg-slate-50"
+				className="flex w-full cursor-pointer items-center justify-center gap-3 rounded-xl border border-[#E6E6E6] bg-white px-4 py-4 font-bold text-slate-600 transition-all hover:bg-slate-50"
 			>
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path
@@ -234,10 +241,10 @@ export function AuthForm({ mode }: AuthFormProps) {
 						fill="#EA4335"
 					/>
 				</svg>
-				Tiếp tục với Google
+				<span className="text-sm">Đăng nhập bằng Google</span>
 			</button>
 
-			<p className="mt-10 text-center text-sm text-slate-500">
+			<p className="mt-8 text-center text-sm font-medium text-slate-500">
 				{mode === "login" ? "Chưa có tài khoản?" : "Đã có tài khoản?"}{" "}
 				<Link
 					href={mode === "login" ? "/dang-ky" : "/dang-nhap"}

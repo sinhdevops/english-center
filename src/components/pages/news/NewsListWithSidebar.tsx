@@ -61,14 +61,10 @@ const NewsListWithSidebar = ({
 										/>
 										<div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
 										<div className="absolute bottom-4 left-4 right-4">
-											<p className="line-clamp-2 text-sm font-bold text-white drop-shadow">
+											<p className="line-clamp-2 text-lg font-semibold text-white drop-shadow">
 												{item.title}
 											</p>
-											{(item.excerpt || item.description) && (
-												<p className="mt-1 line-clamp-2 text-xs text-white/80">
-													{item.excerpt || item.description}
-												</p>
-											)}
+
 										</div>
 									</div>
 								</div>
@@ -79,10 +75,10 @@ const NewsListWithSidebar = ({
 			)}
 
 			{/* 2-column layout: danh sách bài viết + sidebar khóa học */}
-			<div className="flex flex-col gap-8 lg:flex-row">
+			<div className="flex flex-col gap-6 lg:flex-row">
 				{/* LEFT: Article list */}
 				<div className="min-w-0 flex-1">
-					<h2 className="mb-6 text-2xl font-black text-slate-900 lg:text-3xl">{newsTitle}</h2>
+					<h2 className="mb-6 text-2xl font-semibold lg:text-3xl">{newsTitle}</h2>
 
 					<div className="space-y-4">
 						{listArticles.map((item: any, i: number) => {
@@ -96,7 +92,7 @@ const NewsListWithSidebar = ({
 							return (
 								<div
 									key={uid}
-									className="flex flex-col gap-0 overflow-hidden rounded-2xl border border-[#DEDEDE] bg-white sm:flex-row sm:gap-4"
+									className="flex flex-col gap-0 overflow-hidden rounded-2xl border border-[#E6E6E6] bg-white sm:flex-row sm:gap-4"
 								>
 									{/* Thumbnail */}
 									<div className="relative aspect-4/3 w-full shrink-0 overflow-hidden bg-black sm:h-[180px] sm:w-[240px] md:h-[198px] md:w-[282px] sm:rounded-xl">
@@ -150,10 +146,10 @@ const NewsListWithSidebar = ({
 													{new Date(item.date).toLocaleDateString("vi-VN")}
 												</span>
 											</div>
-											<h3 className="mb-2 line-clamp-2 text-base font-black leading-snug text-slate-900 sm:text-lg">
+											<h3 className="mb-2 line-clamp-2 text-base font-semibold leading-snug text-slate-900 sm:text-lg">
 												{item.title}
 											</h3>
-											<p className="line-clamp-3 text-[13px] leading-relaxed text-slate-500 sm:text-sm">
+											<p className="line-clamp-3 text-[13px] leading-relaxed text-slate-500 sm:text-[15px]">
 												{item.excerpt || item.description}
 											</p>
 										</div>
@@ -185,13 +181,13 @@ const NewsListWithSidebar = ({
 
 				{/* RIGHT: KHÓA HỌC */}
 				<div className="w-full shrink-0 lg:w-72 xl:w-80">
-					<h2 className="mb-6 text-2xl font-black text-slate-900 lg:text-3xl">KHÓA HỌC</h2>
+					<h2 className="mb-6 text-2xl font-semibold lg:text-3xl">KHÓA HỌC</h2>
 					<div className="max-h-238 space-y-4 overflow-y-auto pr-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-slate-200">
 						{courses.map((course: any, i: number) => {
 							const color = COURSE_COLORS[i % COURSE_COLORS.length];
 							return (
 								<div key={course.id || i} className={`${color.bg} ${color.border} rounded-2xl border p-5`}>
-									<h3 className="mb-1.5 text-base font-black text-slate-900">{course.name}</h3>
+									<h3 className="mb-1.5 text-base font-semibold">{course.name}</h3>
 									{course.duration && (
 										<p className="mb-4 text-sm leading-relaxed text-slate-500">
 											Thời gian: {course.duration}

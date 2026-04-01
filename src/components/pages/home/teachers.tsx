@@ -20,7 +20,7 @@ const Teachers = () => {
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mb-10 text-center text-2xl font-semibold lg:text-4xl"
+					className="mb-6 text-center text-2xl font-semibold lg:text-4xl"
 				>
 					300+ GIÁO VIÊN TRUYỀN CẢM HỨNG
 				</motion.h2>
@@ -39,7 +39,7 @@ const Teachers = () => {
 							swiperRef.current = swiper;
 						}}
 						modules={[Navigation, Autoplay]}
-						spaceBetween={16}
+						spaceBetween={24}
 						slidesPerView={1.3}
 						autoplay={{ delay: 4000, disableOnInteraction: false }}
 						breakpoints={{

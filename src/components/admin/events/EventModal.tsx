@@ -207,7 +207,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 			<AdminFormField label="Danh mục" error={(errors as any).category?.message} required>
 				<div className="relative mt-1">
 					<select
-						className="focus:border-stem-blue focus:ring-stem-blue block w-full appearance-none rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 pr-10 text-sm"
+						className="focus:border-stem-blue focus:ring-stem-blue block w-full appearance-none rounded-xl border-slate-200  px-4 py-2.5 pr-10 text-sm"
 						{...register("category")}
 					>
 						{CATEGORIES.map((cat) => (
@@ -224,7 +224,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 			<AdminFormField label="Ngày diễn ra" error={(errors as any).date?.message} required>
 				<input
 					type="date"
-					className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+					className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 					{...register("date")}
 				/>
 			</AdminFormField>
@@ -279,7 +279,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								<AdminFormField label="Tiêu đề" error={(errors as any).title?.message} required>
 									<input
 										type="text"
-										className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 										{...register("title")}
 									/>
 								</AdminFormField>
@@ -288,7 +288,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 
 								<AdminFormField label="Mô tả ngắn" error={(errors as any).description?.message} required>
 									<textarea
-										className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 										rows={3}
 										{...register("description")}
 									/>
@@ -297,7 +297,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								<AdminFormField label="Địa điểm" error={(errors as any).location?.message}>
 									<input
 										type="text"
-										className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 										{...register("location")}
 									/>
 								</AdminFormField>
@@ -306,7 +306,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 							<div className="space-y-4">
 								<AdminFormField label="Ảnh bìa">
 									<div className="mt-2 flex items-center gap-4">
-										<div className="hover:border-stem-blue relative flex h-70 w-full items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
+										<div className="hover:border-stem-blue relative flex h-70 w-full items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-slate-200  text-slate-400 transition-colors hover:bg-blue-50/30">
 											{isUploadingImage ? (
 												<div className="flex flex-col items-center gap-2">
 													<Loader2 size={32} className="text-stem-blue animate-spin" />
@@ -344,7 +344,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 									</div>
 								</AdminFormField>
 
-								<div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-4">
+								<div className="rounded-2xl border border-slate-100 /50 p-4">
 									<p className="mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
 										Thông tin người đăng
 									</p>
@@ -399,7 +399,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								<input
 									type="text"
 									placeholder="https://youtu.be/... hoặc nhập thẳng ID"
-									className="block w-full rounded-xl border-slate-200 bg-slate-50 py-2.5 pr-4 pl-9 text-sm"
+									className="block w-full rounded-xl border-slate-200  py-2.5 pr-4 pl-9 text-sm"
 									value={youtubeInput}
 									onChange={handleYoutubeInputChange}
 								/>
@@ -438,7 +438,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								</div>
 							</div>
 						) : (
-							<div className="flex aspect-video w-full items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50">
+							<div className="flex aspect-video w-full items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 ">
 								<div className="flex flex-col items-center gap-2 text-slate-400">
 									<Youtube size={32} />
 									<span className="text-xs font-semibold">Nhập link để xem preview</span>
@@ -451,7 +451,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								<AdminFormField label="Tiêu đề video" error={(errors as any).title?.message} required>
 									<input
 										type="text"
-										className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 										{...register("title")}
 									/>
 								</AdminFormField>
@@ -462,14 +462,14 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 							<div className="space-y-4">
 								<AdminFormField label="Mô tả ngắn" error={(errors as any).description?.message}>
 									<textarea
-										className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 										rows={4}
 										placeholder="Mô tả ngắn về video (không bắt buộc)"
 										{...register("description")}
 									/>
 								</AdminFormField>
 
-								<div className="rounded-2xl border border-slate-100 bg-slate-50/50 p-4">
+								<div className="rounded-2xl border border-slate-100 /50 p-4">
 									<p className="mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
 										Thông tin người đăng
 									</p>
@@ -499,7 +499,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 					<button
 						type="button"
 						onClick={onClose}
-						className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-semibold transition-colors hover:bg-slate-50"
+						className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-semibold transition-colors hover:"
 					>
 						Hủy
 					</button>

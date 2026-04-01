@@ -1,14 +1,14 @@
 "use client";
 
-import { motion } from"motion/react";
-import { Button } from"@/components/ui/button";
-import Link from"next/link";
-import Image from"next/image";
-import { IMAGES } from"../../public/statics/images";
+import { motion } from "motion/react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Image from "next/image";
+import { IMAGES } from "../../public/statics/images";
 
 export default function NotFound() {
 	return (
-		<div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-50 px-4 py-20 text-center">
+		<div className="relative flex min-h-screen items-center justify-center overflow-hidden  px-4 py-20 text-center">
 			{/* Subtle Background Decorations */}
 			<div className="pointer-events-none absolute top-0 left-0 h-full w-full opacity-40">
 				<div className="bg-stem-blue/10 absolute top-[-10%] left-[-5%] h-64 w-64 rounded-full blur-3xl" />

@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from"react";
-import { Phone, MapPin, Search, Menu, ChevronDown, UserIcon } from"lucide-react";
-import { Button } from"../ui/button";
-import Image from"next/image";
-import Link from"next/link";
-import { useRouter } from"next/navigation";
-import { useAuthStore } from"@/store/useAuthStore";
-import { LogoutButton } from"@/components/auth/logout-button";
-import { motion, AnimatePresence } from"motion/react";
+import React, { useState, useEffect } from "react";
+import { Phone, MapPin, Search, Menu, ChevronDown, UserIcon } from "lucide-react";
+import { Button } from "../ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/useAuthStore";
+import { LogoutButton } from "@/components/auth/logout-button";
+import { motion, AnimatePresence } from "motion/react";
 
 export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => {
 	const { user, profile } = useAuthStore();
@@ -22,7 +22,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 	}, [user]);
 
 	const handleSearch = (e?: React.KeyboardEvent | React.MouseEvent) => {
-		if (e &&"key" in e && e.key !=="Enter") return;
+		if (e && "key" in e && e.key !== "Enter") return;
 		if (searchQuery.trim()) {
 			router.push(`/tim-kiem?q=${encodeURIComponent(searchQuery.trim())}`);
 		}
@@ -31,32 +31,32 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 	return (
 		<header className="sticky top-0 z-60 border-b border-slate-50 bg-white px-4 py-3 lg:static lg:border-none">
 			<div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-			<div className="flex items-center gap-10">
+				<div className="flex items-center gap-10">
 					{/* Logo */}
-				<div className="relative h-[54px] w-[136px]">
-					<Link href="/" aria-label="Trang chủ STEMKey">
-						<Image
-							src="/statics/images/logo.svg"
-							alt="Logo STEMKey"
-							fill
-							className="object-contain"
-							priority
-						/>
-					</Link>
-				</div>
+					<div className="relative h-[54px] w-[136px]">
+						<Link href="/" aria-label="Trang chủ STEMKey">
+							<Image
+								src="/statics/images/logo.svg"
+								alt="Logo STEMKey"
+								fill
+								className="object-contain"
+								priority
+							/>
+						</Link>
+					</div>
 
-				{/* Contact Info (Desktop Only) */}
-				<div className="hidden items-center gap-3 lg:flex">
-					<div className="flex items-center gap-2 rounded-xl bg-[#E4E4E4] px-4 py-2 text-sm text-slate-600">
-						<Phone size={15} className="shrink-0 text-[#3D3D3D] font-medium" />
-						<span>091 255 1090</span>
-					</div>
-					<div className="flex items-center gap-2 rounded-xl bg-[#E4E4E4] px-4 py-2 text-sm text-slate-600">
-						<MapPin size={15} className="shrink-0 text-[#3D3D3D] font-medium" />
-						<span>Nam An Khánh, Hà Nội</span>
+					{/* Contact Info (Desktop Only) */}
+					<div className="hidden items-center gap-3 lg:flex">
+						<div className="flex items-center gap-2 rounded-xl bg-[#E4E4E4] px-4 py-2 text-sm text-slate-600">
+							<Phone size={15} className="shrink-0 text-[#3D3D3D] font-medium" />
+							<span>091 255 1090</span>
+						</div>
+						<div className="flex items-center gap-2 rounded-xl bg-[#E4E4E4] px-4 py-2 text-sm text-slate-600">
+							<MapPin size={15} className="shrink-0 text-[#3D3D3D] font-medium" />
+							<span>Nam An Khánh, Hà Nội</span>
+						</div>
 					</div>
 				</div>
-			</div>
 
 				{/* Search & Auth (Responsive) */}
 				<div className="flex items-center gap-3 lg:gap-4">
@@ -68,7 +68,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 							onChange={(e) => setSearchQuery(e.target.value)}
 							onKeyDown={handleSearch}
 							aria-label="Tìm kiếm nội dung"
-							className="focus:ring-stem-blue/20 w-full rounded-full border border-slate-200 bg-slate-50 py-2 pr-10 pl-4 text-sm focus:ring-2 focus:outline-none"
+							className="focus:ring-stem-blue/20 w-full rounded-full border border-slate-200  py-2 pr-10 pl-4 text-sm focus:ring-2 focus:outline-none"
 						/>
 						<Search
 							size={16}
@@ -90,13 +90,13 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 									</div>
 									<div className="flex flex-col items-start">
 										<span className="line-clamp-1 max-w-32 text-xs font-bold text-slate-800">
-											{profile?.full_name ||"Thành viên"}
+											{profile?.full_name || "Thành viên"}
 										</span>
 										<span className="text-[10px] font-medium text-slate-400">Tài khoản</span>
 									</div>
 									<ChevronDown
 										size={16}
-										className={`text-slate-400 transition-transform ${showDropdown ?"rotate-180" :""}`}
+										className={`text-slate-400 transition-transform ${showDropdown ? "rotate-180" : ""}`}
 									/>
 								</button>
 
@@ -115,20 +115,20 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 											>
 												<div className="border-b border-slate-50 px-4 py-3">
 													<p className="text-sm font-bold text-slate-900">
-														{profile?.full_name ||"Thành viên"}
+														{profile?.full_name || "Thành viên"}
 													</p>
 													<p className="truncate text-xs text-slate-500">{user.email}</p>
 												</div>
 												<div className="p-1">
-												{/* <Link
+													{/* <Link
 													href="/trang-ca-nhan"
 													onClick={() => setShowDropdown(false)}
-													className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 hover:text-slate-900"
+													className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover: hover:text-slate-900"
 												>
 													<UserIcon size={18} />
 													Trang cá nhân
 												</Link> */}
-											</div>
+												</div>
 												<div className="border-t border-slate-50 p-1">
 													<LogoutButton
 														className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-bold text-red-500 transition-colors hover:bg-red-50"
@@ -142,7 +142,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 							</div>
 						) : (
 							<div className="flex items-center gap-2">
-							<Link href="/dang-ky">
+								<Link href="/dang-ky">
 									<Button variant="outline" size="sm" className="rounded-full px-6 font-bold">
 										Đăng ký
 									</Button>
@@ -151,7 +151,7 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 										Đăng nhập
 									</Button>
 								</Link>
-								
+
 							</div>
 						)}
 					</div>

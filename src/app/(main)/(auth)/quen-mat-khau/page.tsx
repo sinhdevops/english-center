@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from"react";
-import { motion } from"framer-motion";
-import { Mail, ArrowRight, Loader2 } from"lucide-react";
-import { Button } from"@/components/ui/button";
-import { supabase } from"@/lib/supabase-client";
-import { toast } from"sonner";
-import Link from"next/link";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, ArrowRight, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase-client";
+import { toast } from "sonner";
+import Link from "next/link";
 
 export default function ForgotPasswordPage() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -21,19 +21,19 @@ export default function ForgotPasswordPage() {
 		setIsLoading(true);
 		try {
 			const { error } = await supabase.auth.resetPasswordForEmail(email, {
-				redirectTo:`${window.location.origin}/auth/update-password`,
+				redirectTo: `${window.location.origin}/auth/update-password`,
 			});
 			if (error) throw error;
 			toast.success("Yêu cầu đã được gửi! Vui lòng kiểm tra email của bạn.");
 		} catch (error: any) {
-			toast.error(error.message ||"Có lỗi xảy ra, vui lòng thử lại.");
+			toast.error(error.message || "Có lỗi xảy ra, vui lòng thử lại.");
 		} finally {
 			setIsLoading(false);
 		}
 	};
 
 	return (
-		<div className="flex min-h-[80vh] items-center justify-center bg-slate-50 px-4 py-12">
+		<div className="flex min-h-[80vh] items-center justify-center  px-4 py-12">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ export default function ForgotPasswordPage() {
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								placeholder="example@gmail.com"
-								className="focus:ring-stem-blue/20 w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pr-4 pl-12 transition-all focus:ring-2 focus:outline-none"
+								className="focus:ring-stem-blue/20 w-full rounded-xl border border-slate-200  py-3 pr-4 pl-12 transition-all focus:ring-2 focus:outline-none"
 								required
 							/>
 							<Mail size={18} className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-400" />
@@ -65,7 +65,7 @@ export default function ForgotPasswordPage() {
 						disabled={isLoading}
 						className="flex w-full items-center justify-center gap-2 rounded-xl py-4 text-lg font-bold disabled:opacity-70"
 					>
-						{isLoading ? <Loader2 className="animate-spin" size={20} /> :"Gửi yêu cầu"}
+						{isLoading ? <Loader2 className="animate-spin" size={20} /> : "Gửi yêu cầu"}
 						{!isLoading && <ArrowRight size={20} />}
 					</Button>
 				</form>

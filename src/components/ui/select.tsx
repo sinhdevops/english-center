@@ -101,15 +101,14 @@ export const SelectValidation: React.FC<SelectValidationProps> = ({
 									</span>
 								</div>
 								<ChevronDown
-									className={`h-5 w-5 text-slate-400 transition-transform duration-200 ${
-										isOpen ? "rotate-180 text-blue-500" : ""
-									}`}
+									className={`h-5 w-5 text-slate-400 transition-transform duration-200 ${isOpen ? "rotate-180 text-blue-500" : ""
+										}`}
 								/>
 							</button>
 
 							{isOpen && (
 								<div className="animate-in fade-in zoom-in-95 absolute z-50 mt-2 w-full overflow-hidden rounded-xl border border-slate-100 bg-white duration-150">
-									<div className="flex items-center gap-2 border-b border-slate-50 bg-slate-50/50 p-2">
+									<div className="flex items-center gap-2 border-b border-slate-50 /50 p-2">
 										<Search className="h-4 w-4 text-slate-400" />
 										<input
 											className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400"
@@ -132,11 +131,10 @@ export const SelectValidation: React.FC<SelectValidationProps> = ({
 														setIsOpen(false);
 														setSearchTerm("");
 													}}
-													className={`group flex cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors ${
-														String(value) === String(option.value)
+													className={`group flex cursor-pointer items-center justify-between rounded-lg px-3 py-2.5 text-sm transition-colors ${String(value) === String(option.value)
 															? "bg-blue-50 font-medium text-blue-700"
-															: "text-slate-600 hover:bg-slate-50"
-													}`}
+															: "text-slate-600 hover:"
+														}`}
 												>
 													<span>{option.label}</span>
 													{String(value) === String(option.value) && (

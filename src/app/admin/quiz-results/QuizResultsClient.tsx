@@ -69,7 +69,7 @@ export default function QuizResultsClient({ initialResults }: QuizResultsClientP
 				<div className="overflow-x-auto">
 					<table className="w-full border-collapse text-left text-sm">
 						<thead>
-							<tr className="border-b border-slate-100 bg-slate-50/50">
+							<tr className="border-b border-slate-100 /50">
 								<th className="px-6 py-4 font-bold text-slate-700">Thông tin học viên</th>
 								<th className="px-6 py-4 font-bold text-slate-700">SĐT phụ huynh</th>
 								<th className="px-6 py-4 font-bold text-slate-700">Số bài đã làm</th>
@@ -97,7 +97,7 @@ export default function QuizResultsClient({ initialResults }: QuizResultsClientP
 											<tr
 												key={email}
 												onClick={() => toggleEmail(email)}
-												className="cursor-pointer transition-colors hover:bg-slate-50"
+												className="cursor-pointer transition-colors hover:"
 											>
 												<td className="px-6 py-4">
 													<div className="flex items-center gap-2">
@@ -138,7 +138,7 @@ export default function QuizResultsClient({ initialResults }: QuizResultsClientP
 												results.map((result) => (
 													<tr
 														key={result.id}
-														className="bg-slate-50/60 transition-colors hover:bg-slate-100/60"
+														className="/60 transition-colors hover:bg-slate-100/60"
 													>
 														<td className="py-3 pl-16 pr-6 text-slate-500">
 															<div className="flex items-center gap-2">

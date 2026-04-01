@@ -29,17 +29,17 @@ const Testimonials = ({ items = [] }: TestimonialsProps) => {
 
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-7xl px-4 lg:px-0">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mb-8 text-2xl font-semibold lg:text-4xl"
+					className="mb-6 text-2xl font-semibold lg:text-4xl"
 				>
 					CẢM NHẬN CỦA HỌC VIÊN VÀ PHỤ HUYNH
 				</motion.h2>
 
-				<div className="flex flex-col gap-4 lg:flex-row">
+				<div className="flex flex-col gap-6 lg:flex-row">
 					{/* Left — featured video */}
 					<motion.div
 						initial={{ opacity: 0, x: -20 }}
@@ -71,7 +71,7 @@ const Testimonials = ({ items = [] }: TestimonialsProps) => {
 					</motion.div>
 
 					{/* Right — 2×2 grid */}
-					<div className="grid w-full grid-cols-2 gap-4 lg:w-[45%]">
+					<div className="grid w-full grid-cols-2 gap-6 lg:w-[45%]">
 						{grid.map((item, i) => (
 							<motion.div
 								key={item.id || i}

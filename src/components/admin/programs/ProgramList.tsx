@@ -38,7 +38,7 @@ export const ProgramList = ({
 
 	if (programs.length === 0) {
 		return (
-			<div className="flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400">
+			<div className="flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200  text-slate-400">
 				<p className="font-medium">Chưa có chương trình nào</p>
 			</div>
 		);
@@ -122,7 +122,7 @@ export const ProgramList = ({
 								initial={{ height: 0, opacity: 0 }}
 								animate={{ height: "auto", opacity: 1 }}
 								exit={{ height: 0, opacity: 0 }}
-								className="overflow-hidden border-t border-slate-100 bg-slate-50/50"
+								className="overflow-hidden border-t border-slate-100 /50"
 							>
 								<div className="p-5">
 									<div className="mb-4 flex items-center justify-between">

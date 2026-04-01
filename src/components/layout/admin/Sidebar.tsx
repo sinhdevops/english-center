@@ -83,7 +83,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 										"group relative flex items-center rounded-xl px-3 py-2.5 text-sm font-bold transition-all duration-200",
 										isActive
 											? "bg-stem-blue text-white shadow-lg shadow-blue-200"
-											: "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
+											: "text-slate-600 hover: hover:text-slate-900",
 									)}
 								>
 									<item.icon

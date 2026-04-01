@@ -74,7 +74,7 @@ export default function SchedulesClient({ initialSchedules, branches, courses }:
 
 			<div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
 				<div className="flex items-center gap-2">
-					<button className="flex items-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50">
+					<button className="flex items-center rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 hover:">
 						<Filter size={16} className="mr-2" />
 						Lọc
 					</button>

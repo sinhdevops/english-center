@@ -40,7 +40,7 @@ export function AdminPagination({ currentPage, totalPages }: AdminPaginationProp
 			<button
 				onClick={() => handlePageChange(currentPage - 1)}
 				disabled={currentPage <= 1}
-				className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-100 bg-white text-slate-600 transition-all hover:bg-slate-50 disabled:pointer-events-none disabled:opacity-50"
+				className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-100 bg-white text-slate-600 transition-all hover: disabled:pointer-events-none disabled:opacity-50"
 			>
 				<ChevronLeft size={18} />
 			</button>
@@ -55,11 +55,10 @@ export function AdminPagination({ currentPage, totalPages }: AdminPaginationProp
 						<button
 							key={page}
 							onClick={() => handlePageChange(page as number)}
-							className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold transition-all ${
-								page === currentPage
+							className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold transition-all ${page === currentPage
 									? "bg-stem-blue text-white"
-									: "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-							}`}
+									: " text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+								}`}
 						>
 							{page}
 						</button>
@@ -70,7 +69,7 @@ export function AdminPagination({ currentPage, totalPages }: AdminPaginationProp
 			<button
 				onClick={() => handlePageChange(currentPage + 1)}
 				disabled={currentPage >= totalPages}
-				className="flex h-10 items-center justify-center rounded-xl border border-slate-100 bg-white px-4 text-sm font-bold text-slate-600 transition-all hover:bg-slate-50 disabled:pointer-events-none disabled:opacity-50"
+				className="flex h-10 items-center justify-center rounded-xl border border-slate-100 bg-white px-4 text-sm font-bold text-slate-600 transition-all hover: disabled:pointer-events-none disabled:opacity-50"
 			>
 				<span>Trang sau</span>
 				<ChevronRight size={18} className="ml-1" />

@@ -48,9 +48,8 @@ export const QuizReview = ({
 							<button
 								key={q.id}
 								onClick={() => onQuestionSelect(idx)}
-								className={`flex aspect-square w-full grow cursor-pointer items-center justify-center rounded-lg border-2 text-sm font-black transition-all md:rounded-xl md:text-lg ${
-									isActive ? "z-10 scale-110 border-slate-800" : "border-transparent"
-								} ${isCorrect ? "bg-emerald-500 text-white" : "bg-red-500 text-white"}`}
+								className={`flex aspect-square w-full grow cursor-pointer items-center justify-center rounded-lg border-2 text-sm font-black transition-all md:rounded-xl md:text-lg ${isActive ? "z-10 scale-110 border-slate-800" : "border-transparent"
+									} ${isCorrect ? "bg-emerald-500 text-white" : "bg-red-500 text-white"}`}
 							>
 								{idx + 1}
 							</button>
@@ -108,13 +107,12 @@ export const QuizReview = ({
 									return (
 										<div
 											key={optIdx}
-											className={`relative overflow-hidden rounded-2xl border-4 md:rounded-3xl ${
-												isCorrect
+											className={`relative overflow-hidden rounded-2xl border-4 md:rounded-3xl ${isCorrect
 													? "border-emerald-500"
 													: isSelected
 														? "border-red-500"
 														: "border-transparent opacity-60"
-											}`}
+												}`}
 										>
 											<img
 												src={currentQuestion.option_images?.[optIdx] ?? ""}
@@ -147,18 +145,16 @@ export const QuizReview = ({
 									return (
 										<div
 											key={optIdx}
-											className={`flex items-center gap-3 rounded-xl border-2 p-4 transition-all md:gap-4 md:rounded-2xl md:p-6 ${
-												isCorrect
+											className={`flex items-center gap-3 rounded-xl border-2 p-4 transition-all md:gap-4 md:rounded-2xl md:p-6 ${isCorrect
 													? "border-emerald-500 bg-emerald-50"
 													: isSelected
 														? "border-red-500 bg-red-50"
-														: "border-transparent bg-slate-50 opacity-80"
-											}`}
+														: "border-transparent  opacity-80"
+												}`}
 										>
 											<div
-												className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 md:h-6 md:w-6 ${
-													isSelected ? "border-slate-800 bg-slate-800" : "border-slate-300"
-												}`}
+												className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 md:h-6 md:w-6 ${isSelected ? "border-slate-800 bg-slate-800" : "border-slate-300"
+													}`}
 											>
 												{isSelected && <div className="h-2 w-2 rounded-full bg-white" />}
 											</div>

@@ -1,6 +1,3 @@
-"use client";
-
-import React from "react";
 import { IMAGES } from "../../../../public/statics/images";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,12 +65,12 @@ export default function CoursesClient({ initialCourses }: CoursesClientProps) {
 					<table className="w-full text-sm">
 						<thead>
 							<tr className="border-b border-gray-200 bg-gray-100">
-								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">STT</th>
-								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Tên Khóa Học</th>
-								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Chi Tiết</th>
-								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Thời Gian</th>
-								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Suất Học</th>
-								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500">Đăng Ký</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 w-[10%]">STT</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 w-[20%]">Tên Khóa Học</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 w-[35%]">Chi Tiết</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 w-[10%]">Thời Gian</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 w-[10%]">Suất Học</th>
+								<th className="px-5 py-4 text-left text-xs font-bold uppercase tracking-wider text-gray-500 w-[15%]">Đăng Ký</th>
 							</tr>
 						</thead>
 						<tbody className="divide-y divide-gray-100">

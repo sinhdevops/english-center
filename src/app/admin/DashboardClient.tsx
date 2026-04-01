@@ -249,7 +249,7 @@ export default function DashboardClient({
 								</div>
 							);
 						})}
-						<div className="mt-2 rounded-xl bg-slate-50 px-4 py-3 text-center">
+						<div className="mt-2 rounded-xl  px-4 py-3 text-center">
 							<p className="text-xs text-slate-500">Tổng cộng</p>
 							<p className="text-2xl font-bold text-slate-900">{studentStats.total}</p>
 							<p className="text-xs text-slate-500">học viên</p>
@@ -275,7 +275,7 @@ export default function DashboardClient({
 								return (
 									<div
 										key={s.id}
-										className="flex flex-col gap-2 rounded-xl border border-slate-100 p-4 transition hover:bg-slate-50 sm:flex-row sm:items-center sm:justify-between"
+										className="flex flex-col gap-2 rounded-xl border border-slate-100 p-4 transition hover: sm:flex-row sm:items-center sm:justify-between"
 									>
 										<div className="flex items-start gap-3">
 											<div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
@@ -342,7 +342,7 @@ export default function DashboardClient({
 									{recentRegistrations.map((r) => {
 										const cfg = REGISTRATION_STATUS_CONFIG[r.status];
 										return (
-											<tr key={r.id} className="group transition hover:bg-slate-50">
+											<tr key={r.id} className="group transition hover:">
 												<td className="py-3 pr-4">
 													<p className="font-medium text-slate-900 line-clamp-1">{r.student_name}</p>
 													<p className="text-xs text-slate-500">{r.phone}</p>
@@ -392,7 +392,7 @@ export default function DashboardClient({
 								return (
 									<div
 										key={event.id}
-										className="flex gap-4 rounded-xl border border-slate-100 p-4 transition hover:bg-slate-50"
+										className="flex gap-4 rounded-xl border border-slate-100 p-4 transition hover:"
 									>
 										<div className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl bg-indigo-50 text-indigo-700">
 											<span className="text-lg font-bold leading-none">{day}</span>

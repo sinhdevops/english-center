@@ -9,11 +9,11 @@ export const Footer: React.FC = () => {
 	return (
 		<footer className="bg-white text-gray-800">
 			<div className="px-4 lg:px-0">
-				
-			<FooterCta />
+
+				<FooterCta />
 
 			</div>
-			<div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 border-b border-gray-200 px-4 lg:px-0 py-8 md:grid-cols-4 lg:pt-15 lg:pb-7.5">
+			<div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 border-b border-gray-200 px-4 lg:px-0 py-8 md:grid-cols-[3fr_2fr_2fr_3fr] lg:pt-15 lg:pb-7.5">
 				<div className="col-span-2 space-y-4 md:col-span-1">
 					<Image
 						src="/statics/images/logo.svg"
@@ -22,9 +22,8 @@ export const Footer: React.FC = () => {
 						height={60}
 						className="object-contain"
 					/>
-					<p className="max-w-xs text-sm font-light text-gray-700">
-						Hệ thống đào tạo tiếng Anh trẻ em uy tín top đầu Việt Nam về đảm bảo mục tiêu kép: Toàn diện 4
-						kỹ năng chuẩn Cambridge và Điểm giỏi trên trường
+					<p className="max-w-xs text-sm text-gray-700">
+						Hệ thống giáo dục phát triển tư duy sáng tạo và phản biện.
 					</p>
 
 					<div className="flex gap-3">
@@ -96,7 +95,7 @@ export const Footer: React.FC = () => {
 
 				<div>
 					<h3 className="mb-6 text-sm font-bold uppercase tracking-wide text-gray-900">STEMKEY</h3>
-					<ul className="space-y-3 text-sm font-light text-gray-700">
+					<ul className="space-y-3 text-sm text-gray-700">
 						<li className="cursor-pointer transition-colors hover:text-gray-900">
 							<Link href="/ve-chung-toi">Về chúng tôi</Link>
 						</li>
@@ -114,7 +113,7 @@ export const Footer: React.FC = () => {
 
 				<div>
 					<h3 className="mb-6 text-sm font-bold uppercase tracking-wide text-gray-900">KHÓA HỌC</h3>
-					<ul className="space-y-3 text-sm font-light text-gray-700">
+					<ul className="space-y-3 text-sm text-gray-700">
 						{PROGRAMS_DATA.map((item) => (
 							<li key={item.title} className="cursor-pointer transition-colors hover:text-gray-900">
 								<Link href={`/chuong-trinh/${item.slug}`}>{item.title}</Link>
@@ -125,7 +124,7 @@ export const Footer: React.FC = () => {
 
 				<div className="col-span-2 md:col-span-1">
 					<h3 className="mb-6 text-sm font-bold uppercase tracking-wide text-gray-900">THÔNG TIN LIÊN HỆ</h3>
-					<ul className="space-y-3 text-sm font-light text-gray-700">
+					<ul className="space-y-3 text-sm text-gray-700">
 						<li>Hotline: 091 255 1090</li>
 						<li>Email hỗ trợ học tập: info@stemkey.edu.vn</li>
 						<li>Địa chỉ: Tầng 4 - Tòa nhà T4, Thăng Long Victory, An Khánh, Hà Nội</li>

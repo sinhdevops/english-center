@@ -45,7 +45,7 @@ export const QuizResult = ({ totalQuestions, onRetake }: QuizResultProps) => (
 				</div>
 			</div>
 
-			<div className="space-y-2 rounded-2xl bg-slate-50 p-4 md:p-6">
+			<div className="space-y-2 rounded-2xl  p-4 md:p-6">
 				<p className="text-sm font-bold text-slate-700 md:text-base">
 					Trung tâm sẽ chấm điểm và phản hồi kết quả sớm nhất!
 				</p>

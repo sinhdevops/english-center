@@ -11,9 +11,11 @@ import flex3 from './flex3.jpg'
 import flex4 from './flex4.jpg'
 import courser1 from './courser1.webp'
 import courser2 from './courser2.webp'
+import courser2Mb from './courser2-mb.webp'
 import contact from './contact.webp'
 import floating from './floating.webp'
 import headerPage from './header.webp'
+import login from './login.webp'
 export * from './home'
 
 export const imagePrograms = {
@@ -21,13 +23,13 @@ export const imagePrograms = {
 }
 
 export const home = {
-register
+    register
 }
 
 export const IMAGES = {
     notFound,
     courser,
-    logo,registration,
+    logo, registration,
     flex1,
     flex2,
     flex3,
@@ -37,5 +39,5 @@ export const IMAGES = {
     courser2,
     contact,
     floating,
-    headerPage
+    headerPage, login, courser2Mb
 }

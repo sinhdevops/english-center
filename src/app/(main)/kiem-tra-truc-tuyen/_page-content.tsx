@@ -138,7 +138,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 				<motion.div
 					initial={{ opacity: 0, y: 40 }}
 					animate={{ opacity: 1, y: 0 }}
-					className="relative overflow-hidden rounded-[20px] bg-white p-6 shadow-xl lg:p-10"
+					className="relative overflow-hidden rounded-[20px] bg-white p-6 lg:p-10"
 				>
 					{/* Decorative shapes inside registration card */}
 					<div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-[#E8F5E9]/50" />
@@ -157,32 +157,33 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 									<InputValidation
 										name="parentName"
 										placeholder="Nhập họ tên của bạn"
-										className="rounded-2xl border border-slate-200 bg-slate-50/50 px-6 py-4.5 text-slate-700 outline-none transition-all focus:border-[#2196F3] focus:bg-white"
+										className="rounded-2xl border border-slate-200 /50 px-6 py-4.5 text-slate-700 outline-none transition-all focus:border-[#2196F3] focus:bg-white"
 									/>
 								</div>
 								<div className="w-full md:w-80">
 									<InputValidation
 										name="phone"
 										placeholder="Nhập số điện thoại"
-										className="rounded-2xl border border-slate-200 bg-slate-50/50 px-6 py-4.5 text-slate-700 outline-none transition-all focus:border-[#2196F3] focus:bg-white"
+										className="rounded-2xl border border-slate-200 /50 px-6 py-4.5 text-slate-700 outline-none transition-all focus:border-[#2196F3] focus:bg-white"
 									/>
 								</div>
-								<button
+								<Button
+									size={'md'}
 									type="submit"
 									disabled={isSubmitting}
-									className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#2196F3] px-10 py-4.5 font-bold text-white shadow-lg shadow-blue-200 active:scale-95 disabled:bg-slate-400 md:w-auto"
+									className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#2196F3] px-10 py-4.5 font-bold text-white active:scale-95 disabled:bg-slate-400 md:w-auto"
 								>
 									{isSubmitting ? <Loader2 size={20} className="animate-spin" /> : "Đăng ký tư vấn"}
-								</button>
+								</Button>
 							</form>
 						</FormProvider>
 					</div>
 				</motion.div>
-			</div>
+			</div >
 
 			{/* Test Selection Section */}
-			<section className="mx-auto max-w-7xl px-4 lg:px-0 pb-20 pt-16">
-				<div className="mb-12">
+			< section className="mx-auto max-w-7xl px-4 lg:px-0 pb-20 pt-10" >
+				<div className="mb-6">
 					<motion.h2
 						initial={{ opacity: 0, x: -20 }}
 						whileInView={{ opacity: 1, x: 0 }}
@@ -193,14 +194,14 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 					</motion.h2>
 				</div>
 
-				<div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+				<div className="grid grid-cols-2 gap-6 md:grid-cols-2 lg:grid-cols-4">
 					{quizCategories.map((cat, idx) => {
 						const Icon = cat.icon;
 						return (
 							<Link
 								key={idx}
 								href={`/kiem-tra-truc-tuyen/${CATEGORY_SLUG}?nhom=${cat.nhom}`}
-								className="group relative flex cursor-pointer flex-col aspect-[165/210] overflow-hidden rounded-xl p-4 transition-all hover:-translate-y-1 hover:shadow-xl md:aspect-[282/306] md:p-8"
+								className="group relative flex cursor-pointer flex-col aspect-[165/210] overflow-hidden rounded-xl p-4 transition-all hover:-translate-y-1 md:aspect-[282/306] md:p-8"
 								style={{ backgroundColor: cat.color }}
 							>
 								{/* Decorative circles in cards */}
@@ -208,7 +209,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 								<div className="absolute top-0 right-0 h-[100%] w-[100%] opacity-10" style={{ backgroundImage: "radial-gradient(circle, white 0%, transparent 70%)" }} />
 
 								<div className="relative z-10 flex flex-col h-full">
-									<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-sm mb-3 md:h-[50px] md:w-[50px] md:mb-6">
+									<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white mb-3 md:h-[50px] md:w-[50px] md:mb-6">
 										<Icon size={20} style={{ color: cat.iconColor }} className="md:w-[30px] md:h-[30px]" />
 									</div>
 									<p className="mb-0.5 text-[10px] font-bold text-slate-500 uppercase md:mb-1 md:text-sm">{cat.ageLabel}</p>
@@ -218,7 +219,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 									<p className="line-clamp-2 mb-3 flex-1 text-[11px] font-medium text-slate-500/90 leading-relaxed md:line-clamp-none md:text-[15px]">
 										{cat.description}
 									</p>
-									<div className={`inline-flex w-fit items-center justify-center rounded-full border bg-white px-4 py-1.5 text-[10px] font-bold transition-all group-hover:bg-slate-50 md:px-8 md:py-2.5 md:text-sm ${cat.btnBorder} ${cat.btnText}`}>
+									<div className={`inline-flex w-fit items-center justify-center rounded-full border bg-white px-4 py-1.5 text-[10px] font-bold transition-all group-hover: md:px-8 md:py-2.5 md:text-sm ${cat.btnBorder} ${cat.btnText}`}>
 										Test ngay
 									</div>
 								</div>
@@ -226,7 +227,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 						);
 					})}
 				</div>
-			</section>
-		</div>
+			</section >
+		</div >
 	);
 }

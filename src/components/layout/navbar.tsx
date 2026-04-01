@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from"react";
-import { motion, AnimatePresence } from"motion/react";
-import { ChevronDown, X, Search, UserIcon } from"lucide-react";
-import { usePathname } from"next/navigation";
-import Link from"next/link";
-import { useAuthStore } from"@/store/useAuthStore";
-import { LogoutButton } from"@/components/auth/logout-button";
-import { NAV_ITEMS } from"@/constants";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ChevronDown, X, Search, UserIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { useAuthStore } from "@/store/useAuthStore";
+import { LogoutButton } from "@/components/auth/logout-button";
+import { NAV_ITEMS } from "@/constants";
 
 export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> = ({ isMenuOpen, toggleMenu }) => {
 	const pathname = usePathname();
@@ -35,8 +35,8 @@ export const Navbar: React.FC<{ isMenuOpen: boolean; toggleMenu: () => void }> =
 
 const isActiveHref = (pathname: string, href?: string) => {
 	if (!href) return false;
-	if (href ==="/") return pathname ==="/";
-	return pathname === href || pathname.startsWith(href +"/");
+	if (href === "/") return pathname === "/";
+	return pathname === href || pathname.startsWith(href + "/");
 };
 
 const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => {
@@ -50,16 +50,15 @@ const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => 
 			onMouseLeave={() => setIsHovered(false)}
 		>
 			<Link
-				href={item.href ||"#"}
-				className={`relative flex items-center gap-1 pb-1 uppercase text-base font-medium whitespace-nowrap transition-colors ${
-					isActive ?"text-stem-blue" :"hover:text-stem-blue"
-				}`}
+				href={item.href || "#"}
+				className={`relative flex items-center gap-1 pb-1 uppercase text-base font-medium whitespace-nowrap transition-colors ${isActive ? "text-stem-blue" : "hover:text-stem-blue"
+					}`}
 			>
 				{item.label}
 				{item.subItems && (
 					<ChevronDown
 						size={14}
-						className={`transition-transform duration-200 ${isHovered ?"rotate-180" :""}`}
+						className={`transition-transform duration-200 ${isHovered ? "rotate-180" : ""}`}
 						aria-hidden="true"
 					/>
 				)}
@@ -75,15 +74,14 @@ const DesktopNavItem = ({ item, pathname }: { item: any; pathname: string }) => 
 						animate={{ opacity: 1, y: 0 }}
 						exit={{ opacity: 0, y: 10 }}
 						transition={{ duration: 0.2 }}
-						className={`absolute z-50 mt-2 w-64 overflow-hidden rounded-lg border border-slate-100 bg-white py-2 ${
-							item.label ==="Tin tức" || item.label ==="Liên hệ" ?"right-0" :"left-0"
-						}`}
+						className={`absolute z-50 mt-2 w-64 overflow-hidden rounded-lg border border-slate-100 bg-white py-2 ${item.label === "Tin tức" || item.label === "Liên hệ" ? "right-0" : "left-0"
+							}`}
 					>
 						{item.subItems.map((subItem: any) => (
 							<Link
 								key={subItem.label}
 								href={subItem.href}
-								className="hover:text-stem-blue block w-full border-b border-slate-50 px-4 py-2.5 text-left text-sm text-slate-600 transition-colors last:border-0 hover:bg-slate-50"
+								className="hover:text-stem-blue block w-full border-b border-slate-50 px-4 py-2.5 text-left text-sm text-slate-600 transition-colors last:border-0 hover:"
 							>
 								{subItem.label}
 							</Link>
@@ -109,9 +107,9 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 				className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] lg:hidden"
 			/>
 			<motion.div
-				initial={{ x:"100%" }}
+				initial={{ x: "100%" }}
 				animate={{ x: 0 }}
-				exit={{ x:"100%" }}
+				exit={{ x: "100%" }}
 				transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
 				className="fixed top-0 right-0 bottom-0 z-70 flex w-[85%] flex-col bg-white lg:hidden"
 			>
@@ -124,7 +122,7 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 							id="mobile-search"
 							type="text"
 							placeholder="Tìm kiếm nội dung..."
-							className="focus:ring-stem-blue/20 w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pr-10 pl-4 text-sm focus:ring-2 focus:outline-none"
+							className="focus:ring-stem-blue/20 w-full rounded-xl border border-slate-200  py-3 pr-10 pl-4 text-sm focus:ring-2 focus:outline-none"
 						/>
 						<Search
 							size={18}
@@ -150,7 +148,7 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 					</div>
 				</div>
 
-				<div className="space-y-3 border-t border-slate-100 bg-slate-50/50 p-6">
+				<div className="space-y-3 border-t border-slate-100 /50 p-6">
 					{user ? (
 						<div className="space-y-4">
 							<div className="flex items-center gap-3 px-2">
@@ -158,7 +156,7 @@ const MobileDrawer = ({ toggleMenu, pathname }: { toggleMenu: () => void; pathna
 									{profile?.full_name?.charAt(0) || user.email?.charAt(0)}
 								</div>
 								<div>
-									<p className="font-bold text-slate-800">{profile?.full_name ||"Thành viên"}</p>
+									<p className="font-bold text-slate-800">{profile?.full_name || "Thành viên"}</p>
 									<p className="text-xs text-slate-500">{user.email}</p>
 								</div>
 							</div>
@@ -214,16 +212,15 @@ const MobileNavItem = ({ item, pathname, toggleMenu }: { item: any; pathname: st
 					{item.label}
 					<ChevronDown
 						size={20}
-						className={`text-slate-400 transition-transform duration-200 ${isExpanded ?"rotate-180" :""}`}
+						className={`text-slate-400 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
 					/>
 				</button>
 			) : (
 				<Link
-					href={item.href ||"#"}
+					href={item.href || "#"}
 					onClick={toggleMenu}
-					className={`relative flex items-center gap-1 py-1 text-sm font-medium whitespace-nowrap transition-colors ${
-						isActive ?"text-stem-blue" :"text-slate-800"
-					}`}
+					className={`relative flex items-center gap-1 py-1 text-sm font-medium whitespace-nowrap transition-colors ${isActive ? "text-stem-blue" : "text-slate-800"
+						}`}
 				>
 					{item.label}
 					{isActive && (
@@ -238,7 +235,7 @@ const MobileNavItem = ({ item, pathname, toggleMenu }: { item: any; pathname: st
 			{hasSubItems && isExpanded && (
 				<motion.div
 					initial={{ opacity: 0, height: 0 }}
-					animate={{ opacity: 1, height:"auto" }}
+					animate={{ opacity: 1, height: "auto" }}
 					className="ml-2 space-y-3 overflow-hidden border-l-2 border-slate-100 pt-2 pl-4"
 				>
 					{item.subItems.map((subItem: any) => (
@@ -246,9 +243,8 @@ const MobileNavItem = ({ item, pathname, toggleMenu }: { item: any; pathname: st
 							key={subItem.label}
 							href={subItem.href}
 							onClick={toggleMenu}
-							className={`hover:text-stem-blue block w-full py-1 text-left text-sm transition-colors ${
-								pathname === subItem.href ?"text-stem-blue font-bold" :"text-slate-600"
-							}`}
+							className={`hover:text-stem-blue block w-full py-1 text-left text-sm transition-colors ${pathname === subItem.href ? "text-stem-blue font-bold" : "text-slate-600"
+								}`}
 						>
 							{subItem.label}
 						</Link>

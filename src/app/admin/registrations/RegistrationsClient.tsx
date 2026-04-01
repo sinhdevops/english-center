@@ -88,7 +88,7 @@ export default function RegistrationsClient({ initialRegistrations, branches, co
 				<div className="overflow-x-auto">
 					<table className="w-full border-collapse text-left text-sm">
 						<thead>
-							<tr className="border-b border-slate-100 bg-slate-50/50">
+							<tr className="border-b border-slate-100 /50">
 								<th className="px-6 py-4 font-bold text-slate-700">Thông tin học viên</th>
 								<th className="px-6 py-4 font-bold text-slate-700">Thông tin liên hệ</th>
 								<th className="px-6 py-4 font-bold text-slate-700">Khóa học & Cơ sở</th>
@@ -110,7 +110,7 @@ export default function RegistrationsClient({ initialRegistrations, branches, co
 									const course = courses.find((c) => c.id === reg.course_id);
 
 									return (
-										<tr key={reg.id} className="group transition-colors hover:bg-slate-50/50">
+										<tr key={reg.id} className="group transition-colors hover:/50">
 											<td className="px-6 py-4">
 												<div className="font-bold text-slate-900">{reg.student_name}</div>
 												<div className="text-xs text-slate-500">{reg.grade}</div>

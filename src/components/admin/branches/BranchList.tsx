@@ -20,7 +20,7 @@ export const BranchList = ({ branches, isLoading, onEdit, onDelete }: BranchList
 
 	if (branches.length === 0) {
 		return (
-			<div className="col-span-full flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400">
+			<div className="col-span-full flex h-64 flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200  text-slate-400">
 				<p className="font-medium">Chưa có cơ sở nào</p>
 			</div>
 		);

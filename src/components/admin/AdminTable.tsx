@@ -30,7 +30,7 @@ export function AdminTable<T extends { id: string | number }>({
 		<div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 			<div className="overflow-x-auto">
 				<table className="w-full text-left text-sm">
-					<thead className="bg-slate-50 text-xs font-semibold tracking-wider text-slate-500 uppercase">
+					<thead className=" text-xs font-semibold tracking-wider text-slate-500 uppercase">
 						<tr>
 							{columns.map((col, idx) => (
 								<th
@@ -72,7 +72,7 @@ export function AdminTable<T extends { id: string | number }>({
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: idx * 0.03 }}
 									onClick={() => onRowClick?.(item)}
-									className={cn("group hover:bg-slate-50/50", onRowClick && "cursor-pointer")}
+									className={cn("group hover:/50", onRowClick && "cursor-pointer")}
 								>
 									{columns.map((col, cIdx) => (
 										<td

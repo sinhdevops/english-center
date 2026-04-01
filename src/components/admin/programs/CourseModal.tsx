@@ -98,7 +98,7 @@ export const CourseModal = ({
 						name="program_id"
 						value={formData.program_id}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm disabled:opacity-60"
+						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm disabled:opacity-60"
 						disabled={!!selectedProgramId}
 					>
 						{programs.map((p) => (
@@ -115,7 +115,7 @@ export const CourseModal = ({
 						name="name"
 						value={formData.name}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -127,7 +127,7 @@ export const CourseModal = ({
 							value={formData.duration || ""}
 							onChange={handleChange}
 							placeholder="Ví dụ: 24 buổi"
-							className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+							className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 						/>
 					</AdminFormField>
 					<AdminFormField label="Trình độ" error={errors.level}>
@@ -137,7 +137,7 @@ export const CourseModal = ({
 							value={formData.level || ""}
 							onChange={handleChange}
 							placeholder="Ví dụ: A1 - A2"
-							className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+							className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 						/>
 					</AdminFormField>
 				</div>
@@ -149,7 +149,7 @@ export const CourseModal = ({
 						onChange={handleTextareaChange}
 						placeholder="Mô tả ngắn về khóa học..."
 						rows={3}
-						className="mt-1 block w-full resize-none rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+						className="mt-1 block w-full resize-none rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -157,7 +157,7 @@ export const CourseModal = ({
 					<button
 						type="button"
 						onClick={onClose}
-						className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-semibold transition-colors hover:bg-slate-50"
+						className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-semibold transition-colors hover:"
 					>
 						Hủy
 					</button>

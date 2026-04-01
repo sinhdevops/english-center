@@ -1,12 +1,12 @@
 "use client";
 
-import React from"react";
-import Image from"next/image";
-import Link from"next/link";
-import { useParams } from"next/navigation";
-import { Calendar, Book } from"lucide-react";
-import { PROGRAMS_DETAIL_DATA } from"@/constants";
-import { Breadcrumb } from"@/components/ui/breadcrumb";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { Calendar, Book } from "lucide-react";
+import { PROGRAMS_DETAIL_DATA } from "@/constants";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export default function ProgramDetailPage() {
 	const { slug } = useParams();
@@ -25,20 +25,7 @@ export default function ProgramDetailPage() {
 	}
 
 	return (
-		<div className="min-h-screen bg-slate-50/30">
-			{/* Breadcrumb Section */}
-			<div className="border-b border-slate-100 bg-white py-4">
-				<div className="mx-auto max-w-7xl px-4">
-					<Breadcrumb
-						items={[
-							{ label:"Học online", href:"#" },
-							{ label: program.breadcrumb, active: true },
-						]}
-						variant="dark"
-					/>
-				</div>
-			</div>
-
+		<div className="min-h-screen">
 			<div className="mx-auto max-w-7xl px-4 py-8 lg:py-12">
 				<div className="flex flex-col gap-10 lg:flex-row">
 					{/* Main Content Area */}
@@ -97,11 +84,11 @@ export default function ProgramDetailPage() {
 
 						{/* Quick Links Menu */}
 						<div className="overflow-hidden rounded-4xl border border-slate-100 bg-white">
-							<div className="border-b border-slate-50 bg-slate-50/30 p-5 px-8">
+							<div className="border-b border-slate-50 /30 p-5 px-8">
 								<h3 className="h-4 leading-none font-black text-slate-900">Liên kết nhanh</h3>
 							</div>
 							<div className="divide-y divide-slate-50">
-								<div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors hover:bg-slate-50">
+								<div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors hover:">
 									<div className="flex items-center gap-3">
 										<Calendar size={18} className="text-stem-blue" />
 										<span className="text-sm font-bold text-slate-600">Lịch khai giảng</span>
@@ -113,7 +100,7 @@ export default function ProgramDetailPage() {
 										Xem chi tiết
 									</Link>
 								</div>
-								<div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors hover:bg-slate-50">
+								<div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors hover:">
 									<div className="flex items-center gap-3">
 										<Book size={18} className="text-stem-blue" />
 										<Link href="/khoa-hoc/dang-ky" className="text-sm font-bold text-slate-600">

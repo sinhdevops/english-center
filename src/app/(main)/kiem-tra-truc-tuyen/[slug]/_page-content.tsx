@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from"react";
-import { motion } from"motion/react";
-import { ChevronRight, Calendar, ArrowRight, User, Lock, CheckCircle2, Clock, ClipboardList } from"lucide-react";
-import { Button } from"@/components/ui/button";
-import { Modal } from"@/components/ui/modal";
-import { useRouter, useSearchParams } from"next/navigation";
-import { Breadcrumb } from"@/components/ui/breadcrumb";
-import { useAuthStore } from"@/store/useAuthStore";
-import Link from"next/link";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { ChevronRight, Calendar, ArrowRight, User, Lock, CheckCircle2, Clock, ClipboardList } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Modal } from "@/components/ui/modal";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { useAuthStore } from "@/store/useAuthStore";
+import Link from "next/link";
 
 const AGE_GROUP_LABELS: Record<string, string> = {
 	"3-4-tuoi": "3-4 tuổi",
@@ -39,11 +39,10 @@ const SidebarItem: React.FC<{ icon: any; title: string; colorClass: string; acti
 	active,
 }) => (
 	<div
-		className={`group flex cursor-pointer items-center gap-3 rounded-xl border p-2.5 transition-all lg:gap-4 lg:p-3 ${
-			active
-				?"border-slate-200 bg-white"
-				:"border-transparent bg-white hover:border-slate-100 hover:"
-		}`}
+		className={`group flex cursor-pointer items-center gap-3 rounded-xl border p-2.5 transition-all lg:gap-4 lg:p-3 ${active
+			? "border-slate-200 bg-white"
+			: "border-transparent bg-white hover:border-slate-100 hover:"
+			}`}
 	>
 		<div
 			className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg lg:h-12 lg:w-12 ${colorClass} text-slate-700 transition-transform group-hover:scale-110`}
@@ -52,7 +51,7 @@ const SidebarItem: React.FC<{ icon: any; title: string; colorClass: string; acti
 			<Icon size={24} className="hidden lg:block" />
 		</div>
 		<span
-			className={`text-xs font-bold lg:text-sm ${active ?"text-stem-blue" :"group-hover:text-stem-blue text-slate-600"}`}
+			className={`text-xs font-bold lg:text-sm ${active ? "text-stem-blue" : "group-hover:text-stem-blue text-slate-600"}`}
 		>
 			{title}
 		</span>
@@ -81,7 +80,7 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 			return;
 		}
 
-		if (quizResults[quizId]?.status ==="completed") {
+		if (quizResults[quizId]?.status === "completed") {
 			setShowDoneModal(true);
 			return;
 		}
@@ -95,7 +94,7 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 				<div className="mx-auto max-w-7xl px-4">
 					<Breadcrumb
 						items={[
-							{ label:"Test", href:"/kiem-tra-truc-tuyen" },
+							{ label: "Test", href: "/kiem-tra-truc-tuyen" },
 							{ label: ageGroupLabel, active: true },
 						]}
 						variant="dark"
@@ -104,18 +103,18 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 			</div>
 
 			<div className="mx-auto max-w-7xl px-4 py-8 lg:py-12">
-				<div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+				<div className="flex flex-col gap-6 lg:flex-row lg:gap-12">
 					{/* Main Content */}
 					<div className="w-full lg:w-3/4">
 						{quizSets.length === 0 ? (
-							<div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50 py-20 text-center">
+							<div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100  py-20 text-center">
 								<p className="text-slate-400">Chưa có bài test nào cho nhóm này.</p>
 							</div>
 						) : (
 							<div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
 								{quizSets.map((qs) => {
 									const result = quizResults[qs.id];
-									const isDone = result?.status ==="completed";
+									const isDone = result?.status === "completed";
 
 									return (
 										<motion.div
@@ -162,7 +161,7 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 
 					{/* Sidebar */}
 					<div className="w-full space-y-8 lg:w-1/4">
-						<div className="rounded-3xl border border-slate-100 bg-slate-50/50 p-5 lg:p-6">
+						<div className="rounded-3xl border border-slate-100 /50 p-5 lg:p-6">
 							<h3 className="mb-4 px-1 text-lg font-black text-slate-900 lg:mb-6 lg:px-2 lg:text-xl">
 								Nhóm test
 							</h3>
@@ -175,12 +174,12 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 						</div>
 
 						<div className="overflow-hidden rounded-3xl border border-slate-100 bg-white">
-							<div className="border-b border-slate-100 bg-slate-50/30 p-5">
+							<div className="border-b border-slate-100 /30 p-5">
 								<h3 className="font-bold text-slate-900">Liên kết nhanh</h3>
 							</div>
 							<div className="divide-y divide-slate-50">
 								<Link href="/lich-khai-giang">
-									<div className="group flex cursor-pointer items-center justify-between p-5 transition-colors hover:bg-slate-50">
+									<div className="group flex cursor-pointer items-center justify-between p-5 transition-colors hover:">
 										<div className="flex items-center gap-3">
 											<Calendar size={18} className="text-slate-400" />
 											<span className="text-sm font-medium text-slate-600">Lịch khai giảng</span>
@@ -199,7 +198,7 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 			{/* Modal: Yêu cầu đăng nhập */}
 			<Modal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} title="Yêu cầu đăng nhập">
 				<div className="space-y-6 text-center">
-					<div className="text-stem-red mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-slate-50">
+					<div className="text-stem-red mx-auto flex h-20 w-20 items-center justify-center rounded-full ">
 						<Lock size={40} />
 					</div>
 					<div className="space-y-2">
@@ -216,7 +215,7 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 							onClick={() => {
 								setShowLoginModal(false);
 								const redirectPath = pendingTestId
-									?`/bai-thi/${pendingTestId}`
+									? `/bai-thi/${pendingTestId}`
 									: window.location.pathname;
 								router.push(`/dang-nhap?redirect=${encodeURIComponent(redirectPath)}`);
 							}}

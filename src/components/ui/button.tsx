@@ -8,9 +8,9 @@ const buttonVariants = cva(
 				primary:
 					"bg-gradient-to-b from-[#1890FF] to-[#096DD9] text-white hover:brightness-110 active:scale-95",
 				secondary:
-					"bg-white text-slate-800 hover:bg-slate-50 active:scale-95",
+					"bg-white text-slate-800 hover: active:scale-95",
 				outline: "bg-transparent border border-stem-blue text-stem-blue hover:bg-stem-blue hover:text-white active:scale-95",
-				ghost: "text-slate-700 hover:bg-slate-50",
+				ghost: "text-slate-700 hover:",
 			},
 			size: {
 				sm: "px-4 py-1.5 text-base h-[40px]",

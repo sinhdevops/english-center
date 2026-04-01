@@ -16,14 +16,14 @@ const FlexibleLearning = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10 text-2xl font-semibold lg:text-4xl"
+          className="mb-6 text-2xl font-semibold lg:text-4xl"
         >
           VÌ SAO NÊN CHỌN STEMKey ĐỂ TRẺ PHÁT TRIỂN TƯ DUY TOÀN DIỆN
         </motion.h2>
 
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Left — Benefit cards */}
-          <div className="flex w-full flex-col gap-2 lg:w-1/2">
+          <div className="flex flex-col justify-between">
             {FLEXIBLE_BENEFITS.map((benefit, i) => (
               <motion.div
                 key={i}
@@ -49,7 +49,7 @@ const FlexibleLearning = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="w-full lg:w-1/2"
+            className=""
           >
             <div className="relative w-full overflow-hidden rounded-2xl aspect-video">
               <Image

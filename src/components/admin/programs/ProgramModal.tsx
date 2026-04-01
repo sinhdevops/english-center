@@ -109,7 +109,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 						name="name"
 						value={formData.name}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -118,14 +118,14 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 						name="description"
 						value={formData.description || ""}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
 						rows={3}
 					/>
 				</AdminFormField>
 
 				<AdminFormField label="Ảnh đại diện" error={errors.image_url}>
 					<div className="mt-2 flex items-center gap-4">
-						<div className="hover:border-stem-blue relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
+						<div className="hover:border-stem-blue relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-200  text-slate-400 transition-colors hover:bg-blue-50/30">
 							{isUploadingImage ? (
 								<div className="flex flex-col items-center gap-1">
 									<Loader2 size={20} className="text-stem-blue animate-spin" />
@@ -164,7 +164,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 								value={formData.image_url || ""}
 								onChange={handleChange}
 								placeholder="URL ảnh"
-								className="mt-2 block w-full rounded-lg border-slate-200 bg-slate-50 px-3 py-1.5 text-xs"
+								className="mt-2 block w-full rounded-lg border-slate-200  px-3 py-1.5 text-xs"
 							/>
 						</div>
 					</div>
@@ -174,7 +174,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 					<button
 						type="button"
 						onClick={onClose}
-						className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-semibold transition-colors hover:bg-slate-50"
+						className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-semibold transition-colors hover:"
 					>
 						Hủy
 					</button>

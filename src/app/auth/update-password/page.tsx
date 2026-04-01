@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from"react";
-import { motion } from"framer-motion";
-import { Lock, ArrowRight, Loader2 } from"lucide-react";
-import { Button } from"@/components/ui/button";
-import { supabase } from"@/lib/supabase-client";
-import { toast } from"sonner";
-import { useRouter } from"next/navigation";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Lock, ArrowRight, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabase-client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function UpdatePasswordPage() {
 	const [isLoading, setIsLoading] = useState(false);
@@ -26,14 +26,14 @@ export default function UpdatePasswordPage() {
 			toast.success("Mật khẩu đã được cập nhật thành công!");
 			router.push("/login");
 		} catch (error: any) {
-			toast.error(error.message ||"Có lỗi xảy ra, vui lòng thử lại.");
+			toast.error(error.message || "Có lỗi xảy ra, vui lòng thử lại.");
 		} finally {
 			setIsLoading(false);
 		}
 	};
 
 	return (
-		<div className="flex min-h-[80vh] items-center justify-center bg-slate-50 px-4 py-12">
+		<div className="flex min-h-[80vh] items-center justify-center  px-4 py-12">
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -53,7 +53,7 @@ export default function UpdatePasswordPage() {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								placeholder="••••••••"
-								className="focus:ring-stem-blue/20 w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pr-4 pl-12 transition-all focus:ring-2 focus:outline-none"
+								className="focus:ring-stem-blue/20 w-full rounded-2xl border border-slate-200  py-3 pr-4 pl-12 transition-all focus:ring-2 focus:outline-none"
 								required
 							/>
 							<Lock size={18} className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-400" />
@@ -65,7 +65,7 @@ export default function UpdatePasswordPage() {
 						disabled={isLoading}
 						className="flex w-full items-center justify-center gap-2 rounded-2xl py-4 text-lg font-bold disabled:opacity-70"
 					>
-						{isLoading ? <Loader2 className="animate-spin" size={20} /> :"Cập nhật mật khẩu"}
+						{isLoading ? <Loader2 className="animate-spin" size={20} /> : "Cập nhật mật khẩu"}
 						{!isLoading && <ArrowRight size={20} />}
 					</Button>
 				</form>

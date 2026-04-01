@@ -31,7 +31,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ id, title, category, date, desc, im
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
-				className="hover:border-stem-blue/10 relative flex flex-col gap-6 rounded-3xl border border-slate-100 bg-white p-5 transition-all duration-500 hover:bg-slate-50/30 hover:shadow-md md:flex-row"
+				className="hover:border-stem-blue/10 relative flex flex-col gap-6 rounded-3xl border border-slate-100 bg-white p-5 transition-all duration-500 hover:/30 hover:shadow-md md:flex-row"
 			>
 				{/* Thumbnail → iframe toggle */}
 				<div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-2xl bg-black md:h-48 md:w-72 lg:w-80">
@@ -101,7 +101,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ id, title, category, date, desc, im
 				initial={{ opacity: 0, y: 20 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
-				className="group hover:border-stem-blue/10 relative flex cursor-pointer flex-col gap-6 rounded-3xl border border-slate-100 bg-white p-5 transition-all duration-500 hover:bg-slate-50/30 hover:shadow-md md:flex-row"
+				className="group hover:border-stem-blue/10 relative flex cursor-pointer flex-col gap-6 rounded-3xl border border-slate-100 bg-white p-5 transition-all duration-500 hover:/30 hover:shadow-md md:flex-row"
 			>
 				<div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-2xl md:h-48 md:w-72 lg:w-80">
 					<Image

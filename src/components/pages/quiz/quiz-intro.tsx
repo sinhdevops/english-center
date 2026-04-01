@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from"react";
-import { motion } from"motion/react";
-import { Star, Phone } from"lucide-react";
+import { useState } from "react";
+import { motion } from "motion/react";
+import { Star, Phone } from "lucide-react";
 
 interface QuizIntroProps {
 	questionCount: number;
@@ -36,14 +36,14 @@ export const QuizIntro = ({ questionCount, timeLimit, onStart }: QuizIntroProps)
 
 				<div className="flex flex-col gap-4 py-4 md:gap-6 md:py-8">
 					<div className="flex items-center justify-center gap-3 text-lg font-bold text-slate-700 md:gap-4 md:text-xl">
-						<Star className="h-5 w-5 fill-yellow-400 text-yellow-400 md:h-6 md:w-6"/>
+						<Star className="h-5 w-5 fill-yellow-400 text-yellow-400 md:h-6 md:w-6" />
 						<span>
 							Số câu hỏi:{""}
 							<span className="ml-1 text-2xl font-black md:ml-2 md:text-3xl">{questionCount}</span>
 						</span>
 					</div>
 					<div className="flex items-center justify-center gap-3 text-lg font-bold text-slate-700 md:gap-4 md:text-xl">
-						<Star className="h-5 w-5 fill-yellow-400 text-yellow-400 md:h-6 md:w-6"/>
+						<Star className="h-5 w-5 fill-yellow-400 text-yellow-400 md:h-6 md:w-6" />
 						<span>
 							Thời gian:{""}
 							<span className="ml-1 text-2xl font-black md:ml-2 md:text-3xl">{timeLimit} phút</span>
@@ -57,20 +57,19 @@ export const QuizIntro = ({ questionCount, timeLimit, onStart }: QuizIntroProps)
 						Số điện thoại phụ huynh <span className="text-stem-red">*</span>
 					</label>
 					<div className="relative">
-						<Phone className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400 md:left-4 md:h-5 md:w-5"/>
+						<Phone className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400 md:left-4 md:h-5 md:w-5" />
 						<input
 							type="tel"
 							value={phone}
 							onChange={(e) => setPhone(e.target.value.trim())}
 							onBlur={() => setTouched(true)}
 							placeholder="VD: 0912345678"
-							className={`w-full rounded-xl border-2 py-3 pr-4 pl-9 text-sm font-bold text-slate-800 outline-none transition-colors placeholder:font-normal placeholder:text-slate-400 md:rounded-2xl md:py-4 md:pl-11 md:text-base ${
-								showError
-									?"border-red-400 bg-red-50"
+							className={`w-full rounded-xl border-2 py-3 pr-4 pl-9 text-sm font-bold text-slate-800 outline-none transition-colors placeholder:font-normal placeholder:text-slate-400 md:rounded-2xl md:py-4 md:pl-11 md:text-base ${showError
+									? "border-red-400 bg-red-50"
 									: isValid
-										?"border-green-400 bg-green-50"
-										:"border-slate-200 bg-slate-50 focus:border-slate-400"
-							}`}
+										? "border-green-400 bg-green-50"
+										: "border-slate-200  focus:border-slate-400"
+								}`}
 						/>
 					</div>
 					{showError && (
@@ -88,9 +87,9 @@ export const QuizIntro = ({ questionCount, timeLimit, onStart }: QuizIntroProps)
 					disabled={!isValid}
 					className="bg-stem-blue mx-auto flex cursor-pointer items-center justify-center gap-3 rounded-full px-8 py-4 text-lg font-black text-white transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 md:px-16 md:py-5 md:text-2xl"
 				>
-					<div className="h-1.5 w-1.5 rounded-full bg-white md:h-2 md:w-2"/>
+					<div className="h-1.5 w-1.5 rounded-full bg-white md:h-2 md:w-2" />
 					Bắt đầu làm bài
-					<div className="h-1.5 w-1.5 rounded-full bg-white md:h-2 md:w-2"/>
+					<div className="h-1.5 w-1.5 rounded-full bg-white md:h-2 md:w-2" />
 				</button>
 			</div>
 		</motion.div>

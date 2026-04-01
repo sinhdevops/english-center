@@ -1,8 +1,8 @@
 "use client";
 
-import React from"react";
-import Image from"next/image";
-import Link from"next/link";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import {
 	ChevronRight,
 	CheckCircle2,
@@ -14,9 +14,9 @@ import {
 	Award,
 	PlayCircle,
 	Quote,
-} from"lucide-react";
-import { STANDARD_COURSES_HERO, STANDARD_BENEFITS, STANDARD_ROADMAP, RIPL_METHODOLOGY } from"@/constants";
-import { Breadcrumb } from"@/components/ui/breadcrumb";
+} from "lucide-react";
+import { STANDARD_COURSES_HERO, STANDARD_BENEFITS, STANDARD_ROADMAP, RIPL_METHODOLOGY } from "@/constants";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 const IconMap: Record<string, any> = {
 	Target,
@@ -35,7 +35,7 @@ export default function StandardCoursesPage() {
 				<div className="absolute bottom-0 left-0 h-1/2 w-full bg-emerald-500/10 blur-[100px]" />
 
 				<div className="relative z-10 mx-auto max-w-7xl px-4 lg:px-8">
-					<Breadcrumb items={[{ label:"Khóa học tiêu chuẩn", active: true }]} variant="light" />
+					<Breadcrumb items={[{ label: "Khóa học tiêu chuẩn", active: true }]} variant="light" />
 
 					<div className="mt-12 grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
 						<div className="md:text-left">
@@ -111,7 +111,7 @@ export default function StandardCoursesPage() {
 								>
 									<div className="relative z-10 text-left">
 										<div
-											className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:scale-110 ${benefit.theme ==="primary" ?"text-stem-blue border-blue-100 bg-blue-50" :"border-emerald-100 bg-emerald-50 text-emerald-500"}`}
+											className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:scale-110 ${benefit.theme === "primary" ? "text-stem-blue border-blue-100 bg-blue-50" : "border-emerald-100 bg-emerald-50 text-emerald-500"}`}
 										>
 											{Icon && <Icon className="h-8 w-8" />}
 										</div>
@@ -121,7 +121,7 @@ export default function StandardCoursesPage() {
 										<p className="leading-relaxed text-zinc-500">{benefit.desc}</p>
 									</div>
 									<div
-										className={`absolute -right-4 -bottom-4 h-16 w-16 rounded-full opacity-0 transition-all duration-500 group-hover:opacity-10 ${benefit.theme ==="primary" ?"bg-stem-blue" :"bg-emerald-400"}`}
+										className={`absolute -right-4 -bottom-4 h-16 w-16 rounded-full opacity-0 transition-all duration-500 group-hover:opacity-10 ${benefit.theme === "primary" ? "bg-stem-blue" : "bg-emerald-400"}`}
 									/>
 								</div>
 							);
@@ -131,7 +131,7 @@ export default function StandardCoursesPage() {
 			</section>
 
 			{/* Roadmap Section */}
-			<section id="roadmap" className="relative bg-slate-50 py-24 lg:py-32">
+			<section id="roadmap" className="relative  py-24 lg:py-32">
 				<div className="mx-auto max-w-7xl px-4 lg:px-8">
 					<div className="mb-20 text-center md:text-left">
 						<h2 className="mb-4 text-sm font-bold tracking-[0.3em] text-emerald-500 uppercase">

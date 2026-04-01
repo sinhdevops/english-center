@@ -119,7 +119,7 @@ export const BannerModal = ({ isOpen, onClose, editingBanner, onSubmit, isSubmit
 				{/* Image upload */}
 				<AdminFormField label="Hình ảnh banner" required>
 					<div className="mt-2">
-						<div className="hover:border-stem-blue relative flex h-48 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors hover:bg-blue-50/30">
+						<div className="hover:border-stem-blue relative flex h-48 w-full items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-slate-200  text-slate-400 transition-colors hover:bg-blue-50/30">
 							{isUploadingImage ? (
 								<div className="flex flex-col items-center gap-2">
 									<Loader2 size={32} className="text-stem-blue animate-spin" />
@@ -167,7 +167,7 @@ export const BannerModal = ({ isOpen, onClose, editingBanner, onSubmit, isSubmit
 						<input
 							type="text"
 							placeholder="VD: Khai giảng hè 2025"
-							className="mt-1 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-blue-400 focus:outline-none"
+							className="mt-1 block w-full rounded-xl border border-slate-200  px-4 py-2.5 text-sm focus:border-blue-400 focus:outline-none"
 							{...register("title")}
 						/>
 					</AdminFormField>
@@ -176,7 +176,7 @@ export const BannerModal = ({ isOpen, onClose, editingBanner, onSubmit, isSubmit
 						<input
 							type="number"
 							min={0}
-							className="mt-1 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-blue-400 focus:outline-none"
+							className="mt-1 block w-full rounded-xl border border-slate-200  px-4 py-2.5 text-sm focus:border-blue-400 focus:outline-none"
 							{...register("display_order", { valueAsNumber: true })}
 						/>
 					</AdminFormField>
@@ -186,7 +186,7 @@ export const BannerModal = ({ isOpen, onClose, editingBanner, onSubmit, isSubmit
 					<input
 						type="text"
 						placeholder="VD: /chuong-trinh hoặc https://..."
-						className="mt-1 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm focus:border-blue-400 focus:outline-none"
+						className="mt-1 block w-full rounded-xl border border-slate-200  px-4 py-2.5 text-sm focus:border-blue-400 focus:outline-none"
 						{...register("link_url")}
 					/>
 				</AdminFormField>
@@ -206,7 +206,7 @@ export const BannerModal = ({ isOpen, onClose, editingBanner, onSubmit, isSubmit
 					<button
 						type="button"
 						onClick={onClose}
-						className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-semibold transition-colors hover:bg-slate-50"
+						className="flex-1 rounded-xl border border-slate-200 py-2.5 text-sm font-semibold transition-colors hover:"
 					>
 						Hủy
 					</button>

@@ -23,7 +23,7 @@ const News = ({ initialNews }: NewsProps) => {
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mb-10 text-center text-2xl font-semibold tracking-wide lg:text-4xl"
+					className="mb-6 text-center text-2xl font-semibold tracking-wide lg:text-4xl"
 				>
 					LOẠT SỰ KIỆN HOT
 				</motion.h2>

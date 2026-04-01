@@ -55,11 +55,10 @@ export const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
 				<Link
 					key={page}
 					href={createPageURL(page)}
-					className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold transition-all ${
-						isCurrent
+					className={`flex h-10 w-10 items-center justify-center rounded-xl text-sm font-bold transition-all ${isCurrent
 							? "bg-stem-blue text-white"
-							: "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-					}`}
+							: " text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+						}`}
 				>
 					{page}
 				</Link>
@@ -71,9 +70,8 @@ export const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
 		<nav className="mt-12 flex items-center justify-center gap-2">
 			<Link
 				href={createPageURL(Math.max(1, currentPage - 1))}
-				className={`flex h-10 w-10 items-center justify-center rounded-xl border border-slate-100 bg-white text-slate-600 transition-all hover:bg-slate-50 ${
-					currentPage <= 1 ? "pointer-events-none opacity-50" : ""
-				}`}
+				className={`flex h-10 w-10 items-center justify-center rounded-xl border border-slate-100 bg-white text-slate-600 transition-all hover: ${currentPage <= 1 ? "pointer-events-none opacity-50" : ""
+					}`}
 			>
 				<ChevronLeft size={18} />
 			</Link>
@@ -82,9 +80,8 @@ export const Pagination = ({ totalPages, currentPage }: PaginationProps) => {
 
 			<Link
 				href={createPageURL(Math.min(totalPages, currentPage + 1))}
-				className={`flex h-10 items-center justify-center rounded-xl border border-slate-100 bg-white px-4 text-sm font-bold text-slate-600 transition-all hover:bg-slate-50 ${
-					currentPage >= totalPages ? "pointer-events-none opacity-50" : ""
-				}`}
+				className={`flex h-10 items-center justify-center rounded-xl border border-slate-100 bg-white px-4 text-sm font-bold text-slate-600 transition-all hover: ${currentPage >= totalPages ? "pointer-events-none opacity-50" : ""
+					}`}
 			>
 				<span>Trang sau</span>
 				<ChevronRight size={18} className="ml-1" />

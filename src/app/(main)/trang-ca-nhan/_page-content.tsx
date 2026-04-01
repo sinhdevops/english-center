@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from"motion/react";
+import { motion } from "motion/react";
 import {
 	ClipboardList,
 	Calendar,
@@ -12,11 +12,11 @@ import {
 	Award,
 	BookOpen,
 	ChevronRight,
-} from"lucide-react";
-import { useAuthStore } from"@/store/useAuthStore";
-import { LogoutButton } from"@/components/auth/logout-button";
-import type { QuizResult } from"@/lib/types";
-import Link from"next/link";
+} from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
+import { LogoutButton } from "@/components/auth/logout-button";
+import type { QuizResult } from "@/lib/types";
+import Link from "next/link";
 
 interface ProfilePageContentProps {
 	quizResults: QuizResult[];
@@ -25,11 +25,11 @@ interface ProfilePageContentProps {
 export default function ProfilePageContent({ quizResults }: ProfilePageContentProps) {
 	const { user, profile } = useAuthStore();
 
-	const avatarLetter = profile?.full_name?.charAt(0) || user?.email?.charAt(0) ||"U";
-	const displayName = profile?.full_name ||"Thành viên";
+	const avatarLetter = profile?.full_name?.charAt(0) || user?.email?.charAt(0) || "U";
+	const displayName = profile?.full_name || "Thành viên";
 	const memberSince = user
-		? new Date(user.created_at).toLocaleDateString("vi-VN", { year:"numeric", month:"long" })
-		:"";
+		? new Date(user.created_at).toLocaleDateString("vi-VN", { year: "numeric", month: "long" })
+		: "";
 
 	const avgScore =
 		quizResults.length > 0
@@ -39,19 +39,19 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 	const bestScore = quizResults.length > 0 ? Math.max(...quizResults.map((r) => r.score ?? 0)) : null;
 
 	const getScoreBg = (score: number | null) => {
-		if (!score) return"from-slate-400 to-slate-500";
-		if (score >= 8) return"from-emerald-400 to-emerald-600";
-		if (score >= 5) return"from-amber-400 to-orange-500";
-		return"from-red-400 to-red-600";
+		if (!score) return "from-slate-400 to-slate-500";
+		if (score >= 8) return "from-emerald-400 to-emerald-600";
+		if (score >= 5) return "from-amber-400 to-orange-500";
+		return "from-red-400 to-red-600";
 	};
 
 	const getScoreLabel = (score: number | null) => {
-		if (!score) return"Chưa có";
-		if (score >= 9) return"Xuất sắc";
-		if (score >= 8) return"Giỏi";
-		if (score >= 6.5) return"Khá";
-		if (score >= 5) return"Trung bình";
-		return"Cần cố gắng";
+		if (!score) return "Chưa có";
+		if (score >= 9) return "Xuất sắc";
+		if (score >= 8) return "Giỏi";
+		if (score >= 6.5) return "Khá";
+		if (score >= 5) return "Trung bình";
+		return "Cần cố gắng";
 	};
 
 	return (
@@ -144,30 +144,30 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 				>
 					{[
 						{
-							label:"Bài đã làm",
+							label: "Bài đã làm",
 							value: quizResults.length,
 							icon: ClipboardList,
-							gradient:"from-[#ED1C24] to-[#ff6b6b]",
-							bg:"bg-red-50",
-							text:"text-[#ED1C24]",
+							gradient: "from-[#ED1C24] to-[#ff6b6b]",
+							bg: "bg-red-50",
+							text: "text-[#ED1C24]",
 						},
 						{
-							label:"Điểm TB",
-							value: avgScore ?`${avgScore}` :"—",
-							sub: avgScore ?"/10" :"",
+							label: "Điểm TB",
+							value: avgScore ? `${avgScore}` : "—",
+							sub: avgScore ? "/10" : "",
 							icon: TrendingUp,
-							gradient:"from-amber-400 to-orange-500",
-							bg:"bg-amber-50",
-							text:"text-amber-600",
+							gradient: "from-amber-400 to-orange-500",
+							bg: "bg-amber-50",
+							text: "text-amber-600",
 						},
 						{
-							label:"Điểm cao nhất",
-							value: bestScore ??"—",
-							sub: bestScore ?"/10" :"",
+							label: "Điểm cao nhất",
+							value: bestScore ?? "—",
+							sub: bestScore ? "/10" : "",
 							icon: Award,
-							gradient:"from-emerald-400 to-teal-500",
-							bg:"bg-emerald-50",
-							text:"text-emerald-600",
+							gradient: "from-emerald-400 to-teal-500",
+							bg: "bg-emerald-50",
+							text: "text-emerald-600",
 						},
 					].map((stat, i) => (
 						<motion.div
@@ -238,14 +238,14 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 									initial={{ opacity: 0, x: -10 }}
 									animate={{ opacity: 1, x: 0 }}
 									transition={{ delay: 0.4 + i * 0.05 }}
-									className="flex items-center gap-4 px-6 py-4 transition-colors hover:bg-slate-50/70"
+									className="flex items-center gap-4 px-6 py-4 transition-colors hover:/70"
 								>
 									{/* Score badge */}
 									<div
 										className={`flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-2xl bg-gradient-to-br ${getScoreBg(result.score)}`}
 									>
 										<span className="text-lg font-black leading-none text-white">
-											{result.score ??"—"}
+											{result.score ?? "—"}
 										</span>
 										<span className="text-[9px] font-bold text-white/80">/10</span>
 									</div>
@@ -269,20 +269,19 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 										<div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
 											<div
 												className={`h-full rounded-full bg-gradient-to-r ${getScoreBg(result.score)} transition-all`}
-												style={{ width:`${((result.score ?? 0) / 10) * 100}%` }}
+												style={{ width: `${((result.score ?? 0) / 10) * 100}%` }}
 											/>
 										</div>
 									</div>
 
 									{/* Label */}
 									<span
-										className={`hidden shrink-0 rounded-full px-2.5 py-1 text-xs font-black sm:block ${
-											(result.score ?? 0) >= 8
-												?"bg-emerald-50 text-emerald-600"
+										className={`hidden shrink-0 rounded-full px-2.5 py-1 text-xs font-black sm:block ${(result.score ?? 0) >= 8
+												? "bg-emerald-50 text-emerald-600"
 												: (result.score ?? 0) >= 5
-													?"bg-amber-50 text-amber-600"
-													:"bg-red-50 text-red-500"
-										}`}
+													? "bg-amber-50 text-amber-600"
+													: "bg-red-50 text-red-500"
+											}`}
 									>
 										{getScoreLabel(result.score)}
 									</span>
@@ -292,7 +291,7 @@ export default function ProfilePageContent({ quizResults }: ProfilePageContentPr
 					)}
 				</motion.div>
 
-			
+
 			</div>
 		</div>
 	);

@@ -6,7 +6,7 @@ export default async function CoursesPage() {
 	const supabase = await createClient();
 
 	const { data } = await supabase
-		.from("programs")
+		.from("courses")
 		.select("*")
 		.order("created_at", { ascending: true });
 
@@ -14,9 +14,9 @@ export default async function CoursesPage() {
 		id: p.id,
 		stt: index + 1,
 		title: p.name,
-		description: p.description || "Làm quen với lập trình và robot, khơi gợi tư duy công nghệ, sáng tạo và kỹ năng.",
+		description: p.description || "Khóa học chất lượng cao, giúp con khơi dậy niềm đam mê sáng tạo và tư duy toàn diện.",
 		duration: p.duration || "6 tháng",
-		schedule: p.schedule || "Thứ 2, 4, 6",
+		schedule: p.schedule || "Đang cập nhật",
 	}));
 
 	return <CoursesClient initialCourses={mappedCourses} />;
