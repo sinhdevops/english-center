@@ -112,7 +112,7 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 								<p className="text-slate-400">Chưa có bài test nào cho nhóm này.</p>
 							</div>
 						) : (
-							<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+							<div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
 								{quizSets.map((qs) => {
 									const result = quizResults[qs.id];
 									const isDone = result?.status ==="completed";
@@ -129,23 +129,23 @@ export default function PageContent({ initialTab, quizSets, quizResults }: Props
 													<CheckCircle2 size={11} /> Đã làm
 												</div>
 											)}
-											<div className="relative mb-3 aspect-16/10 overflow-hidden rounded-2xl border border-slate-100 lg:mb-4">
+											<div className="relative mb-2 aspect-[4/3] overflow-hidden rounded-2xl border border-slate-100 lg:mb-4 lg:aspect-16/10">
 												<div className="absolute inset-0 bg-[#a8e0d9]" />
-												<div className="absolute inset-3 flex flex-col items-center justify-center rounded-xl border border-slate-100 bg-white/90 p-3 text-center lg:inset-4 lg:p-4">
+												<div className="absolute inset-2 flex flex-col items-center justify-center rounded-xl border border-slate-100 bg-white/90 p-2 text-center lg:inset-4 lg:p-4">
 													<div className="text-stem-blue mb-0.5 text-[8px] font-black tracking-widest uppercase lg:mb-1 lg:text-[10px]">
 														STEMKey
 													</div>
-													<div className="mb-0.5 text-[10px] font-bold text-slate-800 lg:mb-1 lg:text-xs">
+													<div className="mb-0.5 text-[8px] font-bold text-slate-800 lg:mb-1 lg:text-xs">
 														{qs.age_group}
 													</div>
-													<div className="flex items-center gap-2 text-[8px] text-slate-500 lg:text-[10px]">
+													<div className="flex items-center gap-1 text-[8px] text-slate-500 lg:gap-2 lg:text-[10px]">
 														<span className="flex items-center gap-0.5">
-															<Clock size={9} /> {qs.duration_seconds / 60} phút
+															<Clock size={8} className="lg:size-[9px]" /> {qs.duration_seconds / 60}m
 														</span>
 													</div>
 												</div>
 											</div>
-											<h3 className="group-hover:text-stem-blue line-clamp-2 text-sm leading-snug font-bold text-slate-700 transition-colors">
+											<h3 className="group-hover:text-stem-blue line-clamp-2 text-[11px] leading-snug font-bold text-slate-700 transition-colors lg:text-sm">
 												{qs.title} – {qs.age_group}
 											</h3>
 											{isDone && (

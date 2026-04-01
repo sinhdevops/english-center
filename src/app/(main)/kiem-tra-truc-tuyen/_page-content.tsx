@@ -114,7 +114,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 				<div className="absolute bottom-0 left-0 h-[300px] w-[300px] translate-y-1/2 -translate-x-1/4 rounded-full bg-white/5 blur-3xl" />
 				<div className="absolute top-10 left-10 h-64 w-64 rounded-full border border-white/10" />
 
-				<div className="relative z-10 mx-auto max-w-7xl px-4 text-center text-white">
+				<div className="relative z-10 mx-auto max-w-7xl px-4 text-left text-white lg:text-center">
 					<motion.h1
 						initial={{ opacity: 0, y: -20 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -145,7 +145,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 					<div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-[#E8F5E9]/50" />
 
 					<div className="relative z-10">
-						<h2 className="mb-8 text-center text-[32px] font-semibold text-slate-800">
+						<h2 className="mb-8 text-left text-[32px] font-semibold text-slate-800 lg:text-center">
 							ĐĂNG KÝ NHẬN TƯ VẤN
 						</h2>
 						<FormProvider {...methods}>
@@ -181,26 +181,26 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 			</div>
 
 			{/* Test Selection Section */}
-			<section className="mx-auto max-w-7xl px-4 pb-20 pt-16">
+			<section className="mx-auto max-w-7xl px-4 lg:px-0 pb-20 pt-16">
 				<div className="mb-12">
 					<motion.h2
 						initial={{ opacity: 0, x: -20 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						viewport={{ once: true }}
-						className="text-3xl font-black tracking-tight text-slate-800 uppercase lg:text-4xl"
+						className="text-3xl font-semibold tracking-tight uppercase lg:text-4xl"
 					>
 						Đánh giá năng lực
 					</motion.h2>
 				</div>
 
-				<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+				<div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
 					{quizCategories.map((cat, idx) => {
 						const Icon = cat.icon;
 						return (
 							<Link
 								key={idx}
 								href={`/kiem-tra-truc-tuyen/${CATEGORY_SLUG}?nhom=${cat.nhom}`}
-								className="group relative flex cursor-pointer flex-col aspect-[282/306] overflow-hidden rounded-xl p-8 transition-all hover:-translate-y-1 hover:shadow-xl"
+								className="group relative flex cursor-pointer flex-col aspect-[165/210] overflow-hidden rounded-xl p-4 transition-all hover:-translate-y-1 hover:shadow-xl md:aspect-[282/306] md:p-8"
 								style={{ backgroundColor: cat.color }}
 							>
 								{/* Decorative circles in cards */}
@@ -208,17 +208,17 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 								<div className="absolute top-0 right-0 h-[100%] w-[100%] opacity-10" style={{ backgroundImage: "radial-gradient(circle, white 0%, transparent 70%)" }} />
 
 								<div className="relative z-10 flex flex-col h-full">
-									<div className="flex h-[50px] w-[50px] items-center justify-center rounded-lg bg-white shadow-sm mb-6">
-										<Icon size={30} style={{ color: cat.iconColor }} />
+									<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white shadow-sm mb-3 md:h-[50px] md:w-[50px] md:mb-6">
+										<Icon size={20} style={{ color: cat.iconColor }} className="md:w-[30px] md:h-[30px]" />
 									</div>
-									<p className="mb-1 text-sm font-bold text-slate-500 uppercase">{cat.ageLabel}</p>
-									<h3 className="mb-4 text-2xl font-black text-slate-800 leading-tight">
+									<p className="mb-0.5 text-[10px] font-bold text-slate-500 uppercase md:mb-1 md:text-sm">{cat.ageLabel}</p>
+									<h3 className="mb-1 text-sm font-semibold leading-tight text-slate-800 md:mb-4 md:text-2xl">
 										{cat.name}
 									</h3>
-									<p className="mb-3 flex-1 text-[15px] font-medium text-slate-500/90 leading-relaxed">
+									<p className="line-clamp-2 mb-3 flex-1 text-[11px] font-medium text-slate-500/90 leading-relaxed md:line-clamp-none md:text-[15px]">
 										{cat.description}
 									</p>
-									<div className={`inline-flex w-fit items-center justify-center rounded-full border bg-white px-8 py-2.5 font-bold transition-all group-hover:bg-slate-50 ${cat.btnBorder} ${cat.btnText} text-sm`}>
+									<div className={`inline-flex w-fit items-center justify-center rounded-full border bg-white px-4 py-1.5 text-[10px] font-bold transition-all group-hover:bg-slate-50 md:px-8 md:py-2.5 md:text-sm ${cat.btnBorder} ${cat.btnText}`}>
 										Test ngay
 									</div>
 								</div>

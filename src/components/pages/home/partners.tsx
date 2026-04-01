@@ -11,14 +11,14 @@ import "swiper/css";
 const Partners = () => {
 	return (
 		<section className="overflow-hidden bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-7xl px-4 lg:px-0">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mb-10 text-center text-3xl font-bold text-slate-900 lg:text-4xl"
+					className="mb-10 text-center text-2xl font-semibold lg:text-4xl pt-2"
 				>
-					Đối tác của STEMKey
+					ĐỐI TÁC CỦA STEMKey
 				</motion.h2>
 
 				<div className="transition-all duration-700">

@@ -75,7 +75,7 @@ export default function ContentDetailPage({
 			{/* Page Banner */}
 			<HeaderPage title={"Tin tức chi tiết"} />
 
-			<div className="mx-auto max-w-7xl px-4 py-20 lg:py-25">
+			<div className="mx-auto max-w-7xl px-4 py-20 lg:px-0 lg:py-25">
 				<div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
 					{/* Main Article Content */}
 					<div className="w-full min-w-0 lg:w-2/3">

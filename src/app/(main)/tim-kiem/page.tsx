@@ -94,7 +94,7 @@ function SearchResults() {
 	};
 
 	return (
-		<div className="min-h-screen bg-[#F8FAFC]">
+		<div className="min-h-screen">
 			{/* Banner */}
 			<section className="relative overflow-hidden bg-[#001D44] py-12 lg:py-16">
 				<div className="absolute inset-0 opacity-5">
@@ -331,7 +331,7 @@ export default function SearchPage() {
 	return (
 		<Suspense
 			fallback={
-				<div className="flex min-h-screen items-center justify-center bg-[#F8FAFC]">
+				<div className="flex min-h-screen items-center justify-center">
 					<Loader2 className="text-stem-blue animate-spin" size={48} />
 				</div>
 			}

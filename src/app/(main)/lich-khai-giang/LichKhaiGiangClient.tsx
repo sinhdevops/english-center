@@ -32,7 +32,7 @@ interface Branch {
 	city?: string;
 }
 
-const CITIES = ["TP.Hồ Chí Minh", "Hà Nội"];
+const CITIES = ["Hà Nội", "TP.Hồ Chí Minh"];
 
 interface LichKhaiGiangClientProps {
 	initialBranches: Branch[];
@@ -40,7 +40,7 @@ interface LichKhaiGiangClientProps {
 }
 
 export default function LichKhaiGiangClient({ initialBranches, initialSchedules }: LichKhaiGiangClientProps) {
-	const [activeCity, setActiveCity] = React.useState("TP.Hồ Chí Minh");
+	const [activeCity, setActiveCity] = React.useState("Hà Nội");
 	const [selectedBranchId, setSelectedBranchId] = React.useState<string | null>(
 		initialBranches.length > 0 ? initialBranches[0].id : null,
 	);
@@ -68,31 +68,31 @@ export default function LichKhaiGiangClient({ initialBranches, initialSchedules 
 	const branchSchedules = initialSchedules.filter((s) => s.branch_id === selectedBranchId);
 
 	return (
-		<div className="min-h-screen bg-[#F8FAFC]">
+		<div className="min-h-screen">
 			{/* Banner Section */}
 			<HeaderPage title="Lịch khai giảng" />
 
 			<div className="mx-auto max-w-7xl py-25 px-4 lg:px-0">
-				<h2 className="mb-6 text-xl font-bold text-slate-800 uppercase">Chọn khu vực</h2>
-
-				<div className="scrollbar-hide mb-10 flex gap-2 overflow-x-auto pb-2 whitespace-nowrap lg:flex-wrap">
-					{CITIES.map((city) => (
-						<button
-							key={city}
-							onClick={() => setActiveCity(city)}
-							className={`shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-all lg:px-6 ${
-								activeCity === city
-									? "bg-[#ED1C24] text-white"
-									: "border border-slate-200 bg-white text-slate-600 hover:border-[#ED1C24] hover:text-[#ED1C24]"
-							}`}
-						>
-							{city}
-						</button>
-					))}
-				</div>
-
 				<div className="flex flex-col gap-6 lg:flex-row">
 					<div className="w-full lg:w-1/3">
+						<h2 className="mb-6 text-xl font-bold text-slate-800 uppercase">Chọn khu vực</h2>
+
+						<div className="scrollbar-hide mb-10 flex gap-2 overflow-x-auto pb-2 whitespace-nowrap lg:flex-wrap">
+							{CITIES.map((city) => (
+								<button
+									key={city}
+									onClick={() => setActiveCity(city)}
+									className={`shrink-0 rounded-full px-5 py-2 text-sm font-medium transition-all lg:px-6 ${
+										activeCity === city
+											? "bg-[#ED1C24] text-white"
+											: "border border-slate-200 bg-white text-slate-600 hover:border-[#ED1C24] hover:text-[#ED1C24]"
+									}`}
+								>
+									{city}
+								</button>
+							))}
+						</div>
+
 						<h3 className="mb-4 text-lg font-bold text-slate-800">
 							Lịch khai giảng các lớp tại {activeCity}
 						</h3>

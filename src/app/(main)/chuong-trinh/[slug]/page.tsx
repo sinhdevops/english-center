@@ -44,8 +44,7 @@ export default function ProgramDetailPage() {
 					{/* Main Content Area */}
 					<div className="w-full lg:w-2/3">
 						{/* Banner Banner */}
-						<div className="relative mb-8 aspect-20/11 overflow-hidden rounded-xl sm:aspect-16/7">
-							<div className="absolute inset-0 bg-linear-to-r from-[#e96443] to-[#904e95]" />
+						<div className="relative mb-8 aspect-20/11 overflow-hidden rounded-xl sm:aspect-16/7" style={program.style}>
 							<div className="relative z-10 flex h-full items-center justify-between px-6 sm:px-10">
 								<div className="z-20 max-w-[65%] text-white sm:max-w-xs">
 									<h1 className="text-xl leading-tight font-black sm:text-3xl lg:text-5xl">
@@ -71,7 +70,7 @@ export default function ProgramDetailPage() {
 
 						{/* Description Content */}
 						<div className="rounded-4xl bg-white p-8 lg:p-12">
-							<h2 className="mb-6 text-2xl font-black text-slate-800 lg:text-4xl">{program.title}</h2>
+							<h2 className="mb-6 text-2xl font-semibold uppercase lg:text-4xl">{program.title}</h2>
 							<div className="prose prose-slate max-w-none space-y-6 leading-relaxed text-slate-600">
 								<p className="border-stem-blue border-l-4 pl-6 text-lg font-medium text-slate-900 italic">
 									{program.description}

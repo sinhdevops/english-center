@@ -14,8 +14,8 @@ const Teachers = () => {
 	const swiperRef = useRef<SwiperType | null>(null);
 
 	return (
-		<section className="overflow-hidden bg-white">
-			<div className="mx-auto max-w-7xl px-4 lg:px-0">
+		<section className="bg-white">
+			<div className="mx-auto max-w-7xl px-4 lg:px-0 pt-2">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}

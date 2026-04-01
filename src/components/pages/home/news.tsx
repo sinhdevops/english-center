@@ -18,7 +18,7 @@ const News = ({ initialNews }: NewsProps) => {
 
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-7xl px-4 lg:px-0">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}

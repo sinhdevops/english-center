@@ -10,7 +10,7 @@ import { HomeImages } from "../../../../public/statics/images";
 const FlexibleLearning = () => {
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 lg:px-0">
         {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +23,7 @@ const FlexibleLearning = () => {
 
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12">
           {/* Left — Benefit cards */}
-          <div className="flex w-full flex-col gap-4 lg:w-1/2">
+          <div className="flex w-full flex-col gap-2 lg:w-1/2">
             {FLEXIBLE_BENEFITS.map((benefit, i) => (
               <motion.div
                 key={i}
@@ -31,12 +31,12 @@ const FlexibleLearning = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex items-start gap-4 rounded-2xl border border-slate-200 px-5 py-4"
+                className="flex items-start gap-4 rounded-2xl border border-slate-200 p-4"
               >
                 <div className="mt-0.5 flex shrink-0 items-center justify-center rounded-full bg-blue-100 p-2">
                   <Settings2 size={18} className="text-blue-500" />
                 </div>
-                <p className="text-sm leading-relaxed text-slate-700 lg:text-base">
+                <p className="text-sm leading-relaxed text-slate-700 lg:text-[15px]">
                   {benefit.title}
                 </p>
               </motion.div>

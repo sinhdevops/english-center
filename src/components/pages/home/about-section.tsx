@@ -14,7 +14,7 @@ const FEATURES = [
 const AboutSection = () => {
   return (
     <section className="overflow-hidden bg-white">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 lg:px-0">
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:gap-16 py-3">
           {/* Left — Text */}
           <div className="w-full lg:w-1/2">

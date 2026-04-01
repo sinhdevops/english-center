@@ -17,10 +17,10 @@ const GRADIENTS = [
 const Programs = () => {
 	return (
 		<section className="bg-white">
-			<div className="mx-auto max-w-7xl px-4">
+			<div className="mx-auto max-w-7xl px-4 lg:px-0">
 				<div className="mb-10 text-center">
 					<h2 className="text-2xl font-semibold lg:text-4xl">
-						Các chương trình học tại STEMKey
+						CÁC CHƯƠNG TRÌNH HỌC TẠI STEMKey
 					</h2>
 					<p className="mx-auto max-w-3xl text-slate-600">
 						Hệ thống giáo dục phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ
