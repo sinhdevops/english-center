@@ -96,9 +96,8 @@ const FormRegistration = ({ branches = [], courses = [] }: FormRegistrationProps
 
 					<Button
 						type="submit"
-						size="lg"
 						disabled={isSubmitting}
-						className="mt-6 w-full rounded-xl py-6 text-sm font-black tracking-wider text-white uppercase transition-all hover:bg-blue-600 active:scale-[0.98] disabled:opacity-70 sm:text-base md:text-lg"
+						className="mt-6 w-full h-10 md:h-auto md:py-6 rounded-xl text-xs sm:text-base font-semibold lg:h-12 tracking-wider text-white uppercase transition-all hover:bg-blue-600 active:scale-[0.98] disabled:opacity-70"
 					>
 						{isSubmitting ? "ĐANG XỬ LÝ..." : "GIỮ CHỖ NGAY"}
 					</Button>

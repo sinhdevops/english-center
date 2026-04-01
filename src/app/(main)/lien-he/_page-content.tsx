@@ -20,7 +20,7 @@ const PageContent = ({ branches, courses }: PageContentProps) => {
   return (
     <div className="min-h-screen ">
       {/* Green Hero Section */}
-      <div className="relative bg-[#00842B] pb-32 pt-16 md:h-[360px]">
+      <div className="relative bg-[#00842B] pt-10 pb-20 md:pt-16 md:pb-32 md:h-[360px]">
         {/* Decorative blobs — dùng clip-path để không lòi ra ngoài */}
         <div className="absolute top-0 left-0 h-72 w-72 -translate-x-1/3 -translate-y-1/3 rounded-full bg-[#71FF671A]" />
         <div className="absolute top-0 right-0 h-[100px] w-[100px] -translate-x-1/3 -translate-y-1/3 rounded-full bg-[#71FF671A]" />
@@ -37,7 +37,7 @@ const PageContent = ({ branches, courses }: PageContentProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mx-auto max-w-2xl text-white/90"
+            className="mx-auto max-w-2xl text-white/90 text-sm md:text-base"
           >
             Ba mẹ có bất kỳ thắc mắc nào về chương trình học hoặc cần tư vấn lộ trình học tập cho con, đừng ngần
             ngại để lại thông tin nhé!
@@ -57,13 +57,15 @@ const PageContent = ({ branches, courses }: PageContentProps) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + idx * 0.1 }}
-                  className="flex flex-col items-center rounded-[20px] border border-[#DEDEDE]  px-8 py-8 text-center"
+                  className="flex flex-row items-center gap-5 rounded-[20px] border border-[#DEDEDE] px-6 py-4 md:flex-col md:items-center md:gap-0 md:px-8 md:py-8 lg:py-10 text-left md:text-center"
                 >
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#15B24829] text-[#009832]">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#15B24829] text-[#009832] md:mb-5">
                     {IconMap[item.type]}
                   </div>
-                  <p className="mb-1 text-xl font-black text-slate-800">{item.detail}</p>
-                  <p className="text-sm text-slate-400">{item.sub}</p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="mb-0.5 text-base md:text-xl font-black text-slate-800 break-words">{item.detail}</p>
+                    <p className="text-[12px] md:text-sm text-slate-400">{item.sub}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>

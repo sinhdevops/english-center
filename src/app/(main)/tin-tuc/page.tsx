@@ -47,7 +47,7 @@ export default async function NewsPage({ searchParams }: { searchParams: Promise
 		<div className="min-h-screen ">
 			<HeaderPage title="TIN TỨC" />
 
-			<div className="mx-auto max-w-7xl px-4 py-10 lg:px-0">
+			<div className="mx-auto max-w-7xl px-4 py-10 lg:py-20 lg:px-0">
 				{articleItems.length || videoItems.length ? (
 					<>
 						<NewsListWithSidebar

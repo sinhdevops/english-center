@@ -34,7 +34,7 @@ export default async function LearningCornerPage({ searchParams }: { searchParam
 	return (
 		<div className="min-h-screen bg-white">
 			<HeaderPage title="Góc học tập" />
-			<div className="mx-auto max-w-7xl px-4 py-25 lg:px-0">
+			<div className="mx-auto max-w-7xl px-4 py-10 lg:py-20 lg:px-0">
 				{articleItems.length || videoItems.length ? (
 					<>
 						<NewsListWithSidebar
