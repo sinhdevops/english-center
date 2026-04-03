@@ -91,7 +91,7 @@ export const ScheduleModal = ({
 						name="branch_id"
 						value={formData.branch_id}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					>
 						{branches.map((b) => (
 							<option key={b.id} value={b.id}>
@@ -106,7 +106,7 @@ export const ScheduleModal = ({
 						name="course_id"
 						value={formData.course_id}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					>
 						{courses.map((c) => (
 							<option key={c.id} value={c.id}>
@@ -122,7 +122,7 @@ export const ScheduleModal = ({
 						name="class_code"
 						value={formData.class_code}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -132,7 +132,7 @@ export const ScheduleModal = ({
 						name="start_date"
 						value={formData.start_date}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -142,7 +142,7 @@ export const ScheduleModal = ({
 						name="schedule"
 						value={formData.schedule}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 						placeholder="Ví dụ: MsHoa Junior - Ca (16h30 - 18h00 Thứ 7, CN)"
 					/>
 				</AdminFormField>
@@ -152,7 +152,7 @@ export const ScheduleModal = ({
 						name="status"
 						value={formData.status}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					>
 						<option value="open">Đang mở</option>
 						<option value="full">Đã đầy</option>

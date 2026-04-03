@@ -48,7 +48,7 @@ export default function PageContent() {
 						{/* Right: Video Placeholder (Inline Play Logic) */}
 						<div className="group relative aspect-[588/362] overflow-hidden rounded-[20px] bg-black">
 							<iframe
-								src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+								src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&mute=1`}
 								title="STEMKey Intro Video"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 								allowFullScreen

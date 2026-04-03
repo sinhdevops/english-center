@@ -109,7 +109,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 						name="name"
 						value={formData.name}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -118,7 +118,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 						name="description"
 						value={formData.description || ""}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 						rows={3}
 					/>
 				</AdminFormField>
@@ -164,7 +164,7 @@ export const ProgramModal = ({ isOpen, onClose, editingProgram, onSubmit, isSubm
 								value={formData.image_url || ""}
 								onChange={handleChange}
 								placeholder="URL ảnh"
-								className="mt-2 block w-full rounded-lg border-slate-200  px-3 py-1.5 text-xs"
+								className="mt-2 block w-full rounded-lg border border-slate-200 px-3 py-1.5 text-xs"
 							/>
 						</div>
 					</div>

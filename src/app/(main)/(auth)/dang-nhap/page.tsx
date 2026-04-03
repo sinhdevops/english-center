@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { AuthForm } from "@/components/auth/auth-form";
 import Image from "next/image";
-import Link from "next/link";
 import { IMAGES } from "../../../../../public/statics/images";
 
 export default function LoginPage() {

@@ -108,7 +108,7 @@ export const StudentModal = ({
 						name="name"
 						value={formData.name}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -119,7 +119,7 @@ export const StudentModal = ({
 							name="age"
 							value={formData.age || ""}
 							onChange={handleChange}
-							className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+							className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 						/>
 					</AdminFormField>
 					<AdminFormField label="Lớp" error={errors.grade} required>
@@ -128,7 +128,7 @@ export const StudentModal = ({
 							name="grade"
 							value={formData.grade}
 							onChange={handleChange}
-							className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+							className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 						/>
 					</AdminFormField>
 				</div>
@@ -139,7 +139,7 @@ export const StudentModal = ({
 						name="parent_name"
 						value={formData.parent_name}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -149,7 +149,7 @@ export const StudentModal = ({
 						name="phone"
 						value={formData.phone}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -159,7 +159,7 @@ export const StudentModal = ({
 						name="email"
 						value={formData.email}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -168,7 +168,7 @@ export const StudentModal = ({
 						name="status"
 						value={formData.status}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					>
 						<option value="active">Đang học</option>
 						<option value="inactive">Tạm dừng</option>
@@ -181,7 +181,7 @@ export const StudentModal = ({
 						name="branch_id"
 						value={formData.branch_id}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					>
 						{branches.map((b) => (
 							<option key={b.id} value={b.id}>
@@ -196,7 +196,7 @@ export const StudentModal = ({
 						name="course_id"
 						value={formData.course_id}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					>
 						{courses.map((c) => (
 							<option key={c.id} value={c.id}>
@@ -215,7 +215,7 @@ export const StudentModal = ({
 						name="schedule_id"
 						value={formData.schedule_id || ""}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					>
 						<option value="">Chưa xếp lớp</option>
 						{filteredSchedules.map((s) => (

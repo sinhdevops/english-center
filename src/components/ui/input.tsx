@@ -1,5 +1,5 @@
+import React, { InputHTMLAttributes } from "react";
 import { LucideIcon } from "lucide-react";
-import { InputHTMLAttributes } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -23,65 +23,82 @@ const inputVariants = cva(
 	},
 );
 
-interface InputValidationProps
+// Props dùng chung cho cả Input thuần và InputValidation
+export interface InputProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
 		VariantProps<typeof inputVariants> {
-	name: string;
 	label?: string;
 	icon?: LucideIcon;
-	required?: boolean;
+	error?: string;
 }
+
+// UI thuần — không phụ thuộc react-hook-form, dùng được ở bất kỳ đâu
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+	({ label, name, required, icon: Icon, size, error, ...props }, ref) => {
+		return (
+			<div className="flex w-full flex-col gap-1.5">
+				{label && (
+					<label htmlFor={name} className="ml-1 text-sm font-medium text-slate-700">
+						{label}
+						{required && <span className="ml-1 text-rose-500">*</span>}
+					</label>
+				)}
+				<div className="group relative">
+					{Icon && (
+						<div className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-blue-500">
+							<Icon size={18} />
+						</div>
+					)}
+					<input
+						ref={ref}
+						id={name}
+						{...props}
+						className={inputVariants({
+							size,
+							status: error ? "error" : "default",
+							className: Icon ? "pl-11" : "pl-4",
+						})}
+					/>
+				</div>
+				{error && (
+					<p className="animate-in fade-in slide-in-from-top-1 ml-1 text-xs font-medium text-red-500">
+						{error}
+					</p>
+				)}
+			</div>
+		)
+	},
+)
+Input.displayName = "Input"
+
+// Dành riêng cho react-hook-form — bọc Input bằng Controller
+interface InputValidationProps extends Omit<InputProps, "error"> {
+	name: string;
+}
+
 export const InputValidation: React.FC<InputValidationProps> = ({
 	name,
-	label,
-	icon: Icon,
-	size = "lg",
-	required,
 	...props
 }) => {
 	const {
 		control,
 		formState: { errors },
-	} = useFormContext();
+	} = useFormContext()
 
-	const error = errors[name];
+	const error = errors[name]
 
 	return (
 		<Controller
 			name={name}
 			control={control}
 			render={({ field }) => (
-				<div className="flex w-full flex-col gap-1.5">
-					{label && (
-						<label htmlFor={name} className="ml-1 text-sm font-medium text-slate-700">
-							{label}
-							{required && <span className="ml-1 text-rose-500">*</span>}
-						</label>
-					)}
-					<div className="group relative">
-						{Icon && (
-							<div className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-blue-500">
-								<Icon size={18} />
-							</div>
-						)}
-						<input
-							{...field}
-							{...props}
-							id={name}
-							className={inputVariants({
-								size,
-								status: error ? "error" : "default",
-								className: Icon ? "pl-11" : "pl-4",
-							})}
-						/>
-					</div>
-					{error && (
-						<p className="animate-in fade-in slide-in-from-top-1 ml-1 text-xs font-medium text-red-500">
-							{error.message as string}
-						</p>
-					)}
-				</div>
+				<Input
+					{...props}
+					{...field}
+					name={name}
+					error={error?.message as string | undefined}
+				/>
 			)}
 		/>
-	);
-};
+	)
+}

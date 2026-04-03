@@ -5,14 +5,13 @@ import { ClipboardList, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { registrationSchema } from "@/lib/validations/admin";
+import { z } from "zod";
+import { quickConsultSchema } from "@/lib/validations/admin";
 import { toast } from "sonner";
 import { InputValidation } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-
-type RegistrationFormValues = z.infer<typeof registrationSchema>;
+type RegistrationFormValues = z.infer<typeof quickConsultSchema>;
 
 const CATEGORY_SLUG = "danh-gia-nang-luc-tu-duy";
 
@@ -63,17 +62,12 @@ const quizCategories = [
 	},
 ];
 
-export default function PageContent({ branches = [], courses = [] }: { branches: any; courses: any }) {
+export default function PageContent() {
 	const methods = useForm<RegistrationFormValues>({
-		resolver: zodResolver(registrationSchema),
+		resolver: zodResolver(quickConsultSchema),
 		defaultValues: {
 			parentName: "",
 			phone: "",
-			childName: "Chưa cập nhật",
-			email: "khachhang@gmail.com",
-			childClass: "Chưa cập nhật",
-			course: "STEM/Robotics",
-			branch: "Trực tuyến",
 		},
 	});
 
@@ -85,7 +79,7 @@ export default function PageContent({ branches = [], courses = [] }: { branches:
 
 	const onSubmit = async (data: RegistrationFormValues) => {
 		try {
-			const response = await fetch("/api/registrations", {
+			const response = await fetch("/api/quick-registrations", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(data),

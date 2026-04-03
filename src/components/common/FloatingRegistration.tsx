@@ -32,7 +32,7 @@ const FloatingRegistration = ({ open }: FloatingRegistrationProps) => {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const res = await fetch("/api/registrations", {
+      const res = await fetch("/api/quick-registrations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

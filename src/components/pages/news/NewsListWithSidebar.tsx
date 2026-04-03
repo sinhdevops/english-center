@@ -95,10 +95,10 @@ const NewsListWithSidebar = ({
 									className="flex flex-col overflow-hidden rounded-2xl border border-[#E6E6E6] bg-white lg:flex-row lg:gap-4"
 								>
 									{/* Thumbnail */}
-									<div className="relative aspect-4/3 w-full shrink-0 overflow-hidden bg-black lg:h-[180px] lg:w-[240px] xl:w-[282px] lg:rounded-xl">
+									<div className="relative aspect-4/3 w-full shrink-0 overflow-hidden bg-black lg:aspect-auto lg:h-auto lg:self-stretch lg:w-60 lg:rounded-xl">
 										{isPlaying ? (
 											<iframe
-												src={`https://www.youtube.com/embed/${item.youtube_id}?autoplay=1&rel=0`}
+												src={`https://www.youtube.com/embed/${item.youtube_id}?autoplay=1&rel=0&mute=1`}
 												title={item.title}
 												allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 												allowFullScreen

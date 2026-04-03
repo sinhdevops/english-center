@@ -45,7 +45,7 @@ const VideoCarousel = ({ items }: VideoCarouselProps) => {
 							<div className="relative aspect-video w-full overflow-hidden rounded-2xl">
 								{isPlaying ? (
 									<iframe
-										src={`https://www.youtube.com/embed/${item.youtube_id}?autoplay=1&rel=0`}
+										src={`https://www.youtube.com/embed/${item.youtube_id}?autoplay=1&rel=0&mute=1`}
 										title={item.title}
 										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 										allowFullScreen

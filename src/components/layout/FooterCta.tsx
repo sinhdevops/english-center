@@ -36,7 +36,7 @@ const pathname = usePathname()
       <div className="absolute top-0 right-0 h-24 w-24 -translate-y-1/2 rounded-full bg-[#50FF2980]/50" />
 
       <div className="relative mx-auto max-w-5xl">
-        <h2 className="mb-6 text-center text-[32px] font-semibold uppercase text-white lg:text-3xl">
+        <h2 className="mb-6 text-center text-xl lg:text-[32px] font-semibold uppercase text-white">
           NHẬN TƯ VẤN CHƯƠNG TRÌNH PHÙ HỢP
         </h2>
 

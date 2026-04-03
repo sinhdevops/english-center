@@ -146,7 +146,8 @@ export const Header: React.FC<{ toggleMenu: () => void }> = ({ toggleMenu }) => 
 									<Button variant="outline" size="sm" className="rounded-full px-6 font-bold">
 										Đăng ký
 									</Button>
-								</Link>	<Link href="/dang-nhap">
+								</Link>
+									<Link href="/dang-nhap">
 									<Button variant="primary" size="sm" className="rounded-full px-6 font-bold">
 										Đăng nhập
 									</Button>

@@ -33,13 +33,14 @@ export const EventList = ({ events, isLoading, onEdit, onDelete }: EventListProp
 			header: "Ảnh bìa",
 			accessor: (event: Event) => (
 				<div className="relative h-12 w-20 overflow-hidden rounded-lg bg-slate-100">
-					{event.image_url ? (
+					{event.image_url || event.youtube_id ? (
 						<Image
-							src={event.image_url}
+							src={event.image_url || `https://img.youtube.com/vi/${event.youtube_id}/hqdefault.jpg`}
 							alt={event.title}
 							fill
 							className="object-cover"
 							referrerPolicy="no-referrer"
+							unoptimized={!event.image_url}
 						/>
 					) : (
 						<div className="flex h-full w-full items-center justify-center text-slate-300">

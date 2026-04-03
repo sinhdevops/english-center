@@ -85,13 +85,13 @@ const FormRegistration = ({ branches = [], courses = [] }: FormRegistrationProps
 						<SelectValidation
 							name="course"
 							placeholder="Nhập khóa học"
-							options={courses.map((item) => ({ label: item.name, value: item.name }))}
+							options={courses.map((item) => ({ label: item.name, value: item.id }))}
 						/>
 					</div>
 					<SelectValidation
 						name="branch"
 						placeholder="Chọn cơ sở gần bạn"
-						options={branches.map((item) => ({ label: item.name, value: item.name }))}
+						options={branches.map((item) => ({ label: item.name, value: item.id }))}
 					/>
 
 					<Button

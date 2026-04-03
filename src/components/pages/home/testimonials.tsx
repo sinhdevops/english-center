@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,22 +10,31 @@ interface TestimonialsProps {
 }
 
 const PlayButton = () => (
-	<div className="flex size-16 items-center justify-center rounded-full bg-red-600 shadow-xl lg:size-20">
-		<div className="ml-1 h-0 w-0 border-t-10 border-b-10 border-l-18 border-t-transparent border-b-transparent border-l-white lg:border-t-13 lg:border-b-13 lg:border-l-24" />
+	<div className="flex size-16 items-center justify-center rounded-full bg-red-600 shadow-xl transition-transform duration-300 group-hover:scale-110 lg:size-20">
+		<svg viewBox="0 0 24 24" className="ml-1.5 h-7 w-7 fill-white lg:h-9 lg:w-9">
+			<path d="M8 5v14l11-7z" />
+		</svg>
 	</div>
 );
 
 const Testimonials = ({ items = [] }: TestimonialsProps) => {
+	const [isPlaying, setIsPlaying] = useState(false);
+
 	if (!items.length) return null;
 
 	const mapped = items.map((item) => ({
 		id: item.id,
 		title: item.title,
 		img: item.image_url,
+		youtubeId: item.youtube_id ?? null,
 	}));
 
 	const featured = mapped[0];
 	const grid = mapped.slice(1, 5);
+
+	const featuredThumbnail = featured?.youtubeId
+		? `https://img.youtube.com/vi/${featured.youtubeId}/hqdefault.jpg`
+		: featured?.img || "https://images.unsplash.com/photo-1543269865-cbf427effbad";
 
 	return (
 		<section className="bg-white">
@@ -47,27 +56,38 @@ const Testimonials = ({ items = [] }: TestimonialsProps) => {
 						viewport={{ once: true }}
 						className="w-full lg:w-[55%]"
 					>
-						<Link
-							href={`/goc-ba-me/${featured?.id}`}
-							className="group relative block h-full w-full overflow-hidden rounded-2xl"
-						>
-							<div className="relative aspect-16/10 w-full lg:aspect-auto lg:h-full lg:min-h-90">
-								<Image
-									src={featured?.img || "https://images.unsplash.com/photo-1543269865-cbf427effbad"}
-									alt={featured?.title || "Cảm nhận học viên"}
-									fill
-									className="object-cover transition-transform duration-700 group-hover:scale-105"
-									sizes="(max-width: 1024px) 100vw, 55vw"
-									referrerPolicy="no-referrer"
-									priority
+						<div className="relative aspect-16/10 w-full overflow-hidden rounded-2xl lg:aspect-auto lg:h-full lg:min-h-90">
+							{isPlaying && featured?.youtubeId ? (
+								<iframe
+									src={`https://www.youtube.com/embed/${featured.youtubeId}?autoplay=1&rel=0&mute=1`}
+									title={featured.title || "Video"}
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+									allowFullScreen
+									className="h-full w-full lg:absolute lg:inset-0"
 								/>
-								<div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/30" />
-								{/* Play button */}
-								<div className="absolute inset-0 flex items-center justify-center">
-									<PlayButton />
-								</div>
-							</div>
-						</Link>
+							) : (
+								<button
+									type="button"
+									className="group relative h-full w-full cursor-pointer"
+									onClick={() => featured?.youtubeId && setIsPlaying(true)}
+								>
+									<Image
+										src={featuredThumbnail}
+										alt={featured?.title || "Cảm nhận học viên"}
+										fill
+										className="object-cover transition-transform duration-700 group-hover:scale-105"
+										sizes="(max-width: 1024px) 100vw, 55vw"
+										referrerPolicy="no-referrer"
+										unoptimized={!!featured?.youtubeId}
+										priority
+									/>
+									<div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/30" />
+									<div className="absolute inset-0 flex items-center justify-center">
+										<PlayButton />
+									</div>
+								</button>
+							)}
+						</div>
 					</motion.div>
 
 					{/* Right — 2×2 grid */}

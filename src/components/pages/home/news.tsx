@@ -65,7 +65,7 @@ const News = ({ initialNews }: NewsProps) => {
 									</div>
 
 									{/* Text */}
-									<h3 className="mb-2 line-clamp-1 text-lg font-bold text-slate-900">
+									<h3 className="mb-2 line-clamp-1 text-lg font-semibold text-slate-900">
 										{post.title}
 									</h3>
 									<p className="line-clamp-2 text-sm leading-relaxed text-slate-500">

@@ -75,7 +75,7 @@ export const BranchModal = ({ isOpen, onClose, editingBranch, onSubmit, isSubmit
 						name="name"
 						value={formData.name}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 
@@ -85,7 +85,7 @@ export const BranchModal = ({ isOpen, onClose, editingBranch, onSubmit, isSubmit
 						name="address"
 						value={formData.address}
 						onChange={handleChange}
-						className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+						className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					/>
 				</AdminFormField>
 

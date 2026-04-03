@@ -80,6 +80,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 	const contentValue = useWatch({ control, name: "content" as any });
 
 	useEffect(() => {
+		setYtArticleInput("");
 		if (editingEvent) {
 			const type = (editingEvent.type as "article" | "video") || "article";
 			setActiveTab(type);
@@ -121,6 +122,9 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 	const handleTabChange = (tab: "article" | "video") => {
 		setActiveTab(tab);
 		setValue("type", tab);
+		if (tab === "video") {
+			setValue("category", "Góc ba mẹ");
+		}
 	};
 
 	const handleYoutubeInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -129,6 +133,19 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 		const parsed = parseYoutubeId(val);
 		setYoutubePreviewId(parsed);
 		setValue("youtube_id", parsed);
+		// Tự động set image_url = YouTube thumbnail khi có ID hợp lệ
+		if (parsed && parsed.length === 11) {
+			setValue("image_url", `https://img.youtube.com/vi/${parsed}/hqdefault.jpg`);
+		}
+	};
+
+	const [ytArticleInput, setYtArticleInput] = useState("");
+
+	const handleUseYoutubeThumbnail = () => {
+		const parsed = parseYoutubeId(ytArticleInput);
+		if (parsed && parsed.length >= 11) {
+			setValue("image_url", `https://img.youtube.com/vi/${parsed}/hqdefault.jpg`);
+		}
 	};
 
 	const uploadImage = async (base64: string, folder: string) => {
@@ -202,12 +219,30 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 
 	const formats = ["header", "bold", "italic", "underline", "strike", "list", "link", "image"];
 
+	const videoCommonFields = (
+		<div className="grid grid-cols-2 gap-4">
+			<AdminFormField label="Danh mục" required>
+				<div className="mt-1 flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5">
+					<span className="flex-1 text-sm font-semibold text-pink-600">Góc ba mẹ</span>
+					<Tag size={14} className="text-slate-400" />
+				</div>
+			</AdminFormField>
+			<AdminFormField label="Ngày diễn ra" error={(errors as any).date?.message} required>
+				<input
+					type="date"
+					className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
+					{...register("date")}
+				/>
+			</AdminFormField>
+		</div>
+	);
+
 	const commonFields = (
 		<div className="grid grid-cols-2 gap-4">
 			<AdminFormField label="Danh mục" error={(errors as any).category?.message} required>
 				<div className="relative mt-1">
 					<select
-						className="focus:border-stem-blue focus:ring-stem-blue block w-full appearance-none rounded-xl border-slate-200  px-4 py-2.5 pr-10 text-sm"
+						className="focus:border-stem-blue focus:ring-stem-blue block w-full appearance-none rounded-xl border border-slate-200 px-4 py-2.5 pr-10 text-sm"
 						{...register("category")}
 					>
 						{CATEGORIES.map((cat) => (
@@ -224,7 +259,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 			<AdminFormField label="Ngày diễn ra" error={(errors as any).date?.message} required>
 				<input
 					type="date"
-					className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+					className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 					{...register("date")}
 				/>
 			</AdminFormField>
@@ -279,7 +314,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								<AdminFormField label="Tiêu đề" error={(errors as any).title?.message} required>
 									<input
 										type="text"
-										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 										{...register("title")}
 									/>
 								</AdminFormField>
@@ -288,7 +323,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 
 								<AdminFormField label="Mô tả ngắn" error={(errors as any).description?.message} required>
 									<textarea
-										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 										rows={3}
 										{...register("description")}
 									/>
@@ -297,7 +332,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								<AdminFormField label="Địa điểm" error={(errors as any).location?.message}>
 									<input
 										type="text"
-										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 										{...register("location")}
 									/>
 								</AdminFormField>
@@ -344,25 +379,31 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 									</div>
 								</AdminFormField>
 
-								<div className="rounded-2xl border border-slate-100 /50 p-4">
+								{/* Lấy thumbnail từ YouTube */}
+								<div className="rounded-2xl border border-slate-100 bg-slate-50/60 p-3">
 									<p className="mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-										Thông tin người đăng
+										Hoặc lấy thumbnail từ YouTube
 									</p>
-									<div className="flex items-center gap-3">
-										<div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-white">
-											<Image
-												src={profile?.avatar_url || "https://images.unsplash.com/photo-1543269865-cbf427effbad"}
-												alt="Author"
-												fill
-												className="object-cover"
+									<div className="flex gap-2">
+										<div className="relative flex-1">
+											<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+												<Youtube size={13} />
+											</div>
+											<input
+												type="text"
+												placeholder="https://youtu.be/... hoặc ID"
+												className="block w-full rounded-xl border border-slate-200 bg-white py-2 pr-3 pl-8 text-xs"
+												value={ytArticleInput}
+												onChange={(e) => setYtArticleInput(e.target.value)}
 											/>
 										</div>
-										<div>
-											<p className="text-sm font-bold text-slate-900">{profile?.full_name || "Admin"}</p>
-											<p className="text-[10px] font-medium text-slate-500 capitalize">
-												{profile?.role || "Administrator"}
-											</p>
-										</div>
+										<button
+											type="button"
+											onClick={handleUseYoutubeThumbnail}
+											className="shrink-0 rounded-xl bg-red-500 px-3 py-2 text-[11px] font-bold text-white transition-opacity hover:opacity-90"
+										>
+											Lấy ảnh
+										</button>
 									</div>
 								</div>
 							</div>
@@ -399,7 +440,7 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								<input
 									type="text"
 									placeholder="https://youtu.be/... hoặc nhập thẳng ID"
-									className="block w-full rounded-xl border-slate-200  py-2.5 pr-4 pl-9 text-sm"
+									className="block w-full rounded-xl border border-slate-200 py-2.5 pr-4 pl-9 text-sm"
 									value={youtubeInput}
 									onChange={handleYoutubeInputChange}
 								/>
@@ -451,45 +492,23 @@ export const EventModal = ({ isOpen, onClose, editingEvent, onSubmit, isSubmitti
 								<AdminFormField label="Tiêu đề video" error={(errors as any).title?.message} required>
 									<input
 										type="text"
-										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 										{...register("title")}
 									/>
 								</AdminFormField>
 
-								{commonFields}
+								{videoCommonFields}
 							</div>
 
 							<div className="space-y-4">
 								<AdminFormField label="Mô tả ngắn" error={(errors as any).description?.message}>
 									<textarea
-										className="mt-1 block w-full rounded-xl border-slate-200  px-4 py-2.5 text-sm"
+										className="mt-1 block w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
 										rows={4}
 										placeholder="Mô tả ngắn về video (không bắt buộc)"
 										{...register("description")}
 									/>
 								</AdminFormField>
-
-								<div className="rounded-2xl border border-slate-100 /50 p-4">
-									<p className="mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-										Thông tin người đăng
-									</p>
-									<div className="flex items-center gap-3">
-										<div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-white">
-											<Image
-												src={profile?.avatar_url || "https://images.unsplash.com/photo-1543269865-cbf427effbad"}
-												alt="Author"
-												fill
-												className="object-cover"
-											/>
-										</div>
-										<div>
-											<p className="text-sm font-bold text-slate-900">{profile?.full_name || "Admin"}</p>
-											<p className="text-[10px] font-medium text-slate-500 capitalize">
-												{profile?.role || "Administrator"}
-											</p>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
