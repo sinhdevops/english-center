@@ -1,22 +1,24 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase-client";
+import { createClient } from "@/utils/supabase/server";
 import { registrationSchema } from "@/lib/validations/admin";
 
 export async function POST(request: Request) {
 	try {
 		const body = await request.json();
 		const validatedData = registrationSchema.parse(body);
+		const supabase = await createClient();
 
 		const { data, error } = await supabase.from("registrations").insert([
 			{
 				parent_name: validatedData.parentName,
-				email: validatedData.email,
+				email: validatedData.email || null,
 				phone: validatedData.phone,
-				student_name: validatedData.childName,
-				grade: validatedData.childClass,
-				course_id: validatedData.course,
-				branch_id: validatedData.branch,
+				student_name: validatedData.childName || validatedData.parentName, // Use parentName if childName is missing
+				grade: validatedData.childClass || null,
+				course_id: validatedData.course && validatedData.course.length > 0 ? validatedData.course : null,
+				branch_id: validatedData.branch && validatedData.branch.length > 0 ? validatedData.branch : null,
 				status: "pending",
+
 			},
 		]);
 
@@ -34,3 +36,4 @@ export async function POST(request: Request) {
 		return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
 	}
 }
+

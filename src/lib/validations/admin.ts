@@ -63,15 +63,16 @@ export const eventSchema = z.object({
 
 export const registrationSchema = z.object({
   parentName: z.string().min(1, 'Vui lòng nhập họ tên'),
-  email: z.string().min(1, 'Vui lòng nhập email').email('Email không hợp lệ'),
+  email: z.string().email('Email không hợp lệ').optional().or(z.literal('')),
   phone: z
     .string()
     .min(10, 'Số điện thoại phải có ít nhất 10 số')
     .max(11, 'Số điện thoại không quá 11 số')
     .regex(/^[0-9]+$/, 'Số điện thoại chỉ được chứa số'),
-  childName: z.string().min(1, 'Vui lòng nhập họ tên của con'),
-  childClass: z.string().min(1, 'Vui lòng nhập lớp của con'),
-  course: z.string().min(1, 'Vui lòng nhập khóa học quan tâm'),
-  branch: z.string().min(1, 'Vui lòng chọn cơ sở'),
+  childName: z.string().optional().or(z.literal('')),
+  childClass: z.string().optional().or(z.literal('')),
+  course: z.string().optional().or(z.literal('')),
+  branch: z.string().optional().or(z.literal('')),
 });
+
 
