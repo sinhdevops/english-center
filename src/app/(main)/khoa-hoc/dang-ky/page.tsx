@@ -1,5 +1,5 @@
 import PageContent from "./_page-content";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function RegistrationPage() {
 	const supabase = await createClient();

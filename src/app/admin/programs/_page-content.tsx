@@ -10,7 +10,7 @@ import { CourseModal } from "@/components/admin/programs/CourseModal";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { Program, Course } from "@/lib/types";
 import { toast } from "sonner";
-import { createProgram, updateProgram, deleteProgram, createCourse, updateCourse, deleteCourse } from "./actions";
+import { createProgram, updateProgram, deleteProgram, createCourse, updateCourse, deleteCourse } from "@/actions/program.actions";
 
 interface ProgramsClientProps {
 	initialPrograms: Program[];

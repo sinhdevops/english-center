@@ -1,5 +1,10 @@
-import { createClient } from "@/utils/supabase/server";
-import EventsClient from "./EventsClient";
+import { createClient } from "@/lib/supabase/server";
+import PageContent from "./_page-content";
+
+export const metadata = {
+  title: "Quản lý Sự kiện | Admin",
+  description: "Trang quản trị events",
+};
 
 export default async function EventsPage() {
 	const supabase = await createClient();
@@ -8,7 +13,7 @@ export default async function EventsPage() {
 
 	return (
 		<>
-			<EventsClient initialEvents={events || []} />
+			<PageContent initialEvents={events || []} />
 		</>
 	);
 }

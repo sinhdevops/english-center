@@ -1,6 +1,11 @@
 import React from "react";
-import { createClient } from "@/utils/supabase/server";
-import SchedulesClient from "./SchedulesClient";
+import { createClient } from "@/lib/supabase/server";
+import PageContent from "./_page-content";
+
+export const metadata = {
+  title: "Lịch khai giảng | Admin",
+  description: "Trang quản trị schedules",
+};
 
 export default async function SchedulesPage() {
 	const supabase = await createClient();
@@ -20,7 +25,7 @@ export default async function SchedulesPage() {
 
 	return (
 		<>
-			<SchedulesClient initialSchedules={processedSchedules} branches={branches || []} courses={courses || []} />
+			<PageContent initialSchedules={processedSchedules} branches={branches || []} courses={courses || []} />
 		</>
 	);
 }

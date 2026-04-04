@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { HomePageContent } from './_page-content'
+import { JsonLd } from '@/components/common/JsonLd'
 
 export const metadata: Metadata = {
   title: 'STEMKey - Tư duy – Ngôn ngữ – Công nghệ',
@@ -37,11 +38,28 @@ export default async function HomePage() {
     .eq('is_active', true)
     .order('display_order', { ascending: true })
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'EducationalOrganization',
+    name: 'STEMKey',
+    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://stemkey.vn',
+    logo: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://stemkey.vn'}/statics/images/logo.png`,
+    description: 'Hệ thống giáo dục STEMKey phát triển toàn diện Tư duy – Ngôn ngữ – Công nghệ với phương pháp R.I.P.L độc quyền.',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Hồ Chí Minh',
+      addressCountry: 'VN'
+    }
+  }
+
   return (
-    <HomePageContent
-      banners={banners ?? []}
-      testimonialItems={testimonialItems ?? []}
-      newsItems={newsItems ?? []}
-    />
+    <>
+      <JsonLd data={jsonLd} />
+      <HomePageContent
+        banners={banners ?? []}
+        testimonialItems={testimonialItems ?? []}
+        newsItems={newsItems ?? []}
+      />
+    </>
   )
 }

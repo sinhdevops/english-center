@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase-client'
+import { createClient } from '@/lib/supabase/server'
 import { quickConsultSchema } from '@/lib/validations/admin'
 
 export async function POST(request: Request) {
@@ -7,6 +7,7 @@ export async function POST(request: Request) {
     const body = await request.json()
     const validatedData = quickConsultSchema.parse(body)
 
+    const supabase = await createClient()
     const { data, error } = await supabase.from('registrations').insert([
       {
         parent_name: validatedData.parentName,

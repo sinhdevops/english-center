@@ -1,5 +1,10 @@
-import { createClient } from "@/utils/supabase/server";
-import BannersClient from "./BannersClient";
+import { createClient } from "@/lib/supabase/server";
+import PageContent from "./_page-content";
+
+export const metadata = {
+  title: "Quản lý Banner | Admin",
+  description: "Trang quản trị banners",
+};
 
 export default async function BannersPage() {
 	const supabase = await createClient();
@@ -11,7 +16,7 @@ export default async function BannersPage() {
 
 	return (
 		<>
-			<BannersClient initialBanners={banners || []} />
+			<PageContent initialBanners={banners || []} />
 		</>
 	);
 }

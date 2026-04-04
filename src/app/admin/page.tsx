@@ -1,5 +1,10 @@
-import { createClient } from "@/utils/supabase/server";
-import DashboardClient from "./DashboardClient";
+import { createClient } from "@/lib/supabase/server";
+import PageContent from "./_page-content";
+
+export const metadata = {
+  title: "Tổng quan hệ thống | Admin",
+  description: "Trang quản trị Dashboard",
+};
 
 export default async function DashboardPage() {
 	const supabase = await createClient();
@@ -72,7 +77,7 @@ export default async function DashboardPage() {
 	}));
 
 	return (
-		<DashboardClient
+		<PageContent
 			studentStats={studentStats}
 			registrationStats={registrationStats}
 			openClassesCount={openClassesCount || 0}

@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import CourserSidebarContent from "./courser-sidebar-content";
 
 export const CourserSidebar = async () => {

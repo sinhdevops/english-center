@@ -150,7 +150,7 @@ export function LichKhaiGiangPageContent({ initialBranches, initialSchedules }: 
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.05 }}
-                        className="rounded-xl border border-slate-100 /30 p-5"
+                        className="rounded-xl border border-slate-200 bg-slate-50/50 p-5 shadow-sm"
                       >
                         <div className="mb-4 flex items-start justify-between">
                           <div>

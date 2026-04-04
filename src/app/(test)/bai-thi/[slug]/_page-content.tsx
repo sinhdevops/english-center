@@ -5,10 +5,10 @@ import { AnimatePresence } from"motion/react";
 import { Clock, ChevronRight } from"lucide-react";
 import { useRouter } from"next/navigation";
 import { QuizSet } from"@/lib/types";
-import { QuizIntro } from"@/components/pages/quiz/quiz-intro";
-import { QuizTaking } from"@/components/pages/quiz/quiz-taking";
-import { QuizReview } from"@/components/pages/quiz/quiz-review";
-import { QuizResult } from"@/components/pages/quiz/quiz-result";
+import { QuizIntro } from "@/components/pages/bai-thi/quiz-intro";
+import { QuizTaking } from "@/components/pages/bai-thi/quiz-taking";
+import { QuizReview } from "@/components/pages/bai-thi/quiz-review";
+import { QuizResult } from "@/components/pages/bai-thi/quiz-result";
 
 type GameState ="loading" |"intro" |"taking" |"result" |"review";
 

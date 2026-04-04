@@ -1,12 +1,12 @@
 'use server'
 
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
 export async function createBanner(data: any) {
   const supabase = await createClient()
   const { error } = await supabase.from('banners').insert([data])
-  if (error) throw error
+  if (error) throw error  
   revalidatePath('/admin/banners')
 }
 

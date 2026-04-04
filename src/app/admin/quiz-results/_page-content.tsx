@@ -7,7 +7,7 @@ import { Phone, Mail, ClipboardCheck, Calendar, Trash2, CheckCircle2, ChevronDow
 import { QuizResult } from "@/lib/types";
 import { toast } from "sonner";
 import { AdminPagination } from "@/components/admin/AdminPagination";
-import { deleteQuizResult } from "./actions";
+import { deleteQuizResult } from "@/actions/quiz-result.actions";
 
 interface QuizResultsClientProps {
 	initialResults: QuizResult[];

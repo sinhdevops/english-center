@@ -1,5 +1,10 @@
-import { createClient } from "@/utils/supabase/server";
-import QuizResultsClient from "./QuizResultsClient";
+import { createClient } from "@/lib/supabase/server";
+import PageContent from "./_page-content";
+
+export const metadata = {
+  title: "Kết quả bài test | Admin",
+  description: "Trang quản trị quiz-results",
+};
 
 export default async function QuizResultsPage() {
 	const supabase = await createClient();
@@ -10,5 +15,5 @@ export default async function QuizResultsPage() {
 		.eq("status", "completed")
 		.order("completed_at", { ascending: false });
 
-	return <QuizResultsClient initialResults={results || []} />;
+	return <PageContent initialResults={results || []} />;
 }

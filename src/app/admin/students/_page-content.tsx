@@ -10,7 +10,7 @@ import { Student, Branch, Course, ClassSchedule } from "@/lib/types";
 import { toast } from "sonner";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { Filter, Search } from "lucide-react";
-import { createStudent, updateStudent, deleteStudent } from "./actions";
+import { createStudent, updateStudent, deleteStudent } from "@/actions/student.actions";
 
 interface StudentsClientProps {
 	initialStudents: Student[];
@@ -46,11 +46,12 @@ export default function StudentsClient({ initialStudents, branches, courses, sch
 	const handleDelete = async (id: string) => {
 		if (confirm("Bạn có chắc chắn muốn xóa học viên này?")) {
 			try {
-				await deleteStudent(id);
+				const res = await deleteStudent(id);
+				if (!res.success) throw new Error(res.error);
 				toast.success("Đã xóa học viên");
-			} catch (error) {
+			} catch (error: any) {
 				console.error("Error deleting student:", error);
-				toast.error("Lỗi khi xóa học viên");
+				toast.error(error.message || "Lỗi khi xóa học viên");
 			}
 		}
 	};
@@ -63,17 +64,20 @@ export default function StudentsClient({ initialStudents, branches, courses, sch
 				schedule_id: data.schedule_id || null,
 			};
 
+			let res;
 			if (editingStudent) {
-				await updateStudent(editingStudent.id, submissionData);
+				res = await updateStudent(editingStudent.id, submissionData);
+				if (!res.success) throw new Error(res.error);
 				toast.success("Đã cập nhật thông tin học viên");
 			} else {
-				await createStudent(submissionData);
+				res = await createStudent(submissionData);
+				if (!res.success) throw new Error(res.error);
 				toast.success("Đã thêm học viên mới");
 			}
 			setIsModalOpen(false);
-		} catch (error) {
+		} catch (error: any) {
 			console.error("Error saving student:", error);
-			toast.error("Lỗi khi lưu thông tin học viên");
+			toast.error(error.message || "Lỗi khi lưu thông tin học viên");
 		} finally {
 			setIsSubmitting(false);
 		}

@@ -10,7 +10,7 @@ import { AdminPagination } from "@/components/admin/AdminPagination";
 import { ClassSchedule, Branch, Course } from "@/lib/types";
 import { toast } from "sonner";
 import { Filter } from "lucide-react";
-import { createSchedule, updateSchedule, deleteSchedule } from "./actions";
+import { createSchedule, updateSchedule, deleteSchedule } from "@/actions/schedule.actions";
 
 interface SchedulesClientProps {
 	initialSchedules: ClassSchedule[];
@@ -35,11 +35,12 @@ export default function SchedulesClient({ initialSchedules, branches, courses }:
 	const handleDelete = async (id: string) => {
 		if (confirm("Bạn có chắc chắn muốn xóa lịch khai giảng này?")) {
 			try {
-				await deleteSchedule(id);
+				const res = await deleteSchedule(id);
+				if (!res.success) throw new Error(res.error);
 				toast.success("Đã xóa lịch khai giảng");
-			} catch (error) {
+			} catch (error: any) {
 				console.error("Error deleting schedule:", error);
-				toast.error("Lỗi khi xóa lịch khai giảng");
+				toast.error(error.message || "Lỗi khi xóa lịch khai giảng");
 			}
 		}
 	};
@@ -47,17 +48,20 @@ export default function SchedulesClient({ initialSchedules, branches, courses }:
 	const handleSubmit = async (data: any) => {
 		setIsSubmitting(true);
 		try {
+			let res;
 			if (editingSchedule) {
-				await updateSchedule(editingSchedule.id, data);
+				res = await updateSchedule(editingSchedule.id, data);
+				if (!res.success) throw new Error(res.error);
 				toast.success("Đã cập nhật lịch khai giảng");
 			} else {
-				await createSchedule(data);
+				res = await createSchedule(data);
+				if (!res.success) throw new Error(res.error);
 				toast.success("Đã thêm lịch khai giảng mới");
 			}
 			setIsModalOpen(false);
-		} catch (error) {
+		} catch (error: any) {
 			console.error("Error saving schedule:", error);
-			toast.error("Lỗi khi lưu lịch khai giảng");
+			toast.error(error.message || "Lỗi khi lưu lịch khai giảng");
 		} finally {
 			setIsSubmitting(false);
 		}

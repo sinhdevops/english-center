@@ -9,7 +9,7 @@ import { BranchModal } from "@/components/admin/branches/BranchModal";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { Branch } from "@/lib/types";
 import { toast } from "sonner";
-import { createBranch, updateBranch, deleteBranch } from "./actions";
+import { createBranch, updateBranch, deleteBranch } from "@/actions/branch.actions";
 
 interface BranchesClientProps {
 	initialBranches: Branch[];

@@ -16,7 +16,7 @@ const RegistrationSection = dynamic(
 )
 
 interface HomePageContentProps {
-  banners: Record<string, unknown>[]
+  banners: any[]
   testimonialItems: Record<string, unknown>[]
   newsItems: Record<string, unknown>[]
 }

@@ -9,7 +9,7 @@ import { BannerModal } from "@/components/admin/banners/BannerModal";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { Banner } from "@/lib/types";
 import { toast } from "sonner";
-import { createBanner, updateBanner, deleteBanner } from "./actions";
+import { createBanner, updateBanner, deleteBanner } from "@/actions/banner.actions";
 
 interface BannersClientProps {
 	initialBanners: Banner[];

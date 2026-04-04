@@ -23,7 +23,7 @@ const FlexibleLearning = () => {
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Left — Benefit cards */}
-          <div className="flex flex-col justify-between">
+          <div className="flex flex-col justify-between gap-4 lg:gap-0">
             {FLEXIBLE_BENEFITS.map((benefit, i) => (
               <motion.div
                 key={i}

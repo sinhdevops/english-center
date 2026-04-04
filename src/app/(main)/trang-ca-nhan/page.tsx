@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import ProfilePageContent from "./_page-content";
 import type { QuizResult } from "@/lib/types";
 

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { GocHocTapPageContent } from './_page-content'
 
 export const metadata: Metadata = {

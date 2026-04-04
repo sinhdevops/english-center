@@ -20,8 +20,20 @@ const italianno = Italianno({
 	display: "swap",
 });
 
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+	width: "device-width",
+	initialScale: 1,
+	maximumScale: 5,
+	userScalable: true,
+	themeColor: "#ffffff",
+};
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://stemkey.edu.vn'
+
 export const metadata: Metadata = {
-	metadataBase: new URL("https://stemkey.vn"),
+	metadataBase: new URL(BASE_URL),
 	title: {
 		default: "STEMKey - Hệ thống giáo dục Tư duy, Ngôn ngữ & Công nghệ",
 		template: "%s | STEMKey",
@@ -29,10 +41,13 @@ export const metadata: Metadata = {
 	description:
 		"STEMKey - Hệ thống giáo dục toàn diện cho trẻ từ 4-10 tuổi, tập trung phát triển Tư duy (Toán tư duy), Ngôn ngữ (Tiếng Anh) và Công nghệ (Robotics).",
 	keywords: ["STEM", "STEMKey", "Toán tư duy", "Robotics", "Tiếng Anh cho trẻ", "Giáo dục tiểu học"],
+	alternates: {
+		canonical: BASE_URL,
+	},
 	openGraph: {
 		type: "website",
 		locale: "vi_VN",
-		url: "https://stemkey.vn",
+		url: BASE_URL,
 		siteName: "STEMKey",
 		images: [
 			{

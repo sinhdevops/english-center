@@ -99,7 +99,7 @@ export function ChuongTrinhPageContent({ slug }: ChuongTrinhPageContentProps) {
                     Xem chi tiết
                   </Link>
                 </div>
-                <div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors">
+                {/* <div className="group flex cursor-pointer items-center justify-between p-5 px-8 transition-colors">
                   <div className="flex items-center gap-3">
                     <Book size={18} className="text-stem-blue" />
                     <Link href="/khoa-hoc/dang-ky" className="text-sm font-bold text-slate-600">
@@ -109,7 +109,7 @@ export function ChuongTrinhPageContent({ slug }: ChuongTrinhPageContentProps) {
                   <span className="text-stem-blue flex items-center gap-1 text-[10px] font-black tracking-tighter uppercase">
                     Xem chi tiết
                   </span>
-                </div>
+                </div> */}
               </div>
             </div>
 

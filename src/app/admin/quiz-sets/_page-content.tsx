@@ -117,17 +117,18 @@ function QuestionRow({
 				}
 				imageUrls = urls;
 			}
-			await updateQuizQuestion(question.id, {
+			const res = await updateQuizQuestion(question.id, {
 				text,
 				options,
 				correct_answer: correctAnswer,
 				option_type: optionType,
 				option_images: optionType === 'image' ? imageUrls : null,
 			});
+			if (!res.success) throw new Error(res.error);
 			toast.success("Đã cập nhật câu hỏi");
 			setEditing(false);
-		} catch {
-			toast.error("Lỗi khi cập nhật câu hỏi");
+		} catch (e: any) {
+			toast.error(e.message || "Lỗi khi cập nhật câu hỏi");
 		} finally {
 			setSaving(false);
 		}
@@ -347,7 +348,7 @@ function AddQuestionRow({
 				}
 				imageUrls = urls;
 			}
-			await createQuizQuestion({
+			const res = await createQuizQuestion({
 				quiz_set_id: quizSetId,
 				question_order: nextOrder,
 				text: text.trim(),
@@ -356,10 +357,11 @@ function AddQuestionRow({
 				option_type: optionType,
 				option_images: imageUrls,
 			});
+			if (!res.success) throw new Error(res.error);
 			toast.success("Đã thêm câu hỏi");
 			onDone();
-		} catch {
-			toast.error("Lỗi khi thêm câu hỏi");
+		} catch (e: any) {
+			toast.error(e.message || "Lỗi khi thêm câu hỏi");
 		} finally {
 			setSaving(false);
 		}
@@ -487,16 +489,17 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 	const handleSaveSet = async () => {
 		setSaving(true);
 		try {
-			await updateQuizSet(quizSet.id, {
+			const res = await updateQuizSet(quizSet.id, {
 				title,
 				age_group: ageGroup,
 				duration_seconds: durationMinutes * 60,
 				is_active: isActive,
 			});
+			if (!res.success) throw new Error(res.error);
 			toast.success("Đã cập nhật quiz set");
 			setEditing(false);
-		} catch {
-			toast.error("Lỗi khi cập nhật quiz set");
+		} catch (e: any) {
+			toast.error(e.message || "Lỗi khi cập nhật quiz set");
 		} finally {
 			setSaving(false);
 		}
@@ -508,10 +511,11 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 			message: `Xóa quiz set "${quizSet.title}"? Tất cả câu hỏi cũng sẽ bị xóa.`,
 			onConfirm: async () => {
 				try {
-					await deleteQuizSet(quizSet.id);
+					const res = await deleteQuizSet(quizSet.id);
+					if (!res.success) throw new Error(res.error);
 					toast.success("Đã xóa quiz set");
-				} catch {
-					toast.error("Lỗi khi xóa quiz set");
+				} catch (e: any) {
+					toast.error(e.message || "Lỗi khi xóa quiz set");
 				}
 			},
 		});
@@ -519,11 +523,12 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 
 	const handleToggleActive = async () => {
 		try {
-			await updateQuizSet(quizSet.id, { is_active: !isActive });
+			const res = await updateQuizSet(quizSet.id, { is_active: !isActive });
+			if (!res.success) throw new Error(res.error);
 			setIsActive((v) => !v);
 			toast.success(isActive ? "Đã tắt quiz set" : "Đã bật quiz set");
-		} catch {
-			toast.error("Lỗi khi cập nhật trạng thái");
+		} catch (e: any) {
+			toast.error(e.message || "Lỗi khi cập nhật trạng thái");
 		}
 	};
 
@@ -533,10 +538,11 @@ function QuizSetRow({ quizSet }: { quizSet: QuizSet }) {
 			message: "Xóa câu hỏi này?",
 			onConfirm: async () => {
 				try {
-					await deleteQuizQuestion(id);
+					const res = await deleteQuizQuestion(id);
+					if (!res.success) throw new Error(res.error);
 					toast.success("Đã xóa câu hỏi");
-				} catch {
-					toast.error("Lỗi khi xóa câu hỏi");
+				} catch (e: any) {
+					toast.error(e.message || "Lỗi khi xóa câu hỏi");
 				}
 			},
 		});
@@ -766,12 +772,13 @@ function AddQuizSetForm({ onDone }: { onDone: () => void }) {
 		}
 		setSaving(true);
 		try {
-			await createQuizSet({
+			const res = await createQuizSet({
 				id: id.trim(),
 				title: title.trim(),
 				age_group: ageGroup,
 				duration_seconds: durationMinutes * 60,
 			});
+			if (!res.success) throw new Error(res.error);
 			toast.success("Đã tạo quiz set");
 			onDone();
 		} catch (e: any) {

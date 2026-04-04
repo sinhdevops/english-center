@@ -7,7 +7,7 @@ import { User, Phone, BookOpen, MapPin, Calendar, Clock, Trash2, Check, MessageS
 import { Registration, Branch, Course } from "@/lib/types";
 import { toast } from "sonner";
 import { AdminPagination } from "@/components/admin/AdminPagination";
-import { updateRegistrationStatus, deleteRegistration } from "./actions";
+import { updateRegistrationStatus, deleteRegistration } from "@/actions/registration.actions";
 
 interface RegistrationsClientProps {
 	initialRegistrations: Registration[];
@@ -23,22 +23,24 @@ export default function RegistrationsClient({ initialRegistrations, branches, co
 
 	const handleUpdateStatus = async (id: string, status: Registration["status"]) => {
 		try {
-			await updateRegistrationStatus(id, status);
+			const res = await updateRegistrationStatus(id, status);
+			if (!res.success) throw new Error(res.error);
 			toast.success("Đã cập nhật trạng thái");
-		} catch (error) {
+		} catch (error: any) {
 			console.error("Error updating status:", error);
-			toast.error("Lỗi khi cập nhật trạng thái");
+			toast.error(error.message || "Lỗi khi cập nhật trạng thái");
 		}
 	};
 
 	const handleDelete = async (id: string) => {
 		if (confirm("Bạn có chắc chắn muốn xóa yêu cầu đăng ký này?")) {
 			try {
-				await deleteRegistration(id);
+				const res = await deleteRegistration(id);
+				if (!res.success) throw new Error(res.error);
 				toast.success("Đã xóa đăng ký");
-			} catch (error) {
+			} catch (error: any) {
 				console.error("Error deleting registration:", error);
-				toast.error("Lỗi khi xóa đăng ký");
+				toast.error(error.message || "Lỗi khi xóa đăng ký");
 			}
 		}
 	};

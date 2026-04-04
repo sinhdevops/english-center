@@ -1,5 +1,10 @@
-import { createClient } from "@/utils/supabase/server";
-import StudentsClient from "./StudentsClient";
+import { createClient } from "@/lib/supabase/server";
+import PageContent from "./_page-content";
+
+export const metadata = {
+  title: "Quản lý Học viên | Admin",
+  description: "Trang quản trị students",
+};
 
 export default async function StudentsPage() {
 	const supabase = await createClient();
@@ -12,7 +17,7 @@ export default async function StudentsPage() {
 
 	return (
 		<>
-			<StudentsClient
+			<PageContent
 				initialStudents={students || []}
 				branches={branches || []}
 				courses={courses || []}

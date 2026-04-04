@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { KhoaHocPageContent } from './_page-content'
+import { JsonLd } from '@/components/common/JsonLd'
 
 export const metadata: Metadata = {
   title: 'Khóa học',
@@ -26,5 +27,22 @@ export default async function CoursesPage() {
     schedule: p.schedule || 'Đang cập nhật',
   }))
 
-  return <KhoaHocPageContent initialCourses={mappedCourses} />
+  const jsonLd = mappedCourses.map(course => ({
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: course.title,
+    description: course.description,
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'STEMKey',
+      url: process.env.NEXT_PUBLIC_BASE_URL || 'https://stemkey.vn'
+    }
+  }))
+
+  return (
+    <>
+      <JsonLd data={jsonLd} />
+      <KhoaHocPageContent initialCourses={mappedCourses} />
+    </>
+  )
 }

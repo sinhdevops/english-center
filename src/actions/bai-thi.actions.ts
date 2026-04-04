@@ -2,7 +2,7 @@
 
 import { Resend } from 'resend'
 import { render } from '@react-email/render'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { QuizSubmittedEmail } from '@/lib/emails/quiz-submitted'
 
 export async function createQuizRecord(

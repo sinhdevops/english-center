@@ -9,7 +9,7 @@ import { EventModal } from "@/components/admin/events/EventModal";
 import { AdminPagination } from "@/components/admin/AdminPagination";
 import { Event } from "@/lib/types";
 import { toast } from "sonner";
-import { createEvent, updateEvent, deleteEvent } from "./actions";
+import { createEvent, updateEvent, deleteEvent } from "@/actions/event.actions";
 
 interface EventsClientProps {
 	initialEvents: Event[];

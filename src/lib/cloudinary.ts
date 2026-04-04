@@ -13,6 +13,8 @@ export const uploadToCloudinary = async (fileUri: string, folder: string = 'even
     const res = await cloudinary.uploader.upload(fileUri, {
       folder: `edu-admin/${folder}`,
       resource_type: 'auto',
+      format: 'webp',
+      transformation: [{ quality: 'auto' }],
     });
     return res.secure_url;
   } catch (error) {
@@ -20,3 +22,15 @@ export const uploadToCloudinary = async (fileUri: string, folder: string = 'even
     throw error;
   }
 };
+
+/**
+ * Thêm f_webp,q_auto vào Cloudinary URL để serve ảnh dạng WebP.
+ * Hoạt động với cả URL cũ (jpg/png) và URL mới (webp).
+ * Cloudinary xử lý on-the-fly và cache lại sau lần đầu.
+ */
+export function getCldUrl(url: string): string {
+  if (!url || !url.includes('res.cloudinary.com')) return url
+  // Tránh duplicate transformation nếu URL đã có f_webp
+  if (url.includes('f_webp')) return url
+  return url.replace('/upload/', '/upload/f_webp,q_auto/')
+}

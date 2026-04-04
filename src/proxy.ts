@@ -36,6 +36,16 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
+  // Protect specific routes: /trang-ca-nhan, /bai-thi
+  if (request.nextUrl.pathname.startsWith('/trang-ca-nhan') || request.nextUrl.pathname.startsWith('/bai-thi')) {
+    if (!user) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/dang-nhap'
+      url.searchParams.set('redirectedFrom', request.nextUrl.pathname)
+      return NextResponse.redirect(url)
+    }
+  }
+
   // RBAC: Protect /admin routes
   if (request.nextUrl.pathname.startsWith('/admin')) {
     if (!user) {
